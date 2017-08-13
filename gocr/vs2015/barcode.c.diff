@@ -1,0 +1,4 @@
+955a956,958
+> #if defined(_MSC_VER) 
+>   box2 = NULL; /* avoid a bug of MSVC 64bit version */
+> #endif

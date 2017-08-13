@@ -1,0 +1,8 @@
+To install run (as a root or via sudo)
+./install.sh
+
+It will copy the contents of "package" into /opt/local/osra
+and the wrap-around shell script "osra" into /usr/local/bin
+
+Please do not forget to install ghostscript if you are planning
+on processing PDF or PostScript files.

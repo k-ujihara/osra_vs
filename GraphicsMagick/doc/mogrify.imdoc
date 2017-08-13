@@ -1,0 +1,150 @@
+<imdoc>
+<utils apps=mogrify>
+<title>Mogrify</title>
+<gm>
+<sect NAME="mogrify">gm mogrify
+</gm>
+<im>
+<sect NAME="mog-top">NAME
+mogrify - mogrify an image
+</sect>
+<format type=html>
+<sect NAME="mog-contents">Contents
+
+<dl>
+<dt>
+<a href="#mog-syno">Synopsis</a>
+</dt>
+
+<dt>
+<a href="#mog-desc">Description</a>
+</dt>
+
+<dt>
+<a href="#mog-exam">Examples</a>
+</dt>
+
+<dt>
+<a href="#mog-opti">Options</a>
+</dt>
+
+</dl>
+</format>
+</sect>
+
+<sect NAME="mog-syno">Synopsis
+<p>
+<s>gm mogrify</s> <s>[</s> <i>options</i> <s>... ]</s> <i>file ...</i>
+</p>
+</sect>
+<sect NAME="mog-desc">Description
+</im>
+<p>
+<s>Mogrify</s> transforms an image or a sequence of images. These transforms
+include image scaling, image rotation, color reduction, and others. Each
+transmogrified image overwrites the corresponding original image, unless an
+option such as
+<s>-format</s> causes the output filename to be different from the input
+filename.
+</p>
+The graphics formats supported by <s>mogrify</s> are listed in
+<format type=man,tex>
+<i>GraphicsMagick(1)</i>.
+</format>
+<format type=html>
+<a href="GraphicsMagick.html"><i>GraphicsMagick(1)</i></a>.
+</format>
+</sect>
+<back>
+<sect NAME="mog-exam">Examples
+<p>
+To convert all the TIFF files in a particular directory to JPEG, use:</p>
+
+<pre>
+    gm mogrify -format jpeg *.tiff
+</pre>
+<p>
+To convert a directory full of JPEG images to thumbnails, use:</p>
+<pre>
+    gm mogrify -size 120x120 *.jpg -resize 120x120 +profile "*"
+</pre>
+<pp>
+In this example, <tt>'-size 120x120'</tt> gives a hint to the JPEG decoder
+that the images are going to be downscaled to 120x120, allowing it to run
+faster by avoiding returning full-resolution images to GraphicsMagick for
+the subsequent resizing operation.  The
+<tt>'-resize 120x120'</tt> specifies the desired dimensions of the
+output images.  It will be scaled so its largest dimension is 120 pixels.  The
+<tt>'+profile "*"'</tt> removes any ICM, EXIF, IPTC, or other profiles
+that might be present in the input and aren't needed in the thumbnails.</pp>
+<p>
+To scale an image of a cockatoo to exactly 640 pixels in width and 480
+pixels in height, use: </p>
+
+<pre>
+    gm mogrify -resize 640x480! cockatoo.miff
+</pre>
+
+</sect>
+<back>
+
+<sect NAME="mog-opti">Options
+<p>
+Options are processed in command line order. Any option you specify on
+the command line remains in effect for the set of images that follows,
+until the set is terminated by the appearance of any option or <s>-noop</s>.</p>
+
+<p>
+For a more detailed description of each option, see
+<gm>
+Options, above.
+</gm>
+<im>
+<format type=man,tex>
+<i>GraphicsMagick(1)</i>.
+</format>
+<format type=html>
+<a href="GraphicsMagick.html"><i>GraphicsMagick(1)</i></a>.
+</format>
+</im>
+</p>
+
+<include file=brief_options.imdoc>
+
+<p>
+For a more detailed description of each option, see
+<gm>
+Options, above.
+</gm>
+<im>
+<format type=man,tex>
+<i>GraphicsMagick(1)</i>.
+</format>
+<format type=html>
+<a href="GraphicsMagick.html"><i>GraphicsMagick(1)</i></a>.
+</format>
+</im>
+</p>
+</sect>
+<back>
+<im>
+
+<format type=man>
+<sect NAME="mog-also">SEE ALSO
+<p>
+GraphicsMagick(1),
+animate(1),
+compare(1),
+composite(1),
+conjure(1),
+convert(1),
+display(1),
+identify(1),
+import(1),
+montage(1)
+</p>
+</sect>
+</format>
+</im>
+</utils>
+</imdoc>

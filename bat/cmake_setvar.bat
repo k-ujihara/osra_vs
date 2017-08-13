@@ -1,0 +1,108 @@
+Rem Batch library for CMake with Visual Studio 2015.
+Rem Version 0.0.1 2016-05-06
+Rem Copyright (C) 2016 Kazuya Ujihara <ujihara.kazuya@gmail.com>
+Rem http://www.chemformatter.com
+
+Rem In:
+Rem   BUILD_DIR_SUFFIX: Suffix of build directory name. Defauly is null.
+Rem   INSTALL_BASE: Base install files. Default is %PUBLIC%
+Rem   CFLAGS*
+Rem   LDFLAGS*
+Rem   ARFLAGS*
+Rem
+Rem Out:
+Rem   CMAKE_OPT: To use 'cmake %CMAKE_OPT% .'.
+Rem   BUILD_PLATFORM:=x86|x64|ARM
+Rem   INSTALL_PREFIX:=%INSTALL_BASE% | %INSTALL_BASE%\x64
+Rem   BUILD_DIR: The directory to make.
+
+if "%INSTALL_BASE%" == "" Set INSTALL_BASE=%PUBLIC%
+
+if "%BUILD_PLATFORM%" == "" Set BUILD_PLATFORM=%Platform%
+if "%BUILD_PLATFORM%" == "" Set BUILD_PLATFORM=x86
+if "%BUILD_PLATFORM%" == "X86" Set BUILD_PLATFORM=x86
+if "%BUILD_PLATFORM%" == "X64" Set BUILD_PLATFORM=x64
+if "%BUILD_PLATFORM%" == "arm" Set BUILD_PLATFORM=ARM
+
+Set $CMAKE_ARCH=
+if "%BUILD_PLATFORM%" == "x86" Set $CMAKE_ARCH=
+if "%BUILD_PLATFORM%" == "x64" Set $CMAKE_ARCH=Win64
+if "%BUILD_PLATFORM%" == "ARM" Set $CMAKE_ARCH=ARM
+Set $G_OPTION=Visual Studio 14 2015
+if not "%$CMAKE_ARCH%" == "" Set $G_OPTION=%$G_OPTION% %$CMAKE_ARCH%
+REM *** Set G flag ***
+Set CMAKE_OPT=%CMAKE_OPT% -G "%$G_OPTION%"
+Set $G_OPTION=
+Set $CMAKE_ARCH=
+
+Set INSTALL_PREFIX=%INSTALL_BASE%
+if "%BUILD_PLATFORM%" == "x86" Set INSTALL_PREFIX=%INSTALL_BASE%
+if "%BUILD_PLATFORM%" == "x64" Set INSTALL_PREFIX=%INSTALL_BASE%\x64
+if "%BUILD_PLATFORM%" == "ARM" Set INSTALL_PREFIX=%INSTALL_BASE%\ARM
+if not exist "%INSTALL_PREFIX%" mkdir "%INSTALL_PREFIX%"
+REM *** Define CMAKE_INSTALL_PREFIX ***
+Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_INSTALL_PREFIX="%INSTALL_PREFIX%"
+
+Set BUILD_DIR=build
+Set BUILD_DIR=%BUILD_DIR%%BUILD_DIR_SUFFIX%
+if "%BUILD_PLATFORM%" == "x86" Set BUILD_DIR=%BUILD_DIR%
+if "%BUILD_PLATFORM%" == "x64" Set BUILD_DIR=%BUILD_DIR%_x64
+if "%BUILD_PLATFORM%" == "ARM" Set BUILD_DIR=%BUILD_DIR%_ARM
+if not exist "%BUILD_DIR%" mkdir "%BUILD_DIR%"
+
+Set CFLAGS=/Zi /EHsc %CFLAGS% 
+Set CFLAGS_DEBUG=/Od %CFLAGS_DEBUG%
+Set CFLAGS_RELEASE=/Ox /Oi /Gy /GL %CFLAGS_RELEASE%
+Set LDFLAGS=%LDFLAGS%
+Set LDFLAGS_DEBUG=%LDFLAGS_DEBUG%
+if "%BUILD_PLATFORM%" == "x86" Set LDFLAGS_RELEASE=/LTCG /OPT:REF %LDFLAGS_RELEASE%
+if "%BUILD_PLATFORM%" == "x64" Set LDFLAGS_RELEASE=/LTCG /OPT:REF,ICF %LDFLAGS_RELEASE%
+if "%BUILD_PLATFORM%" == "ARM" Set LDFLAGS_RELEASE=/LTCG /OPT:REF %LDFLAGS_RELEASE%
+Set ARFLAGS=%ARFLAGS%
+Set ARFLAGS_DEBUG=%ARFLAGS_DEBUG%
+if "%BUILD_PLATFORM%" == "x86" Set ARFLAGS_RELEASE=/LTCG %ARFLAGS_RELEASE%
+if "%BUILD_PLATFORM%" == "x64" Set ARFLAGS_RELEASE=/LTCG %ARFLAGS_RELEASE%
+if "%BUILD_PLATFORM%" == "ARM" Set ARFLAGS_RELEASE=/LTCG %ARFLAGS_RELEASE%
+
+if not "%CFLAGS%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_CXX_FLAGS="%CFLAGS%" -DCMAKE_C_FLAGS="%CFLAGS%"
+if not "%CFLAGS_DEBUG%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_CXX_FLAGS_DEBUG="%CFLAGS_DEBUG%" -DCMAKE_C_FLAGS_DEBUG="%CFLAGS_DEBUG%"
+if not "%CFLAGS_RELEASE%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_CXX_FLAGS_RELEASE="%CFLAGS_RELEASE%" -DCMAKE_C_FLAGS_RELEASE="%CFLAGS_RELEASE%"
+
+if not "%LDFLAGS%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_SHARED_LINKER_FLAGS="%LDFLAGS%" -DCMAKE_EXE_LINKER_FLAGS="%LDFLAGS%" -DCMAKE_MODULE_LINKER_FLAGS="%LDFLAGS%"
+if not "%LDFLAGS_DEBUG%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_SHARED_LINKER_FLAGS_DEBUG="%LDFLAGS_DEBUG%" -DCMAKE_EXE_LINKER_FLAGS_DEBUG="%LDFLAGS_DEBUG%" -DCMAKE_MODULE_LINKER_FLAGS_DEBUG="%LDFLAGS_DEBUG%"
+if not "%LDFLAGS_RELEASE%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_SHARED_LINKER_FLAGS_RELEASE="%LDFLAGS_RELEASE%" -DCMAKE_EXE_LINKER_FLAGS_RELEASE="%LDFLAGS_RELEASE%" -DCMAKE_MODULE_LINKER_FLAGS_RELEASE="%LDFLAGS_RELEASE%"
+
+if not "%ARFLAGS%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_STATIC_LINKER_FLAGS="%ARFLAGS%" 
+if not "%ARFLAGS_DEBUG%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_STATIC_LINKER_FLAGS_DEBUG="%ARFLAGS_DEBUG%"
+if not "%ARFLAGS_RELEASE%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DCMAKE_STATIC_LINKER_FLAGS_RELEASE="%ARFLAGS_RELEASE%" 
+
+Set $Platform=
+if "%BUILD_PLATFORM%" == "x86" Set $Platform=Win32
+if "%BUILD_PLATFORM%" == "x64" Set $Platform=x64
+if "%BUILD_PLATFORM%" == "ARM" Set $Platform=ARM
+
+cd "%BUILD_DIR%"
+
+echo cd "%%~dp0" > build-release.bat
+echo CALL "%%VS140COMNTOOLS%%VsDevCmd.bat" %BUILD_PLATFORM% >> build-release.bat
+echo MSBuild ALL_BUILD.vcxproj /p:Configuration=Release,Platform=%$Platform% >> build-release.bat
+echo pause >> build-release.bat
+
+echo cd "%%~dp0" > install.bat
+echo CALL "%%VS140COMNTOOLS%%VsDevCmd.bat" %BUILD_PLATFORM% >> install.bat
+echo MSBuild INSTALL.vcxproj /p:Configuration=Release,Platform=%$Platform% >> install.bat
+echo pause >> install.bat
+
+echo cd "%%~dp0" > run_tests.bat
+echo CALL "%%VS140COMNTOOLS%%VsDevCmd.bat" %BUILD_PLATFORM% >> run_tests.bat
+if "%BUILD_PLATFORM%" == "x64" echo PATH %INSTALL_PREFIX%;%PATH% >> run_tests.bat
+echo MSBuild RUN_TESTS.vcxproj /p:Configuration=Release,Platform=%$Platform% >> run_tests.bat
+echo pause >> run_tests.bat
+
+Set $Platform=
+
+cd ..
+
+
+
+

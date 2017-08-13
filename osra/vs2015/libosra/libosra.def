@@ -1,0 +1,5 @@
+LIBRARY LIBOSRA
+EXPORTS
+	osra_process_image
+	OsraProcessImage
+	

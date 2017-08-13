@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_lcms"
+  ProjectGUID="{0E0CFCA0-3CBC-412E-ACB6-99A960946588}"
+  Keyword="x64Proj">
+  <Platforms>
+    <Platform Name="x64"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_lcms"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\lcms,..\..\lcms\include,..\..\lcms\src"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_LCMSLIB_;__CONSOLE__;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_RL_lcms_.pdb"
+        ImportLibrary="..\lib\CORE_RL_lcms_.lib"
+        OutputFile="..\bin\CORE_RL_lcms_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_lcms"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\lcms,..\..\lcms\include,..\..\lcms\src"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_LCMSLIB_;__CONSOLE__;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_DB_lcms_.pdb"
+        ImportLibrary="..\lib\CORE_DB_lcms_.lib"
+        OutputFile="..\bin\CORE_DB_lcms_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\lcms\src\cmscam02.c"/>
+      <File RelativePath="..\..\lcms\src\cmscgats.c"/>
+      <File RelativePath="..\..\lcms\src\cmscnvrt.c"/>
+      <File RelativePath="..\..\lcms\src\cmserr.c"/>
+      <File RelativePath="..\..\lcms\src\cmsgamma.c"/>
+      <File RelativePath="..\..\lcms\src\cmsgmt.c"/>
+      <File RelativePath="..\..\lcms\src\cmshalf.c"/>
+      <File RelativePath="..\..\lcms\src\cmsintrp.c"/>
+      <File RelativePath="..\..\lcms\src\cmsio0.c"/>
+      <File RelativePath="..\..\lcms\src\cmsio1.c"/>
+      <File RelativePath="..\..\lcms\src\cmslut.c"/>
+      <File RelativePath="..\..\lcms\src\cmsmd5.c"/>
+      <File RelativePath="..\..\lcms\src\cmsmtrx.c"/>
+      <File RelativePath="..\..\lcms\src\cmsnamed.c"/>
+      <File RelativePath="..\..\lcms\src\cmsopt.c"/>
+      <File RelativePath="..\..\lcms\src\cmspack.c"/>
+      <File RelativePath="..\..\lcms\src\cmspcs.c"/>
+      <File RelativePath="..\..\lcms\src\cmsplugin.c"/>
+      <File RelativePath="..\..\lcms\src\cmsps2.c"/>
+      <File RelativePath="..\..\lcms\src\cmssamp.c"/>
+      <File RelativePath="..\..\lcms\src\cmssm.c"/>
+      <File RelativePath="..\..\lcms\src\cmstypes.c"/>
+      <File RelativePath="..\..\lcms\src\cmsvirt.c"/>
+      <File RelativePath="..\..\lcms\src\cmswtpnt.c"/>
+      <File RelativePath="..\..\lcms\src\cmsxform.c"/>
+      <File RelativePath="..\..\lcms\src\lcms2.def"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\lcms\include\lcms2.h"/>
+      <File RelativePath="..\..\lcms\include\lcms2_plugin.h"/>
+      <File RelativePath="..\..\lcms\src\lcms2_internal.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

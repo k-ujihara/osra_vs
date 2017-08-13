@@ -1,0 +1,106 @@
+diff -r -u dcraw-9.26.0/dcraw.c dcraw/dcraw.c
+--- dcraw-9.26.0/dcraw.c	2015-05-24 21:30:26.000000000 -0500
++++ dcraw/dcraw.c	2015-07-18 15:28:14.909539637 -0500
+@@ -25,9 +25,18 @@
+ 
+ #define DCRAW_VERSION "9.26"
+ 
++#if defined(_VISUALC_)
++# pragma warning(disable : 4005)
++# pragma warning(disable : 4133)
++# pragma warning(disable : 4146)
++# pragma warning(disable : 4305)
++#endif
++
+ #ifndef _GNU_SOURCE
+ #define _GNU_SOURCE
+ #endif
++#define WIN32_LEAN_AND_MEAN
++#define VC_EXTRALEAN
+ #define _USE_MATH_DEFINES
+ #include <ctype.h>
+ #include <errno.h>
+@@ -42,7 +51,7 @@
+ #include <time.h>
+ #include <sys/types.h>
+ 
+-#if defined(DJGPP) || defined(__MINGW32__)
++#if defined(DJGPP) || defined(__MINGW32__) || defined(WIN32) || defined(WIN64)
+ #define fseeko fseek
+ #define ftello ftell
+ #else
+@@ -68,6 +77,10 @@
+ typedef unsigned long long UINT64;
+ #endif
+ 
++#if !defined(M_PI)
++#  define M_PI 3.14159265358979323846
++#endif
++
+ #ifdef NODEPS
+ #define NO_JASPER
+ #define NO_JPEG
+@@ -96,6 +109,19 @@
+ #define ushort unsigned short
+ #endif
+ 
++#define strnlen(s,maxlen) strnlen_port(s,maxlen)
++static size_t strnlen(const char *s, size_t maxlen)
++{
++  size_t i;
++
++  for (i = 0; (i < maxlen) && (s[i+1] != '\0'); i++)
++  {
++  }
++
++  return i;
++}
++
++
+ /*
+    All global variables are defined here, and all functions that
+    access them are prefixed with "CLASS".  Note that a thread-safe
+@@ -104,6 +130,7 @@
+ FILE *ifp, *ofp;
+ short order;
+ const char *ifname;
++const char *outfile = NULL;
+ char *meta_data, xtrans[6][6], xtrans_abs[6][6];
+ char cdesc[5], desc[512], make[64], model[64], model2[64], artist[64];
+ float flash_used, canon_ev, iso_speed, shutter, aperture, focal_len;
+@@ -9758,6 +9785,7 @@
+     puts(_("-r <r g b g> Set custom white balance"));
+     puts(_("+M/-M     Use/don't use an embedded color matrix"));
+     puts(_("-C <r b>  Correct chromatic aberration"));
++    puts(_("-O <file> Write output to this file"));
+     puts(_("-P <file> Fix the dead pixels listed in this file"));
+     puts(_("-K <file> Subtract dark frame (16-bit raw PGM)"));
+     puts(_("-k <num>  Set the darkness level"));
+@@ -9826,6 +9854,7 @@
+ #endif
+ 	break;
+       case 'P':  bpfile     = argv[arg++];  break;
++      case 'O':  outfile    = argv[arg++];  break;
+       case 'K':  dark_frame = argv[arg++];  break;
+       case 'z':  timestamp_only    = 1;  break;
+       case 'e':  thumbnail_only    = 1;  break;
+@@ -10109,7 +10138,10 @@
+     if (write_to_stdout)
+       strcpy (ofname,_("standard output"));
+     else {
+-      strcpy (ofname, ifname);
++      if (outfile)
++        strcpy (ofname,outfile);
++      else {
++        strcpy (ofname, ifname);
+       if ((cp = strrchr (ofname, '.'))) *cp = 0;
+       if (multi_out)
+ 	sprintf (ofname+strlen(ofname), "_%0*d",
+@@ -10117,6 +10149,7 @@
+       if (thumbnail_only)
+ 	strcat (ofname, ".thumb");
+       strcat (ofname, write_ext);
++      }
+       ofp = fopen (ofname, "wb");
+       if (!ofp) {
+ 	status = 1;

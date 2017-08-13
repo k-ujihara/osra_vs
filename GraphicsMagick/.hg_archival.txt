@@ -1,0 +1,4 @@
+repo: a75d655b08b1be43db9964d453061e988377d1d7
+node: 4e0a7a93d9a4fae31226a706fadc12a6c275e484
+branch: GraphicsMagick-1_3
+tag: GraphicsMagick-1_3_23

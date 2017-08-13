@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="UTIL_dcraw"
+  ProjectGUID="{DAB94554-A616-477C-80AE-37F4BB2B4762}"
+  Keyword="Win32Proj">
+  <Platforms>
+    <Platform Name="Win32"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|Win32"
+      OutputDirectory="..\bin\"
+      IntermediateDirectory="..\Release\UTIL_dcraw"
+      ConfigurationType="1"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\,..\..\magick,..\..\jp2\src\libjasper\include,..\..\jp2\src\libjasper\include\jasper,..\..\jpeg"
+        PreprocessorDefinitions="NDEBUG;_CONSOLE;WIN32;_VISUALC_;NeedFunctionPrototypes;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;NO_LCMS;_DLL;_MAGICKMOD_"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="1"
+        GenerateDebugInformation="TRUE"
+        ProgramDatabaseFile="..\bin\dcraw.pdb"
+        OutputFile="..\bin\dcraw.exe"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|Win32"
+      OutputDirectory="..\bin\"
+      IntermediateDirectory="..\Debug\UTIL_dcraw"
+      ConfigurationType="1"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\,..\..\magick,..\..\jp2\src\libjasper\include,..\..\jp2\src\libjasper\include\jasper,..\..\jpeg"
+        PreprocessorDefinitions="_DEBUG;_CONSOLE;WIN32;_VISUALC_;NeedFunctionPrototypes;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;NO_LCMS;_DLL;_MAGICKMOD_"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="1"
+        GenerateDebugInformation="TRUE"
+        ProgramDatabaseFile="..\bin\dcraw.pdb"
+        OutputFile="..\bin\dcraw.exe"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\dcraw\dcraw.c"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

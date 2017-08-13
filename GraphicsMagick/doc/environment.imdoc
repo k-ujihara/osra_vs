@@ -1,0 +1,227 @@
+<imdoc>
+
+<!-- ----------------------------------------------------------------  -->
+<!-- Options.imdoc: "options" subsection of convert, composite, et al. -->
+<!-- ----------------------------------------------------------------- -->
+<!-- Markup tags in this document are                                  -->
+<!--   imdoc (Identifies file as ImageMagick document source file)     -->
+<!--   im (Identifies included text as ImageMagick)                    -->
+<!--   gm (Identifies included text as GraphicsMagick)                 -->
+<!--   sect name=section_name (section); remainder of line is title    -->
+<!--   opt  (option)                                                   -->
+<!--   abs  (abstract)                                                 -->
+<!--   p    (regular print paragraph, not OK to nest)                  -->
+<!--   pp   (small print paragraph, not OK to nest)                    -->
+<!--   pre  (== HTML pre, not allowed in pp or sp)                     -->
+<!--   sp   (subparagraph, must be inside p or pp, OK to nest          -->
+<!--   ul   (== HTML ul)                                               -->
+<!--   li   (== HTML li)                                               -->
+<!--   dl   (== HTML dl)                                               -->
+<!--   dt   (== HTML dt, dt without a dd is OK)                        -->
+<!--   dd   (== HTML dd, dd without a dt is OK)                        -->
+<!--   i    (== HTML em)                                               -->
+<!--   s    (== HTML strong)                                           -->
+<!--   tt   (== HTML tt)                                               -->
+<!--   utils apps=name ... (which apps the enclosed lines pertain to)  -->
+<!--   !--  (== HTML !--) comment                                      -->
+<!--                                                                   -->
+<!--   All tags must close with </...> form of tag, e.g. <pp>..</pp>   -->
+<!-- ----------------------------------------------------------------- -->
+
+<opt>COLUMNS</opt>
+
+<abs>Output screen width. Used when formatting text for the screen. Many
+Unix systems keep this shell variable up to date, but it may need to be
+explicitly exported in order for GraphicsMagick to see it.</abs>
+
+<opt>DISPLAY</opt>
+
+<abs>X11 display ID (host, display number, and screen in the form
+hostname:display.screen).</abs>
+
+<opt>HOME</opt>
+
+<abs>Location of user's home directory. GraphicsMagick searches for
+configuration files in $HOME/.magick if the directory exists. See
+<s>MAGICK_CODER_MODULE_PATH</s>, <s>MAGICK_CONFIGURE_PATH</s>, and
+<s>MAGICK_FILTER_MODULE_PATH</s> if more flexibility is needed.</abs>
+
+<opt>MAGICK_ACCESS_MONITOR</opt>
+
+<abs>When set to <s>TRUE</s>, command line monitor mode (enabled by
+<s>-monitor</s>) will also show files accessed (including temporary
+files) and any external commands which are executed. This is useful
+for debugging, but also illustrates arguments made available to an
+access handler registered by the
+<s>MagickSetConfirmAccessHandler()</s> C library function.</abs>
+
+<opt>MAGICK_CODER_STABILITY</opt>
+
+<abs>The minimum coder stability level before it will be used. The
+available levels are <s>PRIMARY</s>, <s>STABLE</s>, <s>UNSTABLE</s>,
+and <s>BROKEN</s>.  The default minimum level is <s>UNSTABLE</s>,
+which means that all available working coders will be used. The
+purpose of this option is to reduce the security exposure (or apparent
+complexity) due to the huge number of formats supported. Coders at the
+<s>PRIMARY</s> level are commonly used formats with very well
+maintained implementations. Coders at the <s>STABLE</s> level are
+reasonably well maintained but represent less used formats. Coders at
+the <s>UNSTABLE</s> level either have weak implementations, the file
+format itself is weak, or the probability the coder will be needed is
+vanishingly small. Coders at the <s>BROKEN</s> level are known to
+often not work properly or might not be useful in their current state
+at all.</abs>
+
+<opt>MAGICK_CODER_MODULE_PATH</opt>
+
+<abs>Search path to use when searching for image format coder modules.
+This path allows the user to arbitrarily extend the image formats
+supported by GraphicsMagick by adding loadable modules to an arbitrary
+location rather than copying them into the GraphicsMagick installation
+directory. The formatting of the search path is similar to operating
+system search paths (i.e. colon delimited for Unix, and semi-colon
+delimited for Microsoft Windows). This user specified search path is used
+before trying the default search path.</abs>
+
+<opt>MAGICK_CONFIGURE_PATH</opt>
+
+<abs>Search path to use when searching for configuration (.mgk) files.
+The formatting of the search path is similar to operating system search
+paths (i.e. colon delimited for Unix, and semi-colon delimited for
+Microsoft Windows). This user specified search path is used before trying
+the default search path.</abs>
+
+<opt>MAGICK_DEBUG</opt>
+
+<abs>Debug options (see <s>-debug</s> for details).  Setting debug
+options via an environment variable is currently necessary to see the
+complete initialization process.</abs>
+
+<opt>MAGICK_FILTER_MODULE_PATH</opt>
+
+<abs>Search path to use when searching for filter process modules
+(invoked via <s>-process</s>). This path allows the user to arbitrarily
+extend GraphicsMagick's image processing functionality by adding loadable
+modules to an arbitrary location rather than copying them into the
+GraphicsMagick installation directory. The formatting of the search path
+is similar to operating system search paths (i.e. colon delimited for
+Unix, and semi-colon delimited for Microsoft Windows). This user
+specified search path is used before trying the default search path.</abs>
+
+<opt>MAGICK_GHOSTSCRIPT_PATH</opt>
+
+<abs>For Microsoft Windows, specify the path to the Ghostscript
+installation rather than searching for it via the Windows registry.
+This helps in case Ghostscript is not installed via the Ghostscript
+Windows installer or the user wants more control over the Ghostscript
+used.</abs>
+
+<opt>MAGICK_HOME</opt>
+
+<abs>Path to top of GraphicsMagick installation directory. Only observed
+by "uninstalled" builds of GraphicsMagick which do not have their location
+hard-coded or set by an installer.</abs>
+
+<opt>MAGICK_MMAP_READ</opt>
+
+<abs>If <s>MAGICK_MMAP_READ</s> is set to <s>TRUE</s>, GraphicsMagick
+will attempt to memory-map the input file for reading. This usually
+substantially improves repeated read performance since the file is
+already in memory after the first time it has been read. However,
+testing shows that performance may be reduced for files accessed for
+the first time since data is accessed via page-faults (upon first
+access) and many operating systems fail to do sequential read-ahead of
+memory mapped files, and particularly if those files are accessed over
+a network.  If many large input files are read, then enabling this
+option may harm performance by overloading the operating system's VM
+system as it then needs to free unmapped pages and map new ones.</abs>
+
+<opt>MAGICK_IO_FSYNC</opt>
+
+<abs>If <s>MAGICK_IO_FSYNC</s> is set to <s>TRUE</s>, then GraphicsMagick
+will request that the output file is fully flushed and synchronized to
+disk when it is closed. This incurs a performance penalty, but has the
+benefit that if the power fails or the system crashes, the file should be
+valid on disk. If image files are referenced from a database, then this
+option helps assure that the files referenced by the database are
+valid.</abs>
+
+<opt>MAGICK_IOBUF_SIZE</opt>
+
+<abs>The amount of I/O buffering (in bytes) to use when reading and
+writing encoded files. The default is 16384, which is observed to work
+well for many cases. The best value for a local filesystem is usually the
+the native filesystem block size (e.g. 4096, 8192, or even 131,072 for
+ZFS) in order to minimize the number of physical disk I/O operations.
+
+I/O performance to files accessed over a network may benefit
+significantly by tuning this option. Larger values are not necessarily
+better (they may be slower!), and there is rarely any benefit from using
+values larger than 32768. Use convert's <s>-verbose</s> option in order
+to evaluate read and write rates in pixels per second while keeping in
+mind that the operating system will try to cache files in RAM.</abs>
+
+<opt>MAGICK_LIMIT_DISK</opt>
+
+<abs>Maximum amount of disk space allowed for use by the pixel cache.</abs>
+
+<opt>MAGICK_LIMIT_FILES</opt>
+
+<abs>Maximum number of open files.</abs>
+
+<opt>MAGICK_LIMIT_MAP</opt>
+
+<abs>Maximum size of a memory mapped file allocation.  A memory mapped
+file consumes memory when the file is accessed, although the system
+may reclaim such memory when needed.</abs>
+
+<opt>MAGICK_LIMIT_MEMORY</opt>
+
+<abs>Maximum amount of memory to allocate from the heap.</abs>
+
+<opt>MAGICK_LIMIT_PIXELS</opt>
+
+<abs>Maximum number of total pixels (image rows times image colums) to
+allow for any image which is requested to be created or read.  This is
+useful to place a limit on how large an image may be.  If the input
+image file has image dimensions larger than the pixel limit, then the
+image memory allocation is denied and an error is returned
+immediately.  This is a per-image limit and does not limit the total
+number of pixels due to multiple image frames/pages (e.g. multi-page
+document or an animation).</abs>
+
+<opt>MAGICK_LIMIT_WIDTH</opt>
+
+<abs>Maximum pixel width of an image read, or created.</abs>
+
+<opt>MAGICK_LIMIT_HEIGHT</opt>
+
+<abs>Maximum pixel height of an image read, or created.</abs>
+
+<opt>MAGICK_TMPDIR</opt>
+
+<abs>Path to directory where GraphicsMagick should write temporary
+files. The default is to use the system default, or the location set by
+<s>TMPDIR</s>.</abs>
+
+<opt>TMPDIR</opt>
+
+<abs>For POSIX-compatible systems (Unix-compatible), the path to the
+directory where all applications should write temporary files.
+Overridden by <s>MAGICK_TMPDIR</s> if it is set.</abs>
+
+<opt>TMP or TEMP</opt>
+
+<abs>For Microsoft Windows, the path to the directory where applications
+should write temporary files. Overridden by <s>MAGICK_TMPDIR</s> if it
+is set.</abs>
+
+<opt>OMP_NUM_THREADS</opt>
+
+<abs>As per the OpenMP standard, this specifies the number of threads to
+use in parallel regions. Some compilers default the number of threads to
+use to the number of processor cores available while others default to
+just one thread. See the OpenMP specification for other standard
+adjustments and your compiler's manual for vendor-specific settings.</abs>
+
+</imdoc>

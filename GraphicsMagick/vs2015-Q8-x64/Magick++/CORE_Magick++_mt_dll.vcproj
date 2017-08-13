@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_Magick++"
+  ProjectGUID="{12AC1302-2B8A-4FAF-86BF-F432D7DBAA59}"
+  Keyword="x64Proj">
+  <Platforms>
+    <Platform Name="x64"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_Magick++"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\Magick++,..\..\Magick++\demo,..\..\Magick++\lib,..\..\Magick++\lib\Magick++,..\..\Magick++\tests"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_RL_Magick++_.pdb"
+        ImportLibrary="..\lib\CORE_RL_Magick++_.lib"
+        OutputFile="..\bin\CORE_RL_Magick++_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_Magick++"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\Magick++,..\..\Magick++\demo,..\..\Magick++\lib,..\..\Magick++\lib\Magick++,..\..\Magick++\tests"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_DB_Magick++_.pdb"
+        ImportLibrary="..\lib\CORE_DB_Magick++_.lib"
+        OutputFile="..\bin\CORE_DB_Magick++_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\Magick++\lib\Blob.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\BlobRef.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\CoderInfo.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Color.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Drawable.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Exception.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Functions.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Geometry.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Image.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\ImageRef.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Montage.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Options.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Pixels.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\STL.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\Thread.cpp"/>
+      <File RelativePath="..\..\Magick++\lib\TypeMetric.cpp"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\Magick++\lib\Magick++\Blob.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\BlobRef.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\CoderInfo.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Color.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Drawable.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Exception.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Functions.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Geometry.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Image.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\ImageRef.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Include.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Montage.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Options.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Pixels.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\STL.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\Thread.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++\TypeMetric.h"/>
+      <File RelativePath="..\..\Magick++\lib\Magick++.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

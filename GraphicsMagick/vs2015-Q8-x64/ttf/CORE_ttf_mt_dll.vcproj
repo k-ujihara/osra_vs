@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_ttf"
+  ProjectGUID="{C281933B-4F3B-467B-8CD5-5149083C36E7}"
+  Keyword="x64Proj">
+  <Platforms>
+    <Platform Name="x64"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_ttf"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\ttf,..\..\ttf\builds,..\..\ttf\builds\windows,..\..\ttf\include,..\..\ttf\include\config,..\..\ttf\src,..\..\ttf\src\autofit,..\..\ttf\src\base,..\..\ttf\src\bdf,..\..\ttf\src\cache,..\..\ttf\src\cff,..\..\ttf\src\cid,..\..\ttf\src\gzip,..\..\ttf\src\lzw,..\..\ttf\src\pcf,..\..\ttf\src\pfr,..\..\ttf\src\psaux,..\..\ttf\src\pshinter,..\..\ttf\src\psnames,..\..\ttf\src\raster,..\..\ttf\src\sfnt,..\..\ttf\src\smooth,..\..\ttf\src\truetype,..\..\ttf\src\type1,..\..\ttf\src\type42,..\..\ttf\src\winfonts"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_TTFLIB_;FT2_BUILD_LIBRARY;_CRT_SECURE_NO_WARNINGS;_MBCS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_RL_ttf_.pdb"
+        ImportLibrary="..\lib\CORE_RL_ttf_.lib"
+        OutputFile="..\bin\CORE_RL_ttf_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_ttf"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\ttf,..\..\ttf\builds,..\..\ttf\builds\windows,..\..\ttf\include,..\..\ttf\include\config,..\..\ttf\src,..\..\ttf\src\autofit,..\..\ttf\src\base,..\..\ttf\src\bdf,..\..\ttf\src\cache,..\..\ttf\src\cff,..\..\ttf\src\cid,..\..\ttf\src\gzip,..\..\ttf\src\lzw,..\..\ttf\src\pcf,..\..\ttf\src\pfr,..\..\ttf\src\psaux,..\..\ttf\src\pshinter,..\..\ttf\src\psnames,..\..\ttf\src\raster,..\..\ttf\src\sfnt,..\..\ttf\src\smooth,..\..\ttf\src\truetype,..\..\ttf\src\type1,..\..\ttf\src\type42,..\..\ttf\src\winfonts"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_TTFLIB_;FT2_BUILD_LIBRARY;_CRT_SECURE_NO_WARNINGS;_MBCS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_DB_ttf_.pdb"
+        ImportLibrary="..\lib\CORE_DB_ttf_.lib"
+        OutputFile="..\bin\CORE_DB_ttf_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\ttf\builds\windows\ftdebug.c"/>
+      <File RelativePath="..\..\ttf\src\autofit\autofit.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftbase.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftbbox.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftbitmap.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftfntfmt.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftfstype.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftgasp.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftglyph.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftgxval.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftinit.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftlcdfil.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftmm.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftotval.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftpatent.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftpfr.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftstroke.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftsynth.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftsystem.c"/>
+      <File RelativePath="..\..\ttf\src\base\fttype1.c"/>
+      <File RelativePath="..\..\ttf\src\base\ftwinfnt.c"/>
+      <File RelativePath="..\..\ttf\src\bdf\bdf.c"/>
+      <File RelativePath="..\..\ttf\src\cache\ftcache.c"/>
+      <File RelativePath="..\..\ttf\src\cff\cff.c"/>
+      <File RelativePath="..\..\ttf\src\cid\type1cid.c"/>
+      <File RelativePath="..\..\ttf\src\gzip\ftgzip.c"/>
+      <File RelativePath="..\..\ttf\src\lzw\ftlzw.c"/>
+      <File RelativePath="..\..\ttf\src\pcf\pcf.c"/>
+      <File RelativePath="..\..\ttf\src\pfr\pfr.c"/>
+      <File RelativePath="..\..\ttf\src\psaux\psaux.c"/>
+      <File RelativePath="..\..\ttf\src\pshinter\pshinter.c"/>
+      <File RelativePath="..\..\ttf\src\psnames\psmodule.c"/>
+      <File RelativePath="..\..\ttf\src\raster\raster.c"/>
+      <File RelativePath="..\..\ttf\src\sfnt\sfnt.c"/>
+      <File RelativePath="..\..\ttf\src\smooth\smooth.c"/>
+      <File RelativePath="..\..\ttf\src\truetype\truetype.c"/>
+      <File RelativePath="..\..\ttf\src\type1\type1.c"/>
+      <File RelativePath="..\..\ttf\src\type42\type42.c"/>
+      <File RelativePath="..\..\ttf\src\winfonts\winfnt.c"/>
+      <File RelativePath="ttf.rc"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\ttf\include\config\ftconfig.h"/>
+      <File RelativePath="..\..\ttf\include\config\ftheader.h"/>
+      <File RelativePath="..\..\ttf\include\config\ftmodule.h"/>
+      <File RelativePath="..\..\ttf\include\config\ftoption.h"/>
+      <File RelativePath="..\..\ttf\include\config\ftstdlib.h"/>
+      <File RelativePath="..\..\ttf\include\ft2build.h"/>
+      <File RelativePath="..\..\ttf\include\ftfntfmt.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

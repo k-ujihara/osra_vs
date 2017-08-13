@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_jpeg"
+  ProjectGUID="{9499A08E-0510-4EEB-ACD3-8CF9EC4776C4}"
+  Keyword="Win32Proj">
+  <Platforms>
+    <Platform Name="Win32"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_jpeg"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\jpeg"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_JPEGLIB_;_CRT_SECURE_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_RL_jpeg_.pdb"
+        ImportLibrary="..\lib\CORE_RL_jpeg_.lib"
+        OutputFile="..\bin\CORE_RL_jpeg_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_jpeg"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\jpeg"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_JPEGLIB_;_CRT_SECURE_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_DB_jpeg_.pdb"
+        ImportLibrary="..\lib\CORE_DB_jpeg_.lib"
+        OutputFile="..\bin\CORE_DB_jpeg_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\jpeg\jaricom.c"/>
+      <File RelativePath="..\..\jpeg\jcapimin.c"/>
+      <File RelativePath="..\..\jpeg\jcapistd.c"/>
+      <File RelativePath="..\..\jpeg\jcarith.c"/>
+      <File RelativePath="..\..\jpeg\jccoefct.c"/>
+      <File RelativePath="..\..\jpeg\jccolor.c"/>
+      <File RelativePath="..\..\jpeg\jcdctmgr.c"/>
+      <File RelativePath="..\..\jpeg\jchuff.c"/>
+      <File RelativePath="..\..\jpeg\jcinit.c"/>
+      <File RelativePath="..\..\jpeg\jcmainct.c"/>
+      <File RelativePath="..\..\jpeg\jcmarker.c"/>
+      <File RelativePath="..\..\jpeg\jcmaster.c"/>
+      <File RelativePath="..\..\jpeg\jcomapi.c"/>
+      <File RelativePath="..\..\jpeg\jcparam.c"/>
+      <File RelativePath="..\..\jpeg\jcprepct.c"/>
+      <File RelativePath="..\..\jpeg\jcsample.c"/>
+      <File RelativePath="..\..\jpeg\jctrans.c"/>
+      <File RelativePath="..\..\jpeg\jdapimin.c"/>
+      <File RelativePath="..\..\jpeg\jdapistd.c"/>
+      <File RelativePath="..\..\jpeg\jdarith.c"/>
+      <File RelativePath="..\..\jpeg\jdatadst.c"/>
+      <File RelativePath="..\..\jpeg\jdatasrc.c"/>
+      <File RelativePath="..\..\jpeg\jdcoefct.c"/>
+      <File RelativePath="..\..\jpeg\jdcolor.c"/>
+      <File RelativePath="..\..\jpeg\jddctmgr.c"/>
+      <File RelativePath="..\..\jpeg\jdhuff.c"/>
+      <File RelativePath="..\..\jpeg\jdinput.c"/>
+      <File RelativePath="..\..\jpeg\jdmainct.c"/>
+      <File RelativePath="..\..\jpeg\jdmarker.c"/>
+      <File RelativePath="..\..\jpeg\jdmaster.c"/>
+      <File RelativePath="..\..\jpeg\jdmerge.c"/>
+      <File RelativePath="..\..\jpeg\jdpostct.c"/>
+      <File RelativePath="..\..\jpeg\jdsample.c"/>
+      <File RelativePath="..\..\jpeg\jdtrans.c"/>
+      <File RelativePath="..\..\jpeg\jerror.c"/>
+      <File RelativePath="..\..\jpeg\jfdctflt.c"/>
+      <File RelativePath="..\..\jpeg\jfdctfst.c"/>
+      <File RelativePath="..\..\jpeg\jfdctint.c"/>
+      <File RelativePath="..\..\jpeg\jidctflt.c"/>
+      <File RelativePath="..\..\jpeg\jidctfst.c"/>
+      <File RelativePath="..\..\jpeg\jidctint.c"/>
+      <File RelativePath="..\..\jpeg\jmemmgr.c"/>
+      <File RelativePath="..\..\jpeg\jmemnobs.c"/>
+      <File RelativePath="..\..\jpeg\jquant1.c"/>
+      <File RelativePath="..\..\jpeg\jquant2.c"/>
+      <File RelativePath="..\..\jpeg\jutils.c"/>
+      <File RelativePath="..\..\jpeg\transupp.c"/>
+      <File RelativePath="jpeg.rc"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\jpeg\cderror.h"/>
+      <File RelativePath="..\..\jpeg\cdjpeg.h"/>
+      <File RelativePath="..\..\jpeg\jconfig.h"/>
+      <File RelativePath="..\..\jpeg\jdct.h"/>
+      <File RelativePath="..\..\jpeg\jerror.h"/>
+      <File RelativePath="..\..\jpeg\jinclude.h"/>
+      <File RelativePath="..\..\jpeg\jmorecfg.h"/>
+      <File RelativePath="..\..\jpeg\jpegint.h"/>
+      <File RelativePath="..\..\jpeg\jpeglib.h"/>
+      <File RelativePath="..\..\jpeg\jversion.h"/>
+      <File RelativePath="..\..\jpeg\transupp.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

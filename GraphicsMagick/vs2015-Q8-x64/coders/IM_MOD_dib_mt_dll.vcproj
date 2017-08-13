@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="IM_MOD_dib"
+  ProjectGUID="{C80B3B90-C5A2-479C-A1E8-1C6D6A47A0A6}"
+  Keyword="x64Proj">
+  <Platforms>
+    <Platform Name="x64"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\IM_MOD_dib"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\,..\..\magick"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        BaseAddress="0x67180000"        ProgramDatabaseFile="..\bin\IM_MOD_RL_dib_.pdb"
+        ImportLibrary="..\lib\IM_MOD_RL_dib_.lib"
+        OutputFile="..\bin\IM_MOD_RL_dib_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\IM_MOD_dib"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\,..\..\magick"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        BaseAddress="0x67190000"        ProgramDatabaseFile="..\bin\IM_MOD_DB_dib_.pdb"
+        ImportLibrary="..\lib\IM_MOD_DB_dib_.lib"
+        OutputFile="..\bin\IM_MOD_DB_dib_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\coders\dib.c"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

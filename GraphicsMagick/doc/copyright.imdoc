@@ -1,0 +1,47 @@
+<imdoc>
+<format man,html>
+<utils apps=animate,batch,benchmark,compare,composite,conjure,convert,display,identify,import,mogrify,montage,time>
+</format>
+<format html>
+<sect NAME="auth">Authors
+<p>
+<i>
+John Cristy,<br>
+Bob Friesenhahn,<br>
+Glenn Randers-Pehrson,<br>
+William Radcliff,<br>
+Leonard Rosenthol,<br>
+Lars Ruben Skyum,<br>
+Jaroslav Fojtik,<br>
+and many more.
+</i>
+</p>
+</sect>
+<back>
+</format>
+<format man,html>
+<sect NAME="copy">Copyright
+<p>
+<s>Copyright (C) 2002 - 2015 GraphicsMagick Group.</s> Additional
+copyrights apply. Please see see
+http://www.GraphicsMagick.org/Copyright.html for details.</p>
+<p>
+</sect>
+<back>
+</format>
+<format tex>
+<sect NAME="auth">Authors
+<p>
+<i>
+John Cristy,<br>
+Bob Friesenhahn,<br>
+Glenn Randers-Pehrson,<br>
+William Radcliffe,<br>
+Leonard Rosenthol,<br>
+Lars Ruben Skyum,<br>
+Jaroslav Fojtik,<br>
+and many more.</i></p>
+</sect>
+</format>
+<home>
+</imdoc>

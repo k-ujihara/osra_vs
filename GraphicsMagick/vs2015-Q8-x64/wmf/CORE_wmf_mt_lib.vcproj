@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_wmf"
+  ProjectGUID="{9958F66F-65AF-4495-A3E6-8A765BD80A2F}"
+  Keyword="x64Proj">
+  <Platforms>
+    <Platform Name="x64"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_wmf"
+      ConfigurationType="4"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\wmf,..\..\wmf\include,..\..\wmf\src"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLibrarianTool"
+        AdditionalDependencies="/MACHINE:AMD64 "
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        OutputFile="..\lib\CORE_RL_wmf_.lib"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_wmf"
+      ConfigurationType="4"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\wmf,..\..\wmf\include,..\..\wmf\src"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLibrarianTool"
+        AdditionalDependencies="/MACHINE:AMD64 "
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        OutputFile="..\lib\CORE_DB_wmf_.lib"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\wmf\src\api.c"/>
+      <File RelativePath="..\..\wmf\src\bbuf.c"/>
+      <File RelativePath="..\..\wmf\src\meta.c"/>
+      <File RelativePath="..\..\wmf\src\player.c"/>
+      <File RelativePath="..\..\wmf\src\recorder.c"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\wmf\src\api.h"/>
+      <File RelativePath="..\..\wmf\src\bbuf.h"/>
+      <File RelativePath="..\..\wmf\src\metadefs.h"/>
+      <File RelativePath="..\..\wmf\src\player.h"/>
+      <File RelativePath="..\..\wmf\src\recorder.h"/>
+      <File RelativePath="..\..\wmf\src\wmfdefs.h"/>
+      <File RelativePath="..\..\wmf\src\xml.h"/>
+      <File RelativePath="..\..\wmf\wmfconfig.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

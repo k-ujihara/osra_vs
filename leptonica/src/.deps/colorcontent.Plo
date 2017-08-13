@@ -1,0 +1,79 @@
+colorcontent.lo: colorcontent.c allheaders.h alltypes.h \
+ c:\mingw\include\stdio.h c:\mingw\include\_mingw.h \
+ c:\mingw\lib\gcc\mingw32\4.9.3\include\stddef.h \
+ c:\mingw\lib\gcc\mingw32\4.9.3\include\stdarg.h \
+ c:\mingw\include\sys\types.h c:\mingw\include\parts\time.h \
+ c:\mingw\include\stdlib.h environ.h \
+ c:\mingw\lib\gcc\mingw32\4.9.3\include\stdint.h \
+ c:\mingw\include\stdint.h array.h bbuffer.h heap.h list.h ptra.h queue.h \
+ rbtree.h stack.h arrayaccess.h bmf.h ccbord.h dewarp.h gplot.h imageio.h \
+ jbclass.h morph.h pix.h recog.h regutils.h stringcode.h sudoku.h \
+ watershed.h
+
+allheaders.h:
+
+alltypes.h:
+
+c:\mingw\include\stdio.h:
+
+c:\mingw\include\_mingw.h:
+
+c:\mingw\lib\gcc\mingw32\4.9.3\include\stddef.h:
+
+c:\mingw\lib\gcc\mingw32\4.9.3\include\stdarg.h:
+
+c:\mingw\include\sys\types.h:
+
+c:\mingw\include\parts\time.h:
+
+c:\mingw\include\stdlib.h:
+
+environ.h:
+
+c:\mingw\lib\gcc\mingw32\4.9.3\include\stdint.h:
+
+c:\mingw\include\stdint.h:
+
+array.h:
+
+bbuffer.h:
+
+heap.h:
+
+list.h:
+
+ptra.h:
+
+queue.h:
+
+rbtree.h:
+
+stack.h:
+
+arrayaccess.h:
+
+bmf.h:
+
+ccbord.h:
+
+dewarp.h:
+
+gplot.h:
+
+imageio.h:
+
+jbclass.h:
+
+morph.h:
+
+pix.h:
+
+recog.h:
+
+regutils.h:
+
+stringcode.h:
+
+sudoku.h:
+
+watershed.h:

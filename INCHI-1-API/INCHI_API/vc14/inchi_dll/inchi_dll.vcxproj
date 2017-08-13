@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5DAB1696-1795-49AA-BDE6-1771FBE25445}</ProjectGuid>
+    <RootNamespace>inchi_dll</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>libinchi</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.24730.2</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_MBCS;_USRDLL;BUILD_LINK_AS_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)libinchi.dll</OutputFile>
+      <ModuleDefinitionFile>vc9_libinchi.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_MBCS;_USRDLL;BUILD_LINK_AS_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)libinchi.dll</OutputFile>
+      <ModuleDefinitionFile>vc9_libinchi.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_MBCS;_USRDLL;BUILD_LINK_AS_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)libinchi.dll</OutputFile>
+      <ModuleDefinitionFile>vc9_libinchi.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_MBCS;_USRDLL;BUILD_LINK_AS_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)libinchi.dll</OutputFile>
+      <ModuleDefinitionFile>vc9_libinchi.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\inchi_dll\ichican2.c" />
+    <ClCompile Include="..\..\inchi_dll\ichicano.c" />
+    <ClCompile Include="..\..\inchi_dll\ichicans.c" />
+    <ClCompile Include="..\..\inchi_dll\ichiisot.c" />
+    <ClCompile Include="..\..\inchi_dll\ichilnct.c" />
+    <ClCompile Include="..\..\inchi_dll\ichimak2.c" />
+    <ClCompile Include="..\..\inchi_dll\ichimake.c" />
+    <ClCompile Include="..\..\inchi_dll\ichimap1.c" />
+    <ClCompile Include="..\..\inchi_dll\ichimap2.c" />
+    <ClCompile Include="..\..\inchi_dll\ichimap4.c" />
+    <ClCompile Include="..\..\inchi_dll\ichinorm.c" />
+    <ClCompile Include="..\..\inchi_dll\ichiparm.c" />
+    <ClCompile Include="..\..\inchi_dll\ichiprt1.c" />
+    <ClCompile Include="..\..\inchi_dll\ichiprt2.c" />
+    <ClCompile Include="..\..\inchi_dll\ichiprt3.c" />
+    <ClCompile Include="..\..\inchi_dll\ichiqueu.c" />
+    <ClCompile Include="..\..\inchi_dll\ichiread.c" />
+    <ClCompile Include="..\..\inchi_dll\ichiring.c" />
+    <ClCompile Include="..\..\inchi_dll\ichirvr1.c" />
+    <ClCompile Include="..\..\inchi_dll\ichirvr2.c" />
+    <ClCompile Include="..\..\inchi_dll\ichirvr3.c" />
+    <ClCompile Include="..\..\inchi_dll\ichirvr4.c" />
+    <ClCompile Include="..\..\inchi_dll\ichirvr5.c" />
+    <ClCompile Include="..\..\inchi_dll\ichirvr6.c" />
+    <ClCompile Include="..\..\inchi_dll\ichirvr7.c" />
+    <ClCompile Include="..\..\inchi_dll\ichisort.c" />
+    <ClCompile Include="..\..\inchi_dll\ichister.c" />
+    <ClCompile Include="..\..\inchi_dll\ichitaut.c" />
+    <ClCompile Include="..\..\inchi_dll\ichi_bns.c" />
+    <ClCompile Include="..\..\inchi_dll\ichi_io.c" />
+    <ClCompile Include="..\..\inchi_dll\ikey_base26.c" />
+    <ClCompile Include="..\..\inchi_dll\ikey_dll.c" />
+    <ClCompile Include="..\..\inchi_dll\inchi_dll.c">
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessSuppressLineNumbers>
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</PreprocessSuppressLineNumbers>
+    </ClCompile>
+    <ClCompile Include="..\..\inchi_dll\inchi_dll_a.c" />
+    <ClCompile Include="..\..\inchi_dll\inchi_dll_a2.c" />
+    <ClCompile Include="..\..\inchi_dll\inchi_dll_main.c" />
+    <ClCompile Include="..\..\inchi_dll\runichi.c" />
+    <ClCompile Include="..\..\inchi_dll\sha2.c" />
+    <ClCompile Include="..\..\inchi_dll\strutil.c" />
+    <ClCompile Include="..\..\inchi_dll\util.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\inchi_dll\aux2atom.h" />
+    <ClInclude Include="..\..\inchi_dll\extr_ct.h" />
+    <ClInclude Include="..\..\inchi_dll\ichi.h" />
+    <ClInclude Include="..\..\inchi_dll\ichicano.h" />
+    <ClInclude Include="..\..\inchi_dll\ichicant.h" />
+    <ClInclude Include="..\..\inchi_dll\ichicomn.h" />
+    <ClInclude Include="..\..\inchi_dll\ichicomp.h" />
+    <ClInclude Include="..\..\inchi_dll\ichidrp.h" />
+    <ClInclude Include="..\..\inchi_dll\ichierr.h" />
+    <ClInclude Include="..\..\inchi_dll\ichimain.h" />
+    <ClInclude Include="..\..\inchi_dll\ichimake.h" />
+    <ClInclude Include="..\..\inchi_dll\ichinorm.h" />
+    <ClInclude Include="..\..\inchi_dll\ichiparm.h" />
+    <ClInclude Include="..\..\inchi_dll\ichiring.h" />
+    <ClInclude Include="..\..\inchi_dll\ichirvrs.h" />
+    <ClInclude Include="..\..\inchi_dll\ichisize.h" />
+    <ClInclude Include="..\..\inchi_dll\ichister.h" />
+    <ClInclude Include="..\..\inchi_dll\ichitaut.h" />
+    <ClInclude Include="..\..\inchi_dll\ichitime.h" />
+    <ClInclude Include="..\..\inchi_dll\ichi_bns.h" />
+    <ClInclude Include="..\..\inchi_dll\ichi_io.h" />
+    <ClInclude Include="..\..\inchi_dll\ikey_base26.h" />
+    <ClInclude Include="..\..\inchi_dll\inchicmp.h" />
+    <ClInclude Include="..\..\inchi_dll\inchi_api.h" />
+    <ClInclude Include="..\..\inchi_dll\inchi_dll_a.h" />
+    <ClInclude Include="..\..\inchi_dll\inchi_dll_main.h" />
+    <ClInclude Include="..\..\inchi_dll\incomdef.h" />
+    <ClInclude Include="..\..\inchi_dll\inpdef.h" />
+    <ClInclude Include="..\..\inchi_dll\lreadmol.h" />
+    <ClInclude Include="..\..\inchi_dll\mode.h" />
+    <ClInclude Include="..\..\inchi_dll\sha2.h" />
+    <ClInclude Include="..\..\inchi_dll\strutil.h" />
+    <ClInclude Include="..\..\inchi_dll\util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="INCHI_DLL.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+    <Keyword>MakeFileProj</Keyword>
+    <ProjectGuid>{337399A5-C59C-43C2-B9D9-2A9CF73860F2}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.24730.2</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\bzlib\CORE_bzlib_mt_dll.vcxproj">
+      <Project>{f9095450-9fba-4a31-ab61-86dd3f50e632}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_art_mt_dll.vcxproj">
+      <Project>{39084576-40fc-43df-86a1-fdcb423ccae2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_avi_mt_dll.vcxproj">
+      <Project>{aca682a0-adf1-4d7a-96ee-482e6fecf05e}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_avs_mt_dll.vcxproj">
+      <Project>{4306f1d0-16ea-4c41-bb63-a3adeaf111ac}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_bmp_mt_dll.vcxproj">
+      <Project>{23e8a6c6-505f-4204-876e-c30a5a119142}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_cals_mt_dll.vcxproj">
+      <Project>{fadf7e0e-63de-4b48-9ebb-b6f78e91dc2b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_caption_mt_dll.vcxproj">
+      <Project>{1e97bc39-daed-498c-a316-23a5950f7ad2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_cineon_mt_dll.vcxproj">
+      <Project>{e405cc9a-3860-4e75-bf6a-70fb79d15397}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_clipboard_mt_dll.vcxproj">
+      <Project>{b2f66af3-3e1b-4673-99a6-f0f98c84fdf0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_cmyk_mt_dll.vcxproj">
+      <Project>{84495387-9c43-4b0f-8c48-05e6564199c0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_cut_mt_dll.vcxproj">
+      <Project>{dde5f487-e129-4559-a388-e83b545a4b8a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_dcm_mt_dll.vcxproj">
+      <Project>{0d7fc7d4-f7dc-4fa8-be2f-8ac729d31b6d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_dcraw_mt_dll.vcxproj">
+      <Project>{abd04cff-6dc8-4b9a-bdb9-242fa52ced55}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_dib_mt_dll.vcxproj">
+      <Project>{e1672c3d-80ac-44a3-a2c7-a09b91659a55}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_dps_mt_dll.vcxproj">
+      <Project>{27b03411-323a-4301-a465-0a055087c0f6}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_dpx_mt_dll.vcxproj">
+      <Project>{c80748f9-54a1-491f-8ed8-842e5800bf0c}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_emf_mt_dll.vcxproj">
+      <Project>{2a73ab45-7e48-44ba-9013-137aa3226778}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_ept_mt_dll.vcxproj">
+      <Project>{6f5804aa-88f5-45ef-ae0d-fcf4f10d504d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_fax_mt_dll.vcxproj">
+      <Project>{562cbbf9-09f8-402c-aefb-e1826185ee4b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_fits_mt_dll.vcxproj">
+      <Project>{4d284f86-8ddc-4f0d-abc9-ca9299ff988a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_fpx_mt_dll.vcxproj">
+      <Project>{a2f3c828-2164-4d06-8c2f-4ebb98f64f3b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_gif_mt_dll.vcxproj">
+      <Project>{5a327e51-4715-40ff-95ad-17ef012d388f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_gradient_mt_dll.vcxproj">
+      <Project>{c2cc7859-82fb-4c90-8c3f-56fc6132c1e1}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_gray_mt_dll.vcxproj">
+      <Project>{13c34894-2cbe-42e6-939c-2b2d53f6d5eb}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_hdf_mt_dll.vcxproj">
+      <Project>{46d489b5-aba2-4d3d-8d65-beb81c043e13}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_histogram_mt_dll.vcxproj">
+      <Project>{0357de56-cacf-4fd1-a405-80923064b6bc}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_hrz_mt_dll.vcxproj">
+      <Project>{0b476776-4f4f-48fd-a7ec-aacb69c9518f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_html_mt_dll.vcxproj">
+      <Project>{13fed1f4-d580-4cfc-9a73-66686dbc6520}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_icon_mt_dll.vcxproj">
+      <Project>{d2c00daf-a4c9-4084-9af3-0102d9d81c96}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_identity_mt_dll.vcxproj">
+      <Project>{1aa78c57-a185-4eda-a728-bd37271f9bd2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_info_mt_dll.vcxproj">
+      <Project>{66accca0-8cc3-4734-a4f6-e3048a710a38}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_jbig_mt_dll.vcxproj">
+      <Project>{bc1bdf9a-d1ce-4d02-bbbd-ea02260dc6d8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_jnx_mt_dll.vcxproj">
+      <Project>{741b350e-c03e-4af0-9ba6-155a5af6df39}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_jp2_mt_dll.vcxproj">
+      <Project>{befac8aa-787a-42dd-937d-b09b624ead86}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_jpeg_mt_dll.vcxproj">
+      <Project>{7bdb7534-4eae-4f76-8522-e1986b899218}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_label_mt_dll.vcxproj">
+      <Project>{50f2315b-8020-401f-9b1d-c1f9d8750355}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_locale_mt_dll.vcxproj">
+      <Project>{cd48cb8e-942c-4e64-9c40-d22d2626d069}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_logo_mt_dll.vcxproj">
+      <Project>{24474a7c-9352-454f-ba65-689ce3a5b61a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_mac_mt_dll.vcxproj">
+      <Project>{41b49209-2f13-45d2-8664-e95f13faa2e7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_map_mt_dll.vcxproj">
+      <Project>{aba5fced-206b-4eab-b0e0-dc61bec2a912}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_matte_mt_dll.vcxproj">
+      <Project>{e2e547f0-f455-4f2b-9a6f-24aab5bfe998}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_mat_mt_dll.vcxproj">
+      <Project>{003d3354-eef2-4672-b252-0dd052dae442}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_meta_mt_dll.vcxproj">
+      <Project>{07af2b9a-c9a2-4cc4-af92-8d504e2e5bf2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_miff_mt_dll.vcxproj">
+      <Project>{bdcdc1d0-7673-44f0-a0f4-c8f31d27cedc}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_mono_mt_dll.vcxproj">
+      <Project>{8a4ef25f-836f-43e2-a915-023b8d855dc9}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_mpc_mt_dll.vcxproj">
+      <Project>{7f89d14a-affc-4283-ba7b-55f4dd344915}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_mpeg_mt_dll.vcxproj">
+      <Project>{b9a50569-a499-4057-8d5d-3b7c33df71e8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_mpr_mt_dll.vcxproj">
+      <Project>{eababb40-f33e-4048-806a-247301b6d4b9}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_msl_mt_dll.vcxproj">
+      <Project>{c5f89994-5bc5-45f1-bb5d-ae22baa87e33}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_mtv_mt_dll.vcxproj">
+      <Project>{fdb76b07-14e1-4b82-8ca9-31a4c74d7278}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_mvg_mt_dll.vcxproj">
+      <Project>{f91bd255-ee47-498f-8b33-5e2022cc8b7f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_null_mt_dll.vcxproj">
+      <Project>{8a2d2fcd-fcaa-4e5e-8037-6bc4089b5b24}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_otb_mt_dll.vcxproj">
+      <Project>{18931ac6-13e5-4dfa-aca8-619884435ad9}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_palm_mt_dll.vcxproj">
+      <Project>{5196baff-e18c-4649-b057-d9ccaed3c78d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_pcd_mt_dll.vcxproj">
+      <Project>{a6df9619-9138-40f5-baa8-ca304c6a8051}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_pcl_mt_dll.vcxproj">
+      <Project>{cd50178d-25d8-4b37-9f9d-248246182fa1}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_pcx_mt_dll.vcxproj">
+      <Project>{693f0e7b-4a24-445b-8df1-84a28d8d4d2d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_pdb_mt_dll.vcxproj">
+      <Project>{ed7fc009-b9a4-4665-8b7b-526b51ed8e08}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_pdf_mt_dll.vcxproj">
+      <Project>{391aa2c3-0bc2-47bb-a940-9016c439db49}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_pict_mt_dll.vcxproj">
+      <Project>{f7e0f508-62ed-4557-a9c3-8156dc53ff3f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_pix_mt_dll.vcxproj">
+      <Project>{cc8de708-ff4a-4904-b1ca-4fac1d3de49d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_plasma_mt_dll.vcxproj">
+      <Project>{3df9d5c5-4a36-4239-90c8-f22666bf7cdd}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_png_mt_dll.vcxproj">
+      <Project>{956a4a2a-f0c0-4016-b710-fcc94629d4b4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_pnm_mt_dll.vcxproj">
+      <Project>{d4fa2db0-b6f5-4bad-b874-d1a5d4053135}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_preview_mt_dll.vcxproj">
+      <Project>{afb0a76c-7355-4761-bf51-0d416d65e2cb}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_ps2_mt_dll.vcxproj">
+      <Project>{3cb00d2c-f80e-4275-964e-f1d6db546a47}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_ps3_mt_dll.vcxproj">
+      <Project>{7e5dcbb3-9514-4482-b123-37b66c0f49ed}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_psd_mt_dll.vcxproj">
+      <Project>{1d458933-004c-4f98-9e1b-52c421e288d3}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_ps_mt_dll.vcxproj">
+      <Project>{39701200-7a50-4e0a-b440-5d595a88f219}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_pwp_mt_dll.vcxproj">
+      <Project>{2a4f138b-c360-4298-a2a3-7fc58a4d8fa6}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_rgb_mt_dll.vcxproj">
+      <Project>{5721f760-4df7-451e-9557-a8ba34937371}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_rla_mt_dll.vcxproj">
+      <Project>{5767a81d-eaee-430a-8f30-c88128222406}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_rle_mt_dll.vcxproj">
+      <Project>{370885d9-cb9e-4f6a-a592-a709fb8e3665}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_sct_mt_dll.vcxproj">
+      <Project>{23ca8f2a-cec8-4a85-9390-6f7d4f593c4f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_sfw_mt_dll.vcxproj">
+      <Project>{82f766a7-0715-441c-a194-9eeadd315de8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_sgi_mt_dll.vcxproj">
+      <Project>{33e743d9-e0d5-4a32-8a67-1fc2c3801373}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_stegano_mt_dll.vcxproj">
+      <Project>{9f9c08a8-00e4-44b6-bdb4-6e3038c278ba}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_sun_mt_dll.vcxproj">
+      <Project>{fe2e19d2-e7a0-4769-88e7-f13b1ca1f802}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_svg_mt_dll.vcxproj">
+      <Project>{1f2ba5de-1747-4975-981a-baf5ea33c3ec}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_tga_mt_dll.vcxproj">
+      <Project>{ed76f1bd-f143-474b-973a-262981cdf293}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_tiff_mt_dll.vcxproj">
+      <Project>{70924e0c-3546-4a9b-bd48-65312071f220}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_tile_mt_dll.vcxproj">
+      <Project>{89d7caa2-cc06-4036-a30e-9cd75f00b2d0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_tim_mt_dll.vcxproj">
+      <Project>{c74e1042-30e1-4bdf-bbe0-f5c8f37e98d1}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_topol_mt_dll.vcxproj">
+      <Project>{50774c9b-82ad-4f4d-aacf-6fd4563bd4f6}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_ttf_mt_dll.vcxproj">
+      <Project>{ae0475ee-6e3e-4f99-a715-a68c2824b38b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_txt_mt_dll.vcxproj">
+      <Project>{837c68a5-9020-4cbf-b63b-19d5ccbcc589}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_uil_mt_dll.vcxproj">
+      <Project>{c3df37b8-4fe7-4b32-9c35-30ef122c237d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_url_mt_dll.vcxproj">
+      <Project>{6a0fbcae-461f-488e-a40a-ff0579cdfdaa}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_uyvy_mt_dll.vcxproj">
+      <Project>{9a40957c-910f-487d-bd62-f77bb1dcb148}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_vicar_mt_dll.vcxproj">
+      <Project>{45522d81-c811-4020-94f5-705518f696b0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_vid_mt_dll.vcxproj">
+      <Project>{48b5f031-9cff-498f-8234-bfae4635a3e8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_viff_mt_dll.vcxproj">
+      <Project>{1ea6b743-0b8f-41a2-b5ca-79afb28b704f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_wbmp_mt_dll.vcxproj">
+      <Project>{7615f55b-17dc-4d60-81a5-86c30060d69a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_webp_mt_dll.vcxproj">
+      <Project>{f82cfcb7-62ed-4265-ad47-8225f494cf5c}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_wmf_mt_dll.vcxproj">
+      <Project>{07e99eec-b769-439c-91b5-da921c6b61a8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_wpg_mt_dll.vcxproj">
+      <Project>{5237439c-e10d-4bc0-88d5-3cbb5157eba4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_xbm_mt_dll.vcxproj">
+      <Project>{c012ca16-39a7-41cf-8bc1-5e2e9005cfd0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_xcf_mt_dll.vcxproj">
+      <Project>{a99fe769-0a5d-4d28-8e9c-9968d696b25d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_xc_mt_dll.vcxproj">
+      <Project>{4d921a3c-b347-4609-97c2-33f95b14f221}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_xpm_mt_dll.vcxproj">
+      <Project>{420ff20f-eeba-49cb-a1f0-e5c7407d3304}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_xtrn_mt_dll.vcxproj">
+      <Project>{03b0b539-f348-4ff2-ad14-d1c226a70018}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_xwd_mt_dll.vcxproj">
+      <Project>{b7fce289-c992-4e15-be80-cf5575f33fed}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_x_mt_dll.vcxproj">
+      <Project>{3d522607-7c91-4118-93de-90a1cd574998}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\coders\IM_MOD_yuv_mt_dll.vcxproj">
+      <Project>{4b2208bf-3be2-4e3b-8322-f26b420f7ec8}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\dcraw\UTIL_dcraw_mt_exe.vcxproj">
+      <Project>{dab94554-a616-477c-80ae-37f4bb2b4762}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\filters\analyze_mt_dll.vcxproj">
+      <Project>{63f070ba-7f2c-4530-9ee2-dc7dad07e3a0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\jbig\CORE_jbig_mt_dll.vcxproj">
+      <Project>{80b6c67a-5922-43e7-a482-f4bd5291853f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\jp2\CORE_jp2_mt_dll.vcxproj">
+      <Project>{55e5d7d9-7f88-43a7-8537-eaad85dab417}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\jpeg\CORE_jpeg_mt_dll.vcxproj">
+      <Project>{9499a08e-0510-4eeb-acd3-8cf9ec4776c4}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\lcms\CORE_lcms_mt_dll.vcxproj">
+      <Project>{6aa76dab-24a9-4f44-8b32-87ade173be83}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libxml\CORE_libxml_mt_dll.vcxproj">
+      <Project>{029d9a26-736b-4308-a855-2e096aea7e01}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\Magick++\CORE_Magick++_mt_dll.vcxproj">
+      <Project>{c942c702-76cc-4e6d-a526-86af2a5c2261}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\magick\CORE_magick_mt_dll.vcxproj">
+      <Project>{e61e366c-4cc6-4151-99c4-4a2e17794254}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\png\CORE_png_mt_dll.vcxproj">
+      <Project>{574e7255-d9dd-40d3-a984-831ab424dc54}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\tiff\CORE_tiff_mt_dll.vcxproj">
+      <Project>{798e6161-6d82-4b71-860a-6b508705d365}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\ttf\CORE_ttf_mt_dll.vcxproj">
+      <Project>{fa31a057-2730-496b-88f2-666ce743e550}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\utilities\UTIL_gm_mt_exe.vcxproj">
+      <Project>{27905ba8-a2f7-4c16-aeed-db8b5b932139}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\wand\CORE_wand_mt_dll.vcxproj">
+      <Project>{cc3e2edd-54c7-42e3-8488-db94ad39431f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\webp\CORE_webp_mt_dll.vcxproj">
+      <Project>{aa3bd166-62dd-4bea-ae2d-6a3bc95d6569}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\win2k\IMDisplay\UTIL_IMDisplay_mt_exe.vcxproj">
+      <Project>{543ed4ad-df8a-454d-a952-3d3b93a6e759}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\wmf\CORE_wmf_mt_lib.vcxproj">
+      <Project>{00ea51cb-b4f4-4e1a-8d2b-39f818ba0763}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\xlib\CORE_xlib_mt_dll.vcxproj">
+      <Project>{324e55ea-151c-4a5a-9df0-788f94daa4e5}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\zlib\CORE_zlib_mt_dll.vcxproj">
+      <Project>{60a83437-f60e-4b21-a594-7ca0f97a6023}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

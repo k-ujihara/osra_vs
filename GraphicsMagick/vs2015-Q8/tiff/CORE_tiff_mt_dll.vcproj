@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_tiff"
+  ProjectGUID="{798E6161-6D82-4B71-860A-6B508705D365}"
+  Keyword="Win32Proj">
+  <Platforms>
+    <Platform Name="Win32"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_tiff"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\tiff,..\..\tiff\libtiff,..\..\tiff\port"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_TIFFLIB_;CHECK_JPEG_YCBCR_SUBSAMPLING;DEFAULT_EXTRASAMPLE_AS_ALPHA;STRIPCHOP_DEFAULT=TIFF_STRIPCHOP;LOGLUV_SUPPORT;NEXT_SUPPORT;THUNDER_SUPPORT;LZW_SUPPORT;PACKBITS_SUPPORT;CCITT_SUPPORT;TIF_PLATFORM_CONSOLE;FILLODER_LSB2MSB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        ModuleDefinitionFile="..\..\tiff\libtiff\libtiff.def"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_RL_tiff_.pdb"
+        ImportLibrary="..\lib\CORE_RL_tiff_.lib"
+        OutputFile="..\bin\CORE_RL_tiff_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_tiff"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\tiff,..\..\tiff\libtiff,..\..\tiff\port"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_TIFFLIB_;CHECK_JPEG_YCBCR_SUBSAMPLING;DEFAULT_EXTRASAMPLE_AS_ALPHA;STRIPCHOP_DEFAULT=TIFF_STRIPCHOP;LOGLUV_SUPPORT;NEXT_SUPPORT;THUNDER_SUPPORT;LZW_SUPPORT;PACKBITS_SUPPORT;CCITT_SUPPORT;TIF_PLATFORM_CONSOLE;FILLODER_LSB2MSB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        ModuleDefinitionFile="..\..\tiff\libtiff\libtiff.def"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_DB_tiff_.pdb"
+        ImportLibrary="..\lib\CORE_DB_tiff_.lib"
+        OutputFile="..\bin\CORE_DB_tiff_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\tiff\libtiff\tif_aux.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_close.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_codec.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_color.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_compress.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_dir.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_dirinfo.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_dirread.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_dirwrite.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_dumpmode.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_error.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_extension.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_fax3.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_fax3sm.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_flush.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_getimage.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_jbig.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_jpeg.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_jpeg_12.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_luv.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_lzma.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_lzw.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_next.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_ojpeg.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_open.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_packbits.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_pixarlog.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_predict.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_print.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_read.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_strip.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_swab.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_thunder.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_tile.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_unix.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_version.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_warning.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_write.c"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_zip.c"/>
+      <File RelativePath="..\..\tiff\port\snprintf.c"/>
+      <File RelativePath="..\..\tiff\libtiff\libtiff.def"/>
+      <File RelativePath="tiff.rc"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\tiff\libtiff\t4.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tiff.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tiffconf.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tiffconf.vc.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tiffconf.wince.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tiffio.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tiffiop.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tiffvers.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_config.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_config.vc.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_config.wince.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_dir.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_fax3.h"/>
+      <File RelativePath="..\..\tiff\libtiff\tif_predict.h"/>
+      <File RelativePath="..\..\tiff\libtiff\uvcode.h"/>
+      <File RelativePath="..\..\tiff\port\libport.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

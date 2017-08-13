@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="UTIL_IMDisplay"
+  ProjectGUID="{EE4A0BCD-A4C5-4994-B36E-B7E0C660881A}"
+  Keyword="x64Proj">
+  <Platforms>
+    <Platform Name="x64"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|x64"
+      OutputDirectory="..\..\bin\"
+      IntermediateDirectory="..\..\Release\UTIL_IMDisplay"
+      ConfigurationType="1"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..\..,..\..\..\xlib,..\..\..\Magick++\lib,..\..\..\,..\..\..\magick"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_MBCS;_DLL;_MAGICKMOD_;_AFXDLL"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        ProgramDatabaseFile="..\..\bin\IMDisplay.pdb"
+        OutputFile="..\..\bin\IMDisplay.exe"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|x64"
+      OutputDirectory="..\..\bin\"
+      IntermediateDirectory="..\..\Debug\UTIL_IMDisplay"
+      ConfigurationType="1"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..\..,..\..\..\xlib,..\..\..\Magick++\lib,..\..\..\,..\..\..\magick"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_MBCS;_DLL;_MAGICKMOD_;_AFXDLL"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        ProgramDatabaseFile="..\..\bin\IMDisplay.pdb"
+        OutputFile="..\..\bin\IMDisplay.exe"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\..\win2k\IMDisplay\ChildFrm.cpp"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\IMDisplay.cpp"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\IMDisplayDoc.cpp"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\IMDisplayView.cpp"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\MainFrm.cpp"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\ResizeDialog.cpp"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\RollDialog.cpp"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\RotateDialog.cpp"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\ShearDialog.cpp"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\StdAfx.cpp"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\..\win2k\IMDisplay\ChildFrm.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\IMDisplay.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\IMDisplayDoc.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\IMDisplayView.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\MainFrm.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\ResizeDialog.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\Resource.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\RollDialog.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\RotateDialog.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\ShearDialog.h"/>
+      <File RelativePath="..\..\..\win2k\IMDisplay\StdAfx.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+      <File RelativePath="..\..\..\win2k\IMDisplay\IMDisplay.rc"/>
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

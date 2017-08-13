@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>CORE_png</ProjectName>
+    <ProjectGuid>{574E7255-D9DD-40D3-A984-831AB424DC54}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.24730.2</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\lib\</OutDir>
+    <IntDir>..\Release\CORE_png\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\lib\</OutDir>
+    <IntDir>..\Debug\CORE_png\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader />
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <OmitFramePointers>true</OmitFramePointers>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>..\..;..\..\xlib;..\..\Magick++\lib;..\..\zlib;..\..\bzlib;..\..\jpeg;..\..\lcms\src;..\..\lcms\include;..\..\ttf\include;..\..\ttf\include\config;..\..\webp\src;..\..\webp\src\dec;..\..\webp\src\demux;..\..\webp\src\dsp;..\..\webp\src\enc;..\..\webp\src\mux;..\..\webp\src\utils;..\..\webp\src\webp;..\..\libxml\include;..\..\libxml\include\libxml;..\..\png;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_PNGLIB_;__WIN32DLL__;__WIN32__;__FLAT__;PNG_BUILD_DLL;PNG_NO_MODULEDEF;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>..\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>/MACHINE:X86;kernel32.lib;user32.lib;gdi32.lib;odbc32.lib;odbccp32.lib;ole32.lib;oleaut32.lib;winmm.lib;wsock32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetMachine>MachineX86</TargetMachine>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkDLL>true</LinkDLL>
+      <ProgramDatabaseFile>..\bin\CORE_RL_png_.pdb</ProgramDatabaseFile>
+      <ImportLibrary>..\lib\CORE_RL_png_.lib</ImportLibrary>
+      <OutputFile>..\bin\CORE_RL_png_.dll</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader />
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <OmitFramePointers>false</OmitFramePointers>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..;..\..\xlib;..\..\Magick++\lib;..\..\zlib;..\..\bzlib;..\..\jpeg;..\..\lcms\src;..\..\lcms\include;..\..\ttf\include;..\..\ttf\include\config;..\..\webp\src;..\..\webp\src\dec;..\..\webp\src\demux;..\..\webp\src\dsp;..\..\webp\src\enc;..\..\webp\src\mux;..\..\webp\src\utils;..\..\webp\src\webp;..\..\libxml\include;..\..\libxml\include\libxml;..\..\png;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_PNGLIB_;__WIN32DLL__;__WIN32__;__FLAT__;PNG_BUILD_DLL;PNG_NO_MODULEDEF;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>..\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>/MACHINE:X86;kernel32.lib;user32.lib;gdi32.lib;odbc32.lib;odbccp32.lib;ole32.lib;oleaut32.lib;winmm.lib;wsock32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetMachine>MachineX86</TargetMachine>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkDLL>true</LinkDLL>
+      <ProgramDatabaseFile>..\bin\CORE_DB_png_.pdb</ProgramDatabaseFile>
+      <ImportLibrary>..\lib\CORE_DB_png_.lib</ImportLibrary>
+      <OutputFile>..\bin\CORE_DB_png_.dll</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\png\png.c" />
+    <ClCompile Include="..\..\png\pngerror.c" />
+    <ClCompile Include="..\..\png\pngget.c" />
+    <ClCompile Include="..\..\png\pngmem.c" />
+    <ClCompile Include="..\..\png\pngpread.c" />
+    <ClCompile Include="..\..\png\pngread.c" />
+    <ClCompile Include="..\..\png\pngrio.c" />
+    <ClCompile Include="..\..\png\pngrtran.c" />
+    <ClCompile Include="..\..\png\pngrutil.c" />
+    <ClCompile Include="..\..\png\pngset.c" />
+    <ClCompile Include="..\..\png\pngtrans.c" />
+    <ClCompile Include="..\..\png\pngwio.c" />
+    <ClCompile Include="..\..\png\pngwrite.c" />
+    <ClCompile Include="..\..\png\pngwtran.c" />
+    <ClCompile Include="..\..\png\pngwutil.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="png.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\png\png.h" />
+    <ClInclude Include="..\..\png\pngconf.h" />
+    <ClInclude Include="..\..\png\pngdebug.h" />
+    <ClInclude Include="..\..\png\pnginfo.h" />
+    <ClInclude Include="..\..\png\pnglibconf.h" />
+    <ClInclude Include="..\..\png\pngpriv.h" />
+    <ClInclude Include="..\..\png\pngstruct.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\zlib\CORE_zlib_mt_dll.vcxproj">
+      <Project>{60a83437-f60e-4b21-a594-7ca0f97a6023}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

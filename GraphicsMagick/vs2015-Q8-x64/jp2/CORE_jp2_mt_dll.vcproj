@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_jp2"
+  ProjectGUID="{199C580D-993D-4521-8D19-54F20BDDC6B8}"
+  Keyword="x64Proj">
+  <Platforms>
+    <Platform Name="x64"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_jp2"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\jp2,..\..\jp2\src,..\..\jp2\src\appl,..\..\jp2\src\libjasper,..\..\jp2\src\libjasper\base,..\..\jp2\src\libjasper\include,..\..\jp2\src\libjasper\include\jasper,..\..\jp2\src\libjasper\jp2,..\..\jp2\src\libjasper\jpc"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;JAS_WIN_MSVC_BUILD;EXCLUDE_MIF_SUPPORT;EXCLUDE_PNM_SUPPORT;EXCLUDE_BMP_SUPPORT;EXCLUDE_RAS_SUPPORT;EXCLUDE_JPG_SUPPORT;EXCLUDE_PGX_SUPPORT;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        ModuleDefinitionFile="..\..\jp2\jasper.def"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_RL_jp2_.pdb"
+        ImportLibrary="..\lib\CORE_RL_jp2_.lib"
+        OutputFile="..\bin\CORE_RL_jp2_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|x64"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_jp2"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\jp2,..\..\jp2\src,..\..\jp2\src\appl,..\..\jp2\src\libjasper,..\..\jp2\src\libjasper\base,..\..\jp2\src\libjasper\include,..\..\jp2\src\libjasper\include\jasper,..\..\jp2\src\libjasper\jp2,..\..\jp2\src\libjasper\jpc"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;JAS_WIN_MSVC_BUILD;EXCLUDE_MIF_SUPPORT;EXCLUDE_PNM_SUPPORT;EXCLUDE_BMP_SUPPORT;EXCLUDE_RAS_SUPPORT;EXCLUDE_JPG_SUPPORT;EXCLUDE_PGX_SUPPORT;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:AMD64 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="17"
+        SubSystem="2"
+        ModuleDefinitionFile="..\..\jp2\jasper.def"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_DB_jp2_.pdb"
+        ImportLibrary="..\lib\CORE_DB_jp2_.lib"
+        OutputFile="..\bin\CORE_DB_jp2_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_cm.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_debug.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_getopt.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_icc.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_iccdata.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_image.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_init.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_malloc.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_seq.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_stream.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_string.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_tmr.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_tvp.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\base\jas_version.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jp2\jp2_cod.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jp2\jp2_dec.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jp2\jp2_enc.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_bs.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_cs.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_dec.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_enc.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_math.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_mct.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_mqcod.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_mqdec.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_mqenc.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_qmfb.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t1cod.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t1dec.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t1enc.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t2cod.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t2dec.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t2enc.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_tagtree.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_tsfb.c"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_util.c"/>
+      <File RelativePath="..\..\jp2\jasper.def"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jasper.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_cm.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_config.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_config2.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_debug.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_fix.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_getopt.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_icc.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_image.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_init.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_malloc.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_math.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_seq.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_stream.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_string.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_tmr.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_tvp.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_types.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\include\jasper\jas_version.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jp2\jp2_cod.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jp2\jp2_dec.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_bs.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_cod.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_cs.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_dec.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_enc.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_fix.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_flt.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_math.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_mct.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_mqcod.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_mqdec.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_mqenc.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_qmfb.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t1cod.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t1dec.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t1enc.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t2cod.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t2dec.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_t2enc.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_tagtree.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_tsfb.h"/>
+      <File RelativePath="..\..\jp2\src\libjasper\jpc\jpc_util.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

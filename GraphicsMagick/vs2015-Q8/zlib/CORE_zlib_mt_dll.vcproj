@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_zlib"
+  ProjectGUID="{60A83437-F60E-4B21-A594-7CA0F97A6023}"
+  Keyword="Win32Proj">
+  <Platforms>
+    <Platform Name="Win32"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_zlib"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\zlib"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_CRT_SECURE_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_RL_zlib_.pdb"
+        ImportLibrary="..\lib\CORE_RL_zlib_.lib"
+        OutputFile="..\bin\CORE_RL_zlib_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_zlib"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\zlib"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_CRT_SECURE_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_DB_zlib_.pdb"
+        ImportLibrary="..\lib\CORE_DB_zlib_.lib"
+        OutputFile="..\bin\CORE_DB_zlib_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\zlib\adler32.c"/>
+      <File RelativePath="..\..\zlib\compress.c"/>
+      <File RelativePath="..\..\zlib\crc32.c"/>
+      <File RelativePath="..\..\zlib\deflate.c"/>
+      <File RelativePath="..\..\zlib\gzclose.c"/>
+      <File RelativePath="..\..\zlib\gzlib.c"/>
+      <File RelativePath="..\..\zlib\gzread.c"/>
+      <File RelativePath="..\..\zlib\gzwrite.c"/>
+      <File RelativePath="..\..\zlib\infback.c"/>
+      <File RelativePath="..\..\zlib\inffast.c"/>
+      <File RelativePath="..\..\zlib\inflate.c"/>
+      <File RelativePath="..\..\zlib\inftrees.c"/>
+      <File RelativePath="..\..\zlib\trees.c"/>
+      <File RelativePath="..\..\zlib\uncompr.c"/>
+      <File RelativePath="..\..\zlib\zutil.c"/>
+      <File RelativePath="zlib.rc"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\zlib\crc32.h"/>
+      <File RelativePath="..\..\zlib\deflate.h"/>
+      <File RelativePath="..\..\zlib\gzguts.h"/>
+      <File RelativePath="..\..\zlib\inffast.h"/>
+      <File RelativePath="..\..\zlib\inffixed.h"/>
+      <File RelativePath="..\..\zlib\inflate.h"/>
+      <File RelativePath="..\..\zlib\inftrees.h"/>
+      <File RelativePath="..\..\zlib\trees.h"/>
+      <File RelativePath="..\..\zlib\zconf.h"/>
+      <File RelativePath="..\..\zlib\zlib.h"/>
+      <File RelativePath="..\..\zlib\zutil.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

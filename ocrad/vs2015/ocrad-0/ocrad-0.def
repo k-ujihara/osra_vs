@@ -1,0 +1,19 @@
+LIBRARY OCRAD-0
+EXPORTS
+	OCRAD_version
+	OCRAD_open
+	OCRAD_close
+	OCRAD_get_errno
+	OCRAD_set_image
+	OCRAD_set_image_from_file
+	OCRAD_set_utf8_format
+	OCRAD_set_threshold
+	OCRAD_scale
+	OCRAD_recognize
+	OCRAD_result_blocks
+	OCRAD_result_lines
+	OCRAD_result_chars_total
+	OCRAD_result_chars_block
+	OCRAD_result_chars_line
+	OCRAD_result_line
+	OCRAD_result_first_character

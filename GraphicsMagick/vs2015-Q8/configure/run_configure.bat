@@ -1,0 +1,1 @@
+..\..\VisualMagick\configure\configure.exe

@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>CORE_webp</ProjectName>
+    <ProjectGuid>{FE921F89-EA22-488D-A380-578C4EF733A3}</ProjectGuid>
+    <Keyword>x64Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.24730.2</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\lib\</OutDir>
+    <IntDir>..\Release\CORE_webp\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\lib\</OutDir>
+    <IntDir>..\Debug\CORE_webp\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader />
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <OmitFramePointers>true</OmitFramePointers>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>..\..;..\..\xlib;..\..\Magick++\lib;..\..\zlib;..\..\bzlib;..\..\jpeg;..\..\lcms\src;..\..\lcms\include;..\..\ttf\include;..\..\ttf\include\config;..\..\webp\src;..\..\webp\src\dec;..\..\webp\src\demux;..\..\webp\src\dsp;..\..\webp\src\enc;..\..\webp\src\mux;..\..\webp\src\utils;..\..\webp\src\webp;..\..\libxml\include;..\..\libxml\include\libxml;..\..\webp;..\..\webp\src;..\..\webp\src\dec;..\..\webp\src\demux;..\..\webp\src\dsp;..\..\webp\src\enc;..\..\webp\src\mux;..\..\webp\src\utils;..\..\webp\src\webp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_WEBPLIB_;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>..\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;odbc32.lib;odbccp32.lib;ole32.lib;oleaut32.lib;winmm.lib;wsock32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetMachine>MachineX64</TargetMachine>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkDLL>true</LinkDLL>
+      <ProgramDatabaseFile>..\bin\CORE_RL_webp_.pdb</ProgramDatabaseFile>
+      <ImportLibrary>..\lib\CORE_RL_webp_.lib</ImportLibrary>
+      <OutputFile>..\bin\CORE_RL_webp_.dll</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader />
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <OmitFramePointers>false</OmitFramePointers>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..;..\..\xlib;..\..\Magick++\lib;..\..\zlib;..\..\bzlib;..\..\jpeg;..\..\lcms\src;..\..\lcms\include;..\..\ttf\include;..\..\ttf\include\config;..\..\webp\src;..\..\webp\src\dec;..\..\webp\src\demux;..\..\webp\src\dsp;..\..\webp\src\enc;..\..\webp\src\mux;..\..\webp\src\utils;..\..\webp\src\webp;..\..\libxml\include;..\..\libxml\include\libxml;..\..\webp;..\..\webp\src;..\..\webp\src\dec;..\..\webp\src\demux;..\..\webp\src\dsp;..\..\webp\src\enc;..\..\webp\src\mux;..\..\webp\src\utils;..\..\webp\src\webp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;WIN64;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_WEBPLIB_;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>..\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;odbc32.lib;odbccp32.lib;ole32.lib;oleaut32.lib;winmm.lib;wsock32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetMachine>MachineX64</TargetMachine>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkDLL>true</LinkDLL>
+      <ProgramDatabaseFile>..\bin\CORE_DB_webp_.pdb</ProgramDatabaseFile>
+      <ImportLibrary>..\lib\CORE_DB_webp_.lib</ImportLibrary>
+      <OutputFile>..\bin\CORE_DB_webp_.dll</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\webp\src\dec\alpha.c" />
+    <ClCompile Include="..\..\webp\src\dec\buffer.c" />
+    <ClCompile Include="..\..\webp\src\dec\frame.c" />
+    <ClCompile Include="..\..\webp\src\dec\idec.c" />
+    <ClCompile Include="..\..\webp\src\dec\io.c" />
+    <ClCompile Include="..\..\webp\src\dec\quant.c" />
+    <ClCompile Include="..\..\webp\src\dec\tree.c" />
+    <ClCompile Include="..\..\webp\src\dec\vp8.c" />
+    <ClCompile Include="..\..\webp\src\dec\vp8l.c" />
+    <ClCompile Include="..\..\webp\src\dec\webp.c" />
+    <ClCompile Include="..\..\webp\src\demux\demux.c" />
+    <ClCompile Include="..\..\webp\src\dsp\alpha_processing.c" />
+    <ClCompile Include="..\..\webp\src\dsp\alpha_processing_sse2.c" />
+    <ClCompile Include="..\..\webp\src\dsp\cpu.c" />
+    <ClCompile Include="..\..\webp\src\dsp\dec.c" />
+    <ClCompile Include="..\..\webp\src\dsp\dec_clip_tables.c" />
+    <ClCompile Include="..\..\webp\src\dsp\dec_mips32.c" />
+    <ClCompile Include="..\..\webp\src\dsp\dec_neon.c" />
+    <ClCompile Include="..\..\webp\src\dsp\dec_sse2.c" />
+    <ClCompile Include="..\..\webp\src\dsp\enc.c" />
+    <ClCompile Include="..\..\webp\src\dsp\enc_avx2.c" />
+    <ClCompile Include="..\..\webp\src\dsp\enc_mips32.c" />
+    <ClCompile Include="..\..\webp\src\dsp\enc_neon.c" />
+    <ClCompile Include="..\..\webp\src\dsp\enc_sse2.c" />
+    <ClCompile Include="..\..\webp\src\dsp\lossless.c" />
+    <ClCompile Include="..\..\webp\src\dsp\lossless_mips32.c" />
+    <ClCompile Include="..\..\webp\src\dsp\lossless_neon.c" />
+    <ClCompile Include="..\..\webp\src\dsp\lossless_sse2.c" />
+    <ClCompile Include="..\..\webp\src\dsp\upsampling.c" />
+    <ClCompile Include="..\..\webp\src\dsp\upsampling_neon.c" />
+    <ClCompile Include="..\..\webp\src\dsp\upsampling_sse2.c" />
+    <ClCompile Include="..\..\webp\src\dsp\yuv.c" />
+    <ClCompile Include="..\..\webp\src\dsp\yuv_mips32.c" />
+    <ClCompile Include="..\..\webp\src\dsp\yuv_sse2.c" />
+    <ClCompile Include="..\..\webp\src\enc\alpha.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)alpha.2.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)alpha.2.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\webp\src\enc\analysis.c" />
+    <ClCompile Include="..\..\webp\src\enc\backward_references.c" />
+    <ClCompile Include="..\..\webp\src\enc\config.c" />
+    <ClCompile Include="..\..\webp\src\enc\cost.c" />
+    <ClCompile Include="..\..\webp\src\enc\filter.c" />
+    <ClCompile Include="..\..\webp\src\enc\frame.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)frame.2.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)frame.2.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\webp\src\enc\histogram.c" />
+    <ClCompile Include="..\..\webp\src\enc\iterator.c" />
+    <ClCompile Include="..\..\webp\src\enc\picture.c" />
+    <ClCompile Include="..\..\webp\src\enc\picture_csp.c" />
+    <ClCompile Include="..\..\webp\src\enc\picture_psnr.c" />
+    <ClCompile Include="..\..\webp\src\enc\picture_rescale.c" />
+    <ClCompile Include="..\..\webp\src\enc\picture_tools.c" />
+    <ClCompile Include="..\..\webp\src\enc\quant.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)quant.2.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)quant.2.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\webp\src\enc\syntax.c" />
+    <ClCompile Include="..\..\webp\src\enc\token.c" />
+    <ClCompile Include="..\..\webp\src\enc\tree.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)tree.2.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)tree.2.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\webp\src\enc\vp8l.c">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)vp8l.2.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)vp8l.2.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\webp\src\enc\webpenc.c" />
+    <ClCompile Include="..\..\webp\src\mux\muxedit.c" />
+    <ClCompile Include="..\..\webp\src\mux\muxinternal.c" />
+    <ClCompile Include="..\..\webp\src\mux\muxread.c" />
+    <ClCompile Include="..\..\webp\src\utils\bit_reader.c" />
+    <ClCompile Include="..\..\webp\src\utils\bit_writer.c" />
+    <ClCompile Include="..\..\webp\src\utils\color_cache.c" />
+    <ClCompile Include="..\..\webp\src\utils\filters.c" />
+    <ClCompile Include="..\..\webp\src\utils\huffman.c" />
+    <ClCompile Include="..\..\webp\src\utils\huffman_encode.c" />
+    <ClCompile Include="..\..\webp\src\utils\quant_levels.c" />
+    <ClCompile Include="..\..\webp\src\utils\quant_levels_dec.c" />
+    <ClCompile Include="..\..\webp\src\utils\random.c" />
+    <ClCompile Include="..\..\webp\src\utils\rescaler.c" />
+    <ClCompile Include="..\..\webp\src\utils\thread.c" />
+    <ClCompile Include="..\..\webp\src\utils\utils.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\webp\src\webp\decode.h" />
+    <ClInclude Include="..\..\webp\src\webp\demux.h" />
+    <ClInclude Include="..\..\webp\src\webp\encode.h" />
+    <ClInclude Include="..\..\webp\src\webp\mux.h" />
+    <ClInclude Include="..\..\webp\src\webp\mux_types.h" />
+    <ClInclude Include="..\..\webp\src\webp\types.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

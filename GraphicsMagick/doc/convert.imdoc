@@ -1,0 +1,224 @@
+<imdoc>
+<utils convert>
+<title>Convert</title>
+<gm>
+<sect convert="top">gm convert
+</gm>
+<im>
+<sect NAME="conv-top">NAME
+<p>
+convert - convert an image or sequence of images
+</p>
+</sect>
+<format type=html>
+<sect NAME="conv-contents">Contents
+<dl>
+<dt>
+<a href="#conv-syno">Synopsis</a>
+</dt>
+<dt>
+<a href="#conv-desc">Description</a>
+</dt>
+<dt>
+<a href="#conv-exam">Examples</a>
+</dt>
+<dt>
+<a href="#conv-opti">Options</a>
+</dt>
+</dl>
+</sect>
+</format>
+<sect NAME="conv-syno">Synopsis
+<p>
+<s>gm convert</s> <s>[</s> <i>options</i> <s>... ]</s>
+<i>input_file <s>[</s> <i>options</i> <s>... ]</s> <i>output_file</i>
+</p>
+</sect>
+<sect NAME="conv-desc">Description
+</im>
+<p>
+<s>Convert</s> converts an input file using one image format to an output
+file with a differing image format. In addition, various types of image
+processing can be performed on the converted image during the conversion
+process. <s>Convert</s> recognizes the image formats listed in
+<format type=man,tex>
+<i>GraphicsMagick(1)</i>.
+</format>
+<format type=html>
+<a href="GraphicsMagick.html"><i>GraphicsMagick(1)</i></a>.
+</format>
+</p>
+</sect>
+<back>
+<sect NAME="conv-exam">Examples
+<p>
+To make a thumbnail of a JPEG image, use:</p>
+<pre>
+<format type=man,tex>
+    gm convert -size 120x120 cockatoo.jpg -resize 120x120
+            +profile "*" thumbnail.jpg
+</format>
+<format type=html>
+    gm convert -size 120x120 cockatoo.jpg -resize 120x120 +profile "*" thumbnail.jpg
+</format>
+</pre>
+<pp>
+In this example, <tt>'-size 120x120'</tt> gives a hint to the JPEG decoder
+that the image is going to be downscaled to 120x120, allowing it to run
+faster by avoiding returning full-resolution images to GraphicsMagick for
+the subsequent resizing operation.  The
+<tt>'-resize 120x120'</tt> specifies the desired dimensions of the
+output image.  It will be scaled so its largest dimension is 120 pixels.  The
+<tt>'+profile "*"'</tt> removes any ICM, EXIF, IPTC, or other profiles
+that might be present in the input and aren't needed in the thumbnail.</pp>
+
+<p>
+To convert a <i>MIFF</i> image of a cockatoo to a SUN raster image, use:</p>
+<pre>
+    gm convert cockatoo.miff sun:cockatoo.ras
+</pre>
+<p>
+To convert a multi-page <i>PostScript</i> document to individual FAX pages,
+use:</p>
+<pre>
+    gm convert -monochrome document.ps fax:page
+</pre>
+<p>
+To convert a TIFF image to a <i>PostScript</i> A4 page with the image in
+the lower left-hand corner, use:</p>
+<pre>
+    gm convert -page A4+0+0 image.tiff document.ps
+</pre>
+<p>
+To convert a raw Gray image with a 128 byte header to a portable graymap,
+use:</p>
+<pre>
+<format type=man,tex>
+    gm convert -depth 8 -size 768x512+128 gray:raw
+            image.pgm
+</format>
+<format type=html>
+    gm convert -depth 8 -size 768x512+128 gray:raw image.pgm
+</format>
+</pre>
+<p>
+In this example, "raw" is the input file.  Its format is "gray" and it
+has the dimensions and number of header bytes specified by the -size
+option and the sample depth specified by the
+-depth option.  The output file is "image.pgm".  The suffix ".pgm"
+specifies its format.
+<p>
+To convert a Photo CD image to a TIFF image, use:</p>
+<pre>
+    gm convert -size 1536x1024 img0009.pcd image.tiff
+    gm convert img0009.pcd[4] image.tiff
+</pre>
+<p>
+To create a visual image directory of all your JPEG images, use:</p>
+<pre>
+    gm convert 'vid:*.jpg' directory.miff
+</pre>
+<p>
+To annotate an image with blue text using font 12x24 at position (100,100),
+use:</p>
+<pre>
+<format type=man,tex>
+    gm convert -font helvetica -fill blue
+            -draw "text 100,100 Cockatoo"
+            bird.jpg bird.miff
+</format>
+<format type=html>
+    gm convert -font helvetica -fill blue -draw "text 100,100 Cockatoo"
+            bird.jpg bird.miff
+</format>
+</pre>
+<p>
+To tile a 640x480 image with a JPEG texture with bumps use:</p>
+<pre>
+    gm convert -size 640x480 tile:bumps.jpg tiled.png
+</pre>
+
+<p>
+To surround an icon with an ornamental border to use with Mosaic(1), use:</p>
+<pre>
+<format type=man,tex>
+    gm convert -mattecolor "#697B8F" -frame 6x6 bird.jpg
+            icon.png
+</format>
+<format type=html>
+    gm convert -mattecolor "#697B8F" -frame 6x6 bird.jpg icon.png
+</format>
+</pre>
+
+<p>
+To create a MNG animation from a DNA molecule sequence, use:</p>
+<pre>
+    gm convert -delay 20 dna.* dna.mng
+</pre>
+</sect>
+<back>
+
+<!-- --------------------- Options ---------------------------------- -->
+
+<sect NAME="conv-opti">Options
+
+<p>
+Options are processed in command line order. Any option you specify on
+the command line remains in effect for the set of images that follows,
+until the set is terminated by the appearance of any option or <s>-noop</s>.
+Some options only affect the decoding of images and others only the encoding.
+The latter can appear after the final group of input images.</p>
+
+<p>
+For a more detailed description of each option, see
+<gm>
+Options, above.
+</gm>
+<im>
+<format type=man,tex>
+<i>GraphicsMagick(1)</i>.
+</format>
+<format type=html>
+<a href="GraphicsMagick.html"><i>GraphicsMagick(1)</i></a>.
+</format>
+</im>
+</p>
+
+<include file=brief_options.imdoc>
+<p>
+For a more detailed description of each option, see
+<gm>
+Options, above.
+</gm>
+<im>
+<format type=man,tex>
+<i>GraphicsMagick(1)</i>.
+</format>
+<format type=html>
+<a href="GraphicsMagick.html"><i>GraphicsMagick(1)</i></a>.
+</format>
+</p>
+</sect>
+<back>
+
+<format type=man>
+<sect NAME="conv-also">SEE ALSO
+<p>
+GraphicsMagick(1),
+animate(1),
+compare(1),
+composite(1),
+conjure(1),
+display(1),
+identify(1),
+import(1),
+mogrify(1),
+montage(1)
+</p>
+</sect>
+</format>
+</im>
+</utils>
+<im>
+</im>
+</imdoc>

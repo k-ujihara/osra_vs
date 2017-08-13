@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_webp"
+  ProjectGUID="{AA3BD166-62DD-4BEA-AE2D-6A3BC95D6569}"
+  Keyword="Win32Proj">
+  <Platforms>
+    <Platform Name="Win32"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_webp"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\webp,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_WEBPLIB_;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_RL_webp_.pdb"
+        ImportLibrary="..\lib\CORE_RL_webp_.lib"
+        OutputFile="..\bin\CORE_RL_webp_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_webp"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\webp,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_WEBPLIB_;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_DB_webp_.pdb"
+        ImportLibrary="..\lib\CORE_DB_webp_.lib"
+        OutputFile="..\bin\CORE_DB_webp_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\webp\src\dec\alpha.c"/>
+      <File RelativePath="..\..\webp\src\dec\buffer.c"/>
+      <File RelativePath="..\..\webp\src\dec\frame.c"/>
+      <File RelativePath="..\..\webp\src\dec\idec.c"/>
+      <File RelativePath="..\..\webp\src\dec\io.c"/>
+      <File RelativePath="..\..\webp\src\dec\quant.c"/>
+      <File RelativePath="..\..\webp\src\dec\tree.c"/>
+      <File RelativePath="..\..\webp\src\dec\vp8.c"/>
+      <File RelativePath="..\..\webp\src\dec\vp8l.c"/>
+      <File RelativePath="..\..\webp\src\dec\webp.c"/>
+      <File RelativePath="..\..\webp\src\demux\demux.c"/>
+      <File RelativePath="..\..\webp\src\dsp\alpha_processing.c"/>
+      <File RelativePath="..\..\webp\src\dsp\alpha_processing_sse2.c"/>
+      <File RelativePath="..\..\webp\src\dsp\cpu.c"/>
+      <File RelativePath="..\..\webp\src\dsp\dec.c"/>
+      <File RelativePath="..\..\webp\src\dsp\dec_clip_tables.c"/>
+      <File RelativePath="..\..\webp\src\dsp\dec_mips32.c"/>
+      <File RelativePath="..\..\webp\src\dsp\dec_neon.c"/>
+      <File RelativePath="..\..\webp\src\dsp\dec_sse2.c"/>
+      <File RelativePath="..\..\webp\src\dsp\enc.c"/>
+      <File RelativePath="..\..\webp\src\dsp\enc_avx2.c"/>
+      <File RelativePath="..\..\webp\src\dsp\enc_mips32.c"/>
+      <File RelativePath="..\..\webp\src\dsp\enc_neon.c"/>
+      <File RelativePath="..\..\webp\src\dsp\enc_sse2.c"/>
+      <File RelativePath="..\..\webp\src\dsp\lossless.c"/>
+      <File RelativePath="..\..\webp\src\dsp\lossless_mips32.c"/>
+      <File RelativePath="..\..\webp\src\dsp\lossless_neon.c"/>
+      <File RelativePath="..\..\webp\src\dsp\lossless_sse2.c"/>
+      <File RelativePath="..\..\webp\src\dsp\upsampling.c"/>
+      <File RelativePath="..\..\webp\src\dsp\upsampling_neon.c"/>
+      <File RelativePath="..\..\webp\src\dsp\upsampling_sse2.c"/>
+      <File RelativePath="..\..\webp\src\dsp\yuv.c"/>
+      <File RelativePath="..\..\webp\src\dsp\yuv_mips32.c"/>
+      <File RelativePath="..\..\webp\src\dsp\yuv_sse2.c"/>
+      <File RelativePath="..\..\webp\src\enc\alpha.c">
+        <FileConfiguration Name="Debug|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)alpha.2.obj"/>
+        </FileConfiguration>
+        <FileConfiguration Name="Release|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)alpha.2.obj"/>
+        </FileConfiguration>
+      </File>
+      <File RelativePath="..\..\webp\src\enc\analysis.c"/>
+      <File RelativePath="..\..\webp\src\enc\backward_references.c"/>
+      <File RelativePath="..\..\webp\src\enc\config.c"/>
+      <File RelativePath="..\..\webp\src\enc\cost.c"/>
+      <File RelativePath="..\..\webp\src\enc\filter.c"/>
+      <File RelativePath="..\..\webp\src\enc\frame.c">
+        <FileConfiguration Name="Debug|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)frame.2.obj"/>
+        </FileConfiguration>
+        <FileConfiguration Name="Release|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)frame.2.obj"/>
+        </FileConfiguration>
+      </File>
+      <File RelativePath="..\..\webp\src\enc\histogram.c"/>
+      <File RelativePath="..\..\webp\src\enc\iterator.c"/>
+      <File RelativePath="..\..\webp\src\enc\picture.c"/>
+      <File RelativePath="..\..\webp\src\enc\picture_csp.c"/>
+      <File RelativePath="..\..\webp\src\enc\picture_psnr.c"/>
+      <File RelativePath="..\..\webp\src\enc\picture_rescale.c"/>
+      <File RelativePath="..\..\webp\src\enc\picture_tools.c"/>
+      <File RelativePath="..\..\webp\src\enc\quant.c">
+        <FileConfiguration Name="Debug|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)quant.2.obj"/>
+        </FileConfiguration>
+        <FileConfiguration Name="Release|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)quant.2.obj"/>
+        </FileConfiguration>
+      </File>
+      <File RelativePath="..\..\webp\src\enc\syntax.c"/>
+      <File RelativePath="..\..\webp\src\enc\token.c"/>
+      <File RelativePath="..\..\webp\src\enc\tree.c">
+        <FileConfiguration Name="Debug|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)tree.2.obj"/>
+        </FileConfiguration>
+        <FileConfiguration Name="Release|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)tree.2.obj"/>
+        </FileConfiguration>
+      </File>
+      <File RelativePath="..\..\webp\src\enc\vp8l.c">
+        <FileConfiguration Name="Debug|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)vp8l.2.obj"/>
+        </FileConfiguration>
+        <FileConfiguration Name="Release|Win32">
+          <Tool Name="VCCLCompilerTool" ObjectFile="$(IntDir)vp8l.2.obj"/>
+        </FileConfiguration>
+      </File>
+      <File RelativePath="..\..\webp\src\enc\webpenc.c"/>
+      <File RelativePath="..\..\webp\src\mux\muxedit.c"/>
+      <File RelativePath="..\..\webp\src\mux\muxinternal.c"/>
+      <File RelativePath="..\..\webp\src\mux\muxread.c"/>
+      <File RelativePath="..\..\webp\src\utils\bit_reader.c"/>
+      <File RelativePath="..\..\webp\src\utils\bit_writer.c"/>
+      <File RelativePath="..\..\webp\src\utils\color_cache.c"/>
+      <File RelativePath="..\..\webp\src\utils\filters.c"/>
+      <File RelativePath="..\..\webp\src\utils\huffman.c"/>
+      <File RelativePath="..\..\webp\src\utils\huffman_encode.c"/>
+      <File RelativePath="..\..\webp\src\utils\quant_levels.c"/>
+      <File RelativePath="..\..\webp\src\utils\quant_levels_dec.c"/>
+      <File RelativePath="..\..\webp\src\utils\random.c"/>
+      <File RelativePath="..\..\webp\src\utils\rescaler.c"/>
+      <File RelativePath="..\..\webp\src\utils\thread.c"/>
+      <File RelativePath="..\..\webp\src\utils\utils.c"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\webp\src\webp\decode.h"/>
+      <File RelativePath="..\..\webp\src\webp\demux.h"/>
+      <File RelativePath="..\..\webp\src\webp\encode.h"/>
+      <File RelativePath="..\..\webp\src\webp\mux.h"/>
+      <File RelativePath="..\..\webp\src\webp\mux_types.h"/>
+      <File RelativePath="..\..\webp\src\webp\types.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

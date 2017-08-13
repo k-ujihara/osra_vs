@@ -1,0 +1,360 @@
+<imdoc>
+
+<!-- ------------------------------------------------------------------- -->
+<!-- GraphicsMagick.imdoc: combined pages of convert, composite, et al.  -->
+<!-- ------------------------------------------------------------------- -->
+<!-- Markup tags in this document are                                    -->
+<!--   <imdoc> (Identifies file as ImageMagick document source file)     -->
+<!--   <sect> name=section_name (section); remainder of line is title    -->
+<!--   <ss>   (subsection)                                               -->
+<!--   <opt>  (option)                                                   -->
+<!--   <abs>  (abstract of an option)                                    -->
+<!--   <p>    (regular print paragraph, not OK to nest)                  -->
+<!--   <pp>   (small print paragraph, not OK to nest)                    -->
+<!--   <sp>   (subparagraph, must be inside p or pp, OK to nest          -->
+<!--   <ul>   (== HTML ul)                                               -->
+<!--   <li>   (== HTML li)                                               -->
+<!--   <dl>   (== HTML dl)                                               -->
+<!--   <dt>   (== HTML dt, dt without a dd is OK)                        -->
+<!--   <dd>   (== HTML dd, dd without a dt is OK)                        -->
+<!--   <i>    (== HTML em)                                               -->
+<!--   <s>    (== HTML strong)                                           -->
+<!--   <tt>   (== HTML tt)                                               -->
+<!--   <bq>   (== HTML blockquote)                                       -->
+<!--   <pre>  (== HTML pre, not allowed in pp or sp)                     -->
+<!--   <utils apps=name,...> (which apps the enclosed lines pertain to)  -->
+<!--   <format type=html|tex|man>                                        -->
+<!--   <back>                                                            -->
+<!--   <home>                                                            -->
+<!--   <include file=filename>                                           -->
+<!--   <!-- (== HTML !--) comment, must not contain newlines, close with -->
+<!--                                                                     -->
+<!--   All tags must close with </...> form of tag, e.g. <pp>..</pp>     -->
+<!-- ------------------------------------------------------------------- -->
+
+<utils apps=all>
+<title>GraphicsMagick Utilities</title>
+<sect NAME="top">NAME
+<p>
+gm - command-line utility to create, edit, compare, convert, or display images
+</p>
+</sect>
+<format type=html>
+<sect NAME="contents">Contents
+<dl>
+<dt>
+<a href="#syno">Synopsis</a>
+</dt>
+<dt>
+<a href="#desc">Description</a>
+</dt>
+<dt>
+<a href="#files">Files and Formats</a>
+</dt>
+<dt>
+<a href="#opti">Options</a>
+</dt>
+<dt>
+<a href="#envi">Environment</a>
+</dt>
+<dt>
+<a href="#file">Configuration Files</a>
+</dt>
+<dt>
+<a href="#auth">Authors</a>
+</dt>
+<dt>
+<a href="#copy">Copyright</a>
+</dt>
+</dl>
+</sect>
+</format>
+<sect NAME="syno">Synopsis
+
+<p>
+<s>gm animate</s> <s>[</s> <i>options ...</i> <s>]</s> <i>file</i> <s>[ [</s>
+<i>options ...</i> <s>]</s> <i>file ...</i> <s>]</s></p>
+
+<p>
+<s>gm batch</s> <s>[</s> <i>options ...</i> <s>]</s> <s>[</s> <i>script</i> <s>]</s></p>
+
+<p>
+<s>gm benchmark</s> <s>[</s> <i>options ...</i> <s>]</s> subcommand</p>
+
+<p>
+<s>gm compare</s> <s>[</s> <i>options</i> <s>... ]</s> <i>reference-image</i>
+<s>[</s> <i>options</i> <s>... ]</s> <i>compare-image</i>
+<s>[</s> <i>options</i> <s>... ]</s></p>
+
+<p>
+<s>gm composite</s> <s>[</s> <i>options ...</i> <s>]</s> <i>change-image base-image</i>
+<s>[</s> <i>mask-image</i> <s>]</s> <i>output-image</i></p>
+
+<p>
+<s>gm conjure</s> <s>[</s> <i>options</i> <s>]</s> <i>script.msl</i>
+<s>[ [</s> <i>options</i> <s>]</s> <i>script.msl</i> <s>]</s></p>
+
+<p>
+<s>gm convert</s> <s>[ [</s> <i>options ...</i> <s>] [</s> <i>input-file ...</i>
+<s>] [</s> <i>options ...</i> <s>] ]</s> <i>output-file</i> </p>
+
+<p>
+<s>gm display</s> <s>[</s> <i>options ...</i> <s>]</s> <i>file ...</i>
+<s>[ [</s><i>options ...</i> <s>]</s><i>file ...</i> <s>]</s></p>
+
+<p>
+<s>gm identify</s> <i>file</i> <s>[</s> <i>file ...</i> <s>]</s></p>
+
+<p>
+<s>gm import</s> <s>[</s> <i>options ...</i> <s>]</s> <i>file</i></p>
+
+<p>
+<s>gm mogrify</s> <s>[</s> <i>options ...</i> <s>]</s> <i>file ...</i></p>
+
+<p>
+<s>gm montage</s> <s>[</s> <i>options ...</i> <s>]</s> <i>file</i> <s>[ [</s>
+<i>options ...</i> <s>]</s> <i>file ...</i> <s>]</s> <i>output-file</i></p>
+
+<p>
+<s>gm time</s> subcommand</p>
+
+<p>
+<s>gm version</s></p>
+
+</sect>
+<sect NAME="desc">Description
+
+<p> GraphicsMagick's <s>gm</s> provides a suite of utilities for
+creating, comparing, converting, editing, and displaying images.  All
+of the utilities are provided as sub-commands of a single <s>gm</s>
+executable:</p>
+
+<p>
+<format type=man,tex>
+<s>animate</s>
+</format>
+<format type=html>
+<a href="animate.html"><s>animate</s></a>
+</format>
+displays an animation (e.g. a GIF file) on any workstation display
+running an <i>X</i> server.</p>
+
+<p>
+<format type=man,tex>
+<s>batch</s>
+</format>
+<format type=html>
+<a href="batch.html"><s>batch</s></a>
+</format>
+executes an arbitary number of the utility commands
+(e.g. <s>convert</s>) in the form of a simple linear batch script in
+order to improve execution efficiency, and/or to allow use as a
+subordinate co-process under the control of an arbitrary script or
+program.</p>
+
+<p>
+<format type=man,tex>
+<s>benchmark</s>
+</format>
+<format type=html>
+<a href="benchmark.html"><s>benchmark</s></a>
+</format>
+executes one of the other utility commands (e.g. <s>convert</s>) for a
+specified number of iterations, or execution time, and reports
+execution time and other profiling information such as CPU
+utilization. <s>Benchmark</s> provides various operating modes
+including executing the command with a varying number of threads, and
+alternate reporting formats such as comma-separated value (CSV).</p>
+
+<p>
+<format type=man,tex>
+<s>compare</s>
+</format>
+<format type=html>
+<a href="compare.html"><s>compare</s></a>
+</format>
+compares two images and reports difference statistics according to
+specified metrics and/or outputs an image with a visual representation
+of the differences.  It may also be used to test if images are similar
+within a particular range and specified metric, returning a truth
+value to the executing environment.</p>
+
+<p>
+<format type=man,tex>
+<s>composite</s>
+</format>
+<format type=html>
+<a href="composite.html"><s>composite</s></a>
+</format>
+composites images (blends or merges images together) to create new images.</p>
+
+<p>
+<format type=man,tex>
+<s>conjure</s>
+</format>
+<format type=html>
+<a href="conjure.html"><s>conjure</s></a>
+</format>
+interprets and executes scripts in
+the Magick Scripting Language (MSL).</p>
+
+<p>
+<format type=man,tex>
+<s>convert</s>
+</format>
+<format type=html>
+<a href="convert.html"><s>convert</s></a>
+</format>
+converts an input file using one image format to an output file with
+the same or differing image format while applying an arbitrary number
+of image transformations.</p>
+
+<p>
+<format type=man,tex>
+<s>display</s>
+</format>
+<format type=html>
+<a href="display.html"><s>display</s></a>
+</format>
+is a machine architecture independent image processing and display
+facility. It can display an image on any workstation display running
+an <i>X</i> server.</p>
+
+<p>
+<format type=man,tex>
+<s>identify</s>
+</format>
+<format type=html>
+<a href="identify.html"><s>identify</s></a>
+</format>
+
+describes the format and characteristics of one or more image
+files. It will also report if an image is incomplete or corrupt.</p>
+
+<p>
+<format type=man,tex>
+<s>import</s>
+</format>
+<format type=html>
+<a href="import.html"><s>import</s></a>
+</format>
+reads an image from any visible window on an <i>X</i> server and
+outputs it as an image file. You can capture a single window, the
+entire screen, or any rectangular portion of the screen.</p>
+
+<p>
+<format type=man,tex>
+<s>mogrify</s>
+</format>
+<format type=html>
+<a href="mogrify.html"><s>mogrify</s></a>
+</format>
+transforms an image or a sequence of images. These transforms include
+<s>image scaling</s>, <s>image rotation</s>, <s>color reduction</s>,
+and others. The transmogrified image <s>overwrites</s> the original
+image.</p>
+
+<p>
+<format type=man,tex>
+<s>montage</s>
+</format>
+<format type=html>
+<a href="montage.html"><s>montage</s></a>
+</format>
+creates a composite by combining several separate images. The images
+are tiled on the composite image with the name of the image optionally
+appearing just below the individual tile.</p>
+
+<p>
+<format type=man,tex>
+<s>time</s>
+</format>
+<format type=html>
+<a href="time.html"><s>time</s></a>
+</format>
+executes a subcommand and reports the user, system, and total
+execution time consumed.</p>
+
+<p>
+<format type=man,tex>
+<s>version</s>
+</format>
+<format type=html>
+<a href="version.html"><s>version</s></a>
+</format>
+reports the GraphicsMagick release version, maximum sample-depth,
+copyright notice, supported features, and the options used while
+building the software.</p>
+
+<p>
+The <s>GraphicsMagick</s> utilities recognize the following image formats:
+</p>
+<include file=format.imdoc>
+<p>
+<i>Support for some of these formats require additional programs or libraries.
+See <a href="README.html">README</a>
+in the source package for where to find optional additional software</i>.</p>
+<p>
+Note, a format delineated with <tt>+</tt> means that if more than one
+image is specified, frames are combined into a single multi-image
+file. Use <s>+adjoin</s> if you want a single image produced for each
+frame.</p>
+<p>
+Your installation might not support all of the formats in the list.
+To get an accurate listing of the formats supported by your particular
+configuration, run <tt>"gm convert -list format"</tt>.
+<p>
+Raw images are expected to have one byte per pixel unless <s>gm</s> is
+compiled in 16-bit quantum mode or in 32-bit quantum mode. Here, the
+raw data is expected to be stored two or four bytes per pixel,
+respectively, in most-significant-byte-first order.  For example, you
+can tell if <s>gm</s> was compiled in 16-bit mode by typing "gm
+version" without any options, and looking for "Q:16" in the first line
+of output.</p>
+</sect>
+<back>
+
+<sect NAME="files">Files and Formats
+<include file=filespec.imdoc>
+</sect>
+<back>
+
+<!-- --------------------- Options ---------------------------------- -->
+
+<sect NAME="opti">Options
+
+<p>
+Options are processed in command line order. Any option you specify on
+the command line remains in effect for the set of images that follows,
+until the set is terminated by the appearance of any option or <s>-noop</s>.
+Some options only affect the decoding of images and others only the encoding.
+The latter can appear after the final group of input images.</p>
+
+<include file=options.imdoc>
+</sect>
+<back>
+
+<sect NAME="envi">Environment
+<include file=environment.imdoc>
+</sect>
+<back>
+
+<sect NAME="file">Configuration Files
+<include file=config_files.imdoc>
+</sect>
+<back>
+
+<im>
+<format type=man>
+<sect NAME="also">SEE ALSO
+<p>
+GraphicsMagick(1),
+animate(1), display(1), animate(1), display(1), identify(1), import(1),
+montage(1), mogrify(1), composite(1)
+</p>
+</sect>
+</format>
+<include file=copyright.imdoc>
+</im>
+</utils>
+</imdoc>

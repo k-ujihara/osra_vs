@@ -1,0 +1,79 @@
+diff -ur character_r12.cc character_r12.cc
+--- character_r12.cc	2015-01-08 20:35:15.000000000 +0900
++++ character_r12.cc	2016-05-14 00:38:49.158323900 +0900
+@@ -15,6 +15,7 @@
+     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
++#include <algorithm>
+ #include <cstdio>
+ #include <cstdlib>
+ #include <vector>
+diff -ur main.cc main.cc
+--- main.cc	2015-01-08 20:37:49.000000000 +0900
++++ main.cc	2016-05-19 19:44:49.720539800 +0900
+@@ -31,7 +31,6 @@
+ #include <stdint.h>
+ #if defined(__MSVCRT__) || defined(__OS2__) || defined(_MSC_VER)
+ #include <fcntl.h>
+-#include <unistd.h>
+ #include <io.h>
+ #endif
+ 
+@@ -352,7 +351,7 @@
+     {
+     if( append ) control.outfile = std::fopen( outfile_name, "a" );
+     else if( force ) control.outfile = std::fopen( outfile_name, "w" );
+-    else if( ( control.outfile = std::fopen( outfile_name, "wx" ) ) == 0 )
++    else if( ( control.outfile = std::fopen( outfile_name, "w" ) ) == 0 )
+       {
+       if( verbosity >= 0 )
+         std::fprintf( stderr, "Output file %s already exists.\n", outfile_name );
+diff -ur ocradcheck.cc ocradcheck.cc
+--- ocradcheck.cc	2015-01-08 20:35:15.000000000 +0900
++++ ocradcheck.cc	2016-05-19 19:44:49.657947600 +0900
+@@ -17,7 +17,6 @@
+ #include <cstdlib>
+ #include <cstring>
+ #include <stdint.h>
+-#include <unistd.h>
+ 
+ #include "ocradlib.h"
+ 
+diff -ur textline_r2.cc textline_r2.cc
+--- textline_r2.cc	2015-01-08 20:35:15.000000000 +0900
++++ textline_r2.cc	2016-05-19 19:44:49.573473600 +0900
+@@ -21,6 +21,7 @@
+ #include <cstdlib>
+ #include <vector>
+ #include <stdint.h>
++#include <cwctype>
+ 
+ #include "common.h"
+ #include "rectangle.h"
+@@ -412,10 +413,10 @@
+           int code2 = c2.guess( 0 ).code;
+           int code2b = UCS::base_letter( code2 );
+           if( !code2b && code2 >= 128 ) continue;
+-          if( ( std::isalpha( code2 ) && 4 * b1.height() > 5 * c2.height() ) ||
+-              ( std::isupper( code2 ) && Ocrad::similar( b1.height(), c2.height(), 10 ) ) ||
+-              ( std::isalpha( code2b ) && 4 * c1.height() > 5 * c2.height() ) ||
+-              ( std::isupper( code2b ) && Ocrad::similar( c1.height(), c2.height(), 10 ) ) )
++          if( ( iswalpha( code2 ) && 4 * b1.height() > 5 * c2.height() ) ||
++              ( iswupper( code2 ) && Ocrad::similar( b1.height(), c2.height(), 10 ) ) ||
++              ( iswalpha( code2b ) && 4 * c1.height() > 5 * c2.height() ) ||
++              ( iswupper( code2b ) && Ocrad::similar( c1.height(), c2.height(), 10 ) ) )
+             { c1.insert_guess( 0, UCS::toupper( code ), 1 ); break; }
+           }
+         }
+diff -ur user_filter.cc user_filter.cc
+--- user_filter.cc	2015-01-20 03:07:24.000000000 +0900
++++ user_filter.cc	2016-05-14 00:38:49.158323900 +0900
+@@ -15,6 +15,7 @@
+     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
++#include <cctype>
+ #include <cstdio>
+ #include <string>
+ #include <vector>

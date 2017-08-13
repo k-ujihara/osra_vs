@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+  ProjectType="Visual C++"
+  Version="7.00"
+  Name="CORE_libxml"
+  ProjectGUID="{029D9A26-736B-4308-A855-2E096AEA7E01}"
+  Keyword="Win32Proj">
+  <Platforms>
+    <Platform Name="Win32"/>
+  </Platforms>
+  <Configurations>
+    <Configuration
+      Name="Release|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Release\CORE_libxml"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="2"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        DebugInformationFormat="3"
+        BasicRuntimeChecks="0"
+        OmitFramePointers="TRUE"
+        Optimization="3"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\libxml,..\..\libxml\include,..\..\libxml\include\libxml"
+        PreprocessorDefinitions="NDEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_XMLLIB_;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="NDEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_RL_libxml_.pdb"
+        ImportLibrary="..\lib\CORE_RL_libxml_.lib"
+        OutputFile="..\bin\CORE_RL_libxml_.dll"
+        />
+    </Configuration>
+    <Configuration
+      Name="Debug|Win32"
+      OutputDirectory="..\lib\"
+      IntermediateDirectory="..\Debug\CORE_libxml"
+      ConfigurationType="2"
+      UseOfMFC="0"
+      ATLMinimizesCRunTimeLibraryUsage="FALSE"
+      CharacterSet="2">
+      <Tool
+        Name="VCCLCompilerTool"
+        RuntimeLibrary="3"
+        StringPooling="TRUE"
+        EnableFunctionLevelLinking="TRUE"
+        WarningLevel="3"
+        UsePrecompiledHeader="0"
+        SuppressStartupBanner="TRUE"
+        CompileAs="0"
+        InlineFunctionExpansion="2"
+        BasicRuntimeChecks="3"
+        OmitFramePointers="FALSE"
+        DebugInformationFormat="3"
+        Optimization="0"
+        AdditionalIncludeDirectories="..\..,..\..\xlib,..\..\Magick++\lib,..\..\zlib,..\..\bzlib,..\..\jpeg,..\..\lcms\src,..\..\lcms\include,..\..\ttf\include,..\..\ttf\include\config,..\..\webp\src,..\..\webp\src\dec,..\..\webp\src\demux,..\..\webp\src\dsp,..\..\webp\src\enc,..\..\webp\src\mux,..\..\webp\src\utils,..\..\webp\src\webp,..\..\libxml\include,..\..\libxml\include\libxml,..\..\libxml,..\..\libxml\include,..\..\libxml\include\libxml"
+        PreprocessorDefinitions="_DEBUG;_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes;_DLL;_MAGICKMOD_;_XMLLIB_;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS"
+        />
+      <Tool
+        Name="VCMIDLTool"/>
+      <Tool
+        Name="VCResourceCompilerTool"
+        PreprocessorDefinitions="_DEBUG"
+        Culture="1033"/>
+      <Tool
+        Name="VCLinkerTool"
+        AdditionalLibraryDirectories="..\lib\"
+        AdditionalDependencies="/MACHINE:X86 kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib"
+        SuppressStartupBanner="TRUE"
+        LinkIncremental="1"
+        TargetMachine="1"
+        SubSystem="2"
+        GenerateDebugInformation="TRUE"
+        LinkDLL="TRUE"
+        ProgramDatabaseFile="..\bin\CORE_DB_libxml_.pdb"
+        ImportLibrary="..\lib\CORE_DB_libxml_.lib"
+        OutputFile="..\bin\CORE_DB_libxml_.dll"
+        />
+    </Configuration>
+  </Configurations>
+  <Files>
+    <Filter Name="src" Filter="">
+      <File RelativePath="..\..\libxml\buf.c"/>
+      <File RelativePath="..\..\libxml\c14n.c"/>
+      <File RelativePath="..\..\libxml\catalog.c"/>
+      <File RelativePath="..\..\libxml\chvalid.c"/>
+      <File RelativePath="..\..\libxml\debugXML.c"/>
+      <File RelativePath="..\..\libxml\dict.c"/>
+      <File RelativePath="..\..\libxml\DOCBparser.c"/>
+      <File RelativePath="..\..\libxml\encoding.c"/>
+      <File RelativePath="..\..\libxml\entities.c"/>
+      <File RelativePath="..\..\libxml\error.c"/>
+      <File RelativePath="..\..\libxml\globals.c"/>
+      <File RelativePath="..\..\libxml\hash.c"/>
+      <File RelativePath="..\..\libxml\HTMLparser.c"/>
+      <File RelativePath="..\..\libxml\HTMLtree.c"/>
+      <File RelativePath="..\..\libxml\legacy.c"/>
+      <File RelativePath="..\..\libxml\list.c"/>
+      <File RelativePath="..\..\libxml\nanoftp.c"/>
+      <File RelativePath="..\..\libxml\nanohttp.c"/>
+      <File RelativePath="..\..\libxml\parser.c"/>
+      <File RelativePath="..\..\libxml\parserInternals.c"/>
+      <File RelativePath="..\..\libxml\pattern.c"/>
+      <File RelativePath="..\..\libxml\relaxng.c"/>
+      <File RelativePath="..\..\libxml\SAX.c"/>
+      <File RelativePath="..\..\libxml\SAX2.c"/>
+      <File RelativePath="..\..\libxml\schematron.c"/>
+      <File RelativePath="..\..\libxml\threads.c"/>
+      <File RelativePath="..\..\libxml\tree.c"/>
+      <File RelativePath="..\..\libxml\uri.c"/>
+      <File RelativePath="..\..\libxml\valid.c"/>
+      <File RelativePath="..\..\libxml\xinclude.c"/>
+      <File RelativePath="..\..\libxml\xlink.c"/>
+      <File RelativePath="..\..\libxml\xmlIO.c"/>
+      <File RelativePath="..\..\libxml\xmlmemory.c"/>
+      <File RelativePath="..\..\libxml\xmlmodule.c"/>
+      <File RelativePath="..\..\libxml\xmlreader.c"/>
+      <File RelativePath="..\..\libxml\xmlregexp.c"/>
+      <File RelativePath="..\..\libxml\xmlsave.c"/>
+      <File RelativePath="..\..\libxml\xmlschemas.c"/>
+      <File RelativePath="..\..\libxml\xmlschemastypes.c"/>
+      <File RelativePath="..\..\libxml\xmlstring.c"/>
+      <File RelativePath="..\..\libxml\xmlunicode.c"/>
+      <File RelativePath="..\..\libxml\xmlwriter.c"/>
+      <File RelativePath="..\..\libxml\xpointer.c"/>
+      <File RelativePath="..\..\libxml\xzlib.c"/>
+    </Filter>
+    <Filter Name="include" Filter="">
+      <File RelativePath="..\..\libxml\include\libxml\c14n.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\catalog.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\chvalid.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\debugXML.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\dict.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\DOCBparser.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\encoding.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\entities.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\globals.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\hash.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\HTMLparser.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\HTMLtree.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\list.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\nanoftp.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\nanohttp.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\parser.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\parserInternals.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\pattern.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\relaxng.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\SAX.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\SAX2.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\schemasInternals.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\schematron.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\threads.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\tree.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\uri.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\valid.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xinclude.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xlink.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlautomata.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlerror.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlexports.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlIO.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlmemory.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlmodule.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlreader.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlregexp.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlsave.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlschemas.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlschemastypes.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlstring.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlunicode.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlversion.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xmlwriter.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xpath.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xpathInternals.h"/>
+      <File RelativePath="..\..\libxml\include\libxml\xpointer.h"/>
+      <File RelativePath="..\..\libxml\include\win32config.h"/>
+      <File RelativePath="..\..\libxml\include\wsockcompat.h"/>
+      <File RelativePath="..\..\libxml\buf.h"/>
+      <File RelativePath="..\..\libxml\config.h"/>
+      <File RelativePath="..\..\libxml\elfgcchack.h"/>
+      <File RelativePath="..\..\libxml\enc.h"/>
+      <File RelativePath="..\..\libxml\libxml.h"/>
+      <File RelativePath="..\..\libxml\save.h"/>
+      <File RelativePath="..\..\libxml\timsort.h"/>
+      <File RelativePath="..\..\libxml\trio.h"/>
+      <File RelativePath="..\..\libxml\triodef.h"/>
+      <File RelativePath="..\..\libxml\trionan.h"/>
+      <File RelativePath="..\..\libxml\triop.h"/>
+      <File RelativePath="..\..\libxml\triostr.h"/>
+      <File RelativePath="..\..\libxml\xzlib.h"/>
+    </Filter>
+    <Filter Name="resource" Filter="">
+    </Filter>
+  </Files>
+  <Globals>
+  </Globals>
+</VisualStudioProject>

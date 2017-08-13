@@ -1,0 +1,81 @@
+bilateral2_reg.o: bilateral2_reg.c ../src/allheaders.h ../src/alltypes.h \
+ c:\mingw\include\stdio.h c:\mingw\include\_mingw.h \
+ c:\mingw\lib\gcc\mingw32\4.9.3\include\stddef.h \
+ c:\mingw\lib\gcc\mingw32\4.9.3\include\stdarg.h \
+ c:\mingw\include\sys\types.h c:\mingw\include\parts\time.h \
+ c:\mingw\include\stdlib.h ../src/environ.h \
+ c:\mingw\lib\gcc\mingw32\4.9.3\include\stdint.h \
+ c:\mingw\include\stdint.h ../src/array.h ../src/bbuffer.h ../src/heap.h \
+ ../src/list.h ../src/ptra.h ../src/queue.h ../src/rbtree.h \
+ ../src/stack.h ../src/arrayaccess.h ../src/bmf.h ../src/ccbord.h \
+ ../src/dewarp.h ../src/gplot.h ../src/imageio.h ../src/jbclass.h \
+ ../src/morph.h ../src/pix.h ../src/recog.h ../src/regutils.h \
+ ../src/stringcode.h ../src/sudoku.h ../src/watershed.h
+
+../src/allheaders.h:
+
+../src/alltypes.h:
+
+c:\mingw\include\stdio.h:
+
+c:\mingw\include\_mingw.h:
+
+c:\mingw\lib\gcc\mingw32\4.9.3\include\stddef.h:
+
+c:\mingw\lib\gcc\mingw32\4.9.3\include\stdarg.h:
+
+c:\mingw\include\sys\types.h:
+
+c:\mingw\include\parts\time.h:
+
+c:\mingw\include\stdlib.h:
+
+../src/environ.h:
+
+c:\mingw\lib\gcc\mingw32\4.9.3\include\stdint.h:
+
+c:\mingw\include\stdint.h:
+
+../src/array.h:
+
+../src/bbuffer.h:
+
+../src/heap.h:
+
+../src/list.h:
+
+../src/ptra.h:
+
+../src/queue.h:
+
+../src/rbtree.h:
+
+../src/stack.h:
+
+../src/arrayaccess.h:
+
+../src/bmf.h:
+
+../src/ccbord.h:
+
+../src/dewarp.h:
+
+../src/gplot.h:
+
+../src/imageio.h:
+
+../src/jbclass.h:
+
+../src/morph.h:
+
+../src/pix.h:
+
+../src/recog.h:
+
+../src/regutils.h:
+
+../src/stringcode.h:
+
+../src/sudoku.h:
+
+../src/watershed.h:

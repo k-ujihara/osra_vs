@@ -1,0 +1,35 @@
+--- Makefile.msvc	2015-11-03 16:28:09.000000000 +0900
++++ Makefile.msvc	2016-05-15 11:35:33.017983700 +0900
+@@ -101,10 +101,11 @@
+ CFLAGS = $(CFLAGS) /D "_DEBUG" /Od /Z7
+ LDFLAGS = $(LDFLAGS) /DEBUG
+ !else
+-CFLAGS = $(CFLAGS) /D "NDEBUG" /O2 
++CFLAGS = $(CFLAGS) /D "NDEBUG" /Ox /Oi /Gy /GL
+ # commented out as this break VC10 c.f. 634846
+ # LDFLAGS = $(LDFLAGS) /OPT:NOWIN98
+-LDFLAGS = $(LDFLAGS)
++LDFLAGS = $(LDFLAGS) /LTCG /OPT:REF /OPT:ICF
++ARFLAGS = $(ARFLAGS) /LTCG
+ !endif
+ 
+ # Libxml object files.
+@@ -420,12 +421,12 @@
+ tests : checktests XPathtests
+ 
+ checktests : $(UTILS)
+-	cd .. && win32\$(BINDIR)\runtest.exe
+-	cd .. && win32\$(BINDIR)\testrecurse.exe
+-	cd .. && win32\$(BINDIR)\testapi.exe
+-	cd .. && win32\$(BINDIR)\testchar.exe
+-	cd .. && win32\$(BINDIR)\testdict.exe
+-	cd .. && win32\$(BINDIR)\runxmlconf.exe
++	cd .. && %%CD%%\$(BINDIR)\runtest.exe
++	cd .. && %%CD%%\$(BINDIR)\testrecurse.exe
++	cd .. && %%CD%%\$(BINDIR)\testapi.exe
++	cd .. && %%CD%%\$(BINDIR)\testchar.exe
++	cd .. && %%CD%%\$(BINDIR)\testdict.exe
++	cd .. && %%CD%%\$(BINDIR)\runxmlconf.exe
+ 
+ XPathtests : $(BINDIR)\testXPath.exe
+ 	@echo. 2> .memdump
