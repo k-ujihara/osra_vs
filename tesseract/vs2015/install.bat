@@ -3,13 +3,13 @@
 @if not "%VisualStudioVersion%" == "" Set HAS_VSDEV=TRUE
 @if not "%HAS_VSDEV%" == "TRUE" CALL "%VS140COMNTOOLS%VsDevCmd.bat" %1
 
-@Set DIR=build
-@if "%Platform%" == "X64" Set DIR=%DIR%_x64
+If "%Config%" == "" Set Config=Release
+
 @if "%Platform%" == "" Set $PLATFORM=x86
 @if "%Platform%" == "X64" Set $PLATFORM=x64
 
 @pushd
-MSBuild tesseract.sln /m /p:Configuration=DLL_Release
+MSBuild tesseract.sln /m /p:Configuration=DLL_%Config%,Platform=%$PLATFORM%
 
 if "%INSTALL_BASE%" == "" Set INSTALL_BASE=%PUBLIC%
 if "%INSTALL_PREFIX%" == "" (
@@ -20,12 +20,14 @@ if "%INSTALL_PREFIX%" == "" (
 	)
 )
 
+Set OutDir=DLL_%Config%
+if /I "%Platform%" == "X64" Set OutDir=x64\%OutDir%
 Set DestIncl=%INSTALL_PREFIX%\include\tesseract
 if not exist "%DestIncl%" mkdir "%DestIncl%"
 Set DestLib=%INSTALL_PREFIX%\lib
 Set DestBin=%INSTALL_PREFIX%\bin
-XCOPY /D /Y /I DLL_Release\libtesseract304.dll "%DestBin%"
-XCOPY /D /Y /I DLL_Release\libtesseract304.lib "%DestLib%"
+XCOPY /D /Y /I libtesseract\%OutDir%\libtesseract304.dll "%DestBin%"
+XCOPY /D /Y /I libtesseract\%OutDir%\libtesseract304.lib "%DestLib%"
 cd ..
 XCOPY /D /Y /I api\*.h "%DestIncl%"
 XCOPY /D /Y /I ccmain\*.h "%DestIncl%"

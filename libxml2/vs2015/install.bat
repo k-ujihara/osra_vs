@@ -17,7 +17,7 @@ if "%INSTALL_PREFIX%" == "" (
 
 @if not exist "%BUILD_DIR%" mkdir "%BUILD_DIR%"
 XCOPY /D /Y /I ..\win32\*.* "%BUILD_DIR%"
-copy /D /Y /I "Makefile.msvc.replace" "%BUILD_DIR%"
+copy "Makefile.msvc.replace" "%BUILD_DIR%\Makefile"
 
 @pushd "%BUILD_DIR%"
 call cscript configure.js zlib=yes prefix="%INSTALL_PREFIX%" vcmanifest=yes

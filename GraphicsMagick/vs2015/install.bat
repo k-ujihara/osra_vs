@@ -13,31 +13,24 @@ if "%INSTALL_PREFIX%" == "" (
 )
 
 Set GMTYPE=GraphicsMagick-Q8
-if "%Platform%" == "" (
-	Set GM_INSTALL_PREFIX=%INSTALL_PREFIX%\bin\%GMTYPE%
-) else if "%Platform%" == "X64" (
-	Set GM_INSTALL_PREFIX=%INSTALL_PREFIX%\x64\bin\%GMTYPE%
-)
 
-echo %GM_INSTALL_PREFIX%
+Call setup.bat
+
+Set GM_INSTALL_PREFIX=%INSTALL_PREFIX%\bin\%GMTYPE%
 
 if "%Platform%" == "" (
-	Set GM_INSTALL_PREFIX=%INSTALL_PREFIX%\bin\%GMTYPE%
 	cd ..\vs2015-Q8
 	CALL :InstallTarget x86
 ) else if "%Platform%" == "X64" (
-	Set GM_INSTALL_PREFIX=%INSTALL_PREFIX%\x64\bin\%GMTYPE%
 	cd ..\vs2015-Q8-x64
 	CALL :InstallTarget x64
 )
-
-
 
 @popd
 @if not "%HAS_VSDEV%" == "TRUE" pause
 @GOTO :End
 
-:InstallTarget
+:InstallTarget 
 MSBuild VisualDynamicMT.sln /m /p:Configuration=Release,Platform=%1
 if ERRORLEVEL 1 EXIT /b %ERRORLEVEL% 
 

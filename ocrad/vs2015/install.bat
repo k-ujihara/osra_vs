@@ -3,6 +3,8 @@
 @if not "%VisualStudioVersion%" == "" Set HAS_VSDEV=TRUE
 @if not "%HAS_VSDEV%" == "TRUE" CALL "%VS140COMNTOOLS%VsDevCmd.bat" %1
 
+@if "%Config%" == "" Set Config=Release
+
 Set $PLATFORM=x86
 if /I "%Platform%" == "X64" Set $PLATFORM=x64
 
@@ -20,13 +22,11 @@ if "%INSTALL_PREFIX%" == "" (
 MSBuild ocrad.sln /m /p:Configuration=Release,Platform=%$PLATFORM%
 if errorlevel 1 goto :EBye
 
-Set $OUTDIR=Release
+Set $OUTDIR=%Config%
 if /I "%Platform%" == "X64" Set $OUTDIR=x64\%$OUTDIR%
 
-pushd %$OUTDIR%
-for %%i in ( ocrad-0.dll ocrad.exe ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\bin"
-for %%i in ( libocrad.lib ocrad-0.lib ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\lib"
-popd
+for %%i in ( ocrad-0\%$OUTDIR%\ocrad-0.dll ocrad\%$OUTDIR%\ocrad.exe ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\bin"
+for %%i in ( libocrad\%$OUTDIR%\libocrad.lib ocrad-0\%$OUTDIR%\ocrad-0.lib ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\lib"
 XCOPY /D /Y ..\ocradlib.h "%INSTALL_PREFIX%\include"
 
 :EBye

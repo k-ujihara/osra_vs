@@ -3,8 +3,8 @@ OSRA <https://cactus.nci.nih.gov/osra/> built by Visual Studio 2015.
 
 ## How to build
 
-Execute build.bat, which creates dependency binaries in a Release\bin dirctory.
-Execute osra\vs2015\compile.bat to create OSRA executable and the library. Binaries are created in Release directory.
+Execute build.bat in Native Tools Command Prompt. It creates dependency binaries in a Release\bin dirctory. 
+After that, execute build_osra.bat to create OSRA executable and the library. Binaries are created in Release directory.
 
 CMAKE is required.
 File path including spaces can be troublesome.

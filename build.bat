@@ -1,32 +1,8 @@
 pushd "%~dp0"
 
-CALL "%VS140COMNTOOLS%VsDevCmd.bat"
+Call init-env.bat
 
-Set Config=Release
-SET INSTALL_BASE=%~dp0%Config%
-
-if not exist "%INSTALL_BASE%" md "%INSTALL_BASE%"
-if "%INSTALL_PREFIX%" == "" (
-	if /I "%Platform%" == "X64" (
-		Set INSTALL_PREFIX=%INSTALL_BASE%\x64
-	) else (
-		Set INSTALL_PREFIX=%INSTALL_BASE%
-	)
-)
-
-md %INSTALL_PREFIX%
-md %INSTALL_PREFIX%\bin
-md %INSTALL_PREFIX%\lib
-md %INSTALL_PREFIX%\include
-
-del /Q bin
-mklink /D bin %INSTALL_PREFIX%\bin
-del /Q lib
-mklink /D lib %INSTALL_PREFIX%\lib
-del /Q include
-mklink /D include %INSTALL_PREFIX%\include
-
-PATH %~dp0bat;%PATH%
+Call "%VS140COMNTOOLS%VsDevCmd.bat"
 
 call gocr\vs2015\install
 call ocrad\vs2015\install
@@ -66,6 +42,5 @@ call GraphicsMagick\vs2015\install
 
 XCOPY /Y /D /I tclap\include\tclap\*.h %INSTALL_PREFIX%\include\tclap
 
-
-pause
+popd
 

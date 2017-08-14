@@ -115,7 +115,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WIN64;OSRA_LIB;USING_DYNAMIC_LIBS;_USE_MATH_DEFINES;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\x64\$(Configuration)\bin\GraphicsMagick-Q8\include;$(ProjectDir)..\..\..\x64\$(Configuration)\bin\gocr\include;$(ProjectDir)..\..\..\x64\$(Configuration)\include\openbabel-2.0;$(ProjectDir)..\..\..\x64\$(Configuration)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\$(Configuration)\x64\bin\GraphicsMagick-Q8\include;$(ProjectDir)..\..\..\$(Configuration)\x64\bin\gocr\include;$(ProjectDir)..\..\..\$(Configuration)\x64\include\openbabel-2.0;$(ProjectDir)..\..\..\$(Configuration)\x64\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -124,7 +124,7 @@
       <ModuleDefinitionFile>libosra.def</ModuleDefinitionFile>
       <AdditionalDependencies>libPgm2ascd.lib;shell32.lib;wsock32.lib;zlib.lib;CORE_RL_magick_.lib;CORE_RL_Magick++_.lib;ocrad-0.lib;libpotrace.lib;openbabel-2.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\x64\$(Configuration)\bin;$(ProjectDir)..\..\..\x64\$(Configuration)\bin\GraphicsMagick-Q8\lib;$(ProjectDir)..\..\..\x64\$(Configuration)\bin\gocr\lib;$(ProjectDir)..\..\..\x64\$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\$(Configuration)\x64\bin;$(ProjectDir)..\..\..\$(Configuration)\x64\bin\GraphicsMagick-Q8\lib;$(ProjectDir)..\..\..\$(Configuration)\x64\bin\gocr\lib;$(ProjectDir)..\..\..\$(Configuration)\x64\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -169,7 +169,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WIN64;OSRA_LIB;USING_DYNAMIC_LIBS;_USE_MATH_DEFINES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\x64\$(Configuration)\bin\GraphicsMagick-Q8\include;$(ProjectDir)..\..\..\x64\$(Configuration)\bin\gocr\include;$(ProjectDir)..\..\..\x64\$(Configuration)\include\openbabel-2.0;$(ProjectDir)..\..\..\x64\$(Configuration)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\$(Configuration)\x64\bin\GraphicsMagick-Q8\include;$(ProjectDir)..\..\..\$(Configuration)\x64\bin\gocr\include;$(ProjectDir)..\..\..\$(Configuration)\x64\include\openbabel-2.0;$(ProjectDir)..\..\..\$(Configuration)\x64\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -179,7 +179,7 @@
       <AdditionalDependencies>libPgm2asc.lib;libtesseract304.lib;lept173.lib;shell32.lib;wsock32.lib;zlib.lib;CORE_RL_magick_.lib;CORE_RL_Magick++_.lib;ocrad-0.lib;libpotrace.lib;openbabel-2.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\x64\$(Configuration)\bin;$(ProjectDir)..\..\..\x64\$(Configuration)\bin\GraphicsMagick-Q8\lib;$(ProjectDir)..\..\..\x64\$(Configuration)\bin\gocr\lib;$(ProjectDir)..\..\..\x64\$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\$(Configuration)\x64\bin;$(ProjectDir)..\..\..\$(Configuration)\x64\bin\GraphicsMagick-Q8\lib;$(ProjectDir)..\..\..\$(Configuration)\x64\bin\gocr\lib;$(ProjectDir)..\..\..\$(Configuration)\x64\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

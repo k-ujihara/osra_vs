@@ -19,7 +19,7 @@ if "%INSTALL_PREFIX%" == "" (
 )
 
 
-MSBuild osra.sln /p:Configuration=Release,Platform=%$PLATFORM%
+MSBuild osra.sln /m /p:Configuration=Release,Platform=%$PLATFORM%
 
 @popd
 @if not "%HAS_VSDEV%" == "TRUE" pause

@@ -95,7 +95,7 @@ echo pause >> install.bat
 
 echo cd "%%~dp0" > run_tests.bat
 echo CALL "%%VS140COMNTOOLS%%VsDevCmd.bat" %BUILD_PLATFORM% >> run_tests.bat
-if "%BUILD_PLATFORM%" == "x64" echo PATH %INSTALL_PREFIX%;%PATH% >> run_tests.bat
+if "%BUILD_PLATFORM%" == "x64" echo PATH %INSTALL_PREFIX%\bin;%PATH% >> run_tests.bat
 echo MSBuild RUN_TESTS.vcxproj /p:Configuration=Release,Platform=%$Platform% >> run_tests.bat
 echo pause >> run_tests.bat
 

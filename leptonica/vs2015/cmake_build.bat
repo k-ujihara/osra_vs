@@ -13,7 +13,7 @@ if "%INSTALL_PREFIX%" == "" (
 )
 
 Set BUILD=build
-
+if /I "%Platform%" == "X64" Set BUILD=%BUILD%_x64
 if not exist %BUILD% mkdir %BUILD%
 cd %BUILD%
 
