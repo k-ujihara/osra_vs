@@ -7,7 +7,6 @@ Execute build.bat, which creates dependency binaries in a Release\bin dirctory.
 Execute osra\vs2015\compile.bat to create OSRA executable and the library. Binaries are created in Release directory.
 
 CMAKE is required.
-Path incljding space is not supported. (You can avoid it by useing MKLINK.)
 
 The following versions are used to make it.
 
