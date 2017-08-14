@@ -5,10 +5,10 @@
 
 @if "%Platform%" == "X64" Set $DIR_SIFFIX=_x64
 @pushd build_static%$DIR_SIFFIX%
-MSBuild INSTALL.vcxproj /p:Configuration=Release
+MSBuild INSTALL.vcxproj /m /p:Configuration=Release
 @popd
 @pushd build_shared%$DIR_SIFFIX%
-MSBuild INSTALL.vcxproj /p:Configuration=Release
+MSBuild INSTALL.vcxproj /m /p:Configuration=Release
 @popd
 
 @popd

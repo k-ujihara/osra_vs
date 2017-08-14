@@ -14,7 +14,7 @@ if "%INSTALL_PREFIX%" == "" (
 	)
 )
 
-MSBuild jbigkit.sln /p:Configuration=Release,Platform=%$PLATFORM%
+MSBuild jbigkit.sln /m /p:Configuration=Release,Platform=%$PLATFORM%
 
 Set STATIC_LIB_RELEASE=
 Set STATIC_LIB_DEBUG=

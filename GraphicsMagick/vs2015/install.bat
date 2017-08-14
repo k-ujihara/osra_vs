@@ -38,7 +38,7 @@ if "%Platform%" == "" (
 @GOTO :End
 
 :InstallTarget
-MSBuild VisualDynamicMT.sln /p:Configuration=Release,Platform=%1
+MSBuild VisualDynamicMT.sln /m /p:Configuration=Release,Platform=%1
 if ERRORLEVEL 1 EXIT /b %ERRORLEVEL% 
 
 @CALL :FMD "%GM_INSTALL_PREFIX%"

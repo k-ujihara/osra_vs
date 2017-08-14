@@ -1,3 +1,5 @@
+Rem OpenBabel's cmake does not support file path including space. Use old file name.
+
 @setlocal
 @pushd "%~dp0"
 @if not "%VisualStudioVersion%" == "" Set HAS_VSDEV=TRUE
@@ -24,7 +26,7 @@ Set JAVA_BINDINGS=OFF
 Set PYTHON_BINDINGS=OFF
 Set ENABLE_CAIRO=OFF
 
-: If "%WXWIN%" == "" Set WXWIN=C:\wxWidgets-3.1.0
+If "%WXWIN%" == "" Set WXWIN=C:\wxWidgets-3.1.0
 If "%EIGEN3_INCLUDE_DIR%" == "" Set EIGEN3_INCLUDE_DIR=C:\eigen-eigen-07105f7124f9
 : If "%SWIG_EXECUTABLE%" == "" Set SWIG_EXECUTABLE=C:\swigwin-2.0.12
 :Set SWIG_EXECUTABLE=C:\swigwin-3.0.10

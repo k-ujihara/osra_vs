@@ -1,4 +1,0 @@
-Install zlib, libjpeg, jbig-kit.
-Edit cmake_build_libtiff.bat and modify it appropriately.
-Execute cmake_build_libtiff.bat .
-Execute install.bat .

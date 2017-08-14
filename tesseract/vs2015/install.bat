@@ -9,7 +9,7 @@
 @if "%Platform%" == "X64" Set $PLATFORM=x64
 
 @pushd
-MSBuild tesseract.sln /p:Configuration=DLL_Release
+MSBuild tesseract.sln /m /p:Configuration=DLL_Release
 
 if "%INSTALL_BASE%" == "" Set INSTALL_BASE=%PUBLIC%
 if "%INSTALL_PREFIX%" == "" (
@@ -21,26 +21,26 @@ if "%INSTALL_PREFIX%" == "" (
 )
 
 Set DestIncl=%INSTALL_PREFIX%\include\tesseract
-if not exist %DestIncl% mkdir %DestIncl%
+if not exist "%DestIncl%" mkdir "%DestIncl%"
 Set DestLib=%INSTALL_PREFIX%\lib
 Set DestBin=%INSTALL_PREFIX%\bin
-XCOPY /D /Y DLL_Release\libtesseract304.dll "%DestBin%"
-XCOPY /D /Y DLL_Release\libtesseract304.lib "%DestLib%"
+XCOPY /D /Y /I DLL_Release\libtesseract304.dll "%DestBin%"
+XCOPY /D /Y /I DLL_Release\libtesseract304.lib "%DestLib%"
 cd ..
-XCOPY /D /Y api\*.h %DestIncl%
-XCOPY /D /Y ccmain\*.h %DestIncl%
-XCOPY /D /Y ccutil\*.h %DestIncl%
-XCOPY /D /Y ccstruct\*.h %DestIncl%
-XCOPY /D /Y classify\*.h %DestIncl%
-XCOPY /D /Y cube\*.h %DestIncl%
-XCOPY /D /Y cutil\*.h %DestIncl%
-XCOPY /D /Y dict\*.h %DestIncl%
-XCOPY /D /Y image\*.h %DestIncl%
-XCOPY /D /Y neural_networks\runtime\*.h %DestIncl%
-XCOPY /D /Y textord\*.h %DestIncl%
-XCOPY /D /Y viewer\*.h %DestIncl%
-XCOPY /D /Y wordrec\*.h %DestIncl%
-XCOPY /D /Y opencl\*.h %DestIncl%
+XCOPY /D /Y /I api\*.h "%DestIncl%"
+XCOPY /D /Y /I ccmain\*.h "%DestIncl%"
+XCOPY /D /Y /I ccutil\*.h "%DestIncl%"
+XCOPY /D /Y /I ccstruct\*.h "%DestIncl%"
+XCOPY /D /Y /I classify\*.h "%DestIncl%"
+XCOPY /D /Y /I cube\*.h "%DestIncl%"
+XCOPY /D /Y /I cutil\*.h "%DestIncl%"
+XCOPY /D /Y /I dict\*.h "%DestIncl%"
+XCOPY /D /Y /I image\*.h "%DestIncl%"
+XCOPY /D /Y /I neural_networks\runtime\*.h "%DestIncl%"
+XCOPY /D /Y /I textord\*.h "%DestIncl%"
+XCOPY /D /Y /I viewer\*.h "%DestIncl%"
+XCOPY /D /Y /I wordrec\*.h "%DestIncl%"
+XCOPY /D /Y /I opencl\*.h "%DestIncl%"
 
 @popd
 @if not "%HAS_VSDEV%" == "TRUE" pause

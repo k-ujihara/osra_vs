@@ -18,7 +18,7 @@ if "%INSTALL_PREFIX%" == "" (
 )
 
 @pushd %DIR%
-MSBuild src\leptonica.vcxproj /p:Configuration=Release,Platform=%$PLATFORM%
+MSBuild src\leptonica.vcxproj /m /p:Configuration=Release,Platform=%$PLATFORM%
 @popd
 
 Set DestIncl=%INSTALL_PREFIX%\include\leptonica

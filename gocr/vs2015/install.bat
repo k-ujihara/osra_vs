@@ -2,6 +2,7 @@
 @pushd "%~dp0"
 @if not "%VisualStudioVersion%" == "" Set HAS_VSDEV=TRUE
 @if not "%HAS_VSDEV%" == "TRUE" CALL "%VS140COMNTOOLS%VsDevCmd.bat" %1
+
 @Set $PLATFORM=x86
 @if "%Platform%" == "X64" Set $PLATFORM=x64
 
@@ -23,7 +24,8 @@ Set OutDir=%~dp0.
 if "%$PLATFORM%" == "x64" Set OutDir=%OutDir%\x64
 Set OutDir=%OutDir%\Release
 
-MSBuild gocr.sln /p:Configuration=Release,Platform=%$PLATFORM%
+MSBuild gocr.sln /m /p:Configuration=Release,Platform=%$PLATFORM%
+if errorlevel 1 goto :EBye
 
 Set INSTALL_PREFIX=%INSTALL_BASE%\bin\gocr
 Set STATIC_LIB_RELEASE=libPgm2asc.lib
@@ -44,6 +46,7 @@ if not "%SHARED_LIB%" == ""  XCOPY /Y /D "%OutDir%\%SHARED_LIB%" "%INSTALL_PREFI
 if not "%SHARED_DLL%" == ""  XCOPY /Y /D "%OutDir%\%SHARED_DLL%" "%INSTALL_PREFIX%\bin"
 for %%i in ( %EXES% ) do XCOPY /Y /D "%OutDir%\%%i" "%INSTALL_PREFIX%\bin"
 
+:EBye
 @popd
 @if not "%HAS_VSDEV%" == "TRUE" pause
 @endlocal

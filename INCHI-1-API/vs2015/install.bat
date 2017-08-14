@@ -8,10 +8,10 @@
 
 @CALL setup
 @pushd ..\INCHI_API\vc14\inchi_dll
-MSBuild inchi_dll.vcxproj /p:Configuration=Release,Platform=%$PLATFORM%
+MSBuild inchi_dll.vcxproj /m /p:Configuration=Release,Platform=%$PLATFORM%
 @popd
 @pushd ..\INCHI\vc14\inchi-1
-MSBuild inchi-1.vcxproj /p:Configuration=Release,Platform=%$PLATFORM%
+MSBuild inchi-1.vcxproj /m /p:Configuration=Release,Platform=%$PLATFORM%
 @popd
 
 if "%INSTALL_PREFIX%" == "" (

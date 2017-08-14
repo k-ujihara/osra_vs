@@ -7,7 +7,7 @@
 @Set BUILD_DIR=build
 @if "%Platform%" == "X64" Set BUILD_DIR=%BUILD_DIR%_x64
 @pushd "%BUILD_DIR%"
-MSBuild INSTALL.vcxproj /p:Configuration=Release,Platform=%$PLATFORM%
+MSBuild INSTALL.vcxproj /m /p:Configuration=Release,Platform=%$PLATFORM%
 @popd
 @Set $PLATFORM=
 @popd

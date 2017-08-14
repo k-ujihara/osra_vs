@@ -3,13 +3,22 @@
 @if not "%VisualStudioVersion%" == "" Set HAS_VSDEV=TRUE
 @if not "%HAS_VSDEV%" == "TRUE" CALL "%VS140COMNTOOLS%VsDevCmd.bat" %1
 
+if "%INSTALL_BASE%" == "" Set INSTALL_BASE=%PUBLIC%
+if "%INSTALL_PREFIX%" == "" (
+	if /I "%Platform%" == "X64" (
+		Set INSTALL_PREFIX=%INSTALL_BASE%\x64
+	) else (
+		Set INSTALL_PREFIX=%INSTALL_BASE%
+	)
+)
+
 Set BUILD=build
 
 if not exist %BUILD% mkdir %BUILD%
 cd %BUILD%
 
-Set CFLAGS=/I%PUBLIC%\include
-Set LDFLAGS=/LIBPATH:%PUBLIC%\lib
+Set CFLAGS=/I%INSTALL_PREFIX%\include
+Set LDFLAGS=/LIBPATH:%INSTALL_PREFIX%\lib
 
 @echo off
 @CALL "cmake_setvar.bat"

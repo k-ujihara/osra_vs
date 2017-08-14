@@ -309,7 +309,7 @@
       <AdditionalDependencies>ws2_32.lib;user32.lib;lept$(LIBLEPT_VERSION).lib;tiff.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <Version>$(LIBTESS_NUMBER)</Version>
-      <AdditionalLibraryDirectories>$(INSTALL_PREFIX)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

@@ -14,7 +14,7 @@ if "%INSTALL_PREFIX%" == "" (
 	)
 )
 
-MSBuild giflib.sln /p:Configuration=Release,Platform=%$PLATFORM%
+MSBuild giflib.sln /m /p:Configuration=Release,Platform=%$PLATFORM%
 
 Set STATIC_LIB_RELEASE=
 Set STATIC_LIB_DEBUG=
@@ -24,6 +24,7 @@ Set INCLUDES=..\lib\gif_lib.h
 Set EXES=gif2rgb.exe gifbuild.exe gifecho.exe giffix.exe gifinto.exe giftext.exe giftool.exe gifclrmp.exe
 
 Set OutDir=Release
+if /I "%Platform%" == "X64" Set OutDir=x64\%OutDir%
 
 Set STATIC_LIB=%STATIC_LIB_RELEASE%
 for %%i in ( %INCLUDES% ) do XCOPY /Y /D /I "%%i" "%INSTALL_PREFIX%\include"

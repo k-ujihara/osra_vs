@@ -2,7 +2,8 @@ pushd "%~dp0"
 
 CALL "%VS140COMNTOOLS%VsDevCmd.bat"
 
-SET INSTALL_BASE=%~dp0Release
+Set Config=Release
+SET INSTALL_BASE=%~dp0%Config%
 
 if not exist "%INSTALL_BASE%" md "%INSTALL_BASE%"
 if "%INSTALL_PREFIX%" == "" (
@@ -13,9 +14,17 @@ if "%INSTALL_PREFIX%" == "" (
 	)
 )
 
-md %INSTALL_BASE%\bin
-md %INSTALL_BASE%\lib
-md %INSTALL_BASE%\include
+md %INSTALL_PREFIX%
+md %INSTALL_PREFIX%\bin
+md %INSTALL_PREFIX%\lib
+md %INSTALL_PREFIX%\include
+
+del /Q bin
+mklink /D bin %INSTALL_PREFIX%\bin
+del /Q lib
+mklink /D lib %INSTALL_PREFIX%\lib
+del /Q include
+mklink /D include %INSTALL_PREFIX%\include
 
 PATH %~dp0bat;%PATH%
 

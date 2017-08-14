@@ -15,7 +15,7 @@ if "%INSTALL_PREFIX%" == "" (
 
 
 Set Config=Release
-MSBuild jpeg.sln /p:Configuration=%Config%,Platform=%$PLATFORM%
+MSBuild jpeg.sln /m /p:Configuration=%Config%,Platform=%$PLATFORM%
 
 Set STATIC_LIB_RELEASE=
 Set STATIC_LIB_DEBUG=
