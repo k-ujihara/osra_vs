@@ -152,10 +152,10 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_USE_MATH_DEFINES;VERSION="$(POTRACE_VERSION)";POTRACE="$(ProjectName)";WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;VERSION="$(POTRACE_VERSION)";POTRACE="$(ProjectName)";HAVE_CONFIG_H=1;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4996;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\src;$(SolutionDir)port</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src;$(ProjectDir)..\port;$(ProjectDIr)..\..\src\include\getopt</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -168,10 +168,10 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_USE_MATH_DEFINES;VERSION="$(POTRACE_VERSION)";POTRACE="$(ProjectName)";_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;VERSION="$(POTRACE_VERSION)";POTRACE="$(ProjectName)";HAVE_CONFIG_H=1;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4996;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\src;$(SolutionDir)port</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src;$(ProjectDir)..\port;$(ProjectDIr)..\..\src\include\getopt</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -186,10 +186,10 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_USE_MATH_DEFINES;VERSION="$(POTRACE_VERSION)";POTRACE="$(ProjectName)";HAVE_STRING_H=1;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;VERSION="$(POTRACE_VERSION)";POTRACE="$(ProjectName)";HAVE_CONFIG_H=1;HAVE_STRING_H=1;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4996;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\src;$(SolutionDir)port</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src;$(ProjectDir)..\port;$(ProjectDIr)..\..\src\include\getopt</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -206,10 +206,10 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_USE_MATH_DEFINES;VERSION="$(POTRACE_VERSION)";POTRACE="$(ProjectName)";HAVE_STRING_H=1;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;VERSION="$(POTRACE_VERSION)";POTRACE="$(ProjectName)";HAVE_CONFIG_H=1;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <DisableSpecificWarnings>4996;4146</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\src;$(SolutionDir)port</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\src;$(ProjectDir)..\port;$(ProjectDIr)..\..\src\include\getopt</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
