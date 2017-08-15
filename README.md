@@ -11,6 +11,7 @@ File path including spaces can be troublesome.
 
 The following versions are used to make it.
 
+osra-2.1.0
 zlib-1.2.11
 libpng-1.6.21
 giflib-5.1.4
@@ -26,5 +27,4 @@ openbabel-2.4.1
 INCHI-1.0.4
 tesseract-3.04.01
 leptonica-1.73
-osra-2.0.1
 tclap-1.2.1
