@@ -35,7 +35,7 @@ struct fragment_s
   int x1, y1, x2, y2;
   //array: atom
   //vector of atom indices for atoms in a molecule of this fragment
-  vector<int> atom;
+  std::vector<int> atom;
 };
 //typedef: fragment_t
 //defines fragment_t type based on fragment_s struct
@@ -56,7 +56,7 @@ typedef struct fragment_s fragment_t;
 //
 // Returns:
 // vector of vectors of atom id's which belong to different fragments
-vector<vector<int> > find_fragments(const vector<bond_t> &bond, int n_bond, const vector<atom_t> &atom);
+std::vector<std::vector<int> > find_fragments(const std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom);
 
 // Function: reconnect_fragments()
 //
@@ -70,7 +70,7 @@ vector<vector<int> > find_fragments(const vector<bond_t> &bond, int n_bond, cons
 //
 // Returns:
 // New number of bonds
-int reconnect_fragments(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, double avg);
+int reconnect_fragments(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom, double avg);
 
 // Function: populate_fragments()
 //
@@ -82,7 +82,7 @@ int reconnect_fragments(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, 
 //
 // Returns:
 // vector of fragments
-vector<fragment_t> populate_fragments(const vector<vector<int> > &frags, const vector<atom_t> &atom);
+std::vector<fragment_t> populate_fragments(const std::vector<std::vector<int> > &frags, const std::vector<atom_t> &atom);
 
 // Function: comp_fragments()
 //

@@ -1,4 +1,3 @@
-/* src/config.h.  Generated from config.h.in by configure.  */
 /******************************************************************************
  OSRA: Optical Structure Recognition Application
 
@@ -25,10 +24,10 @@
 #define PACKAGE_NAME "osra"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "osra 2.0.1"
+#define PACKAGE_STRING "osra 2.1.0"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "2.0.1"
+#define PACKAGE_VERSION "2.1.0"
 
 /* Define the location of data files. */
 #define DATA_DIR "C:/Users/Public/share"

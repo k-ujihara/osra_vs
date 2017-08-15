@@ -1,6 +1,6 @@
                         OSRA: Optical Structure Recognition Application
 
-							Igor Filippov, 2007-2015
+							Igor Filippov, 2007-2016
 							igor.v.filippov@gmail.com
 
 
@@ -40,6 +40,9 @@ Starting with version 1.4.0 OSRA is capable of recognizing reactions.
 To run reaction recognition use the output formats rxn, rsmi, or cmlr:
 osra -f rxn input.pdf -w output.rxn
 
+Starting with version 2.1.0 OSRA can recognize some simple polymers.
+You need to build OSRA with a patched version of OpenBabel (provided at osra.sf.net),
+and the output format must be either MDL MOL or SDF for polymer recognition.
 =============================================================================
 Dependencies:
 
@@ -68,11 +71,16 @@ http://www.gnu.org/software/ocrad/ocrad.html
 - TCLAP, Templatized C++ Command Line Parser Library, version 1.2.1,
 http://tclap.sourceforge.net/
 
-- OpenBabel, open source chemistry toolbox, version 2.3.2 or later; 
-if installing from RPM make sure you have the following packages:
-	 openbabel 
-	 openbabel-devel
-http://openbabel.sourceforge.net/wiki/Main_Page
+- OpenBabel, open source chemistry toolbox, please use openbabel-2.3.2-patched.tgz
+from osra.sf.net. It has been modified to save polymer-relevant data in MDL MOL format.
+
+- Poppler,  a PDF rendering library, version 0.41.0 was used successfully;
+if installing from RPM the following packages are needed:
+poppler-cpp-devel
+poppler-cpp
+poppler-devel
+poppler
+https://poppler.freedesktop.org/
 
 =============================================================================
 Other acknowledgements:
@@ -120,6 +128,11 @@ otherwise -
 then -  
 make; make install
 
+POPPLER:
+The following flags were used to build static library:
+./configure --disable-libtiff --disable-libjpeg --disable-libpng --disable-cairo-output --disable-poppler-glib --disable-poppler-qt4  --disable-poppler-qt5 --disable-gtk-test --disable-utils --disable-shared
+poppler may require fontconfig, expat and freetype to be installed.
+
 libosra: You can create a library version of OSRA (libosra.a and one of the
 following - libosra.so, libosra.dylib, or libosra.dll) by adding
 --enable-lib command-line option to ./configure
@@ -135,7 +148,7 @@ LD_PRELOAD=/usr/local/lib/libopenbabel.so $JAVA_HOME/bin/java TestOsra
 Compiling on Linux/Unix systems:
 
 If compiling GraphicsMagick from source check the output of configure run to make sure all of the important image formats are
-getting configured (PNG, JPEG, TIFF) and that it finds GhostScript (gs).
+getting configured (PNG, JPEG, TIFF).
 On Linux you might want to use:
 ./configure --enable-shared
 make
@@ -206,14 +219,14 @@ cmake.exe   -G"MSYS Makefiles" -DZLIB_LIBRARY=/usr/local/lib/libz.a -DZLIB_INCLU
 make
 make install
 
+Compiling poppler:
+With MinGW one may need to edit poppler-global.h (lines 25-26) to remove dllimport and dllexport defines, also add to gfile.cc  "#define _WIN32_WINNT 0x0501"
+
 Compiling osra:
 ./configure --with-openbabel-lib=/usr/local/bin --enable-static-linking
 make
 
-Make sure you take a look at osra.bat to see that the environment is set
-correctly. You will still need delegates.xml from ImageMagick installation
-and a separately installed Ghostscript if you'd like to process PDF and
-PostScript files.
+Starting with OSRA 2.1.0 Ghostscript is not required to process PDF files.
 
 =============================================================================
 Usage:
@@ -224,9 +237,7 @@ OSRA can process the following types of images:
 http://pubchem.ncbi.nlm.nih.gov/, black-and-white and color (use a
 resolution of 72 dpi),
 
-- Black-and-white PDF and PostScript files, including multi-page ones. Please
-note that you need Ghostcript installed for ImageMagick to be able to
-parse these kinds of files. 
+- PDF and PostScript files, including multi-page ones.
 
 - Scanned images - black-and-white, a resolution of 300 dpi is recommended,
 though 150 dpi can also produce fair results. Please make sure the
@@ -235,9 +246,7 @@ only generate garbage output.
 
 Some common abbreviations, hetero atoms, fused and merged atomic
 labels, hash and wedge bonds, and bridge bonds are currently
-recognized. Isotopes and some element
-symbols, i.e. iodine ("I" -- looks too much like a straight line = single
-bond), are not.
+recognized. Isotopes and some element symbols are not.
 
 
 Command-line options: 

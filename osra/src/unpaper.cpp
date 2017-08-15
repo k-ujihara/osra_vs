@@ -3611,9 +3611,9 @@ int unpaper(Magick::Image &picture, double &radians, int &unpaper_dx, int &unpap
   int totalCount;
   int blankCount;
   int exitCode;
-
+  
   sheet.bitdepth = 0;
-  sheet.color = FALSE;
+  sheet.color = FALSE;  
 
   sheet.buffer = NULL;
   page.buffer = NULL;

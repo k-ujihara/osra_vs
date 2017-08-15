@@ -31,7 +31,7 @@
 #include "osra_labels.h"
 
 
-bool alone(const vector<bond_t> &bond, int i, double avg)
+bool alone(const std::vector<bond_t> &bond, int i, double avg)
 {
   bool alone = false;
   const potrace_path_t * const p = bond[i].curve;
@@ -42,8 +42,8 @@ bool alone(const vector<bond_t> &bond, int i, double avg)
   return (alone);
 }
 
-void delete_bonds_in_char(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, double left, double top,
-                          double right, double bottom)
+void delete_bonds_in_char(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom,
+                          double left, double top, double right, double bottom)
 {
   for (int j = 0; j < n_bond; j++)
     if (bond[j].exists && atom[bond[j].a].x >= left && atom[bond[j].a].x <= right && atom[bond[j].a].y >= top
@@ -52,8 +52,8 @@ void delete_bonds_in_char(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom
       bond[j].exists = false;
 }
 
-bool chlorine(const vector<bond_t> &bond, const vector<atom_t> &atom, int i, vector<letters_t> &letters, int n_letters,
-              int max_font_height, int min_font_height)
+bool chlorine(const std::vector<bond_t> &bond, const std::vector<atom_t> &atom, int i,
+              std::vector<letters_t> &letters, int n_letters, int max_font_height, int min_font_height)
 {
   bool res = false;
   double x = (atom[bond[i].a].x + atom[bond[i].b].x) / 2;
@@ -64,7 +64,8 @@ bool chlorine(const vector<bond_t> &bond, const vector<atom_t> &atom, int i, vec
     {
       for (int j = 0; j < n_letters; j++)
         {
-          if ((distance(x, y, letters[j].x, letters[j].y) < r + letters[j].r) && (fabs(y - letters[j].y) < min(r,letters[j].r)))
+          if ((distance(x, y, letters[j].x, letters[j].y) < r + letters[j].r) &&
+              (fabs(y - letters[j].y) < std::min(r, letters[j].r)))
             {
               res = true;
             }
@@ -74,11 +75,12 @@ bool chlorine(const vector<bond_t> &bond, const vector<atom_t> &atom, int i, vec
   return (res);
 }
 
-bool iodine(const vector<bond_t> &bond, const vector<atom_t> &atom, int i, vector<letters_t> &letters, int n_letters, int max_font_height, int min_font_height)
+bool iodine(const std::vector<bond_t> &bond, const std::vector<atom_t> &atom, int i,
+            std::vector<letters_t> &letters, int n_letters, int max_font_height, int min_font_height)
 {
-  if (bond_length(bond, i, atom) < max_font_height && 
+  if (bond_length(bond, i, atom) < max_font_height &&
       bond_length(bond, i, atom) > min_font_height &&
-      fabs(atom[bond[i].a].x - atom[bond[i].b].x) < V_DISPLACEMENT && 
+      fabs(atom[bond[i].a].x - atom[bond[i].b].x) < V_DISPLACEMENT &&
       fabs(atom[bond[i].a].y - atom[bond[i].b].y) > min_font_height &&
       bond[i].type == 1)
     {
@@ -94,7 +96,7 @@ bool iodine(const vector<bond_t> &bond, const vector<atom_t> &atom, int i, vecto
 	  double d1 = fabs(distance_from_bond_x_a(xa, ya, xb, yb, letters[j].x, letters[j].y));
 	  double d2 = fabs(distance_from_bond_x_b(xa, ya, xb, yb, letters[j].x, letters[j].y));
 	  double h = fabs(distance_from_bond_y(xa, ya, xb, yb, letters[j].x, letters[j].y));
-	  double nb = min(d1,d2) - letters[j].r;
+	  double nb = std::min(d1, d2) - letters[j].r;
 
 	  if (nb <= bl/2 && h <=  letters[j].r / 2)
 	    found = true;
@@ -106,8 +108,9 @@ bool iodine(const vector<bond_t> &bond, const vector<atom_t> &atom, int i, vecto
   return false;
 }
 
-int remove_small_bonds(vector<bond_t> &bond, int n_bond, const vector<atom_t> &atom, vector<letters_t> &letters,
-                       int n_letters, int max_font_height, int min_font_height, double avg)
+int remove_small_bonds(std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom,
+                       std::vector<letters_t> &letters, int n_letters, int max_font_height,
+                       int min_font_height, double avg)
 {
   for (int i = 0; i < n_bond; i++)
     if ((bond[i].exists) && (bond[i].type == 1))
@@ -117,7 +120,7 @@ int remove_small_bonds(vector<bond_t> &bond, int n_bond, const vector<atom_t> &a
           {
             bond[i].exists = false;
           }
-        else if (al) 
+        else if (al)
           {
 	    bool cl = chlorine(bond, atom, i, letters, n_letters, max_font_height, min_font_height);
 	    bool io = iodine(bond, atom, i, letters, n_letters, max_font_height, min_font_height);
@@ -134,10 +137,10 @@ int remove_small_bonds(vector<bond_t> &bond, int n_bond, const vector<atom_t> &a
 		letters[n_letters].x = (atom[bond[i].a].x + atom[bond[i].b].x) / 2;
 		letters[n_letters].y = (atom[bond[i].a].y + atom[bond[i].b].y) / 2;
 		letters[n_letters].r = bond_length(bond, i, atom) / 2;
-		letters[n_letters].min_x = min(atom[bond[i].a].min_x,atom[bond[i].b].min_x);
-		letters[n_letters].max_x = max(atom[bond[i].b].max_x,atom[bond[i].b].max_x);
-		letters[n_letters].min_y = min(atom[bond[i].a].min_y,atom[bond[i].b].min_y);
-		letters[n_letters].max_y = max(atom[bond[i].a].max_y,atom[bond[i].b].max_y);
+		letters[n_letters].min_x = std::min(atom[bond[i].a].min_x, atom[bond[i].b].min_x);
+		letters[n_letters].max_x = std::max(atom[bond[i].b].max_x, atom[bond[i].b].max_x);
+		letters[n_letters].min_y = std::min(atom[bond[i].a].min_y, atom[bond[i].b].min_y);
+		letters[n_letters].max_y = std::max(atom[bond[i].a].max_y, atom[bond[i].b].max_y);
 		letters[n_letters].free = true;
 		n_letters++;
 		if (n_letters >= MAX_ATOMS)
@@ -167,9 +170,9 @@ bool comp_letters(const letters_t &left, const letters_t &right)
   return (false);
 }
 
-int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &label)
+int assemble_labels(std::vector<letters_t> &letters, int n_letters, std::vector<label_t> &label)
 {
-  vector<lbond_t> lbond;
+  std::vector<lbond_t> lbond;
 
   std::sort(letters.begin(), letters.end(), comp_letters);
 
@@ -178,14 +181,14 @@ int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &
       //            cout<<letters[i].a<<" "<<letters[i].min_x<<" "<<letters[i].min_y<<" "<<letters[i].max_x<<" "<<letters[i].max_y<<endl;
       for (int j = i + 1; j < letters.size(); j++)
 	{
-	  bool digits = fabs(letters[i].y - letters[j].y) < (letters[i].r + letters[j].r) 
+	  bool digits = fabs(letters[i].y - letters[j].y) < (letters[i].r + letters[j].r)
 							    && ((letters[i].y < letters[j].y  && isdigit(letters[j].a)) || ((letters[j].y < letters[i].y) && isdigit(letters[i].a)));
-	  bool alphanum = distance(letters[i].x, letters[i].y, letters[j].x, letters[j].y) < 2 * max(letters[i].r, letters[j].r)
-											     && (fabs(letters[i].y - letters[j].y) < min(letters[i].r, letters[j].r) 
-												 || fabs(letters[i].x - letters[j].x) < min(letters[i].r, letters[j].r)
+	  bool alphanum = distance(letters[i].x, letters[i].y, letters[j].x, letters[j].y) < 2 * std::max(letters[i].r, letters[j].r)
+											     && (fabs(letters[i].y - letters[j].y) < std::min(letters[i].r, letters[j].r)
+												 || fabs(letters[i].x - letters[j].x) < std::min(letters[i].r, letters[j].r)
 												 || digits);
-	  bool signs = distance(letters[i].x, letters[i].y, letters[j].x, letters[j].y) < 1.5 * (letters[i].r + letters[j].r) 
-											  && ((letters[i].y < letters[j].y && (letters[i].a == '-' || letters[i].a == '+')) || 
+	  bool signs = distance(letters[i].x, letters[i].y, letters[j].x, letters[j].y) < 1.5 * (letters[i].r + letters[j].r)
+											  && ((letters[i].y < letters[j].y && (letters[i].a == '-' || letters[i].a == '+')) ||
 											      (letters[j].y < letters[i].y && (letters[j].a == '-' || letters[j].a == '+')));
 	  if (alphanum || signs)
 	    {
@@ -220,10 +223,10 @@ int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &
         lb.a += letters[lbond[i].b].a;
         lb.n.push_back(lbond[i].a);
         lb.n.push_back(lbond[i].b);
-	lb.min_x =  min(letters[lbond[i].a].min_x, letters[lbond[i].b].min_x);
-	lb.min_y =  min(letters[lbond[i].a].min_y,letters[lbond[i].b].min_y);
-	lb.max_x =  max(letters[lbond[i].a].max_x, letters[lbond[i].b].max_x);
-	lb.max_y =  max(letters[lbond[i].a].max_y,letters[lbond[i].b].max_y);
+	lb.min_x = std::min(letters[lbond[i].a].min_x, letters[lbond[i].b].min_x);
+	lb.min_y = std::min(letters[lbond[i].a].min_y,letters[lbond[i].b].min_y);
+	lb.max_x = std::max(letters[lbond[i].a].max_x, letters[lbond[i].b].max_x);
+	lb.max_y = std::max(letters[lbond[i].a].max_y,letters[lbond[i].b].max_y);
 
         if (!isdigit(letters[lbond[i].a].a) && letters[lbond[i].a].a != '-' && letters[lbond[i].a].a != '+'
             && !found_left)
@@ -259,10 +262,10 @@ int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &
           if ((lbond[j].exists) && (lbond[j].a == last))
             {
               lb.a += letters[lbond[j].b].a;
-	      lb.min_x =  min(lb.min_x, letters[lbond[j].b].min_x);
-	      lb.min_y =  min(lb.min_y,letters[lbond[j].b].min_y);
-	      lb.max_x =  max(lb.max_x, letters[lbond[j].b].max_x);
-	      lb.max_y =  max(lb.max_y,letters[lbond[j].b].max_y);
+	      lb.min_x = std::min(lb.min_x, letters[lbond[j].b].min_x);
+	      lb.min_y = std::min(lb.min_y,letters[lbond[j].b].min_y);
+	      lb.max_x = std::max(lb.max_x, letters[lbond[j].b].max_x);
+	      lb.max_y = std::max(lb.max_y,letters[lbond[j].b].max_y);
               lb.n.push_back(lbond[j].b);
               if (!isdigit(letters[lbond[j].a].a) && letters[lbond[j].a].a != '-' && letters[lbond[j].a].a != '+'
                   && !found_left)
@@ -318,7 +321,7 @@ int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &
 
       if (n > 1)
         {
-	  vector<int> old_label_n(label[i].n);
+          std::vector<int> old_label_n(label[i].n);
           label[i].a = "";
           label[i].x1 = FLT_MAX;
           label[i].x2 = 0;
@@ -338,10 +341,10 @@ int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &
                 {
                   label[i].a += letters[old_label_n[j]].a;
 		  label[i].n.push_back(old_label_n[j]);
-		  label[i].min_x =  min(label[i].min_x, letters[old_label_n[j]].min_x);
-		  label[i].min_y =  min(label[i].min_y,letters[old_label_n[j]].min_y);
-		  label[i].max_x =  max(label[i].max_x, letters[old_label_n[j]].max_x);
-		  label[i].max_y =  max(label[i].max_y,letters[old_label_n[j]].max_y);
+		  label[i].min_x = std::min(label[i].min_x, letters[old_label_n[j]].min_x);
+		  label[i].min_y = std::min(label[i].min_y,letters[old_label_n[j]].min_y);
+		  label[i].max_x = std::max(label[i].max_x, letters[old_label_n[j]].max_x);
+		  label[i].max_y = std::max(label[i].max_y,letters[old_label_n[j]].max_y);
                   if (isalpha(letters[old_label_n[j]].a))
                     {
                       if (letters[old_label_n[j]].x < label[i].x1)
@@ -362,10 +365,10 @@ int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &
                 {
                   lb.a += letters[old_label_n[j]].a;
 		  lb.n.push_back(old_label_n[j]);
-		  lb.min_x =  min(lb.min_x, letters[old_label_n[j]].min_x);
-		  lb.min_y =  min(lb.min_y,letters[old_label_n[j]].min_y);
-		  lb.max_x =  max(lb.max_x, letters[old_label_n[j]].max_x);
-		  lb.max_y =  max(lb.max_y,letters[old_label_n[j]].max_y);
+		  lb.min_x = std::min(lb.min_x, letters[old_label_n[j]].min_x);
+		  lb.min_y = std::min(lb.min_y,letters[old_label_n[j]].min_y);
+		  lb.max_x = std::max(lb.max_x, letters[old_label_n[j]].max_x);
+		  lb.max_y = std::max(lb.max_y,letters[old_label_n[j]].max_y);
                   if (isalpha(letters[old_label_n[j]].a))
                     {
                       if (letters[old_label_n[j]].x < lb.x1)
@@ -386,24 +389,24 @@ int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &
           label.push_back(lb);
         }
     }
-  
+
   for (int i = 0; i < label.size(); i++)
     {
       //cout<<label[i].a<<" "<<label[i].min_x<<" "<<label[i].min_y<<" "<<label[i].max_x<<" "<<label[i].max_y<<endl;
       bool cont = true;
-      string charges = "";
+      std::string charges = "";
       while (cont)
         {
           cont = false;
-          string::size_type pos = label[i].a.find_first_of('-');
-          if (pos != string::npos)
+          std::string::size_type pos = label[i].a.find_first_of('-');
+          if (pos != std::string::npos)
             {
               label[i].a.erase(pos, 1);
               charges += "-";
               cont = true;
             }
           pos = label[i].a.find_first_of('+');
-          if (pos != string::npos)
+          if (pos != std::string::npos)
             {
               label[i].a.erase(pos, 1);
               charges += "+";
@@ -412,16 +415,18 @@ int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &
         }
       label[i].a += charges;
       }
- 
+
   return (label.size());
 }
 
 
-int find_numbers(const potrace_path_t * p, const Image &orig, vector<letters_t> &letters, vector<atom_t> &atom, vector<bond_t> &bond, 
-		 int n_atom, int n_bond, int height, int width, ColorGray &bgColor, double THRESHOLD, int n_letters)
+int find_numbers(const potrace_path_t * p, const Image &orig, std::vector<letters_t> &letters,
+                 std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+		 int n_atom, int n_bond, int height, int width,
+                 ColorGray &bgColor, double THRESHOLD, int n_letters)
 {
   int max_font_width, max_font_height;
-  vector<int> widths, heights;
+  std::vector<int> widths, heights;
   for (int i=0; i<n_letters; i++)
     if (letters[i].a >= '2' && letters[i].a <= '9')
       {
@@ -429,8 +434,8 @@ int find_numbers(const potrace_path_t * p, const Image &orig, vector<letters_t> 
 	heights.push_back(letters[i].max_y - letters[i].min_y+1);
       }
   if (widths.size() < 3) return n_letters;
-  max_font_width = min(MAX_FONT_WIDTH,widths[widths.size() / 2]);
-  max_font_height = min(MAX_FONT_HEIGHT,heights[heights.size() / 2]);
+  max_font_width = std::min(MAX_FONT_WIDTH, widths[widths.size() / 2]);
+  max_font_height = std::min(MAX_FONT_HEIGHT, heights[heights.size() / 2]);
 
 
   int n, *tag;
@@ -623,7 +628,7 @@ int find_numbers(const potrace_path_t * p, const Image &orig, vector<letters_t> 
 		{
 		  char label = 0;
 		  label = get_atom_label(orig, bgColor, left, top, right, bottom, THRESHOLD, (right + left) / 2, top, false, false ,true);
-		  
+
 		  if (label == '1')
 		    {
 		      letters_t lt;
@@ -652,9 +657,11 @@ int find_numbers(const potrace_path_t * p, const Image &orig, vector<letters_t> 
   return (n_letters);
 }
 
-int find_chars(const potrace_path_t * p, const Image &orig, vector<letters_t> &letters, vector<atom_t> &atom, vector<
-               bond_t> &bond, int n_atom, int n_bond, int height, int width, ColorGray &bgColor, double THRESHOLD,
-               int max_font_width, int max_font_height, int &real_font_width, int &real_font_height, bool verbose)
+int find_chars(const potrace_path_t * p, const Image &orig, std::vector<letters_t> &letters,
+               std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+               int n_atom, int n_bond, int height, int width, ColorGray &bgColor, double THRESHOLD,
+               int max_font_width, int max_font_height, int &real_font_width, int &real_font_height,
+               bool verbose)
 {
   int n, *tag, n_letters = 0;
   potrace_dpoint_t (*c)[3];
@@ -992,39 +999,41 @@ int find_chars(const potrace_path_t * p, const Image &orig, vector<letters_t> &l
 
 
 
-int find_fused_chars(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, vector<letters_t> &letters, int n_letters,
-                     int max_font_height, int max_font_width, char dummy, const Image &orig, const ColorGray &bgColor,
+int find_fused_chars(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom,
+                     std::vector<letters_t> &letters, int n_letters,
+                     int max_font_height, int max_font_width, char dummy,
+                     const Image &orig, const ColorGray &bgColor,
                      double THRESHOLD, unsigned int size, bool verbose)
 {
-  double dist = max(max_font_width, max_font_height);
+  double dist = std::max(max_font_width, max_font_height);
 
   for (int i = 0; i < n_bond; i++)
     if (bond[i].exists && bond_length(bond, i, atom) < dist)
       {
-        list<int> t;
+        std::list<int> t;
         t.push_back(i);
-        double xmin1 = min(atom[bond[i].a].x, atom[bond[i].b].x);
-        double xmax1 = max(atom[bond[i].a].x, atom[bond[i].b].x);
-        double ymin1 = min(atom[bond[i].a].y, atom[bond[i].b].y);
-        double ymax1 = max(atom[bond[i].a].y, atom[bond[i].b].y);
+        double xmin1 = std::min(atom[bond[i].a].x, atom[bond[i].b].x);
+        double xmax1 = std::max(atom[bond[i].a].x, atom[bond[i].b].x);
+        double ymin1 = std::min(atom[bond[i].a].y, atom[bond[i].b].y);
+        double ymax1 = std::max(atom[bond[i].a].y, atom[bond[i].b].y);
         for (int j = 0; j < n_bond; j++)
           if (bond[j].exists && bond_length(bond, j, atom) < dist && j != i && atom[bond[j].a].x >= xmin1
               && atom[bond[j].a].x >= xmin1)
             {
-              double xmax2 = max(xmax1, max(atom[bond[j].a].x, atom[bond[j].b].x));
-              double ymin2 = min(ymin1, min(atom[bond[j].a].y, atom[bond[j].b].y));
-              double ymax2 = max(ymax1, max(atom[bond[j].a].y, atom[bond[j].b].y));
+              double xmax2 = std::max(xmax1, std::max(atom[bond[j].a].x, atom[bond[j].b].x));
+              double ymin2 = std::min(ymin1, std::min(atom[bond[j].a].y, atom[bond[j].b].y));
+              double ymax2 = std::max(ymax1, std::max(atom[bond[j].a].y, atom[bond[j].b].y));
 
               if (xmax2 - xmin1 <= max_font_width && ymax2 - ymin2 <= max_font_height)
                 t.push_back(j);
             }
 
-        vector<int> all_bonds(n_bond, 0);
+        std::vector<int> all_bonds(n_bond, 0);
         for (int j = 0; j < n_bond; j++)
           if (bond[j].exists)
             all_bonds[j] = 1;
 
-        list<int> bag1, bag2;
+        std::list<int> bag1, bag2;
         all_bonds[i] = 2;
         bag1.push_back(i);
         while (!bag1.empty())
@@ -1062,10 +1071,10 @@ int find_fused_chars(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, vec
                 bag2.pop_front();
                 cx += atom[bond[k].a].x + atom[bond[k].b].x;
                 cy += atom[bond[k].a].y + atom[bond[k].b].y;
-                l = min(l, min(atom[bond[k].a].x, atom[bond[k].b].x));
-                r = max(r, max(atom[bond[k].a].x, atom[bond[k].b].x));
-                t = min(t, min(atom[bond[k].a].y, atom[bond[k].b].y));
-                b = max(b, max(atom[bond[k].a].y, atom[bond[k].b].y));
+                l = std::min(l, std::min(atom[bond[k].a].x, atom[bond[k].b].x));
+                r = std::max(r, std::max(atom[bond[k].a].x, atom[bond[k].b].x));
+                t = std::min(t, std::min(atom[bond[k].a].y, atom[bond[k].b].y));
+                b = std::max(b, std::max(atom[bond[k].a].y, atom[bond[k].b].y));
                 n += 2;
               }
             cx /= n;
@@ -1128,7 +1137,7 @@ int find_fused_chars(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, vec
 
 void detect_plus_minus(const Image &image, ColorGray &bg, double THRESHOLD, int x1, int x2, int y1, int y2, int top, int left, int right, int bottom, bool &is_plus, bool &is_minus)
 {
-  vector < vector <short> > pic(right-left+1, vector<short> (bottom-top+1,0));
+  std::vector<std::vector<short> > pic(right-left+1, std::vector<short> (bottom-top+1,0));
   for (int i=left; i<=right; i++)
     for (int j=top; j<=bottom; j++)
       pic[i-left][j-top] = get_pixel(image, bg, i, j, THRESHOLD) ;
@@ -1138,16 +1147,16 @@ void detect_plus_minus(const Image &image, ColorGray &bg, double THRESHOLD, int 
   if (x<0 || x>=pic.size()) return;
   while (y<pic[x].size() &&  pic[x][y] != 1) y++;
   if (y>=pic[x].size()) return;
-  vector<point_t> points;
+  std::vector<point_t> points;
   // populating points with BFS
-  list<point_t> bag;
+  std::list<point_t> bag;
   point_t p;
   p.x = x;
   p.y = y;
   bag.push_back(p);
 
   pic[p.x][p.y] = 2;
-  
+
   while (!bag.empty())
     {
       point_t c = bag.front();
@@ -1167,7 +1176,7 @@ void detect_plus_minus(const Image &image, ColorGray &bg, double THRESHOLD, int 
               }
       }
   const int len=50;
-  vector<int> hist(len,0);
+  std::vector<int> hist(len,0);
   int top_pos=0;
   int top_value=0;
   point_t head, tail,center;
@@ -1176,9 +1185,9 @@ void detect_plus_minus(const Image &image, ColorGray &bg, double THRESHOLD, int 
   double fill = (double) points.size() / ((max_x-min_x+1)*(max_y-min_y+1));
   double aspect = (double) (max_y - min_y +1) / (max_x - min_x +1);
   if (points.size() > len)
-    {     
-      vector<int> peaks(1,top_pos);
-      vector<int> values(1,top_value);
+    {
+      std::vector<int> peaks(1,top_pos);
+      std::vector<int> values(1,top_value);
       for (int k=1; k<len;k++)
 	{
 	  int pos=k+top_pos;
@@ -1194,13 +1203,13 @@ void detect_plus_minus(const Image &image, ColorGray &bg, double THRESHOLD, int 
 	    }
 	}
 
-      if (peaks.size() == 2   && abs(len/2 - abs(peaks[1]-peaks[0]))<=1)  // only two peaks are present at 180 degrees 
+      if (peaks.size() == 2   && abs(len/2 - abs(peaks[1]-peaks[0]))<=1)  // only two peaks are present at 180 degrees
 	{
-	  
+
 	  if (aspect < 0.7 && fill > 0.9)
 	    is_minus = true;
 	}
-      
+
       if (peaks.size() == 4  && (double(values[1])/values[0]>0.8 || values[0]-values[1]<=2)  && (double(values[2])/values[0]>0.8  || values[0]-values[2]<=2) && (double(values[3])/values[0]>0.8 || values[0]-values[3]<=2))
 	{
 	  bool first=false, second=false, third=false, fourth=false;
@@ -1219,7 +1228,7 @@ void detect_plus_minus(const Image &image, ColorGray &bg, double THRESHOLD, int 
 		if (kk>=len) kk -=len;
 		hist[kk]=0;
 	      }
-	  
+
 	  bool low=true;
 	  for(int k=0; k<len; k++)
 	    if (hist[k]>3) low=false;
@@ -1228,7 +1237,7 @@ void detect_plus_minus(const Image &image, ColorGray &bg, double THRESHOLD, int 
 	      // we found a plus!
 	      is_plus = true;
 	    }
-	}	
+	}
     }
   else
     {
@@ -1238,11 +1247,14 @@ void detect_plus_minus(const Image &image, ColorGray &bg, double THRESHOLD, int 
 	  && abs(x1 - x2) < 3 && abs(x1 + x2 - right - left) / 2 < 3)
 	is_plus = true;
     }
-  
+
 }
 
-int find_plus_minus(const potrace_path_t *p, const Image &image, ColorGray &bgColor, double THRESHOLD, vector<letters_t> &letters, vector<atom_t> &atom, vector<bond_t> &bond,
-                    int n_atom, int n_bond, int height, int width, int max_font_height, int max_font_width, int n_letters, double avg_bond_length)
+int find_plus_minus(const potrace_path_t *p, const Image &image, ColorGray &bgColor, double THRESHOLD,
+                    std::vector<letters_t> &letters, std::vector<atom_t> &atom,
+                    std::vector<bond_t> &bond,
+                    int n_atom, int n_bond, int height, int width,
+                    int max_font_height, int max_font_width, int n_letters, double avg_bond_length)
 {
   int n, *tag;
   potrace_dpoint_t (*c)[3];
@@ -1385,7 +1397,7 @@ int find_plus_minus(const potrace_path_t *p, const Image &image, ColorGray &bgCo
               bool inside_char = false;
               for (int j = 0; j < n_letters; j++)
                 {
-                  if (letters[j].x > right && (top + bottom) / 2 > letters[j].min_y  && (top + bottom) / 2 < letters[j].max_y 
+                  if (letters[j].x > right && (top + bottom) / 2 > letters[j].min_y  && (top + bottom) / 2 < letters[j].max_y
 		      && right > letters[j].min_x - letters[j].r && letters[j].a  != '-' && letters[j].a != '+')
 		    char_to_right = true;
                   if (letters[j].min_x <= left && letters[j].max_x >= right && letters[j].min_y <= top && letters[j].max_y >= bottom)
@@ -1428,10 +1440,11 @@ int find_plus_minus(const potrace_path_t *p, const Image &image, ColorGray &bgCo
   return (n_letters);
 }
 
-int clean_unrecognized_characters(vector<bond_t> &bond, int n_bond, const vector<atom_t> &atom, int real_font_height,
-                                  int real_font_width, unsigned int size, vector<letters_t> &letters, int n_letters)
+int clean_unrecognized_characters(std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom,
+                                  int real_font_height, int real_font_width, unsigned int size,
+                                  std::vector<letters_t> &letters, int n_letters)
 {
-  vector<int> all_bonds(n_bond, 0);
+  std::vector<int> all_bonds(n_bond, 0);
 
   for (int i = 0; i < n_bond; i++)
     if (bond[i].exists)
@@ -1440,8 +1453,8 @@ int clean_unrecognized_characters(vector<bond_t> &bond, int n_bond, const vector
   for (int i = 0; i < n_bond; i++)
     if (all_bonds[i] == 1)
       {
-        list<int> bag1, bag2;
-        list<int> trash;
+        std::list<int> bag1, bag2;
+        std::list<int> trash;
         all_bonds[i] = 2;
         bag1.push_back(i);
         while (!bag1.empty())
@@ -1510,7 +1523,8 @@ int clean_unrecognized_characters(vector<bond_t> &bond, int n_bond, const vector
   return (n_letters);
 }
 
-void remove_small_terminal_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, double avg)
+void remove_small_terminal_bonds(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom,
+                                 double avg)
 {
   bool found = true;
 
@@ -1532,10 +1546,10 @@ void remove_small_terminal_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t
                     if (atom[bond[j].a].label != " ")
 		      {
 			atom[bond[j].b].label = atom[bond[j].a].label;
-			atom[bond[j].b].min_x = min(atom[bond[j].b].min_x,atom[bond[j].a].min_x);
-			atom[bond[j].b].min_y = min(atom[bond[j].b].min_y,atom[bond[j].a].min_y);
-			atom[bond[j].b].max_x = max(atom[bond[j].b].max_x,atom[bond[j].a].max_x);
-			atom[bond[j].b].max_y = max(atom[bond[j].b].max_y,atom[bond[j].a].max_y);
+			atom[bond[j].b].min_x = std::min(atom[bond[j].b].min_x, atom[bond[j].a].min_x);
+			atom[bond[j].b].min_y = std::min(atom[bond[j].b].min_y, atom[bond[j].a].min_y);
+			atom[bond[j].b].max_x = std::max(atom[bond[j].b].max_x, atom[bond[j].a].max_x);
+			atom[bond[j].b].max_y = std::max(atom[bond[j].b].max_y, atom[bond[j].a].max_y);
 		      }
                     else
                       {
@@ -1551,10 +1565,10 @@ void remove_small_terminal_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t
                         if (!dashed)
 			  {
 			    atom[bond[j].b].label = "Xx";
-			    atom[bond[j].b].min_x = min(atom[bond[j].b].min_x,atom[bond[j].a].min_x);
-			    atom[bond[j].b].min_y = min(atom[bond[j].b].min_y,atom[bond[j].a].min_y);
-			    atom[bond[j].b].max_x = max(atom[bond[j].b].max_x,atom[bond[j].a].max_x);
-			    atom[bond[j].b].max_y = max(atom[bond[j].b].max_y,atom[bond[j].a].max_y);
+			    atom[bond[j].b].min_x = std::min(atom[bond[j].b].min_x, atom[bond[j].a].min_x);
+			    atom[bond[j].b].min_y = std::min(atom[bond[j].b].min_y, atom[bond[j].a].min_y);
+			    atom[bond[j].b].max_x = std::max(atom[bond[j].b].max_x, atom[bond[j].a].max_x);
+			    atom[bond[j].b].max_y = std::max(atom[bond[j].b].max_y, atom[bond[j].a].max_y);
 			  }
                       }
                   }
@@ -1569,10 +1583,10 @@ void remove_small_terminal_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t
                     if (atom[bond[j].b].label != " ")
 		      {
 			atom[bond[j].a].label = atom[bond[j].b].label;
-			atom[bond[j].a].min_x = min(atom[bond[j].b].min_x,atom[bond[j].a].min_x);
-			atom[bond[j].a].min_y = min(atom[bond[j].b].min_y,atom[bond[j].a].min_y);
-			atom[bond[j].a].max_x = max(atom[bond[j].b].max_x,atom[bond[j].a].max_x);
-			atom[bond[j].a].max_y = max(atom[bond[j].b].max_y,atom[bond[j].a].max_y);
+			atom[bond[j].a].min_x = std::min(atom[bond[j].b].min_x, atom[bond[j].a].min_x);
+			atom[bond[j].a].min_y = std::min(atom[bond[j].b].min_y, atom[bond[j].a].min_y);
+			atom[bond[j].a].max_x = std::max(atom[bond[j].b].max_x, atom[bond[j].a].max_x);
+			atom[bond[j].a].max_y = std::max(atom[bond[j].b].max_y, atom[bond[j].a].max_y);
 		      }
                     else
                       {
@@ -1588,10 +1602,10 @@ void remove_small_terminal_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t
                         if (!dashed)
 			  {
 			    atom[bond[j].a].label = "Xx";
-			    atom[bond[j].a].min_x = min(atom[bond[j].b].min_x,atom[bond[j].a].min_x);
-			    atom[bond[j].a].min_y = min(atom[bond[j].b].min_y,atom[bond[j].a].min_y);
-			    atom[bond[j].a].max_x = max(atom[bond[j].b].max_x,atom[bond[j].a].max_x);
-			    atom[bond[j].a].max_y = max(atom[bond[j].b].max_y,atom[bond[j].a].max_y);
+			    atom[bond[j].a].min_x = std::min(atom[bond[j].b].min_x, atom[bond[j].a].min_x);
+			    atom[bond[j].a].min_y = std::min(atom[bond[j].b].min_y, atom[bond[j].a].min_y);
+			    atom[bond[j].a].max_x = std::max(atom[bond[j].b].max_x, atom[bond[j].a].max_x);
+			    atom[bond[j].a].max_y = std::max(atom[bond[j].b].max_y, atom[bond[j].a].max_y);
 			  }
                       }
                   }

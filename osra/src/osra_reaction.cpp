@@ -25,13 +25,20 @@
 #include <openbabel/mol.h>
 #include <openbabel/obconversion.h>
 #include <openbabel/reaction.h>
+#include <openbabel/shared_ptr.h> // shared_ptr<T> in global namespace
 
 #include "osra_segment.h"
 #include "osra_reaction.h"
 #include "osra_common.h"
 
 using namespace OpenBabel;
-using namespace std;
+
+//// openbabel/shared_ptr.h declares shared_ptr<T> in global namespace.
+//// Here we encapsulate it into OpenBabel:: namespace, and use only fully specified
+//// name obsharedptr<T> in the code.
+//namespace OpenBabel {
+//  template<typename T> using shared_ptr = shared_ptr<T>;
+//}
 
 //
 // Create a reaction representation for input vector of structures
@@ -43,23 +50,26 @@ using namespace std;
 // Returns:
 //      resulting reaction in the format set up by output_format parameter
 //
-string convert_page_to_reaction(const vector<string> &page_of_structures, const string &output_format, const vector <int> &reactants, const vector <int> &products, string value, bool reversible)
+std::string convert_page_to_reaction(
+    const std::vector<std::string> &page_of_structures, const std::string &output_format,
+    const std::vector<int> &reactants, const std::vector <int> &products,
+    std::string value, bool reversible)
 {
-  string reaction;
+  std::string reaction;
   OBConversion *conv=new OBConversion;
   conv->SetInAndOutFormats(SUBSTITUTE_REACTION_FORMAT,output_format.c_str());
-  ostringstream strstr;
-  
+  std::ostringstream strstr;
+
   OBReaction react;
   for (int j=0; j<reactants.size(); j++)
     {
-      shared_ptr<OBMol> reactant(new OBMol);
+	  obsharedptr<OBMol> reactant(new OBMol);
       conv->ReadString(reactant.get(), page_of_structures[reactants[j]]);
       react.AddReactant(reactant);
     }
   for (int j=0; j<products.size(); j++)
     {
-      shared_ptr<OBMol> product(new OBMol);
+      obsharedptr<OBMol> product(new OBMol);
       conv->ReadString(product.get(), page_of_structures[products[j]]);
       react.AddProduct(product);
     }
@@ -83,23 +93,23 @@ string convert_page_to_reaction(const vector<string> &page_of_structures, const 
   return(reaction);
 }
 
-string convert_to_smiles_agent_structure(const string &structure)
+std::string convert_to_smiles_agent_structure(const std::string &structure)
 {
   OBConversion conv;
   conv.SetInAndOutFormats(SUBSTITUTE_REACTION_FORMAT,"smi");
-  string result;
+  std::string result;
   OBMol mol;
   if (conv.ReadString(&mol,structure))
     result = conv.WriteString(&mol,true);
   return result;
 }
 
-void linear_arrow_sort(vector<arrow_t> &arrows)
+void linear_arrow_sort(std::vector<arrow_t> &arrows)
 {
   point_t start;
   start.x=0;
   start.y=0;
-  vector<arrow_t> new_arrows;
+  std::vector<arrow_t> new_arrows;
   while (!arrows.empty())
     {
       double d=FLT_MAX;
@@ -109,12 +119,12 @@ void linear_arrow_sort(vector<arrow_t> &arrows)
 	{
 	  bool linebreak = false;
 	  if (!new_arrows.empty())
-	    linebreak = arrows[i].head.x>arrows[i].tail.x && new_arrows.back().head.x>new_arrows.back().tail.x 
-	      && abs(arrows[i].head.y-arrows[i].tail.y)<5  && abs(new_arrows.back().head.y-new_arrows.back().tail.y)<5
-	      && (min(arrows[i].head.y,arrows[i].tail.y)-max(new_arrows.back().head.y,new_arrows.back().tail.y)>MAX_FONT_HEIGHT ||
-		  min(new_arrows.back().head.y,new_arrows.back().tail.y)-max(arrows[i].head.y,arrows[i].tail.y)>MAX_FONT_HEIGHT);
+	    linebreak = arrows[i].head.x > arrows[i].tail.x && new_arrows.back().head.x > new_arrows.back().tail.x
+	      && abs(arrows[i].head.y - arrows[i].tail.y)<5  && abs(new_arrows.back().head.y - new_arrows.back().tail.y)<5
+              && (std::min(arrows[i].head.y,arrows[i].tail.y) - std::max(new_arrows.back().head.y, new_arrows.back().tail.y) > MAX_FONT_HEIGHT ||
+		  std::min(new_arrows.back().head.y,new_arrows.back().tail.y) - std::max(arrows[i].head.y, arrows[i].tail.y) > MAX_FONT_HEIGHT);
 	      //&& arrows[i].tail.x<new_arrows.back().head.x;
-	  
+
 	  if (distance(start.x,start.y,arrows[i].tail.x,arrows[i].tail.y)<d && (!linebreak || new_arrows.back().linebreak))
 	    {
 	      d = distance(start.x,start.y,arrows[i].tail.x,arrows[i].tail.y);
@@ -122,7 +132,7 @@ void linear_arrow_sort(vector<arrow_t> &arrows)
 	      found = true;
 	    }
 	}
-     
+
       if (found)
 	{
 	  new_arrows.push_back(arrows[closest]);
@@ -136,14 +146,14 @@ void linear_arrow_sort(vector<arrow_t> &arrows)
 	  if (!new_arrows.empty())
 	    {
 	      new_arrows.back().linebreak = true;
-	      start.y = max(new_arrows.back().tail.y,new_arrows.back().head.y);
+	      start.y = std::max(new_arrows.back().tail.y,new_arrows.back().head.y);
 	    }
 	}
     }
   arrows = new_arrows;
 }
 
-void check_the_last_arrow_linebreak(vector<arrow_t> &arrows,const vector<box_t> &page_of_boxes)
+void check_the_last_arrow_linebreak(std::vector<arrow_t> &arrows, const std::vector<box_t> &page_of_boxes)
 {
   if (arrows.back().head.x>arrows.back().tail.x && abs(arrows.back().head.y-arrows.back().tail.y)<5)
     {
@@ -156,7 +166,7 @@ void check_the_last_arrow_linebreak(vector<arrow_t> &arrows,const vector<box_t> 
     }
 }
 
-void mark_reversible(vector<arrow_t> &arrows)
+void mark_reversible(std::vector<arrow_t> &arrows)
 {
   if (arrows.size()<2) return;
   for (int i=0; i<arrows.size(); i++)
@@ -166,9 +176,9 @@ void mark_reversible(vector<arrow_t> &arrows)
       {
 	double d1=distance_from_bond_y(arrows[i].tail.x,arrows[i].tail.y,arrows[i].head.x,arrows[i].head.y,arrows[j].tail.x,arrows[j].tail.y);
 	double d2=distance_from_bond_y(arrows[i].tail.x,arrows[i].tail.y,arrows[i].head.x,arrows[i].head.y,arrows[j].head.x,arrows[j].head.y);
-	if (max(fabs(d1),fabs(d2))<2*MAX_FONT_HEIGHT)
+	if (std::max(fabs(d1), fabs(d2)) < 2 * MAX_FONT_HEIGHT)
 	  {
-	    
+
 	    double l = distance(arrows[i].tail.x,arrows[i].tail.y,arrows[i].head.x,arrows[i].head.y);
 	    double l1 = distance_from_bond_x_a(arrows[i].tail.x,arrows[i].tail.y,arrows[i].head.x,arrows[i].head.y,arrows[j].tail.x,arrows[j].tail.y);
 	    double l2 = distance_from_bond_x_a(arrows[i].tail.x,arrows[i].tail.y,arrows[i].head.x,arrows[i].head.y,arrows[j].head.x,arrows[j].head.y);
@@ -186,7 +196,7 @@ void mark_reversible(vector<arrow_t> &arrows)
 			x2=arrows[i-1].head.x;
 			y2=arrows[i-1].head.y;
 		      }
-		    else 
+		    else
 		      {
 			x1=arrows[i-1].head.x;
 			y1=arrows[i-1].head.y;
@@ -209,8 +219,8 @@ void mark_reversible(vector<arrow_t> &arrows)
 	      }
 	  }
       }
-      
-  vector<arrow_t>::iterator i=arrows.begin();
+
+  std::vector<arrow_t>::iterator i=arrows.begin();
   while (i!=arrows.end())
     {
       if (i->remove) i=arrows.erase(i);
@@ -239,34 +249,34 @@ double distance_between_boxes(const box_t &a, const box_t &b)
   double dab = distance_from_box(p,b);
   p.x = a.x1;
   p.y = a.y2;
- dab = min(dab,distance_from_box(p,b));
+  dab = std::min(dab, distance_from_box(p, b));
   p.x = a.x2;
   p.y = a.y1;
-  dab = min(dab,distance_from_box(p,b));
+  dab = std::min(dab, distance_from_box(p, b));
   p.x = a.x2;
   p.y = a.y2;
-  dab = min(dab,distance_from_box(p,b));
+  dab = std::min(dab, distance_from_box(p, b));
 
   p.x = b.x1;
   p.y = b.y1;
-  dab = min(dab,distance_from_box(p,a));
+  dab = std::min(dab, distance_from_box(p, a));
   p.x = b.x2;
   p.y = b.y1;
-  dab = min(dab,distance_from_box(p,a));
+  dab = std::min(dab, distance_from_box(p, a));
   p.x = b.x1;
   p.y = b.y2;
-  dab = min(dab,distance_from_box(p,a));
+  dab = std::min(dab, distance_from_box(p, a));
   p.x = b.x2;
   p.y = b.y2;
-  dab = min(dab,distance_from_box(p,a));
+  dab = std::min(dab, distance_from_box(p, a));
   return(dab);
 }
 
-void  sort_boxes_one_by_one(vector<int> &b, const vector<int> &a, const vector<box_t> &page_of_boxes, bool behind)
+void sort_boxes_one_by_one(std::vector<int> &b, const std::vector<int> &a, const std::vector<box_t> &page_of_boxes, bool behind)
 {
   box_t p=page_of_boxes[b[0]];
 
-  set<int> existing;
+  std::set<int> existing;
   existing.insert(b[0]);
   if (behind)
     existing.insert(a[0]);
@@ -277,7 +287,7 @@ void  sort_boxes_one_by_one(vector<int> &b, const vector<int> &a, const vector<b
     {
       found  = false;
       double d = FLT_MAX;
-      int min_j = 0;    
+      int min_j = 0;
       for (int j=0; j<page_of_boxes.size(); j++)
 	if (d > distance_between_boxes(p,page_of_boxes[j]) && existing.find(j) == existing.end())
 	  {
@@ -294,9 +304,9 @@ void  sort_boxes_one_by_one(vector<int> &b, const vector<int> &a, const vector<b
     }
 }
 
-void sort_boxes_from_arrows(vector < vector<int> > &before, const vector < vector<int> > &after,const vector<box_t> &page_of_boxes, bool behind)
+void sort_boxes_from_arrows(std::vector<std::vector<int> > &before, const std::vector<std::vector<int> > &after,
+                            const std::vector<box_t> &page_of_boxes, bool behind)
 {
- 
   for (int i=0; i<before.size(); i++)
     if (!before[i].empty() && !after[i].empty())
     {
@@ -306,7 +316,9 @@ void sort_boxes_from_arrows(vector < vector<int> > &before, const vector < vecto
     }
 }
 
-void arrange_structures_between_arrows_before(vector<arrow_t> &arrows,  vector < vector<int> > &before, const vector<box_t> &page_of_boxes, const vector<string> &page_of_structures)
+void arrange_structures_between_arrows_before(
+    std::vector<arrow_t> &arrows, std::vector<std::vector<int> > &before,
+    const std::vector<box_t> &page_of_boxes, const std::vector<std::string> &page_of_structures)
 {
   for (int j=0; j<arrows.size(); j++)
     {
@@ -323,14 +335,14 @@ void arrange_structures_between_arrows_before(vector<arrow_t> &arrows,  vector <
 	  double rx3 = distance_from_bond_x_a(arrows[j].tail.x,arrows[j].tail.y,arrows[j].head.x,arrows[j].head.y,page_of_boxes[i].x2,page_of_boxes[i].y1);
 	  double rx4 = distance_from_bond_x_a(arrows[j].tail.x,arrows[j].tail.y,arrows[j].head.x,arrows[j].head.y,page_of_boxes[i].x2,page_of_boxes[i].y2);
 	  double cr = distance((page_of_boxes[i].x2+page_of_boxes[i].x1)/2,(page_of_boxes[i].y2+page_of_boxes[i].y1)/2,(arrows[j].tail.x+arrows[j].head.x)/2,(arrows[j].tail.y+arrows[j].head.y)/2);
-	  if (rx1>=0 && rx1<=l && rx2>=0 && rx2<=l && rx3>=0 && rx3<=l && rx4>=0 && rx4<=l && 
-	      cr<max(page_of_boxes[i].x2-page_of_boxes[i].x1, page_of_boxes[i].y2-page_of_boxes[i].y1))
+	  if (rx1>=0 && rx1<=l && rx2>=0 && rx2<=l && rx3>=0 && rx3<=l && rx4>=0 && rx4<=l &&
+	      cr < std::max(page_of_boxes[i].x2 - page_of_boxes[i].x1, page_of_boxes[i].y2 - page_of_boxes[i].y1))
 	    {
-	      string smi=convert_to_smiles_agent_structure(page_of_structures[i]);
-		  if (!smi.empty())
-			arrows[j].agent += " OSRA_AGENT_SMILES="+smi;
+              std::string smi = convert_to_smiles_agent_structure(page_of_structures[i]);
+              if (!smi.empty())
+                  arrows[j].agent += " OSRA_AGENT_SMILES="+smi;
 	    }
-	  else if (fabs(ry)<min(page_of_boxes[i].x2-page_of_boxes[i].x1, page_of_boxes[i].y2-page_of_boxes[i].y1) && r<rt)
+	  else if (fabs(ry) < std::min(page_of_boxes[i].x2 - page_of_boxes[i].x1, page_of_boxes[i].y2 - page_of_boxes[i].y1) && r<rt)
 	    {
 	      rt = r;
 	      i_min = i;
@@ -342,7 +354,9 @@ void arrange_structures_between_arrows_before(vector<arrow_t> &arrows,  vector <
     }
 }
 
-void arrange_structures_between_arrows_after(vector<arrow_t> &arrows,  vector < vector<int> > &after, const vector < vector<int> > &before,const vector<box_t> &page_of_boxes, const vector<string> &page_of_structures)
+void arrange_structures_between_arrows_after(
+    std::vector<arrow_t> &arrows, std::vector<std::vector<int> > &after, const std::vector<std::vector<int> > &before,
+    const std::vector<box_t> &page_of_boxes, const std::vector<std::string> &page_of_structures)
 {
   for (int j=0; j<arrows.size(); j++)
     {
@@ -365,7 +379,9 @@ void arrange_structures_between_arrows_after(vector<arrow_t> &arrows,  vector < 
 	  double rx3 = distance_from_bond_x_a(arrows[j].tail.x,arrows[j].tail.y,arrows[j].head.x,arrows[j].head.y,page_of_boxes[i].x2,page_of_boxes[i].y1);
 	  double rx4 = distance_from_bond_x_a(arrows[j].tail.x,arrows[j].tail.y,arrows[j].head.x,arrows[j].head.y,page_of_boxes[i].x2,page_of_boxes[i].y2);
 	  double cr = distance((page_of_boxes[i].x2+page_of_boxes[i].x1)/2,(page_of_boxes[i].y2+page_of_boxes[i].y1)/2,(arrows[j].tail.x+arrows[j].head.x)/2,(arrows[j].tail.y+arrows[j].head.y)/2);
-	  bool agent_structure = rx1>=0 && rx1<=l && rx2>=0 && rx2<=l && rx3>=0 && rx3<=l && rx4>=0 && rx4<=l && cr<max(page_of_boxes[i].x2-page_of_boxes[i].x1, page_of_boxes[i].y2-page_of_boxes[i].y1);
+	  bool agent_structure =
+              rx1 >= 0 && rx1 <= l && rx2 >= 0 && rx2 <= l && rx3 >= 0 && rx3 <= l && rx4 >= 0 && rx4 <= l &&
+              cr < std::max(page_of_boxes[i].x2 - page_of_boxes[i].x1, page_of_boxes[i].y2 - page_of_boxes[i].y1);
 	  if (!agent_structure)
 	    {
 	      if (arrows[j].linebreak)
@@ -379,7 +395,7 @@ void arrange_structures_between_arrows_after(vector<arrow_t> &arrows,  vector < 
 		      previous_bottom = page_of_boxes[i].y2;
 		    }
 		}
-	      else if  (fabs(ry)<min(page_of_boxes[i].x2-page_of_boxes[i].x1, page_of_boxes[i].y2-page_of_boxes[i].y1)  && r<rh)
+	      else if (fabs(ry) < std::min(page_of_boxes[i].x2 - page_of_boxes[i].x1, page_of_boxes[i].y2 - page_of_boxes[i].y1) && r < rh)
 		{
 		  rh = r;
 		  i_min = i;
@@ -397,7 +413,8 @@ void arrange_structures_between_arrows_after(vector<arrow_t> &arrows,  vector < 
     }
 }
 
-void arrange_plus_sings_between_boxes(const vector < vector<int> > &before,const vector<box_t> &page_of_boxes,const vector<plus_t> &pluses, vector < vector <int> > &is_plus)
+void arrange_plus_sings_between_boxes(const std::vector<std::vector<int> > &before, const std::vector<box_t> &page_of_boxes,
+                                      const std::vector<plus_t> &pluses, std::vector<std::vector<int> > &is_plus)
 {
   for (int i=0; i<before.size(); i++)
     for (int j=1; j<before[i].size(); j++)
@@ -411,7 +428,10 @@ void arrange_plus_sings_between_boxes(const vector < vector<int> > &before,const
 	    for (int m=0; m<pluses.size(); m++)
 	      {
 		//double d=distance_from_bond_y((a.x1+a.x2)/2,(a.y1+a.y2)/2,(b.x1+b.x2)/2,(b.y1+b.y2)/2,pluses[m].x, pluses[m].y);
-		if (pluses[m].center.y>max(a.y1,b.y1) && pluses[m].center.y<min(a.y2,b.y2) && ((pluses[m].center.x>a.x2 && pluses[m].center.x<b.x1) ||  (pluses[m].center.x>b.x2 && pluses[m].center.x<a.x1)))
+                  if (pluses[m].center.y > std::max(a.y1, b.y1) &&
+                      pluses[m].center.y < std::min(a.y2, b.y2) &&
+                      ((pluses[m].center.x > a.x2 && pluses[m].center.x < b.x1) ||
+                       (pluses[m].center.x > b.x2 && pluses[m].center.x < a.x1)))
 		  {
 		    is_plus[k][l] = m;
 		    is_plus[l][k] = m;
@@ -428,22 +448,23 @@ void arrange_plus_sings_between_boxes(const vector < vector<int> > &before,const
 		    is_plus[k][l] = true;
 		    is_plus[l][k] = true;
 		  }*/
-		
+
 	      }
 	  }
       }
 }
 
 
-void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_boxes, const vector<plus_t> &pluses, vector<string> &results, vector<box_t> &rbox,
-		       const vector<string> &page_of_structures,  const string &output_format)
+void arrange_reactions(std::vector<arrow_t> &arrows, const std::vector<box_t> &page_of_boxes, const std::vector<plus_t> &pluses,
+                       std::vector<std::string> &results, std::vector<box_t> &rbox,
+		       const std::vector<std::string> &page_of_structures, const std::string &output_format)
 {
-  vector < vector<int> > before;
-  vector < vector<int> > after;
+  std::vector<std::vector<int> > before;
+  std::vector<std::vector<int> > after;
   if (arrows.empty() || page_of_boxes.empty()) return;
   // Find average distance between nearest arrows and standard deviation
-  vector<arrow_t> arrows_by_closest;
-  vector<double> dist_arrows;
+  std::vector<arrow_t> arrows_by_closest;
+  std::vector<double> dist_arrows;
   double avg_dist_arrow=0, avg_dist_arrow_squared=0, std_dev_arrow=0;
   int n_arrows = arrows.size();
   point_t start;
@@ -455,9 +476,11 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
       double d = FLT_MAX;
       int min_i=0;
       for (int i=0; i<arrows.size(); i++)
-	if (d>min(distance(start.x,start.y,arrows[i].head.x,arrows[i].head.y),distance(start.x,start.y,arrows[i].tail.x,arrows[i].tail.y)))
+          if (d > std::min(distance(start.x, start.y, arrows[i].head.x, arrows[i].head.y),
+                           distance(start.x, start.y, arrows[i].tail.x, arrows[i].tail.y)))
 	  {
-	    d = min(distance(start.x,start.y,arrows[i].head.x,arrows[i].head.y),distance(start.x,start.y,arrows[i].tail.x,arrows[i].tail.y));
+              d = std::min(distance(start.x, start.y, arrows[i].head.x, arrows[i].head.y),
+                           distance(start.x, start.y, arrows[i].tail.x, arrows[i].tail.y));
 	    min_i = i;
 	  }
       arrows_by_closest.push_back(arrows[min_i]);
@@ -474,11 +497,11 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
   mark_reversible(arrows_by_closest);
 
   // Break arrows into close-knit groups
-  vector < vector <arrow_t> > arrow_groups;
+  std::vector<std::vector<arrow_t> > arrow_groups;
   int i=0;
   while (i<n_arrows)
     {
-      vector <arrow_t> group;
+      std::vector<arrow_t> group;
       group.push_back(arrows_by_closest[i]);
       i++;
       while (i<n_arrows && dist_arrows[i]<avg_dist_arrow+2*std_dev_arrow)
@@ -500,11 +523,10 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
   for (int i=0; i<arrow_groups.size(); i++)
     {
       // arrange structures to best fit between arrows
-      vector < vector<int> > before_group(arrow_groups[i].size());
+      std::vector<std::vector<int> > before_group(arrow_groups[i].size());
       arrange_structures_between_arrows_before(arrow_groups[i],before_group,page_of_boxes,page_of_structures);
-      vector < vector<int> > after_group(arrow_groups[i].size());
+      std::vector<std::vector<int> > after_group(arrow_groups[i].size());
       arrange_structures_between_arrows_after(arrow_groups[i],after_group,before_group,page_of_boxes,page_of_structures);
-    
 
 
       sort_boxes_from_arrows(before_group,after_group,page_of_boxes,true);
@@ -542,11 +564,10 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
     	cout<<after[ii][j]<<" ";
      cout<<endl;
      }*/
-  
- 
-  vector < vector <int> > is_plus_before(page_of_boxes.size(), vector <int> (page_of_boxes.size(), -1));
+
+  std::vector<std::vector<int> > is_plus_before(page_of_boxes.size(), std::vector<int> (page_of_boxes.size(), -1));
   arrange_plus_sings_between_boxes(before,page_of_boxes,pluses, is_plus_before);
- vector < vector <int> > is_plus_after(page_of_boxes.size(), vector <int> (page_of_boxes.size(), -1));
+  std::vector<std::vector<int> > is_plus_after(page_of_boxes.size(), std::vector<int> (page_of_boxes.size(), -1));
   arrange_plus_sings_between_boxes(after,page_of_boxes,pluses, is_plus_after);
 
 /*   for (int ii=0;ii<before.size(); ii++)
@@ -575,7 +596,7 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
   // extract reactions, if any
   for (int i=0; i<arrows.size(); i++)
     {
-      vector <int> r,p;
+      std::vector<int> r, p;
       box_t box;
       box.x1 = arrows[i].min_x;
       box.y1 = arrows[i].min_y;
@@ -589,10 +610,10 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
 	{
 	  int k = before[i][ii];
 	  r.push_back(k);
-	  box.x1 = min(box.x1,page_of_boxes[k].x1);
-	  box.y1 = min(box.y1,page_of_boxes[k].y1);
-	  box.x2 = max(box.x2,page_of_boxes[k].x2);
-	  box.y2 = max(box.y2,page_of_boxes[k].y2);
+	  box.x1 = std::min(box.x1, page_of_boxes[k].x1);
+	  box.y1 = std::min(box.y1, page_of_boxes[k].y1);
+	  box.x2 = std::max(box.x2, page_of_boxes[k].x2);
+	  box.y2 = std::max(box.y2, page_of_boxes[k].y2);
 	}
 
       for (int j=ii-1; j>=0; j--)
@@ -605,15 +626,15 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
 	      if (m>=0)
 		{
 		  r.push_back(k);
-		  box.x1 = min(box.x1,page_of_boxes[k].x1);
-		  box.y1 = min(box.y1,page_of_boxes[k].y1);
-		  box.x2 = max(box.x2,page_of_boxes[k].x2);
-		  box.y2 = max(box.y2,page_of_boxes[k].y2);
+		  box.x1 = std::min(box.x1, page_of_boxes[k].x1);
+		  box.y1 = std::min(box.y1, page_of_boxes[k].y1);
+		  box.x2 = std::max(box.x2, page_of_boxes[k].x2);
+		  box.y2 = std::max(box.y2, page_of_boxes[k].y2);
 
-		  box.x1 = min(box.x1,pluses[m].min_x);
-		  box.y1 = min(box.y1,pluses[m].min_y);
-		  box.x2 = max(box.x2,pluses[m].max_x);
-		  box.y2 = max(box.y2,pluses[m].max_y);
+		  box.x1 = std::min(box.x1, pluses[m].min_x);
+		  box.y1 = std::min(box.y1, pluses[m].min_y);
+		  box.x2 = std::max(box.x2, pluses[m].max_x);
+		  box.y2 = std::max(box.y2, pluses[m].max_y);
 		}
 	      else
 		break;
@@ -629,10 +650,10 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
 	    {
 	      int k = after[i][ii];
 	      p.push_back(k);
-	      box.x1 = min(box.x1,page_of_boxes[k].x1);
-	      box.y1 = min(box.y1,page_of_boxes[k].y1);
-	      box.x2 = max(box.x2,page_of_boxes[k].x2);
-	      box.y2 = max(box.y2,page_of_boxes[k].y2);
+	      box.x1 = std::min(box.x1, page_of_boxes[k].x1);
+	      box.y1 = std::min(box.y1, page_of_boxes[k].y1);
+	      box.x2 = std::max(box.x2, page_of_boxes[k].x2);
+	      box.y2 = std::max(box.y2, page_of_boxes[k].y2);
 	    }
 	  for (int j=ii+1; j<after[i].size(); j++)
 	    {
@@ -644,15 +665,15 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
 		  if (m>=0)
 		    {
 		      p.push_back(k);
-		      box.x1 = min(box.x1,page_of_boxes[k].x1);
-		      box.y1 = min(box.y1,page_of_boxes[k].y1);
-		      box.x2 = max(box.x2,page_of_boxes[k].x2);
-		      box.y2 = max(box.y2,page_of_boxes[k].y2);
+		      box.x1 = std::min(box.x1, page_of_boxes[k].x1);
+		      box.y1 = std::min(box.y1, page_of_boxes[k].y1);
+		      box.x2 = std::max(box.x2, page_of_boxes[k].x2);
+		      box.y2 = std::max(box.y2, page_of_boxes[k].y2);
 
-		      box.x1 = min(box.x1,pluses[m].min_x);
-		      box.y1 = min(box.y1,pluses[m].min_y);
-		      box.x2 = max(box.x2,pluses[m].max_x);
-		      box.y2 = max(box.y2,pluses[m].max_y);
+		      box.x1 = std::min(box.x1, pluses[m].min_x);
+		      box.y1 = std::min(box.y1, pluses[m].min_y);
+		      box.x2 = std::max(box.x2, pluses[m].max_x);
+		      box.y2 = std::max(box.y2, pluses[m].max_y);
 		    }
 		  else
 		    break;
@@ -662,7 +683,8 @@ void arrange_reactions(vector<arrow_t> &arrows, const vector<box_t> &page_of_box
 
       if (!r.empty() && !p.empty())
 	{
-	  string result=convert_page_to_reaction(page_of_structures,output_format, r, p, arrows[i].agent,arrows[i].reversible);
+          std::string result = convert_page_to_reaction(
+              page_of_structures,output_format, r, p, arrows[i].agent, arrows[i].reversible);
 	  trim(result);
 	  if (!result.empty())
 	    {

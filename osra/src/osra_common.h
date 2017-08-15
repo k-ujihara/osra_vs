@@ -94,7 +94,7 @@ double distance(double x1, double y1, double x2, double y2);
 //
 // Returns:
 // Length of i-th bond
-double bond_length(const vector<bond_t> &bond, int i, const vector<atom_t> &atom);
+double bond_length(const std::vector<bond_t> &bond, int i, const std::vector<atom_t> &atom);
 
 // Function: delete_curve()
 //
@@ -109,7 +109,7 @@ double bond_length(const vector<bond_t> &bond, int i, const vector<atom_t> &atom
 //
 // Returns:
 // nothing
-void delete_curve(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n_bond,
+void delete_curve(std::vector<atom_t> &atom, std::vector<bond_t> &bond, int n_atom, int n_bond,
                   const potrace_path_t * const curve);
 
 // Function: delete_curve_with_children()
@@ -125,7 +125,7 @@ void delete_curve(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n_
 //
 // Returns:
 // nothing
-void delete_curve_with_children(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n_bond,
+void delete_curve_with_children(std::vector<atom_t> &atom, std::vector<bond_t> &bond, int n_atom, int n_bond,
                                 const potrace_path_t * const p);
 
 // Function: detect_curve()
@@ -139,7 +139,7 @@ void delete_curve_with_children(vector<atom_t> &atom, vector<bond_t> &bond, int 
 //
 // Returns:
 // True if a single bond corresponding to such curve is found, False otherwise
-bool detect_curve(vector<bond_t> &bond, int n_bond, const potrace_path_t * const curve);
+bool detect_curve(std::vector<bond_t> &bond, int n_bond, const potrace_path_t * const curve);
 
 // Function: terminal_bond()
 //
@@ -153,7 +153,7 @@ bool detect_curve(vector<bond_t> &bond, int n_bond, const potrace_path_t * const
 //
 // Returns:
 // False if a bond ending on atom a is found, True otherwise
-bool terminal_bond(int a, int b, const vector<bond_t> &bond, int n_bond);
+bool terminal_bond(int a, int b, const std::vector<bond_t> &bond, int n_bond);
 
 // Function: bm_new()
 //
@@ -189,7 +189,7 @@ double angle4(double x1, double y1, double x2, double y2, double x3, double y3, 
 //
 // Returns:
 // cosine of the angle between bonds i and j
-double angle_between_bonds(const vector<bond_t> &bond, int i, int j, const vector<atom_t> &atom);
+double angle_between_bonds(const std::vector<bond_t> &bond, int i, int j, const std::vector<atom_t> &atom);
 
 // Function: distance_from_bond_y()
 //
@@ -216,7 +216,7 @@ double distance_from_bond_y(double x0, double y0, double x1, double y1, double x
 // Maximum vertical distance from bond j ends to bond i when the coordinates are rotated so that bond i
 // is horizontal. If the difference between distances from end a and end b is greater than 4 FLT_MAX
 // is returned.
-double distance_between_bonds(const vector<bond_t> &bond, int i, int j, const vector<atom_t> &atom);
+double distance_between_bonds(const std::vector<bond_t> &bond, int i, int j, const std::vector<atom_t> &atom);
 
 // Function: distance_from_bond_x_a()
 //
@@ -255,7 +255,7 @@ double distance_from_bond_x_b(double x0, double y0, double x1, double y1, double
 //
 // Returns:
 // Third quintile value for bond length.
-double percentile75(const vector<bond_t> &bond, int n_bond, const vector<atom_t> &atom);
+double percentile75(const std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom);
 
 // Function: count_pages()
 //
@@ -266,7 +266,9 @@ double percentile75(const vector<bond_t> &bond, int n_bond, const vector<atom_t>
 //
 // Returns:
 // number of pages in an image file
-int count_pages(const string &input);
+int count_pages(const std::string &input);
+
+int count_pages(const Blob &blob);
 
 // Function: count_atoms()
 //
@@ -278,7 +280,7 @@ int count_pages(const string &input);
 //
 // Returns:
 // number of non-deleted atoms
-int count_atoms(const vector<atom_t> &atom, int n_atom);
+int count_atoms(const std::vector<atom_t> &atom, int n_atom);
 
 // Function: count_bonds()
 //
@@ -290,7 +292,7 @@ int count_atoms(const vector<atom_t> &atom, int n_atom);
 //
 // Returns:
 // number of non-deleted bonds
-int count_bonds(const vector<bond_t> &bond, int n_bond, int &bond_max_type);
+int count_bonds(const std::vector<bond_t> &bond, int n_bond, int &bond_max_type);
 
 // Function: load_config_map()
 //
@@ -302,7 +304,7 @@ int count_bonds(const vector<bond_t> &bond, int n_bond, int &bond_max_type);
 //
 // Returns:
 // True if file load is successful, False otherwise
-bool load_config_map(const string &file, map<string, string> &out);
+bool load_config_map(const std::string &file, std::map<std::string, std::string> &out);
 
 // Function: comp_boxes()
 //
@@ -317,5 +319,5 @@ bool load_config_map(const string &file, map<string, string> &out);
 // False otherwise
 bool comp_boxes(const box_t &aa, const box_t &bb);
 
-void debug_image(Image image, const vector<atom_t> &atom, int n_atom, const vector<bond_t> &bond, int n_bond,
-		 const string &fname);
+void debug_image(Image image, const std::vector<atom_t> &atom, int n_atom, const std::vector<bond_t> &bond,
+                 int n_bond, const std::string &fname);

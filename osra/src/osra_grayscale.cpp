@@ -47,7 +47,7 @@ const Color getBgColor(const Image &image)
   return (r);
 }
 
-void otsu_find_peaks(const vector<int> &h, int num_bins, int &peak1, int &peak2, int &max1, int &max2)
+void otsu_find_peaks(const std::vector<int> &h, int num_bins, int &peak1, int &peak2, int &max1, int &max2)
 {
 // Otsu Algorithm, from http://habrahabr.ru/blogs/algorithm/112079/
   unsigned int m = 0;
@@ -99,13 +99,13 @@ Image adaptive_otsu(const Image &image, int window)
 {
   int num_bins=20;
   Image result(Geometry(image.columns(),image.rows()),"white");
-  vector<int> h(num_bins,0);
-  vector<int> h0(num_bins,0);
+  std::vector<int> h(num_bins,0);
+  std::vector<int> h0(num_bins,0);
   ColorGray g;
   int peak1, peak2, max1, max2;
 
-  for (int i1 = 0; i1 < min((int)image.columns(), window/2); i1++)
-    for (int j1 = 0; j1 < min((int)image.rows(), window/2); j1++)
+  for (int i1 = 0; i1 < std::min((int)image.columns(), window/2); i1++)
+    for (int j1 = 0; j1 < std::min((int)image.rows(), window/2); j1++)
       {
         g = image.pixelColor(i1, j1);
         h0[int((num_bins-1)*g.shade())]++;
@@ -124,26 +124,26 @@ Image adaptive_otsu(const Image &image, int window)
           else
             result.pixelColor(i,j,"black");
           if ((i-window/2) >=0)
-            for (int j1 = max(0,j-window/2); j1 < min((int)image.rows(), j + window/2); j1++)
+            for (int j1 = std::max(0, j-window/2); j1 < std::min((int)image.rows(), j + window/2); j1++)
               {
                 g = image.pixelColor(i-window/2, j1);
                 h[int((num_bins-1)*g.shade())]--;
               }
           if ((i+window/2) < image.columns())
-            for (int j1 = max(0,j-window/2); j1 < min((int)image.rows(), j + window/2); j1++)
+            for (int j1 = std::max(0, j-window/2); j1 < std::min((int)image.rows(), j + window/2); j1++)
               {
                 g = image.pixelColor(i+window/2, j1);
                 h[int((num_bins-1)*g.shade())]++;
               }
         }
       if ((j-window/2) >=0)
-        for (int i1 = 0; i1 < min((int)image.columns(),window/2); i1++)
+        for (int i1 = 0; i1 < std::min((int)image.columns(), window/2); i1++)
           {
             g = image.pixelColor(i1,j-window/2);
             h0[int((num_bins-1)*g.shade())]--;
           }
       if ((j+window/2) < image.rows())
-        for (int i1 = 0; i1 < min((int)image.columns(),window/2); i1++)
+        for (int i1 = 0; i1 < std::min((int)image.columns(), window/2); i1++)
           {
             g = image.pixelColor(i1,j+window/2);
             h0[int((num_bins-1)*g.shade())]++;
@@ -152,12 +152,78 @@ Image adaptive_otsu(const Image &image, int window)
   return(result);
 }
 
+// https://habrahabr.ru/post/278435/
+Image Bradley_threshold(const Image &src)
+{
+  int width = src.columns();
+  int height = src.rows();
+  Image res(Geometry(width, height),"white");
+
+  const int S = width/8;
+  int s2 = S/2;
+  const float t = 0.15;
+  unsigned long* integral_image = 0;
+  long sum=0;
+  int count=0;
+  int index;
+  int x1, y1, x2, y2;
+  ColorGray g;
+
+  integral_image = new unsigned long [width*height*sizeof(unsigned long*)];
+
+  for (int i = 0; i < width; i++) {
+    sum = 0;
+    for (int j = 0; j < height; j++) {
+      index = j * width + i;
+      g = src.pixelColor(i, j);
+      sum += g.shade() * 255;
+      if (i==0)
+	integral_image[index] = sum;
+      else
+	integral_image[index] = integral_image[index-1] + sum;
+    }
+  }
+
+  for (int i = 0; i < width; i++) {
+    for (int j = 0; j < height; j++) {
+      index = j * width + i;
+
+      x1=i-s2;
+      x2=i+s2;
+      y1=j-s2;
+      y2=j+s2;
+
+      if (x1 < 0)
+	x1 = 0;
+      if (x2 >= width)
+	x2 = width-1;
+      if (y1 < 0)
+	y1 = 0;
+      if (y2 >= height)
+	y2 = height-1;
+
+      count = (x2-x1)*(y2-y1);
+
+      sum = integral_image[y2*width+x2] - integral_image[y1*width+x2] -
+	integral_image[y2*width+x1] + integral_image[y1*width+x1];
+      g = src.pixelColor(i, j);
+      if ((long)(g.shade() * 255 * count) < (long)(sum*(1.0-t)))
+	res.pixelColor(i,j,"black");
+      else
+	res.pixelColor(i,j,"white");
+    }
+  }
+
+  delete[] integral_image;
+  return res;
+}
+
 bool convert_to_gray(Image &image, bool invert, bool adaptive, bool verbose)
 {
   int num_bins=50;
   int num_bins_rgb = 20;
-  vector<int> h(num_bins,0);
-  vector < vector < vector <int> > > bg_search(num_bins_rgb, vector < vector <int> > (num_bins_rgb, vector<int>(num_bins_rgb, 0)));
+  std::vector<int> h(num_bins,0);
+  std::vector<std::vector<std::vector<int> > > bg_search(num_bins_rgb, std::vector<std::vector<int> > (num_bins_rgb, std::vector<int>(num_bins_rgb, 0)));
   ColorRGB c,b;
   Color t;
   ColorGray g;
@@ -189,7 +255,7 @@ bool convert_to_gray(Image &image, bool invert, bool adaptive, bool verbose)
   bool color_background = false;
   if (verbose)
     {
-      cout<<"Background rgb: "<<bg_pos_red<<" "<<bg_pos_green<<" "<<bg_pos_blue<<endl;
+      std::cout << "Background rgb: " << bg_pos_red << " " << bg_pos_green << " " << bg_pos_blue << std::endl;
     }
 
   if (fabs(bg_pos_red-bg_pos_green) > 0.05 || fabs(bg_pos_red-bg_pos_blue)>0.05 || fabs(bg_pos_green-bg_pos_blue)>0.05) color_background = true;
@@ -242,11 +308,11 @@ bool convert_to_gray(Image &image, bool invert, bool adaptive, bool verbose)
 
   if (verbose)
     {
-      cout << "Distance between light and dark: " << distance_between_peaks << endl;
-      cout<<"Max at peak 1: "<<max1<<"  Max at peak 2: "<<max2<<endl;
-      cout<<"Color background? "<<color_background<<endl;
-      cout<<"Adaptive? "<<adaptive<<endl;
-      cout<<"Invert? "<<invert<<endl;
+      std::cout << "Distance between light and dark: " << distance_between_peaks << std::endl;
+      std::cout << "Max at peak 1: " << max1 << "  Max at peak 2: " << max2 << std::endl;
+      std::cout << "Color background? "<< color_background << std::endl;
+      std::cout << "Adaptive? "<< adaptive << std::endl;
+      std::cout << "Invert? " << invert << std::endl;
     }
 
   //const double kernel[]={0.0, -1.0, 0.0,-1.0, 5.0, -1.0, 0.0, -1.0, 0.0};
@@ -258,27 +324,28 @@ bool convert_to_gray(Image &image, bool invert, bool adaptive, bool verbose)
       image.type(GrayscaleType);
     }
 
-  int window = min(image.columns(),image.rows()) / 41;
+  int window = std::min(image.columns(),image.rows()) / 41;
   if (window < 15) window = 15;
 
-  if (adaptive)
+  if (adaptive && image.columns() > 7 && image.rows() > 7)
     {
       image.despeckle();
       if (invert)
         {
-          image.adaptiveThreshold(window,window,(double)7);
+          image.adaptiveThreshold(window,window,7.0);
         }
       else
         {
           image.negate();
-          image.adaptiveThreshold(window,window,(double)7);
+          image.adaptiveThreshold(window,window,7.0);
           image.negate();
         }
     }
   else if (color_background)
     {
       image.despeckle();
-      image = adaptive_otsu(image,window);
+      //image = adaptive_otsu(image,window);
+      image = Bradley_threshold(image);
     }
 
   if (invert)

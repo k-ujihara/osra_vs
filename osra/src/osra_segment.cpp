@@ -31,16 +31,16 @@
 
 unsigned int distance_between_points(const point_t &p1, const point_t &p2)
 {
-  return max(abs(p1.x - p2.x), abs(p1.y - p2.y));
+  return std::max(abs(p1.x - p2.x), abs(p1.y - p2.y));
 }
 
-unsigned int distance_between_segments(const vector<point_t> &s1, const vector<point_t> &s2)
+unsigned int distance_between_segments(const std::vector<point_t> &s1, const std::vector<point_t> &s2)
 {
   int r = INT_MAX;
   int d;
 
-  for (vector<point_t>::const_iterator i = s1.begin(); i != s1.end(); i++)
-    for (vector<point_t>::const_iterator j = s2.begin(); j != s2.end(); j++)
+  for (std::vector<point_t>::const_iterator i = s1.begin(); i != s1.end(); i++)
+    for (std::vector<point_t>::const_iterator j = s2.begin(); j != s2.end(); j++)
       {
         d = distance_between_points(*i, *j);
         if (d < r)
@@ -76,19 +76,20 @@ unsigned int distance_between_segments(const vector<point_t> &s1, const vector<p
 }
 
 void find_connected_components(const Image &image, double threshold, const ColorGray &bgColor,
-                               vector<list<point_t> > &segments, vector<vector<point_t> > &margins, bool adaptive)
+                               std::vector<std::list<point_t> > &segments,
+                               std::vector<std::vector<point_t> > &margins, bool adaptive)
 {
   point_t p;
-  list<point_t> points;
+  std::list<point_t> points;
   int speckle_area = 2;
   if (adaptive)
     {
-      int speckle_side = min(image.columns(), image.rows()) / 200;
+      int speckle_side = std::min(image.columns(), image.rows()) / 200;
       speckle_area = speckle_side * speckle_side;
       if (speckle_area < 2) speckle_area = 2;
     }
 
-  vector<vector<int> > tmp(image.columns(), vector<int> (image.rows(), 0));
+  std::vector<std::vector<int> > tmp(image.columns(), std::vector<int> (image.rows(), 0));
 
   for (unsigned int i = 0; i < image.columns(); i++)
     for (unsigned int j = 0; j < image.rows(); j++)
@@ -104,8 +105,8 @@ void find_connected_components(const Image &image, double threshold, const Color
           p.x = i;
           p.y = j;
           points.push_back(p);
-          list<point_t> new_segment;
-          vector<point_t> new_margin;
+          std::list<point_t> new_segment;
+          std::vector<point_t> new_margin;
           int counter = 0;
           point_t p1;
           while (!points.empty())
@@ -163,13 +164,15 @@ void find_connected_components(const Image &image, double threshold, const Color
 
 unsigned int area_ratio(unsigned int a, unsigned int b)
 {
-  double r = max(a, b) / min(a, b);
+  double r = std::max(a, b) / std::min(a, b);
   return (unsigned int) r;
 }
 
-void build_distance_matrix(const vector<vector<point_t> > &margins, unsigned int max_dist,
-                           vector<vector<int> > &distance_matrix, vector<vector<int> > &features, const vector<list<point_t> > &segments,
-                           unsigned int max_area_ratio, vector<vector<int> > &area_matrix)
+void build_distance_matrix(const std::vector<std::vector<point_t> > &margins, unsigned int max_dist,
+                           std::vector<std::vector<int> > &distance_matrix,
+                           std::vector<std::vector<int> > &features,
+                           const std::vector<std::list<point_t> > &segments,
+                           unsigned int max_area_ratio, std::vector<std::vector<int> > &area_matrix)
 {
   unsigned int d;
   unsigned int ar;
@@ -194,14 +197,15 @@ void build_distance_matrix(const vector<vector<point_t> > &margins, unsigned int
         }
 }
 
-list<list<list<point_t> > > build_explicit_clusters(const list<list<int> > &clusters,
-    const vector<list<point_t> > &segments)
+std::list<std::list<std::list<point_t> > > build_explicit_clusters(
+    const std::list<std::list<int> > &clusters,
+    const std::vector<std::list<point_t> > &segments)
 {
-  list<list<list<point_t> > > explicit_clusters;
-  for (list<list<int> >::const_iterator c = clusters.begin(); c != clusters.end(); c++)
+  std::list<std::list<std::list<point_t> > > explicit_clusters;
+  for (std::list<std::list<int> >::const_iterator c = clusters.begin(); c != clusters.end(); c++)
     {
-      list<list<point_t> > set_of_segments;
-      for (list<int>::const_iterator s = c->begin(); s != c->end(); s++)
+      std::list<std::list<point_t> > set_of_segments;
+      for (std::list<int>::const_iterator s = c->begin(); s != c->end(); s++)
         if (!segments[*s].empty())
           set_of_segments.push_back(segments[*s]);
       if (!set_of_segments.empty())
@@ -210,11 +214,12 @@ list<list<list<point_t> > > build_explicit_clusters(const list<list<int> > &clus
   return explicit_clusters;
 }
 
-void remove_separators(vector<list<point_t> > &segments, vector<vector<point_t> > &margins, double max_aspect,
-                       unsigned int size)
+void remove_separators(std::vector<std::list<point_t> > &segments,
+                       std::vector<std::vector<point_t> > &margins,
+                       double max_aspect, unsigned int size)
 {
-  vector<list<point_t> >::iterator s;
-  vector<vector<point_t> >::iterator m;
+  std::vector<std::list<point_t> >::iterator s;
+  std::vector<std::vector<point_t> >::iterator m;
   s = segments.begin();
   m = margins.begin();
 
@@ -228,7 +233,7 @@ void remove_separators(vector<list<point_t> > &segments, vector<vector<point_t> 
         }
 
       int stop = INT_MAX, sleft = INT_MAX, sbottom = 0, sright = 0;
-      for (list<point_t>::iterator p = s->begin(); p != s->end(); p++)
+      for (std::list<point_t>::iterator p = s->begin(); p != s->end(); p++)
         {
           if (p->x < sleft)
             sleft = p->x;
@@ -256,10 +261,11 @@ void remove_separators(vector<list<point_t> > &segments, vector<vector<point_t> 
     }
 }
 
-void remove_tables_old(vector<list<point_t> > &segments, vector<vector<point_t> > &margins, unsigned int size)
+void remove_tables_old(std::vector<std::list<point_t> > &segments,
+                       std::vector<std::vector<point_t> > &margins, unsigned int size)
 {
-  vector<list<point_t> >::iterator s;
-  vector<vector<point_t> >::iterator m;
+  std::vector<std::list<point_t> >::iterator s;
+  std::vector<std::vector<point_t> >::iterator m;
   s = segments.begin();
   m = margins.begin();
 
@@ -274,7 +280,7 @@ void remove_tables_old(vector<list<point_t> > &segments, vector<vector<point_t> 
 
       int top = INT_MAX, left = INT_MAX, bottom = 0, right = 0;
       int border_count = 0;
-      for (vector<point_t>::iterator p = m->begin(); p != m->end(); p++)
+      for (std::vector<point_t>::iterator p = m->begin(); p != m->end(); p++)
         {
           if (p->x < left)
             left = p->x;
@@ -296,7 +302,7 @@ void remove_tables_old(vector<list<point_t> > &segments, vector<vector<point_t> 
           continue;
         }
 
-      for (vector<point_t>::iterator p = m->begin(); p != m->end(); p++)
+      for (std::vector<point_t>::iterator p = m->begin(); p != m->end(); p++)
         if (p->x - left < 2 || right - p->x < 2 || p->y - top < 2 || bottom - p->y < 2)
           {
             border_count++;
@@ -332,7 +338,7 @@ double cos_angle_between_points(point_t a, point_t b, point_t c)
 }
 
 // clockwise actual angle is considered positive
-pair<double,double> find_rotation(point_t top, point_t left, point_t bottom, point_t right)
+std::pair<double, double> find_rotation(point_t top, point_t left, point_t bottom, point_t right)
 {
   double top_angle = fabs(cos_angle_between_points(left,top,right));
   double right_angle = fabs(cos_angle_between_points(top,right,bottom));
@@ -357,13 +363,13 @@ pair<double,double> find_rotation(point_t top, point_t left, point_t bottom, poi
     }
   else if (left_angle<right_angle && left_angle<top_angle && left_angle<bottom_angle)
     {
-      // angle at the left is the closest to 90 degrees 
+      // angle at the left is the closest to 90 degrees
       if (bottom.y-left.y < left.y - top.y)
 	{
 	  // clockwise
 	  dx = top.x-left.x;
 	  dy = left.y-top.y;
-	} 
+	}
       else
 	{
 	  // counter-clockwise
@@ -405,12 +411,13 @@ pair<double,double> find_rotation(point_t top, point_t left, point_t bottom, poi
     }
   double s = dx / sqrt(dx*dx+dy*dy);
   double c = dy / sqrt(dx*dx+dy*dy);
-  return(make_pair(s,c));
+  return(std::make_pair(s, c));
 }
 
-int border_count_in_rotated_frame(vector<vector<point_t> >::iterator m,
-				  point_t top_point,point_t left_point,point_t bottom_point,point_t right_point,
-				  pair <double,double> &sin_cos)
+int border_count_in_rotated_frame(
+    std::vector<std::vector<point_t> >::iterator m,
+    point_t top_point, point_t left_point, point_t bottom_point,point_t right_point,
+    std::pair <double, double> &sin_cos)
 {
   double s = -sin_cos.first;
   double c = sin_cos.second;
@@ -424,17 +431,17 @@ int border_count_in_rotated_frame(vector<vector<point_t> >::iterator m,
   double x4 = right_point.x*c-right_point.y*s;
   double y4 = right_point.x*s+right_point.y*c;
 
-  double left = min(min(x1,x2),min(x3,x4));
-  double right = max(max(x1,x2),max(x3,x4));
-  double top = min(min(y1,y2),min(y3,y4));
-  double bottom = max(max(y1,y2),max(y3,y4));
+  double left = std::min(std::min(x1, x2), std::min(x3, x4));
+  double right = std::max(std::max(x1, x2), std::max(x3, x4));
+  double top = std::min(std::min(y1, y2), std::min(y3, y4));
+  double bottom = std::max(std::max(y1, y2), std::max(y3, y4));
 
   int border_count = 0;
-  for (vector<point_t>::iterator p = m->begin(); p != m->end(); p++)
+  for (std::vector<point_t>::iterator p = m->begin(); p != m->end(); p++)
     {
       double x = c*(p->x) - s*(p->y);
       double y = s*(p->x) + c*(p->y);
-      
+
       if ((x - left)<2 || (right - x) < 2 || (y - top) < 2 || (bottom - y) < 2)
 	border_count++;
     }
@@ -442,10 +449,11 @@ int border_count_in_rotated_frame(vector<vector<point_t> >::iterator m,
 }
 
 
-void remove_tables(vector<list<point_t> > &segments, vector<vector<point_t> > &margins, unsigned int size)
+void remove_tables(std::vector<std::list<point_t> > &segments, std::vector<std::vector<point_t> > &margins,
+                   unsigned int size)
 {
-  vector<list<point_t> >::iterator s;
-  vector<vector<point_t> >::iterator m;
+  std::vector<std::list<point_t> >::iterator s;
+  std::vector<std::vector<point_t> >::iterator m;
   s = segments.begin();
   m = margins.begin();
 
@@ -460,7 +468,7 @@ void remove_tables(vector<list<point_t> > &segments, vector<vector<point_t> > &m
 
       int top = INT_MAX, left = INT_MAX, bottom = 0, right = 0;
       point_t left_point,top_point,right_point,bottom_point;
-      for (vector<point_t>::iterator p = m->begin(); p != m->end(); p++)
+      for (std::vector<point_t>::iterator p = m->begin(); p != m->end(); p++)
         {
           if (p->x < left)
 	    {
@@ -505,7 +513,7 @@ void remove_tables(vector<list<point_t> > &segments, vector<vector<point_t> > &m
           m++;
           continue;
         }
-      pair<double,double> zero_angle = make_pair(0,1);
+      std::pair<double, double> zero_angle = std::make_pair(0, 1);
       int border_count = border_count_in_rotated_frame(m,top_point,left_point,bottom_point,right_point,zero_angle);
 
       if (PARTS_IN_MARGIN*border_count > BORDER_COUNT)
@@ -516,7 +524,7 @@ void remove_tables(vector<list<point_t> > &segments, vector<vector<point_t> > &m
       else
         {
 	  // perform rotation
-	  pair<double,double> sin_cos = find_rotation(top_point,left_point,bottom_point,right_point);
+          std::pair<double, double> sin_cos = find_rotation(top_point,left_point,bottom_point,right_point);
 	  int rotated_border_count = border_count_in_rotated_frame(m,top_point,left_point,bottom_point,right_point,sin_cos);
 
 	    if (PARTS_IN_MARGIN*rotated_border_count > BORDER_COUNT && fabs(sin_cos.first)<sin(10*PI/180) && sin_cos.second>cos(10*PI/180))
@@ -525,7 +533,7 @@ void remove_tables(vector<list<point_t> > &segments, vector<vector<point_t> > &m
 	      m = margins.erase(m);
 	    }
 	  else
-	    { 
+	    {
 	      s++;
 	      m++;
 	    }
@@ -533,19 +541,20 @@ void remove_tables(vector<list<point_t> > &segments, vector<vector<point_t> > &m
     }
 }
 
-list<list<int> > assemble_clusters(const vector<vector<point_t> > &margins, int dist,
-                                   const vector<vector<int> > &distance_matrix, vector<int> &avail, bool text,
-                                   const vector<vector<int> > &area_matrix)
+std::list<std::list<int> > assemble_clusters(
+    const std::vector<std::vector<point_t> > &margins, int dist,
+    const std::vector<std::vector<int> > &distance_matrix, std::vector<int> &avail, bool text,
+    const std::vector<std::vector<int> > &area_matrix)
 {
-  list<list<int> > clusters;
-  list<int> bag;
+  std::list<std::list<int> > clusters;
+  std::list<int> bag;
 
   for (unsigned int s = 0; s < margins.size(); s++)
     if (avail[s] == 1)
       {
         bag.push_back(s);
         avail[s] = 2;
-        list<int> new_cluster;
+        std::list<int> new_cluster;
         while (!bag.empty())
           {
             int c = bag.back();
@@ -566,20 +575,21 @@ list<list<int> > assemble_clusters(const vector<vector<point_t> > &margins, int 
   return (clusters);
 }
 
-void remove_text_blocks(const list<list<int> > &clusters, const vector<list<point_t> > &segments, vector<int> &avail)
+void remove_text_blocks(const std::list<std::list<int> > &clusters,
+                        const std::vector<std::list<point_t> > &segments, std::vector<int> &avail)
 {
-  for (list<list<int> >::const_iterator c = clusters.begin(); c != clusters.end(); c++)
+  for (std::list<std::list<int> >::const_iterator c = clusters.begin(); c != clusters.end(); c++)
     {
       unsigned int area = 0, square_area = 0;
       double ratio = 0, aspect = 0;
       int top = INT_MAX, left = INT_MAX, bottom = 0, right = 0;
       bool fill_below_max = false;
 
-      for (list<int>::const_iterator i = c->begin(); i != c->end(); i++)
+      for (std::list<int>::const_iterator i = c->begin(); i != c->end(); i++)
         if (!segments[*i].empty())
           {
             int stop = INT_MAX, sleft = INT_MAX, sbottom = 0, sright = 0;
-            for (list<point_t>::const_iterator p = segments[*i].begin(); p != segments[*i].end(); p++)
+            for (std::list<point_t>::const_iterator p = segments[*i].begin(); p != segments[*i].end(); p++)
               {
                 if (p->x < sleft)
                   sleft = p->x;
@@ -615,13 +625,13 @@ void remove_text_blocks(const list<list<int> > &clusters, const vector<list<poin
           if (right != left)
             aspect = 1. * (bottom - top) / (right - left);
           if (aspect < MIN_ASPECT || aspect > MAX_ASPECT || !fill_below_max)
-            for (list<int>::const_iterator i = c->begin(); i != c->end(); i++)
+            for (std::list<int>::const_iterator i = c->begin(); i != c->end(); i++)
               avail[*i] = -1;
         }
     }
 }
 
-int locate_first_min(const vector<int> &stats)
+int locate_first_min(const std::vector<int> &stats)
 {
   int peak = 1;
 
@@ -641,10 +651,10 @@ int locate_first_min(const vector<int> &stats)
   return (dist);
 }
 
-int locate_max_entropy(const vector<vector<int> > &features, unsigned int max_area_ratio, unsigned int max_dist,
-                       vector<int> &stats)
+int locate_max_entropy(const std::vector<std::vector<int> > &features, unsigned int max_area_ratio,
+                       unsigned int max_dist, std::vector<int> &stats)
 {
-  vector<double> entropy(max_area_ratio, 0);
+  std::vector<double> entropy(max_area_ratio, 0);
 
   for (unsigned int i = 1; i < max_area_ratio; i++)
     {
@@ -671,10 +681,10 @@ int locate_max_entropy(const vector<vector<int> > &features, unsigned int max_ar
 }
 
 
-bool bulge(const point_t tail, const point_t head, const list<point_t> & seg)
+bool bulge(const point_t tail, const point_t head, const std::list<point_t> & seg)
 {
   bool r = false;
-  vector<int> y(max(abs(head.x-tail.x),abs(head.y-tail.y))+1,0);
+  std::vector<int> y(std::max(abs(head.x - tail.x), abs(head.y - tail.y)) + 1, 0);
   int n=y.size();
 
   if (n<10) return false;
@@ -682,7 +692,7 @@ bool bulge(const point_t tail, const point_t head, const list<point_t> & seg)
   bool horizontal = false;
   if (abs(head.x-tail.x)>abs(head.y-tail.y)) horizontal = true;
 
-  for (list<point_t>::const_iterator p=seg.begin(); p!=seg.end(); p++)
+  for (std::list<point_t>::const_iterator p = seg.begin(); p != seg.end(); p++)
     {
       int d;
       if (horizontal)
@@ -706,9 +716,9 @@ bool bulge(const point_t tail, const point_t head, const list<point_t> & seg)
   cout<<endl;
   */
   if (pos<3) return false;
-  int midpoint = min(int(0.75*n),pos-3);
+  int midpoint = std::min(int(0.75 * n), pos - 3);
   if (midpoint<0) return false;
- 
+
   double avg=0;
   for (int i=0; i<midpoint; i++)
     avg +=y[i];
@@ -734,12 +744,15 @@ bool bulge(const point_t tail, const point_t head, const list<point_t> & seg)
 }
 
 
-void find_arrows_pluses(vector<vector<point_t> > &margins, vector<list<point_t> > &segments, vector<arrow_t> &arrows, vector<plus_t> &pluses)
+void find_arrows_pluses(std::vector<std::vector<point_t> > &margins,
+                        std::vector<std::list<point_t> > &segments,
+                        std::vector<arrow_t> &arrows,
+                        std::vector<plus_t> &pluses)
 {
   const int len=50;
   for (int i=0; i<margins.size(); i++)
     {
-      vector<int> hist(len,0);
+      std::vector<int> hist(len,0);
       int top_pos=0;
       int top_value=0;
       point_t head, tail,center;
@@ -752,8 +765,8 @@ void find_arrows_pluses(vector<vector<point_t> > &margins, vector<list<point_t> 
 
       if (top_value>5)
 	{
-	  vector<int> peaks(1,top_pos);
-	  vector<int> values(1,top_value);
+          std::vector<int> peaks(1,top_pos);
+          std::vector<int> values(1,top_value);
 	  for (int k=1; k<len;k++)
 	    {
 	      int pos=k+top_pos;
@@ -769,7 +782,7 @@ void find_arrows_pluses(vector<vector<point_t> > &margins, vector<list<point_t> 
 		}
 	    }
 
-	  if (peaks.size() == 2   && abs(len/2 - abs(peaks[1]-peaks[0]))<=1)  // only two peaks are present at 180 degrees 
+	  if (peaks.size() == 2   && abs(len/2 - abs(peaks[1]-peaks[0]))<=1)  // only two peaks are present at 180 degrees
 	    {
 	      bool ba=bulge(tail,head,segments[i]);
 	      bool bb=bulge(head,tail,segments[i]);
@@ -788,7 +801,7 @@ void find_arrows_pluses(vector<vector<point_t> > &margins, vector<list<point_t> 
 		  segments[i].clear();
 		}
 	    }
-		
+
 	  if (peaks.size() == 4  && (double(values[1])/values[0]>0.8 || values[0]-values[1]<=2)  && (double(values[2])/values[0]>0.8  || values[0]-values[2]<=2) && (double(values[3])/values[0]>0.8 || values[0]-values[3]<=2))
 	    {
 	      bool first=false, second=false, third=false, fourth=false;
@@ -807,7 +820,7 @@ void find_arrows_pluses(vector<vector<point_t> > &margins, vector<list<point_t> 
 		    if (kk>=len) kk -=len;
 		    hist[kk]=0;
 		  }
-		  
+
 	      bool low=true;
 	      for(int k=0; k<len; k++)
 		if (hist[k]>3) low=false;
@@ -823,29 +836,29 @@ void find_arrows_pluses(vector<vector<point_t> > &margins, vector<list<point_t> 
 		  pluses.push_back(plus);
 		}
 	    }
-	  
+
 	}
     }
-  vector<vector<point_t> >::iterator k = margins.begin();
+  std::vector<std::vector<point_t> >::iterator k = margins.begin();
   while (k!=margins.end())
     {
       if (k->empty()) k = margins.erase(k);
       else k++;
     }
- vector<list<point_t> >::iterator l = segments.begin();
+  std::vector<std::list<point_t> >::iterator l = segments.begin();
   while (l!=segments.end())
     {
       if (l->empty()) l = segments.erase(l);
       else l++;
     }
-  
+
 }
 
 bool comp_labels(const label_t &left, const label_t &right)
 {
   if (left.x2 < right.x1)
     return (true);
-  if (max(left.y1,left.y2) < min(right.y1,right.y2))
+  if (std::max(left.y1, left.y2) < std::min(right.y1, right.y2))
     return (true);
   return (false);
 }
@@ -856,22 +869,23 @@ int comp_labels_int(const void *l, const void *r)
   label_t *right = (label_t *) r;
   if (left->x2 < right->x1)
     return (-1);
-  if (max(left->y1,left->y2) < min(right->y1,right->y2))
+  if (std::max(left->y1, left->y2) < std::min(right->y1, right->y2))
     return (-1);
   return (1);
 }
 
-string ocr_agent_strings(const vector<list<point_t> >  &agents,const Image &image, double threshold, const ColorGray &bgColor, bool verbose)
-{ 
-  string agent_string;
-  vector<letters_t> letters;
+std::string ocr_agent_strings(const std::vector<std::list<point_t> > &agents, const Image &image,
+                              double threshold, const ColorGray &bgColor, bool verbose)
+{
+  std::string agent_string;
+  std::vector<letters_t> letters;
   for (int i=0; i<agents.size(); i++)
     {
       int left=INT_MAX;
       int right=0;
       int top=INT_MAX;
       int bottom=0;
-      for (list<point_t>::const_iterator a=agents[i].begin(); a!=agents[i].end(); a++)
+      for (std::list<point_t>::const_iterator a = agents[i].begin(); a != agents[i].end(); a++)
 	{
 	  if (a->x<left) left=a->x;
 	  if (a->x>right) right=a->x;
@@ -898,9 +912,9 @@ string ocr_agent_strings(const vector<list<point_t> >  &agents,const Image &imag
 		}
 	    }
     }
-  vector<label_t> label;
+  std::vector<label_t> label;
   assemble_labels(letters, letters.size(), label);
- 
+
   //sort(label.begin(),label.end(),comp_labels);
 
   if (!label.empty())
@@ -912,13 +926,14 @@ string ocr_agent_strings(const vector<list<point_t> >  &agents,const Image &imag
   return (agent_string);
 }
 
-void find_agent_strings(vector<vector<point_t> > &margins,vector<list<point_t> > &segments, vector<arrow_t> &arrows, 
+void find_agent_strings(std::vector<std::vector<point_t> > &margins,
+                        std::vector<std::list<point_t> > &segments, std::vector<arrow_t> &arrows,
 			const Image &image, double threshold, const ColorGray &bgColor, bool verbose)
 {
   for (int i=0; i<arrows.size(); i++)
     {
-      vector<vector<point_t> >  agent_margins;
-      vector<list<point_t> >  agents;
+      std::vector<std::vector<point_t> > agent_margins;
+      std::vector<std::list<point_t> > agents;
 
       double l=distance(arrows[i].tail.x,arrows[i].tail.y,arrows[i].head.x,arrows[i].head.y);
       bool found=false;
@@ -927,7 +942,7 @@ void find_agent_strings(vector<vector<point_t> > &margins,vector<list<point_t> >
 	  bool close=false;
 	  bool within=true;
 	  for (int k=0; k<margins[j].size(); k++)
-	    { 
+	    {
 	      //     if (fabs(distance_from_bond_y(arrows[i].tail.x,arrows[i].tail.y,arrows[i].head.x,arrows[i].head.y,margins[j][k].x,margins[j][k].y))<MAX_FONT_HEIGHT) close=true;
 	      //double d=distance_from_bond_x_a(arrows[i].tail.x,arrows[i].tail.y,arrows[i].head.x,arrows[i].head.y,margins[j][k].x,margins[j][k].y);
 	      //if (d<0 || d>l) within=false;
@@ -947,13 +962,13 @@ void find_agent_strings(vector<vector<point_t> > &margins,vector<list<point_t> >
 	{
 	  found=false;
 
-	  vector<vector<point_t> >::iterator k = margins.begin();
+          std::vector<std::vector<point_t> >::iterator k = margins.begin();
 	  while (k!=margins.end())
 	    {
 	      if (k->empty()) k = margins.erase(k);
 	      else k++;
 	    }
-	  vector<list<point_t> >::iterator l = segments.begin();
+          std::vector<std::list<point_t> >::iterator l = segments.begin();
 	  while (l!=segments.end())
 	    {
 	      if (l->empty()) l = segments.erase(l);
@@ -981,19 +996,20 @@ void find_agent_strings(vector<vector<point_t> > &margins,vector<list<point_t> >
     }
 }
 
-list<list<list<point_t> > > find_segments(const Image &image, double threshold, const ColorGray &bgColor, bool adaptive, bool is_reaction, vector<arrow_t> &arrows, vector<plus_t> &pluses,
-					  bool verbose)
+std::list<std::list<std::list<point_t> > > find_segments(
+    const Image &image, double threshold, const ColorGray &bgColor, bool adaptive, bool is_reaction,
+    std::vector<arrow_t> &arrows, std::vector<plus_t> &pluses, bool verbose)
 {
-  vector<list<point_t> > segments;
-  vector<vector<point_t> > margins;
-  list<list<list<point_t> > > explicit_clusters;
+  std::vector<std::list<point_t> > segments;
+  std::vector<std::vector<point_t> > margins;
+  std::list<std::list<std::list<point_t> > > explicit_clusters;
 
   // 1m34s
 
   find_connected_components(image, threshold, bgColor, segments, margins, adaptive);
 
   if (verbose)
-    cout << "Number of segments: " << segments.size() << '.' << endl;
+    std::cout << "Number of segments: " << segments.size() << '.' << std::endl;
 
   if (segments.size() > MAX_SEGMENTS)
     {
@@ -1014,15 +1030,15 @@ list<list<list<point_t> > > find_segments(const Image &image, double threshold, 
 
   unsigned int max_dist = MAX_DIST;
   unsigned int max_area_ratio = MAX_AREA_RATIO;
-  vector<vector<int> > distance_matrix(segments.size(), vector<int> (segments.size(), INT_MAX));
-  vector<vector<int> > area_matrix(segments.size(), vector<int> (segments.size(), INT_MAX));
-  vector<vector<int> > features(max_area_ratio, vector<int> (max_dist, 0));
+  std::vector<std::vector<int> > distance_matrix(segments.size(), std::vector<int> (segments.size(), INT_MAX));
+  std::vector<std::vector<int> > area_matrix(segments.size(), std::vector<int> (segments.size(), INT_MAX));
+  std::vector<std::vector<int> > features(max_area_ratio, std::vector<int> (max_dist, 0));
 
   build_distance_matrix(margins, max_dist, distance_matrix, features, segments, max_area_ratio, area_matrix);
 
   // 2m53s
 
-  vector<int> avail(margins.size(), 1);
+  std::vector<int> avail(margins.size(), 1);
 
   /*
   unsigned int ar;
@@ -1037,14 +1053,14 @@ list<list<list<point_t> > > find_segments(const Image &image, double threshold, 
 
   // 5m53s -> new 4m15s
 
-  vector<int> stats(max_dist, 0);
+  std::vector<int> stats(max_dist, 0);
   int entropy_max = locate_max_entropy(features, max_area_ratio, max_dist, stats);
 
   int dist = SINGLE_IMAGE_DIST;
 
   if (entropy_max > THRESHOLD_LEVEL && !adaptive && margins.size() > 100)
     {
-      vector<int> text_stats(max_dist, 0);
+      std::vector<int> text_stats(max_dist, 0);
       for (unsigned int j = 2; j < max_dist; j++)
         {
           text_stats[j] = features[1][j];
@@ -1053,8 +1069,8 @@ list<list<list<point_t> > > find_segments(const Image &image, double threshold, 
 
       int dist_text = locate_first_min(text_stats);
 
-      const list<list<int> > &text_blocks = assemble_clusters(margins, dist_text, distance_matrix, avail, true,
-                                            area_matrix);
+      const std::list<std::list<int> > &text_blocks = assemble_clusters(
+          margins, dist_text, distance_matrix, avail, true, area_matrix);
       remove_text_blocks(text_blocks, segments, avail);
 
       dist = 2 * dist_text;
@@ -1064,19 +1080,20 @@ list<list<list<point_t> > > find_segments(const Image &image, double threshold, 
     if (avail[i] != -1)
       avail[i] = 1;
 
-  const list<list<int> > &clusters = assemble_clusters(margins, dist, distance_matrix, avail, false, area_matrix);
+  const std::list<std::list<int> > &clusters = assemble_clusters(
+      margins, dist, distance_matrix, avail, false, area_matrix);
 
   explicit_clusters = build_explicit_clusters(clusters, segments);
   return explicit_clusters;
 }
 
-void find_box_size(const vector<point_t> &set1, int &x1, int &x2, int &y1, int &y2)
+void find_box_size(const std::set<std::pair<int,int> > &set1, int &x1, int &x2, int &y1, int &y2)
 {
   x1 = INT_MAX; y1 = INT_MAX; x2 = 0; y2 = 0;
-  for (unsigned int p = 0; p < set1.size(); p++) 
+  for (std::set<std::pair<int, int> >::const_iterator it = set1.begin(); it != set1.end(); ++it)
     {
-      int px = set1[p].x;
-      int py = set1[p].y;
+      int px = it->first;
+      int py = it->second;
       if (px < x1)
 	x1 = px;
       if (px > x2)
@@ -1088,20 +1105,22 @@ void find_box_size(const vector<point_t> &set1, int &x1, int &x2, int &y1, int &
     }
 }
 
-bool check_possible_bracket(vector<point_t> &set1, vector < vector<bool> > &global_pic, int left, int right, int top, int bottom, int i, vector<int> &bracket)
+bool check_possible_bracket(std::set<std::pair<int, int> > &set1,
+                            std::vector<std::vector<bool> > &global_pic,
+                            int left, int right, int top, int bottom, int i)
 {
   bool res = false;
   int x1,x2,y1,y2;
   find_box_size(set1,x1,x2,y1,y2);
   if (set1.size() <= 10 || (x2 - x1) <= 3 || (y2 - y1) <= 20 )
     return false;
-  vector< vector<int> > tmp(x2-x1+1, vector<int>(y2-y1+1,0));
+  std::vector<std::vector<int> > tmp(x2 - x1 + 1, std::vector<int>(y2 - y1 + 1, 0));
   int startx = 0;
   int starty = INT_MAX;
-  for (unsigned int p = 0; p < set1.size(); p++) 
+  for (std::set<std::pair<int, int> >::const_iterator it = set1.begin(); it != set1.end(); ++it)
     {
-      int px = set1[p].x;
-      int py = set1[p].y;
+      int px = it->first;
+      int py = it->second;
       tmp[px-x1][py-y1] = 1;
       if (starty > py - y1)
 	{
@@ -1110,31 +1129,27 @@ bool check_possible_bracket(vector<point_t> &set1, vector < vector<bool> > &glob
 	}
     }
   int middle = (y2 - y1) / 2;
-  vector<pair<int,int> > margin(1,make_pair(startx,starty));
-  vector<point_t> set2;
+  std::vector<std::pair<int, int> > margin(1, std::make_pair(startx, starty));
+  std::set<std::pair<int, int> > set2;
   while (!margin.empty())
     {
       startx = margin.back().first;
       starty = margin.back().second;
       margin.pop_back();
       int reflect = middle + (middle - starty);
-      /*if (startx - 1 >= 0 && starty - 1 >= 0 && startx + 1 <= x2-x1 && starty+1 <= y2-y1 &&
-	  reflect - 1 >= 0 && reflect + 1 <= y2-y1 &&
-	  ( tmp[startx][reflect] != 0 || tmp[startx+1][reflect] != 0 || tmp[startx-1][reflect] != 0 ||
-	  tmp[startx][reflect+1] != 0 || tmp[startx][reflect-1] != 0 || tmp[startx-1][reflect-1] != 0 ||
-	  tmp[startx-1][reflect+1] != 0 || tmp[startx+1][reflect-1] != 0 || tmp[startx+1][reflect+1] != 0) )*/
+
       if (reflect >= 0 && reflect <= y2-y1 && tmp[startx][reflect] != 0)
 	{
-	  set2.push_back(point_t(startx+x1,starty+y1));
+          set2.insert(std::make_pair(startx + x1, starty + y1));
 	}
       tmp[startx][starty] = -1;
-      for (int i = startx-1; i  <= startx+1; i++)
-	if (i >= 0 && i < tmp.size())
+      for (int ii = startx-1; ii  <= startx+1; ii++)
+	if (ii >= 0 && ii < tmp.size())
 	  for (int j = starty-1; j <= starty+1; j++)
-	    if (j >= 0 && j < tmp[i].size() && tmp[i][j] == 1)
+	    if (j >= 0 && j < tmp[ii].size() && tmp[ii][j] == 1)
 	      {
-		tmp[i][j] = 2;
-		margin.push_back(make_pair(i,j));
+		tmp[ii][j] = 2;
+		margin.push_back(std::make_pair(ii, j));
 	      }
     }
   swap(set1,set2);
@@ -1144,162 +1159,92 @@ bool check_possible_bracket(vector<point_t> &set1, vector < vector<bool> > &glob
       int x = x2 - x1 + 1;
       int y = y2 - y1 + 1;
       int f = 1;
-      if (y > 40)
-	f = y / 40;
+      // if (y > 40)
+      //	f = y / 40;
       x /= f;
       y /= f;
+
       //      cout << x1 <<" " << y1 <<" "<<x2<<" "<<y2<<" " << i << endl;
 
       unsigned char *pic = (unsigned char *) malloc(x * y);
       for (int j = 0; j < x * y; j++)
 	pic[j] = 255;
-      for (unsigned int p = 0; p < set1.size(); p++)
-	if ((set1[p].y - y1) / f < y && (set1[p].x - x1) / f < x && (set1[p].y - y1) % f == 0 && (set1[p].x - x1) % f == 0)
-	  pic[((set1[p].y - y1) / f) * x + (set1[p].x - x1) / f] = 0;
-      res = detect_bracket(x, y, pic);
-      //free(pic);
-      if (res) 
+      for (std::set<std::pair<int, int> >::const_iterator it = set1.begin(); it != set1.end(); ++it)
 	{
-	  for (unsigned int p = 0; p < set1.size(); p++) 
-	    {
-	      int px = set1[p].x;
-	      int py = set1[p].y;
-	      if ( (i + (i - px) - left - 1 >= 0) && (i + (i - px) - left + 1 < right - left + 1)
-		   && ( py - top - 1 >= 0) && (py - top + 1 < bottom - top + 1)
-		   && (px - left - 1 >= 0) && (px - left + 1 < right - left +1))
-		{
-		  global_pic[px - left][py - top] = false;
-		  global_pic[px - left - 1][py - top] = false;
-		  global_pic[px - left + 1][py - top] = false;
-		  global_pic[px - left][py - top - 1] = false;
-		  global_pic[px - left][py - top + 1] = false;
-		  global_pic[px - left - 1][py - top - 1] = false;
-		  global_pic[px - left - 1][py - top + 1] = false;
-		  global_pic[px - left + 1][py - top - 1] = false;
-		  global_pic[px - left + 1][py - top + 1] = false;
-		  global_pic[i + (i - px) - left][py - top] = false; 
-		  global_pic[i + (i - px) - left - 1][py - top] = false; 
-		  global_pic[i + (i - px) - left + 1][py - top] = false; 
-		  global_pic[i + (i - px) - left][py - top - 1] = false; 
-		  global_pic[i + (i - px) - left][py - top + 1] = false; 
-		  global_pic[i + (i - px) - left - 1][py - top - 1] = false; 
-		  global_pic[i + (i - px) - left + 1][py - top - 1] = false; 
-		  global_pic[i + (i - px) - left - 1][py - top + 1] = false; 
-		  global_pic[i + (i - px) - left + 1][py - top + 1] = false;
-		}
-	    }
-	  bracket[0] = x1;
-	  bracket[1] = y1;
-	  bracket[2] = x2;
-	  bracket[3] = y2;
+	  int px = it->first;
+	  int py = it->second;
+	  if ((py - y1) / f < y && (px - x1) / f < x && (py - y1) % f == 0 && (px - x1) % f == 0)
+	    pic[((py - y1) / f) * x + (px - x1) / f] = 0;
+	}
 
-	  bracket[4] = i + (i - x1);
-	  bracket[5] = y1;
-	  bracket[6] = i + (i - x2);
-	  bracket[7] = y2;
-	  
-	}	    
+      res = detect_bracket(x, y, pic);
     }
   return res;
 }
 
-void remove_brackets(int left, int right, int top, int bottom, list<list<list<point_t> > >::iterator c) 
+void remove_brackets(int left, int right, int top, int bottom,
+                     std::list<std::list<std::list<point_t> > >::iterator c,
+                     std::set<std::pair<int, int> > &brackets)
 {
-  vector < vector<bool> > tmp(right - left + 1, vector<bool> (bottom - top + 1, false));
-  vector < vector<bool> > global_pic(right - left + 1, vector<bool> (bottom - top + 1, false));
+  std::vector<std::vector<bool> > tmp(right - left + 1, std::vector<bool> (bottom - top + 1, false));
+  std::vector<std::vector<bool> > global_pic(right - left + 1, std::vector<bool> (bottom - top + 1, false));
 
-  for (list<list<point_t> >::const_iterator s = c->begin(); s != c->end(); s++)
-    for (list<point_t>::const_iterator p = s->begin(); p != s->end(); p++)
+  for (std::list<std::list<point_t> >::const_iterator s = c->begin(); s != c->end(); s++)
+    for (std::list<point_t>::const_iterator p = s->begin(); p != s->end(); p++)
       global_pic[p->x - left][p->y - top] = true;
 
-  bool found = true;
-  //Image t(Geometry(right - left + 1, bottom - top + 1), "white");
-  while (found)
+  //Image t(Geometry(right + 1, bottom + 1), "white");
+
+ for (int i = left + FRAME; i < right - FRAME; i++)
     {
-      found = false;
-      int median = 0;
-      vector<int> bracket(8,0);
-      for (int i = left + FRAME; i < right - FRAME; i++)
+      for (std::list<std::list<point_t> >::const_iterator s = c->begin(); s != c->end(); s++)
 	{
-	  for (list<list<point_t> >::const_iterator s = c->begin(); s != c->end(); s++) 
+          std::set<std::pair<int, int> > set1;
+	  for (std::list<point_t>::const_iterator p = s->begin(); p != s->end(); p++)
 	    {
-	      vector<point_t> set1, set2;
-
-	      for (list<point_t>::const_iterator p = s->begin(); p != s->end(); p++)
+	      if ( i + (i - p->x) < right &&
+		   i + (i - p->x) - left - 1 >= 0 &&  p->y - top - 1 >= 0 &&
+		   i + (i - p->x) - left + 1 < right - left + 1 && p->y - top + 1 < bottom - top + 1 &&
+		   global_pic[p->x - left][p->y - top] &&
+		   (global_pic[i + (i - p->x) - left][p->y - top] ||
+		    global_pic[i + (i - p->x) - left + 1][p->y - top] ||
+		    global_pic[i + (i - p->x) - left - 1][p->y - top] ||
+		    global_pic[i + (i - p->x) - left][p->y - top + 1] ||
+		    global_pic[i + (i - p->x) - left][p->y - top - 1] ||
+		    global_pic[i + (i - p->x) - left - 1][p->y - top - 1] ||
+		    global_pic[i + (i - p->x) - left - 1][p->y - top + 1] ||
+		    global_pic[i + (i - p->x) - left + 1][p->y - top - 1] ||
+		    global_pic[i + (i - p->x) - left + 1][p->y - top + 1]  )
+		   && (p->x < i - 40) )
 		{
-		  if ( i + (i - p->x) < right && 
-		       i + (i - p->x) - left - 1 >= 0 &&  p->y - top - 1 >= 0 &&
-		       i + (i - p->x) - left + 1 < right - left + 1 && p->y - top + 1 < bottom - top + 1 &&
-		       global_pic[p->x - left][p->y - top] && 
-		       (global_pic[i + (i - p->x) - left][p->y - top] || 
-			global_pic[i + (i - p->x) - left + 1][p->y - top] ||
-			global_pic[i + (i - p->x) - left - 1][p->y - top] ||
-			global_pic[i + (i - p->x) - left][p->y - top + 1] ||
-			global_pic[i + (i - p->x) - left][p->y - top - 1] ||
-			global_pic[i + (i - p->x) - left - 1][p->y - top - 1] ||
-			global_pic[i + (i - p->x) - left - 1][p->y - top + 1] ||
-			global_pic[i + (i - p->x) - left + 1][p->y - top - 1] ||
-			global_pic[i + (i - p->x) - left + 1][p->y - top + 1]  ) 
-		       ) 
-		    {
-		      if (p->x < i - 40)
-			{
-			  set1.push_back(*p);			
-			}
-		      if (p->x > i + 40)
-			{
-			  point_t p2;
-			  p2.x = i + (i - p->x);
-			  p2.y = p->y;
-			  set2.push_back(p2);			 
-			}
-		    }
+                  set1.insert(std::make_pair(p->x, p->y));
 		}
+	    }
 
-	      found = check_possible_bracket(set1, global_pic, left, right, top, bottom, i, bracket);
-	      if (!found)
-		found = check_possible_bracket(set2, global_pic, left, right, top, bottom, i, bracket);
-	      if (found)
-		break;
-	    }
-	  if (found)
+	  if (check_possible_bracket(set1, global_pic, left, right, top, bottom, i))
 	    {
-	      median = i;
-	      break;
-	    }
-	}
-    
-      if (found)
-	{
-	  int middle = (bracket[1] + bracket[3]) / 2;
-	  list<list<point_t> >::iterator s1 = c->begin();
-	  while (s1 != c->end()) 
-	    {
-	      list<point_t>::iterator p1 = s1->begin();
-	      while (p1 != s1->end())
-		if (!global_pic[p1->x - left][p1->y - top] && abs(p1->y - middle) > 1)
-		  {
-		    //t.pixelColor(p1->x - left, p1->y - top, "black");
-		    //t.pixelColor(median + (median - p1->x) - left, p1->y - top, "black");
-		      p1 = s1->erase(p1);
-		  }
-		else
-		  p1++;
-	      if (s1->size() > 0)
-		s1++;
-	      else
-		s1 = c->erase(s1);
+              for (std::set<std::pair<int, int> >::const_iterator it = set1.begin(); it != set1.end(); ++it)
+		{
+		  int ox = it->first;
+		  int oy = it->second;
+		  int px = i + (i - ox);
+		  brackets.insert(*it);
+		  brackets.insert(std::make_pair(px, oy));
+		  //t.pixelColor(ox, oy, "black");
+		  //t.pixelColor(px, oy, "black");
+		}
 	    }
 	}
     }
-  //t.write("t.png");
+ //t.write("t.png");
 }
 
 
-int prune_clusters(list<list<list<point_t> > > &clusters, vector<box_t> &boxes)
+int prune_clusters(std::list<std::list<std::list<point_t> > > &clusters, std::vector<box_t> &boxes,
+                   std::set<std::pair<int, int> > &brackets)
 {
   int n_boxes = 0;
-  list<list<list<point_t> > >::iterator c = clusters.begin();
+  std::list<std::list<std::list<point_t> > >::iterator c = clusters.begin();
 
   while (c != clusters.end())
     {
@@ -1307,10 +1252,10 @@ int prune_clusters(list<list<list<point_t> > > &clusters, vector<box_t> &boxes)
       double ratio = 0, aspect = 0;
       int top = INT_MAX, left = INT_MAX, bottom = 0, right = 0;
       bool fill_below_max = false;
-      for (list<list<point_t> >::const_iterator s = c->begin(); s != c->end(); s++)
+      for (std::list<std::list<point_t> >::const_iterator s = c->begin(); s != c->end(); s++)
         {
           int stop = INT_MAX, sleft = INT_MAX, sbottom = 0, sright = 0;
-          for (list<point_t>::const_iterator p = s->begin(); p != s->end(); p++)
+          for (std::list<point_t>::const_iterator p = s->begin(); p != s->end(); p++)
             {
               if (p->x < sleft)
                 sleft = p->x;
@@ -1353,10 +1298,10 @@ int prune_clusters(list<list<list<point_t> > > &clusters, vector<box_t> &boxes)
           boxes[n_boxes].x2 = right;
           boxes[n_boxes].y2 = bottom;
 
-          //remove_brackets(left, right, top, bottom, c);
+          remove_brackets(left, right, top, bottom, c, brackets);
 
-          for (list<list<point_t> >::const_iterator s = c->begin(); s != c->end(); s++)
-            for (list<point_t>::const_iterator p = s->begin(); p != s->end(); p++)
+          for (std::list<std::list<point_t> >::const_iterator s = c->begin(); s != c->end(); s++)
+              for (std::list<point_t>::const_iterator p = s->begin(); p != s->end(); p++)
               boxes[n_boxes].c.push_back(*p);
           c++;
           n_boxes++;

@@ -79,7 +79,7 @@ int get_pixel(const Image &image, const ColorGray &bg, unsigned int x, unsigned 
   return (0);
 }
 
-void delete_curve(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n_bond,
+void delete_curve(std::vector<atom_t> &atom, std::vector<bond_t> &bond, int n_atom, int n_bond,
                   const potrace_path_t * const curve)
 {
   for (int i = 0; i < n_atom; i++)
@@ -98,8 +98,8 @@ void delete_curve(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n_
     }
 }
 
-void delete_curve_with_children(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n_bond,
-                                const potrace_path_t * const p)
+void delete_curve_with_children(std::vector<atom_t> &atom, std::vector<bond_t> &bond, int n_atom,
+                                int n_bond, const potrace_path_t * const p)
 {
   delete_curve(atom, bond, n_atom, n_bond, p);
   potrace_path_t *child = p->childlist;
@@ -110,13 +110,14 @@ void delete_curve_with_children(vector<atom_t> &atom, vector<bond_t> &bond, int 
     }
 }
 
-double angle_between_bonds(const vector<bond_t> &bond, int i, int j, const vector<atom_t> &atom)
+double angle_between_bonds(const std::vector<bond_t> &bond, int i, int j,
+                           const std::vector<atom_t> &atom)
 {
   return (angle4(atom[bond[i].a].x, atom[bond[i].a].y, atom[bond[i].b].x, atom[bond[i].b].y, atom[bond[j].a].x,
                  atom[bond[j].a].y, atom[bond[j].b].x, atom[bond[j].b].y));
 }
 
-double bond_length(const vector<bond_t> &bond, int i, const vector<atom_t> &atom)
+double bond_length(const std::vector<bond_t> &bond, int i, const std::vector<atom_t> &atom)
 {
   return (distance(atom[bond[i].a].x, atom[bond[i].a].y, atom[bond[i].b].x, atom[bond[i].b].y));
 }
@@ -130,7 +131,8 @@ double distance_from_bond_y(double x0, double y0, double x1, double y1, double x
   return (h);
 }
 
-double distance_between_bonds(const vector<bond_t> &bond, int i, int j, const vector<atom_t> &atom)
+double distance_between_bonds(const std::vector<bond_t> &bond, int i, int j,
+                              const std::vector<atom_t> &atom)
 {
   /*
   double y1 = distance_from_bond_y(atom[bond[j].a].x, atom[bond[j].a].y, atom[bond[j].b].x, atom[bond[j].b].y,
@@ -147,7 +149,7 @@ double distance_between_bonds(const vector<bond_t> &bond, int i, int j, const ve
                                    atom[bond[j].b].x, atom[bond[j].b].y);
   if (fabs(y3 - y4) >= 4)
     return (FLT_MAX);
-  double r2 = max(fabs(y3), fabs(y4));
+  double r2 = std::max(fabs(y3), fabs(y4));
   return (r2);
 }
 
@@ -169,9 +171,9 @@ double distance_from_bond_x_b(double x0, double y0, double x1, double y1, double
   return (l - d1);
 }
 
-double percentile75(const vector<bond_t> &bond, int n_bond, const vector<atom_t> &atom)
+double percentile75(const std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom)
 {
-  vector<double> a;
+  std::vector<double> a;
   int n = 0;
 
   for (int i = 0; i < n_bond; i++)
@@ -191,7 +193,7 @@ double percentile75(const vector<bond_t> &bond, int n_bond, const vector<atom_t>
 }
 
 
-bool terminal_bond(int a, int b, const vector<bond_t> &bond, int n_bond)
+bool terminal_bond(int a, int b, const std::vector<bond_t> &bond, int n_bond)
 {
   bool terminal = true;
 
@@ -203,8 +205,8 @@ bool terminal_bond(int a, int b, const vector<bond_t> &bond, int n_bond)
 }
 
 
-void debug_image(Image image, const vector<atom_t> &atom, int n_atom, const vector<bond_t> &bond, int n_bond,
-               const string &fname)
+void debug_image(Image image, const std::vector<atom_t> &atom, int n_atom,
+                 const std::vector<bond_t> &bond, int n_bond, const std::string &fname)
 {
   image.modifyImage();
   image.type(TrueColorType);
@@ -253,7 +255,7 @@ void debug_image(Image image, const vector<atom_t> &atom, int n_atom, const vect
   image.write(fname);
 }
 
-void draw_square(Image &image, int x1, int y1, int x2, int y2, const string &color)
+void draw_square(Image &image, int x1, int y1, int x2, int y2, const std::string &color)
 {
   image.strokeWidth(1);
   image.strokeColor(color);
@@ -263,7 +265,7 @@ void draw_square(Image &image, int x1, int y1, int x2, int y2, const string &col
   image.draw(DrawableLine(x2, y1, x2, y2));
 }
 
-void draw_box(Image &image, vector<box_t> &boxes, int n_boxes, const string &fname)
+void draw_box(Image &image, std::vector<box_t> &boxes, int n_boxes, const std::string &fname)
 {
   image.modifyImage();
   image.type(TrueColorType);
@@ -276,14 +278,22 @@ void draw_box(Image &image, vector<box_t> &boxes, int n_boxes, const string &fna
 }
 
 
-int count_pages(const string &input)
+int count_pages(const std::string &input)
 {
-  list<Image> imageList;
+  std::list<Image> imageList;
   readImages(&imageList, input);
   return (imageList.size());
 }
 
-int count_atoms(const vector<atom_t> &atom, int n_atom)
+int count_pages(const Blob &blob)
+{
+  std::list<Image> imageList;
+  readImages(&imageList, blob);
+  return (imageList.size());
+}
+
+
+int count_atoms(const std::vector<atom_t> &atom, int n_atom)
 {
   int r = 0;
   for (int i = 0; i < n_atom; i++)
@@ -292,7 +302,7 @@ int count_atoms(const vector<atom_t> &atom, int n_atom)
   return (r);
 }
 
-int count_bonds(const vector<bond_t> &bond, int n_bond, int &bond_max_type)
+int count_bonds(const std::vector<bond_t> &bond, int n_bond, int &bond_max_type)
 {
   int r = 0;
   for (int i = 0; i < n_bond; i++)
@@ -304,7 +314,7 @@ int count_bonds(const vector<bond_t> &bond, int n_bond, int &bond_max_type)
   return (r);
 }
 
-bool detect_curve(vector<bond_t> &bond, int n_bond, const potrace_path_t * const curve)
+bool detect_curve(std::vector<bond_t> &bond, int n_bond, const potrace_path_t * const curve)
 {
   bool res = false;
   for (int i = 0; i < n_bond; i++)
@@ -332,7 +342,7 @@ bool detect_curve(vector<bond_t> &bond, int n_bond, const potrace_path_t * const
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 
-void trim(string &s)
+void trim(std::string &s)
 {
   // Remove leading and trailing whitespace
   static const char whitespace[] = " \n\t\v\r\f";
@@ -340,10 +350,10 @@ void trim(string &s)
   s.erase(s.find_last_not_of(whitespace) + 1U);
 }
 
-bool load_config_map(const string &file, map<string, string> &out)
+bool load_config_map(const std::string &file, std::map<std::string, std::string> &out)
 {
-  typedef string::size_type pos;
-  const string& delim = " "; // separator
+  typedef std::string::size_type pos;
+  const std::string& delim = " "; // separator
   const pos skip = delim.length(); // length of separator
 
   std::ifstream is(file.c_str());
@@ -353,7 +363,7 @@ bool load_config_map(const string &file, map<string, string> &out)
   while (is)
     {
       // Read an entire line at a time
-      string line;
+      std::string line;
       std::getline(is, line);
 
       // Ignore comments
@@ -363,15 +373,15 @@ bool load_config_map(const string &file, map<string, string> &out)
 
       // replace tabs with spaces
       pos t;
-      while ((t = line.find('\t')) != string::npos)
+      while ((t = line.find('\t')) != std::string::npos)
         line[t] = ' ';
 
       // Parse the line if it contains a delimiter
       pos delimPos = line.find(delim);
-      if (delimPos < string::npos)
+      if (delimPos < std::string::npos)
         {
           // Extract the key
-          string key = line.substr(0, delimPos);
+          std::string key = line.substr(0, delimPos);
           line.replace(0, delimPos + skip, "");
 
           // Store key and value

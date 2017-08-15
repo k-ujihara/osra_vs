@@ -43,7 +43,7 @@ extern "C" {
 // We can't push these functions into this cpp file, as the types from Tesseract conflict with GOCR
 void osra_tesseract_init();
 void osra_tesseract_destroy();
-char osra_tesseract_ocr(unsigned char *pixel_map, int width, int height, const string &char_filter);
+char osra_tesseract_ocr(unsigned char *pixel_map, int width, int height, const std::string &char_filter);
 #endif
 
 // Global GOCR variable (omg) both for 0.48-0.49 and 0.50 versions:
@@ -130,10 +130,10 @@ char osra_gocr_ocr(job_t &gocr_job)
 //
 // Returns:
 //      0 in case the recognition failed or valid alphanumeric character
-char osra_ocrad_ocr(const OCRAD_Pixmap * const ocrad_pixmap, const string &char_filter)
+char osra_ocrad_ocr(const OCRAD_Pixmap * const ocrad_pixmap, const std::string &char_filter)
 {
   char result = 0;
-  string line;
+  std::string line;
 
   OCRAD_Descriptor * const ocrad_res = OCRAD_open();
 
@@ -150,7 +150,7 @@ char osra_ocrad_ocr(const OCRAD_Pixmap * const ocrad_pixmap, const string &char_
   OCRAD_close(ocrad_res);
 
   // TODO: Why line should have 0 or 1 characters? Give examples...
-  if (line.length() > 2 || !isalnum(result) || (!char_filter.empty() && char_filter.find(result, 0) == string::npos))
+  if (line.length() > 2 || !isalnum(result) || (!char_filter.empty() && char_filter.find(result, 0) == std::string::npos))
     return UNKNOWN_CHAR;
 
   return result;
@@ -167,7 +167,7 @@ char osra_ocrad_ocr(const OCRAD_Pixmap * const ocrad_pixmap, const string &char_
 // Returns:
 //      0 in case the recognition failed or valid alphanumeric character
 #ifdef HAVE_CUNEIFORM_LIB
-char osra_cuneiform_ocr(Magick::Image &cuneiform_img, const string &char_filter)
+char osra_cuneiform_ocr(Magick::Image &cuneiform_img, const std::string &char_filter)
 {
   Magick::Blob blob;
   cuneiform_img.write(&blob, "DIB");
@@ -195,7 +195,7 @@ char osra_cuneiform_ocr(Magick::Image &cuneiform_img, const string &char_filter)
   // As we have initialized the image with two identical samples, it is expected that they go in the string
   // one after another, or separated by space (e.g. "ZZ\n" or "Z Z\n").
   if (((str[0] == str[1] && isspace(str[2])) || (str[0] == str[2] && str[1] == ' ')) && isalnum(str[0])
-      && (char_filter.empty() || char_filter.find(str[0], 0) != string::npos))
+      && (char_filter.empty() || char_filter.find(str[0], 0) != std::string::npos))
     return str[0];
 
   return UNKNOWN_CHAR;
@@ -239,8 +239,8 @@ char get_atom_label(const Magick::Image &image, const Magick::ColorGray &bg, int
 
     pixmap[y * width + x] = 2;
 
-    list<int> cx;
-    list<int> cy;
+    std::list<int> cx;
+    std::list<int> cy;
 
     cx.push_back(x);
     cy.push_back(y);
@@ -272,7 +272,7 @@ char get_atom_label(const Magick::Image &image, const Magick::ColorGray &bg, int
     job_t gocr_job;
 
     // The list of all characters, that can be recognised as atom label:
-    string char_filter = RECOGNIZED_CHARS;
+    std::string char_filter = RECOGNIZED_CHARS;
     if (numbers) char_filter = "1";
     if (no_filtering) char_filter.clear();
 
@@ -335,12 +335,12 @@ char get_atom_label(const Magick::Image &image, const Magick::ColorGray &bg, int
 
     if (verbose)
       {
-        cout << "Box to OCR: " << x1 << "x" << y1 << "-" << x2 << "x" << y2 << " w/h: " << width << "x" << height << endl;
+        std::cout << "Box to OCR: " << x1 << "x" << y1 << "-" << x2 << "x" << y2 << " w/h: " << width << "x" << height << std::endl;
         for (int i = 0; i < height; i++)
           {
             for (int j = 0; j < width; j++)
-              cout << (gocr_job.src.p.p[i * width + j] / 255 ? '#' : '.');
-            cout << endl;
+              std::cout << (gocr_job.src.p.p[i * width + j] / 255 ? '#' : '.');
+            std::cout << std::endl;
           }
       }
 
@@ -350,7 +350,7 @@ char get_atom_label(const Magick::Image &image, const Magick::ColorGray &bg, int
     c = osra_gocr_ocr(gocr_job);
 
     if (verbose)
-      cout << "GOCR: c=" << c << endl;
+      std::cout << "GOCR: c=" << c << std::endl;
 
     //c = UNKNOWN_CHAR; // Switch off GOCR recognition
 
@@ -362,7 +362,7 @@ char get_atom_label(const Magick::Image &image, const Magick::ColorGray &bg, int
     c = osra_ocrad_ocr(ocrad_pixmap, char_filter);
 
     if (verbose)
-      cout << "OCRAD: c=" << c << endl;
+      std::cout << "OCRAD: c=" << c << std::endl;
 
     //c = UNKNOWN_CHAR;  // Switch off OCRAD recognition
 
@@ -374,7 +374,7 @@ char get_atom_label(const Magick::Image &image, const Magick::ColorGray &bg, int
     c = osra_tesseract_ocr(gocr_job.src.p.p, width, height, char_filter);
 
     if (verbose)
-      cout << "Tesseract: c=" << c << endl;
+      std::cout << "Tesseract: c=" << c << std::endl;
 
     //c = UNKNOWN_CHAR;  // Switch off Tesseract recognition
 
@@ -390,7 +390,7 @@ char get_atom_label(const Magick::Image &image, const Magick::ColorGray &bg, int
     c = osra_cuneiform_ocr(cuneiform_img, char_filter);
 
     if (verbose)
-      cout << "Cuneiform: c=" << c << endl;
+      std::cout << "Cuneiform: c=" << c << std::endl;
 
     //c = UNKNOWN_CHAR; // Switch off Cuneiform recognition
 #endif
@@ -412,12 +412,89 @@ FINALIZE:
   return(c == UNKNOWN_CHAR ? 0 : c);
 }
 
+bool detect_square_bracket(unsigned char *pic, int x, int y)
+{
 
-bool detect_bracket(int x, int y, unsigned char *pic) 
+  int w = -1;
+  for (int j = x / 2; j >= 0 ; j--)
+    {
+      if (pic[(y / 2) * x + j] == 1)
+	{
+	  w = j;
+	  break;
+	}
+    }
+  int h1 = -1;
+  for (int i = y / 2; i >= 0; i--)
+    {
+      if (pic[i * x + x / 2] == 1)
+	{
+	  h1 = i;
+	  break;
+	}
+    }
+  int h2 = y;
+  for (int i = y / 2; i < y; i++)
+    {
+      if (pic[i * x + x / 2] == 1)
+	{
+	  h2 = i;
+	  break;
+	}
+    }
+  if (w > x /2 + 1 || h1 > y / 4 || (y - h2) > y / 4)
+    return false;
+  int total_vert(0), total_up_hor(0), total_down_hor(0), fill_vert(0), fill_up_hor(0), fill_down_hor(0), total_empty(0), fill_empty(0);
+
+  for (int i = 0; i < y; i++)
+    {
+      for (int j = 0; j < x; j++)
+	{
+	  bool fill = (pic[i * x + j] == 1);
+	  if (j <= w)
+	    {
+	      total_vert++;
+	      if (fill)
+		fill_vert++;
+	    }
+	  if (i <= h1)
+	    {
+	      total_up_hor++;
+	      if (fill)
+		fill_up_hor++;
+	    }
+	  if (i >= h2)
+	    {
+	      total_down_hor++;
+	      if (fill)
+		fill_down_hor++;
+	    }
+	  if (j > w && i > h1 && i < h2)
+	    {
+	      total_empty++;
+	      if (fill)
+		fill_empty++;
+	    }
+	}
+    }
+
+  if (total_vert == 0 || total_up_hor == 0 || total_down_hor == 0 || total_empty == 0)
+    return false;
+
+  double fill_v = double(fill_vert) / total_vert;
+  double fill_up_h = double(fill_up_hor) / total_up_hor;
+  double fill_down_h = double(fill_down_hor) / total_down_hor;
+  double fill_e = double(fill_empty) / total_empty;
+  if (fill_v > 0.8 && fill_up_h > 0.7 && fill_down_h > 0.7 && fill_e < 0.2)
+    return true;
+  return false;
+}
+
+bool detect_bracket(int x, int y, unsigned char *pic)
 {
   bool res = false;
-  
-  
+
+
 #pragma omp critical
   {
   char c1 = 0;
@@ -427,58 +504,58 @@ bool detect_bracket(int x, int y, unsigned char *pic)
   job_init(&job);
   job_init_image(&job);
   job.cfg.cfilter = (char *) "([{";
-  
+
   //job.cfg.cs = 160;
   //job.cfg.certainty = 80;
   //job.cfg.dust_size = 1;
-  
+
   job.src.p.x = x;
   job.src.p.y = y;
   job.src.p.bpp = 1;
   job.src.p.p = pic;
-  
+
   struct OCRAD_Pixmap *ocrad_pixmap = new OCRAD_Pixmap();
   unsigned char *ocrad_bitmap = (unsigned char *) malloc(x * y);
-  memset(ocrad_bitmap, 0, x * y);	  
+  memset(ocrad_bitmap, 0, x * y);
   ocrad_pixmap->height = y;
   ocrad_pixmap->width = x;
   ocrad_pixmap->mode = OCRAD_bitmap;
   ocrad_pixmap->data = ocrad_bitmap;
-  
+
   int count = 0;
   int zeros = 0;
   for (int i = 0; i < y; i++)
     {
-     for (int j = 0; j < x; j++) 
+     for (int j = 0; j < x; j++)
       {
-	if (pic[i * x + j] == 0) 
+	if (pic[i * x + j] == 0)
 	  {
 	    ocrad_bitmap[i * x + j] = 1;
 	    count++;
-	  } 
+	  }
 	else
 	  zeros++;
       }
    }
-  
-  /*  string str;
+
+  /*std::string str;
   for (int i = 0; i < y; i++)
     {
-      for (int j = 0; j < x; j++) 
+      for (int j = 0; j < x; j++)
 	{
 	  str += (pic[i * x + j] != 0 ? "#" : ".");
 	}
       str += "\n";
     }
-  
-    cout << str << endl;
+
+    std::cout << str << std::endl;
   */
-  if (count > MIN_CHAR_POINTS && zeros > MIN_CHAR_POINTS) 
+  if (count > MIN_CHAR_POINTS && zeros > MIN_CHAR_POINTS)
     {
-      try 
+      try
 	{
 	  pgm2asc(&job);
-	} 
+	}
       catch (...) {  }
       char *l;
       l = (char *) job.res.linelist.start.next->data;
@@ -486,24 +563,26 @@ bool detect_bracket(int x, int y, unsigned char *pic)
 	c1 = l[0];
       if (c1 == '(' || c1 == '[' || c1 == '{')
 	res = true;
-      else 
+      else
 	{
           char c2 = osra_ocrad_ocr(ocrad_pixmap, "([{");
 	  if (c2 == '(' || c2 == '[' || c2 == '{')
 	    res = true;
 	}
     }
+
+  if (!res)
+    res = detect_square_bracket(ocrad_bitmap, x, y);
   /*
   if (res)
     {
-      
-      cout <<"Found! " << c1<<endl;
+      std::cout << "Found! " << c1 << std::endl;
     }
   */
-    
-  delete ocrad_pixmap; 
+
+  delete ocrad_pixmap;
   free(ocrad_bitmap);
-  
+
   job_free_image(&job);
   OCR_JOB = NULL;
   JOB = NULL;
@@ -513,18 +592,19 @@ bool detect_bracket(int x, int y, unsigned char *pic)
 }
 
 
-const string fix_atom_name(const string &s, int n, const map<string, string> &fix,
-                           const map<string, string> &superatom, bool debug)
+const std::string fix_atom_name(const std::string &s, int n,
+                                const std::map<std::string, std::string> &fix,
+                                const std::map<std::string, std::string> &superatom, bool debug)
 {
-  string r = s;
+  std::string r = s;
 
   if (s.length() == 1)
     r = toupper(s.at(0));
   if (s == "H" && n > 1)
     r = "N";
 
-  map<string, string>::const_iterator it = fix.find(s);
-  string mapped = " ";
+  std::map<std::string, std::string>::const_iterator it = fix.find(s);
+  std::string mapped = " ";
   if (it != fix.end())
     {
       r = it->second;
@@ -534,10 +614,10 @@ const string fix_atom_name(const string &s, int n, const map<string, string> &fi
   if (debug && s != " " && s != "")
     {
       it = superatom.find(r);
-      string smiles = " ";
+      std::string smiles = " ";
       if (it != superatom.end())
         smiles = it->second;
-      cout << s << " --> " << mapped << " --> " << smiles << endl;
+      std::cout << s << " --> " << mapped << " --> " << smiles << std::endl;
     }
 
   return (r);

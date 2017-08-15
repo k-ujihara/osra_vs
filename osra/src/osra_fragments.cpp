@@ -30,7 +30,7 @@
 #include "osra_common.h"
 #include "osra_fragments.h"
 
-double atom_distance(const vector<atom_t> &atom, int a, int b)
+double atom_distance(const std::vector<atom_t> &atom, int a, int b)
 {
   return (distance(atom[a].x, atom[a].y, atom[b].x, atom[b].y));
 }
@@ -39,10 +39,11 @@ double atom_distance(const vector<atom_t> &atom, int a, int b)
  * TODO: Returning the vector from the stack causes copy constructor to trigger, which is inefficient.
  * Consider passing the vector as a reference.
  */
-vector<vector<int> > find_fragments(const vector<bond_t> &bond, int n_bond, const vector<atom_t> &atom)
+std::vector<std::vector<int> > find_fragments(
+    const std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom)
 {
-  vector<vector<int> > frags;
-  vector<int> pool;
+  std::vector<std::vector<int> > frags;
+  std::vector<int> pool;
   int n = 0;
 
   for (int i = 0; i < n_bond; i++)
@@ -101,9 +102,9 @@ vector<vector<int> > find_fragments(const vector<bond_t> &bond, int n_bond, cons
   return (frags);
 }
 
-int reconnect_fragments(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, double avg)
+int reconnect_fragments(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom, double avg)
 {
-  vector<vector<int> > frags = find_fragments(bond, n_bond, atom);
+  std::vector<std::vector<int> > frags = find_fragments(bond, n_bond, atom);
 
   if (frags.size() <= 3)
     {
@@ -128,7 +129,7 @@ int reconnect_fragments(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, 
                 if (l < 1.1 * avg && l > avg / 3)
                   {
 		    //cout<<atom[atom1].label<<" "<<atom[atom2].label<<endl;
-		    
+
 		    if (atom[atom1].label.length() < 2 &&  atom[atom2].label.length() < 2)
 		      {
 			bond_t b1(atom1,atom2,atom[atom1].curve);
@@ -155,9 +156,10 @@ int reconnect_fragments(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, 
  * TODO: Returning the vector from the stack causes copy constructor to trigger, which is inefficient.
  * Consider passing the vector as a reference.
  */
-vector<fragment_t> populate_fragments(const vector<vector<int> > &frags, const vector<atom_t> &atom)
+std::vector<fragment_t> populate_fragments(
+    const std::vector<std::vector<int> > &frags, const std::vector<atom_t> &atom)
 {
-  vector<fragment_t> r;
+  std::vector<fragment_t> r;
 
   for (unsigned int i = 0; i < frags.size(); i++)
     {
