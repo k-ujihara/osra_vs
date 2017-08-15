@@ -1174,6 +1174,8 @@ public:
 
 #include <Windows.h>
 
+/* Copy of osra_process_image() */
+
 int OsraProcessImage(
 	const char* ptr_input_file,
 	const char* ptr_output_file,
