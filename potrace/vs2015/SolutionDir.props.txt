@@ -2,13 +2,14 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <INSTALL_PREFIX>C:\Users\Public</INSTALL_PREFIX>
+  <SOLUTION_BASE>__SOLUTION_BASE__</SOLUTION_BASE>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
   <ItemGroup>
-    <BuildMacro Include="INSTALL_PREFIX">
-      <Value>$(INSTALL_PREFIX)</Value>
+    <BuildMacro Include="SOLUTION_BASE">
+      <Value>$(SOLUTION_BASE)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
   </ItemGroup>
 </Project>

@@ -22,11 +22,15 @@ if "%INSTALL_PREFIX%" == "" (
 MSBuild ocrad.sln /m /p:Configuration=Release,Platform=%$PLATFORM%
 if errorlevel 1 goto :EBye
 
-Set $OUTDIR=%Config%
-if /I "%Platform%" == "X64" Set $OUTDIR=x64\%$OUTDIR%
+Set OutDir=%Config%
+if /I "%Platform%" == "X64" Set OutDir=x64\%OutDir%
 
-for %%i in ( ocrad-0\%$OUTDIR%\ocrad-0.dll ocrad\%$OUTDIR%\ocrad.exe ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\bin"
-for %%i in ( libocrad\%$OUTDIR%\libocrad.lib ocrad-0\%$OUTDIR%\ocrad-0.lib ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\lib"
+Set BINS=ocrad-0.dll ocrad.exe
+Set LIBS=libocrad.lib ocrad-0.lib
+pushd %OutDir%
+for %%i in ( %BINS% ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\bin"
+for %%i in ( %LIBS% ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\lib"
+popd
 XCOPY /D /Y ..\ocradlib.h "%INSTALL_PREFIX%\include"
 
 :EBye

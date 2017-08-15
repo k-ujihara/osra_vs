@@ -18,15 +18,15 @@ If "%INSTALL_PREFIX%" == "" (
 	Set INSTALL_PREFIX=%INSTALL_BASE%
 )
 
-Set $OUTDIR=%Config%
-if /I "%Platform%" == "X64" Set $OUTDIR=x64\%$OUTDIR%
+Set $OutDir=%Config%
+if /I "%Platform%" == "X64" Set $OutDir=x64\%$OutDir%
 
-Set STATIC_LIB_RELEASE=libpotrace\%$OUTDIR%\libpotrace.lib
-Set STATIC_LIB_DEBUG=libpotrace\%$OUTDIR%\libpotraced.lib
+Set STATIC_LIB_RELEASE=libpotrace.lib
+Set STATIC_LIB_DEBUG=libpotraced.lib
 Set SHARED_DLL=
 Set SHARED_LIB=
 Set INCLUDES=..\src\potracelib.h
-Set EXES=potrace mkbitmap
+Set EXES=potrace.exe mkbitmap.exe
 
 if not exist "%INSTALL_PREFIX%" mkdir "%INSTALL_PREFIX%"
 if not exist "%INSTALL_PREFIX%\bin" mkdir "%INSTALL_PREFIX%\bin"
@@ -36,10 +36,12 @@ if not exist "%INSTALL_PREFIX%\include" mkdir "%INSTALL_PREFIX%\include"
 Set STATIC_LIB=%STATIC_LIB_RELEASE%
 for %%i in ( %INCLUDES% ) do XCOPY /Y /D "%%i" "%INSTALL_PREFIX%\include"
 
+pushd "%$OutDir%"
 if not "%STATIC_LIB%" == "" XCOPY /Y /D /I "%STATIC_LIB%" "%INSTALL_PREFIX%\lib"
 if not "%SHARED_LIB%" == "" XCOPY /Y /D /I "%SHARED_LIB%" "%INSTALL_PREFIX%\lib"
 if not "%SHARED_DLL%" == "" XCOPY /Y /D /I "%SHARED_DLL%" "%INSTALL_PREFIX%\bin"
-for %%i in ( %EXES% ) do XCOPY /Y /D /I "%%i\%$OutDir%\%%i.exe" "%INSTALL_PREFIX%\bin"
+for %%i in ( %EXES% ) do XCOPY /Y /D /I "%%i" "%INSTALL_PREFIX%\bin"
+popd
 
 @Set $PLATFORM=
 
