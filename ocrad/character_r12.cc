@@ -1,5 +1,5 @@
-/*  GNU Ocrad - Optical Character Recognition program
-    Copyright (C) 2003-2015 Antonio Diaz Diaz.
+ï»¿/*  GNU Ocrad - Optical Character Recognition program
+    Copyright (C) 2003-2017 Antonio Diaz Diaz.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 
 
 // Recognizes 2 blob characters.
-// ijÑñ!%:;=?|¡ª±º¿ÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛáéíóúàèìòùâêîôûÅå
+// ijÃ‘Ã±!%:;=?|Â¡ÂªÂ±ÂºÂ¿ÃÃ‰ÃÃ“ÃšÃ€ÃˆÃŒÃ’Ã™Ã‚ÃŠÃŽÃ”Ã›Ã¡Ã©Ã­Ã³ÃºÃ Ã¨Ã¬Ã²Ã¹Ã¢ÃªÃ®Ã´Ã»Ã…Ã¥
 //
 void Character::recognize12( const Charset & charset, const Rectangle & charbox )
   {
@@ -112,7 +112,7 @@ void Character::recognize12( const Charset & charset, const Rectangle & charbox 
         }
       if( !b2.holes() && ( code == '.' || code == '\'' ) )
         {
-        // Looks for merged 'ri' or 'rí'
+        // Looks for merged 'ri' or 'rÃ­'
         if( f2.bp.minima( b2.height() / 4 ) == 2 &&
             b2.top() > b1.bottom() && b2.hcenter() < b1.left() )
           {

@@ -1,6 +1,6 @@
 #! /bin/sh
 # check script for GNU Ocrad - Optical Character Recognition program
-# Copyright (C) 2009-2014 Antonio Diaz Diaz.
+# Copyright (C) 2009-2017 Antonio Diaz Diaz.
 #
 # This script is free software: you have unlimited permission
 # to copy, distribute and modify it.
@@ -20,74 +20,79 @@ fi
 
 if [ -d tmp ] ; then rm -rf tmp ; fi
 mkdir tmp
-cd "${objdir}"/tmp
+cd "${objdir}"/tmp || framework_failure
 
 in="${testdir}"/test.pbm
 ouf="${testdir}"/test.ouf
 txt="${testdir}"/test.txt
 utxt="${testdir}"/test_utf8.txt
 fail=0
+test_failed() { fail=1 ; printf " $1" ; [ -z "$2" ] || printf "($2)" ; }
 
 printf "testing ocrad-%s..." "$2"
 
 "${OCRAD}" -q -T-0.1 ${in} > /dev/null
-if [ $? = 1 ] ; then printf . ; else printf - ; fail=1 ; fi
+[ $? = 1 ] || test_failed $LINENO
 "${OCRAD}" -q -T 1.1 ${in} > /dev/null
-if [ $? = 1 ] ; then printf . ; else printf - ; fail=1 ; fi
+[ $? = 1 ] || test_failed $LINENO
 "${OCRAD}" -q -u -2,-1,1,1 ${in} > /dev/null
-if [ $? = 1 ] ; then printf . ; else printf - ; fail=1 ; fi
+[ $? = 1 ] || test_failed $LINENO
 "${OCRAD}" -q -u 1,1,1,1 ${in} > /dev/null
-if [ $? = 1 ] ; then printf . ; else printf - ; fail=1 ; fi
+[ $? = 1 ] || test_failed $LINENO
 
-"${OCRAD}" ${in} > out || fail=1
-cmp ${txt} out || fail=1
-printf .
-"${OCRAD}" < ${in} > out || fail=1
-cmp ${txt} out || fail=1
-printf .
-"${OCRAD}" -F utf8 ${in} > out || fail=1
-cmp ${utxt} out || fail=1
-printf .
-"${OCRAD}" -F utf8 < ${in} > out || fail=1
-cmp ${utxt} out || fail=1
-printf .
+"${OCRAD}" ${in} > out || test_failed $LINENO
+cmp ${txt} out || test_failed $LINENO
+"${OCRAD}" < ${in} > out || test_failed $LINENO
+cmp ${txt} out || test_failed $LINENO
+"${OCRAD}" -F utf8 ${in} > out || test_failed $LINENO
+cmp ${utxt} out || test_failed $LINENO
+"${OCRAD}" -F utf8 < ${in} > out || test_failed $LINENO
+cmp ${utxt} out || test_failed $LINENO
 
-"${OCRAD}" -E ${ouf} ${in} > out || fail=1
-cmp ${txt} out || fail=1
-printf .
-"${OCRAD}" -E ${ouf} -F utf8 ${in} > out || fail=1
-cmp ${utxt} out || fail=1
-printf .
+"${OCRAD}" -E ${ouf} ${in} > out || test_failed $LINENO
+cmp ${txt} out || test_failed $LINENO
+"${OCRAD}" -E ${ouf} -F utf8 ${in} > out || test_failed $LINENO
+cmp ${utxt} out || test_failed $LINENO
 
 "${OCRAD}" -u 0,0,1,1 ${in} > out
-cmp ${txt} out || fail=1
-printf .
+cmp ${txt} out || test_failed $LINENO
 "${OCRAD}" -u 0,0,1,1 - < ${in} > out
-cmp ${txt} out || fail=1
-printf .
+cmp ${txt} out || test_failed $LINENO
 
 "${OCRAD}" -u -1,-1,1,1 ${in} > out
-cmp ${txt} out || fail=1
-printf .
+cmp ${txt} out || test_failed $LINENO
 "${OCRAD}" - -u -1,-1,1,1 < ${in} > out
-cmp ${txt} out || fail=1
-printf .
+cmp ${txt} out || test_failed $LINENO
 
 cat ${in} ${in} > in2 || framework_failure
 cat ${txt} ${txt} > txt2 || framework_failure
+"${OCRAD}" < in2 > out || test_failed $LINENO
+cmp txt2 out || test_failed $LINENO
+"${OCRAD}" ${in} ${in} > out || test_failed $LINENO
+cmp txt2 out || test_failed $LINENO
+"${OCRAD}" ${in} - < ${in} > out || test_failed $LINENO
+cmp txt2 out || test_failed $LINENO
+"${OCRAD}" - ${in} < ${in} > out || test_failed $LINENO
+cmp txt2 out || test_failed $LINENO
+"${OCRAD}" - ${in} - < ${in} > out || test_failed $LINENO
+cmp txt2 out || test_failed $LINENO
+"${OCRAD}" - - ${in} < ${in} > out || test_failed $LINENO
+cmp txt2 out || test_failed $LINENO
+"${OCRAD}" ${in} - - < ${in} > out || test_failed $LINENO
+cmp txt2 out || test_failed $LINENO
+
 cat ${utxt} ${utxt} > utxt2 || framework_failure
-"${OCRAD}" < in2 > out || fail=1
-cmp txt2 out || fail=1
-printf .
-"${OCRAD}" -F utf8 < in2 > out || fail=1
-cmp utxt2 out || fail=1
-printf .
+"${OCRAD}" -F utf8 < in2 > out || test_failed $LINENO
+cmp utxt2 out || test_failed $LINENO
+"${OCRAD}" -F utf8 ${in} ${in} > out || test_failed $LINENO
+cmp utxt2 out || test_failed $LINENO
 rm -f in2 txt2 utxt2
 
 test_chars()
 	{
 	for coord in ${coords} ; do
-		produced_chars="${produced_chars}`"${OCRAD}" -u${coord} ${in}`" || fail=1
+		produced_chars="${produced_chars}`"${OCRAD}" -u${coord} ${in}`" ||
+		test_failed $LINENO ${coord}
 	done
 
 	if [ "${produced_chars}" != "${expected_chars}" ] ; then
@@ -96,7 +101,6 @@ test_chars()
 		echo "produced \"${produced_chars}\""
 		fail=1
 	fi
-	printf .
 	}
 
 # lines 1, 2, 3
@@ -172,12 +176,10 @@ expected_chars="@[\\]^{|}~¡ª¬o±º¿çÇ"
 produced_chars=
 test_chars
 
-"${OCRADCHECK}" ${in} > out || fail=1
-cmp ${txt} out || fail=1
-printf .
-"${OCRADCHECK}" ${in} --utf8 > out || fail=1
-cmp ${utxt} out || fail=1
-printf .
+"${OCRADCHECK}" ${in} > out || test_failed $LINENO
+cmp ${txt} out || test_failed $LINENO
+"${OCRADCHECK}" ${in} --utf8 > out || test_failed $LINENO
+cmp ${utxt} out || test_failed $LINENO
 
 echo
 if [ ${fail} = 0 ] ; then

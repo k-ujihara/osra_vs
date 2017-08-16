@@ -1,3 +1,10 @@
+2017-03-24  Antonio Diaz Diaz  <antonio@gnu.org>
+
+	* Version 0.26 released.
+	* main.cc (main): Don't use stdin more than once.
+	* configure: Avoid warning on some shells when testing for g++.
+	* Makefile.in: Detect the existence of install-info.
+
 2015-03-31  Antonio Diaz Diaz  <antonio@gnu.org>
 
 	* Version 0.25 released.
@@ -75,7 +82,7 @@
 	* Version 0.18 released.
 	* Added a layout analyser able to process arbitrary pages.
 	* Added new option '-q, --quiet'.
-	* The '--layout' option no more accepts an argument.
+	* The '--layout' option no longer accepts an argument.
 	* The '--crop' option now accepts negative coordinates.
 	* New recognized letter; 'a' with ring above.
 	* Fixed recognition on files with a single big character.
@@ -91,7 +98,7 @@
 
 	* Version 0.17 released.
 	* License updated to GPL version 3 or later.
-	* '--scale' no more suppresses ORF output.
+	* '--scale' no longer suppresses ORF output.
 	* Improved removal of thick frames.
 	* Changed 'Textline' to accept more than one big initial.
 	* Class 'Block' renamed to 'Blob'.
@@ -220,7 +227,7 @@
 	* Recursive 'layout detector' added.
 
 
-Copyright (C) 2003-2015 Antonio Diaz Diaz.
+Copyright (C) 2003-2017 Antonio Diaz Diaz.
 
 This file is a collection of facts, and thus it is not copyrightable,
 but just in case, you have unlimited permission to copy, distribute and

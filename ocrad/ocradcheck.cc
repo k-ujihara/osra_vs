@@ -1,5 +1,5 @@
 /*  Ocrcheck - A test program for the ocradlib library
-    Copyright (C) 2009-2015 Antonio Diaz Diaz.
+    Copyright (C) 2009-2017 Antonio Diaz Diaz.
 
     This program is free software: you have unlimited permission
     to copy, distribute and modify it.
@@ -17,6 +17,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <stdint.h>
+#include <unistd.h>
 
 #include "ocradlib.h"
 
@@ -26,19 +27,19 @@ int main( const int argc, const char * const argv[] )
   const bool utf8 = ( argc > 2 );
   if( argc < 2 )
     {
-    std::fprintf( stderr, "Usage: ocradcheck filename.pnm\n" );
+    std::fputs( "Usage: ocradcheck filename.pnm\n", stderr );
     return 1;
     }
 
   if( OCRAD_version()[0] != OCRAD_version_string[0] )
     {
-    std::fprintf( stderr, "bad library version" );
+    std::fputs( "bad library version.\n", stderr );
     return 3;
     }
 
   if( std::strcmp( PROGVERSION, OCRAD_version_string ) != 0 )
     {
-    std::fprintf( stderr, "bad library version_string" );
+    std::fputs( "bad library version_string.\n", stderr );
     return 3;
     }
 
@@ -46,7 +47,7 @@ int main( const int argc, const char * const argv[] )
   if( !ocrdes || OCRAD_get_errno( ocrdes ) != OCRAD_ok )
     {
     OCRAD_close( ocrdes );
-    std::fprintf( stderr, "not enough memory.\n" );
+    std::fputs( "not enough memory.\n", stderr );
     return 1;
     }
 
@@ -55,9 +56,9 @@ int main( const int argc, const char * const argv[] )
     const OCRAD_Errno ocr_errno = OCRAD_get_errno( ocrdes );
     OCRAD_close( ocrdes );
     if( ocr_errno == OCRAD_mem_error )
-      std::fprintf( stderr, "not enough memory.\n" );
+      std::fputs( "not enough memory.\n", stderr );
     else
-      std::fprintf( stderr, "Can't open file '%s' for reading\n", argv[1] );
+      std::fprintf( stderr, "Can't open file '%s' for reading.\n", argv[1] );
     return 1;
     }
 //  std::fprintf( stderr, "ocradcheck: testing file '%s'\n", argv[1] );
@@ -70,10 +71,10 @@ int main( const int argc, const char * const argv[] )
     OCRAD_close( ocrdes );
     if( ocr_errno == OCRAD_mem_error )
       {
-      std::fprintf( stderr, "not enough memory.\n" );
+      std::fputs( "not enough memory.\n", stderr );
       return 1;
       }
-    std::fprintf( stderr, "internal error: invalid argument.\n" );
+    std::fputs( "internal error: invalid argument.\n", stderr );
     return 3;
     }
 
@@ -91,7 +92,7 @@ int main( const int argc, const char * const argv[] )
       chars_total_by_line += OCRAD_result_chars_line( ocrdes, b, l );
       if( s && s[0] )
         {
-        std::printf( "%s", s );
+        std::fputs( s, stdout );
         const int len = std::strlen( s ) - 1;
         if( !utf8 )
           chars_total_by_count += len;
@@ -101,7 +102,7 @@ int main( const int argc, const char * const argv[] )
               ++chars_total_by_count;
         }
       }
-    std::fputs( "\n", stdout );
+    std::fputc( '\n', stdout );
     }
   const int chars_total = OCRAD_result_chars_total( ocrdes );
   if( chars_total_by_block != chars_total ||

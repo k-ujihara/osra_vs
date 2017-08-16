@@ -1,5 +1,5 @@
 /*  GNU Ocrad - Optical Character Recognition program
-    Copyright (C) 2003-2015 Antonio Diaz Diaz.
+    Copyright (C) 2003-2017 Antonio Diaz Diaz.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@
 #include <cstdlib>
 #include <vector>
 #include <stdint.h>
-#include <cwctype>
 
 #include "common.h"
 #include "rectangle.h"
@@ -413,10 +412,10 @@ void Textline::recognize2( const Charset & charset )
           int code2 = c2.guess( 0 ).code;
           int code2b = UCS::base_letter( code2 );
           if( !code2b && code2 >= 128 ) continue;
-          if( ( iswalpha( code2 ) && 4 * b1.height() > 5 * c2.height() ) ||
-              ( iswupper( code2 ) && Ocrad::similar( b1.height(), c2.height(), 10 ) ) ||
-              ( iswalpha( code2b ) && 4 * c1.height() > 5 * c2.height() ) ||
-              ( iswupper( code2b ) && Ocrad::similar( c1.height(), c2.height(), 10 ) ) )
+          if( ( std::isalpha( code2 ) && 4 * b1.height() > 5 * c2.height() ) ||
+              ( std::isupper( code2 ) && Ocrad::similar( b1.height(), c2.height(), 10 ) ) ||
+              ( std::isalpha( code2b ) && 4 * c1.height() > 5 * c2.height() ) ||
+              ( std::isupper( code2b ) && Ocrad::similar( c1.height(), c2.height(), 10 ) ) )
             { c1.insert_guess( 0, UCS::toupper( code ), 1 ); break; }
           }
         }

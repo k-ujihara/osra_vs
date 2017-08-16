@@ -1,5 +1,5 @@
 /*  GNU Ocrad - Optical Character Recognition program
-    Copyright (C) 2003-2015 Antonio Diaz Diaz.
+    Copyright (C) 2003-2017 Antonio Diaz Diaz.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -251,7 +251,7 @@ void Character::dprint( const Control & control, const Rectangle & charbox,
                     UCS::ucs_to_utf8( gv[i].code ), gv[i].value );
     if( !graph && !recursive ) break;
     }
-  std::fputs( "\n", control.outfile );
+  std::fputc( '\n', control.outfile );
   if( graph )
     {
     std::fprintf( control.outfile,
@@ -267,7 +267,7 @@ void Character::dprint( const Control & control, const Rectangle & charbox,
       std::fprintf( control.outfile,
                     "hbars = %d, vbars = %d\n", f.hbars(), f.vbars() );
       }
-    std::fputs( "\n", control.outfile );
+    std::fputc( '\n', control.outfile );
 
     const int minrow = std::min( top(), charbox.top() );
     const int maxrow = std::max( bottom(), charbox.bottom() );
@@ -321,7 +321,7 @@ void Character::dprint( const Control & control, const Rectangle & charbox,
       if( ish2top ) std::fprintf( control.outfile, "  h2.top(%d)", row );
       if( ish2bot ) std::fprintf( control.outfile, "  h2.bottom(%d)", row );
 
-      std::fputs( "\n", control.outfile );
+      std::fputc( '\n', control.outfile );
       }
     std::fputs( "\n\n", control.outfile );
     }
@@ -343,7 +343,7 @@ void Character::xprint( const Control & control ) const
     else
       std::fprintf( control.exportfile, ", '%s'%d",
                     UCS::ucs_to_utf8( gv[i].code ), gv[i].value );
-  std::fputs( "\n", control.exportfile );
+  std::fputc( '\n', control.exportfile );
   }
 
 

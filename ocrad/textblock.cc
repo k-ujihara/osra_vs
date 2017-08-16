@@ -1,5 +1,5 @@
 /*  GNU Ocrad - Optical Character Recognition program
-    Copyright (C) 2003-2015 Antonio Diaz Diaz.
+    Copyright (C) 2003-2017 Antonio Diaz Diaz.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -490,7 +490,7 @@ void Textblock::print( const Control & control ) const
   {
   for( int i = 0; i < textlines(); ++i )
     tlpv[i]->print( control );
-  std::fputs( "\n", control.outfile );
+  std::fputc( '\n', control.outfile );
   }
 
 
@@ -504,7 +504,7 @@ void Textblock::dprint( const Control & control, bool graph, bool recursive ) co
                   tlpv[i]->characters(), i + 1 );
     tlpv[i]->dprint( control, graph, recursive );
     }
-  std::fputs( "\n", control.outfile );
+  std::fputc( '\n', control.outfile );
   }
 
 

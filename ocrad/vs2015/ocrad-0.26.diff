@@ -1,0 +1,101 @@
+diff -c -x .svn -x vs2015 -r ocrad-0.26/character_r12.cc osra_vs\ocrad/character_r12.cc
+*** ocrad-0.26/character_r12.cc	2017-03-24 08:07:48.000000000 +0900
+--- osra_vs\ocrad/character_r12.cc	2017-08-16 19:48:59.902845300 +0900
+***************
+*** 1,4 ****
+! /*  GNU Ocrad - Optical Character Recognition program
+      Copyright (C) 2003-2017 Antonio Diaz Diaz.
+  
+      This program is free software: you can redistribute it and/or modify
+--- 1,4 ----
+! ï»¿/*  GNU Ocrad - Optical Character Recognition program
+      Copyright (C) 2003-2017 Antonio Diaz Diaz.
+  
+      This program is free software: you can redistribute it and/or modify
+***************
+*** 15,20 ****
+--- 15,21 ----
+      along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+  
++ #include <algorithm>
+  #include <cstdio>
+  #include <cstdlib>
+  #include <vector>
+***************
+*** 32,38 ****
+  
+  
+  // Recognizes 2 blob characters.
+! // ijÑñ!%:;=?|¡ª±º¿ÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛáéíóúàèìòùâêîôûÅå
+  //
+  void Character::recognize12( const Charset & charset, const Rectangle & charbox )
+    {
+--- 33,39 ----
+  
+  
+  // Recognizes 2 blob characters.
+! // ijÃ‘Ã±!%:;=?|Â¡ÂªÂ±ÂºÂ¿ÃÃ‰ÃÃ“ÃšÃ€ÃˆÃŒÃ’Ã™Ã‚ÃŠÃŽÃ”Ã›Ã¡Ã©Ã­Ã³ÃºÃ Ã¨Ã¬Ã²Ã¹Ã¢ÃªÃ®Ã´Ã»Ã…Ã¥
+  //
+  void Character::recognize12( const Charset & charset, const Rectangle & charbox )
+    {
+***************
+*** 111,117 ****
+          }
+        if( !b2.holes() && ( code == '.' || code == '\'' ) )
+          {
+!         // Looks for merged 'ri' or 'rí'
+          if( f2.bp.minima( b2.height() / 4 ) == 2 &&
+              b2.top() > b1.bottom() && b2.hcenter() < b1.left() )
+            {
+--- 112,118 ----
+          }
+        if( !b2.holes() && ( code == '.' || code == '\'' ) )
+          {
+!         // Looks for merged 'ri' or 'rÃ­'
+          if( f2.bp.minima( b2.height() / 4 ) == 2 &&
+              b2.top() > b1.bottom() && b2.hcenter() < b1.left() )
+            {
+diff -c -x .svn -x vs2015 -r ocrad-0.26/main.cc osra_vs\ocrad/main.cc
+*** ocrad-0.26/main.cc	2017-03-25 03:39:41.000000000 +0900
+--- osra_vs\ocrad/main.cc	2017-08-16 19:31:32.739324300 +0900
+***************
+*** 31,37 ****
+  #include <stdint.h>
+  #if defined(__MSVCRT__) || defined(__OS2__) || defined(_MSC_VER)
+  #include <fcntl.h>
+- #include <unistd.h>
+  #include <io.h>
+  #endif
+  
+--- 31,36 ----
+***************
+*** 373,379 ****
+      {
+      if( append ) control.outfile = std::fopen( outfile_name, "a" );
+      else if( force ) control.outfile = std::fopen( outfile_name, "w" );
+!     else if( ( control.outfile = std::fopen( outfile_name, "wx" ) ) == 0 )
+        {
+        if( verbosity >= 0 )
+          std::fprintf( stderr, "Output file %s already exists.\n", outfile_name );
+--- 372,378 ----
+      {
+      if( append ) control.outfile = std::fopen( outfile_name, "a" );
+      else if( force ) control.outfile = std::fopen( outfile_name, "w" );
+!     else if( ( control.outfile = std::fopen( outfile_name, "w" ) ) == 0 )
+        {
+        if( verbosity >= 0 )
+          std::fprintf( stderr, "Output file %s already exists.\n", outfile_name );
+diff -c -x .svn -x vs2015 -r ocrad-0.26/user_filter.cc osra_vs\ocrad/user_filter.cc
+*** ocrad-0.26/user_filter.cc	2017-03-24 08:07:48.000000000 +0900
+--- osra_vs\ocrad/user_filter.cc	2017-08-16 19:22:55.335494700 +0900
+***************
+*** 15,20 ****
+--- 15,21 ----
+      along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+  
++ #include <cctype>
+  #include <cstdio>
+  #include <string>
+  #include <vector>

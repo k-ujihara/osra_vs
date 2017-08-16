@@ -1,5 +1,5 @@
 /*  Ocradlib - Optical Character Recognition library
-    Copyright (C) 2009-2015 Antonio Diaz Diaz.
+    Copyright (C) 2009-2017 Antonio Diaz Diaz.
 
     This library is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 extern "C" {
 #endif
 
-const char * const OCRAD_version_string = "0.25";
+const char * const OCRAD_version_string = "0.26";
 
 
 /* OCRAD_Pixmap.data is a pointer to image data formed by "height" rows

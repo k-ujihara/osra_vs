@@ -1,12 +1,12 @@
 #! /bin/sh
 # configure script for GNU Ocrad - Optical Character Recognition program
-# Copyright (C) 2003-2015 Antonio Diaz Diaz.
+# Copyright (C) 2003-2017 Antonio Diaz Diaz.
 #
 # This configure script is free software: you have unlimited permission
 # to copy, distribute and modify it.
 
 pkgname=ocrad
-pkgversion=0.25
+pkgversion=0.26
 progname=ocrad
 libname=ocrad
 srctrigger=doc/${pkgname}.texi
@@ -29,11 +29,11 @@ CXXFLAGS='-Wall -W -O2'
 LDFLAGS=
 
 # checking whether we are using GNU C++.
-${CXX} --version > /dev/null 2>&1
-if [ $? != 0 ] ; then
+/bin/sh -c "${CXX} --version" > /dev/null 2>&1 ||
+	{
 	CXX=c++
-	CXXFLAGS='-W -O2'
-fi
+	CXXFLAGS=-O2
+	}
 
 # Loop over all args
 args=
@@ -55,9 +55,12 @@ while [ $# != 0 ] ; do
 	# Process the options
 	case ${option} in
 	--help | -h)
-		echo "Usage: configure [options]"
+		echo "Usage: $0 [OPTION]... [VAR=VALUE]..."
 		echo
-		echo "Options: [defaults in brackets]"
+		echo "To assign makefile variables (e.g., CXX, CXXFLAGS...), specify them as"
+		echo "arguments to configure in the form VAR=VALUE."
+		echo
+		echo "Options and variables: [defaults in brackets]"
 		echo "  -h, --help            display this help and exit"
 		echo "  -V, --version         output version information and exit"
 		echo "  --srcdir=DIR          find the sources in DIR [. or ..]"
@@ -148,7 +151,7 @@ if [ -z "${no_create}" ] ; then
 	rm -f config.status
 	cat > config.status << EOF
 #! /bin/sh
-# This file was generated automatically by configure. Do not edit.
+# This file was generated automatically by configure. Don't edit.
 # Run this file to recreate the current configuration.
 #
 # This script is free software: you have unlimited permission
@@ -176,8 +179,8 @@ echo "LDFLAGS = ${LDFLAGS}"
 rm -f Makefile
 cat > Makefile << EOF
 # Makefile for GNU Ocrad - Optical Character Recognition program
-# Copyright (C) 2003-2015 Antonio Diaz Diaz.
-# This file was generated automatically by configure. Do not edit.
+# Copyright (C) 2003-2017 Antonio Diaz Diaz.
+# This file was generated automatically by configure. Don't edit.
 #
 # This Makefile is free software: you have unlimited permission
 # to copy, distribute and modify it.

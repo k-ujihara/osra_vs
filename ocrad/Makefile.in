@@ -6,6 +6,7 @@ INSTALL_PROGRAM = $(INSTALL) -m 755
 INSTALL_DATA = $(INSTALL) -m 644
 INSTALL_DIR = $(INSTALL) -d -m 755
 SHELL = /bin/sh
+CAN_RUN_INSTALLINFO = $(SHELL) -c "install-info --version" > /dev/null 2>&1
 
 lib_objs = ocradlib.o
 ocr_objs = common.o segment.o mask.o rational.o rectangle.o track.o \
@@ -28,19 +29,19 @@ lib$(libname).a: $(ocr_objs) $(lib_objs)
 	$(AR) -rcs $@ $(ocr_objs) $(lib_objs)
 
 $(progname) : $(ocr_objs) $(objs)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(ocr_objs) $(objs)
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) -o $@ $(ocr_objs) $(objs)
 
 ocradcheck : ocradcheck.o lib$(libname).a
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ ocradcheck.o lib$(libname).a
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) -o $@ ocradcheck.o lib$(libname).a
 
 ocradcheck.o : ocradcheck.cc
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -DPROGVERSION=\"$(pkgversion)\" -c -o $@ $<
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DPROGVERSION=\"$(pkgversion)\" -c -o $@ $<
 
 main.o : main.cc
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -DPROGVERSION=\"$(pkgversion)\" -c -o $@ $<
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DPROGVERSION=\"$(pkgversion)\" -c -o $@ $<
 
 %.o : %.cc
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 $(lib_objs)     : Makefile ocradlib.h
 $(ocr_objs)     : Makefile bitmap.h blob.h common.h rectangle.h ucs.h
@@ -109,7 +110,9 @@ install-info :
 	if [ ! -d "$(DESTDIR)$(infodir)" ] ; then $(INSTALL_DIR) "$(DESTDIR)$(infodir)" ; fi
 	-rm -f "$(DESTDIR)$(infodir)/$(pkgname).info"*
 	$(INSTALL_DATA) $(VPATH)/doc/$(pkgname).info "$(DESTDIR)$(infodir)/$(pkgname).info"
-	-install-info --info-dir="$(DESTDIR)$(infodir)" "$(DESTDIR)$(infodir)/$(pkgname).info"
+	-if $(CAN_RUN_INSTALLINFO) ; then \
+		install-info --info-dir="$(DESTDIR)$(infodir)" "$(DESTDIR)$(infodir)/$(pkgname).info" ; \
+	fi
 
 install-info-compress : install-info
 	lzip -v -9 "$(DESTDIR)$(infodir)/$(pkgname).info"
@@ -130,7 +133,9 @@ uninstall-bin :
 	-rm -f "$(DESTDIR)$(libdir)/lib$(libname).a"
 
 uninstall-info :
-	-install-info --info-dir="$(DESTDIR)$(infodir)" --remove "$(DESTDIR)$(infodir)/$(pkgname).info"
+	-if $(CAN_RUN_INSTALLINFO) ; then \
+		install-info --info-dir="$(DESTDIR)$(infodir)" --remove "$(DESTDIR)$(infodir)/$(pkgname).info" ; \
+	fi
 	-rm -f "$(DESTDIR)$(infodir)/$(pkgname).info"*
 
 uninstall-man :
@@ -150,14 +155,14 @@ dist : doc
 	  $(DISTNAME)/doc/$(progname).1 \
 	  $(DISTNAME)/doc/$(pkgname).info \
 	  $(DISTNAME)/doc/$(pkgname).texi \
+	  $(DISTNAME)/*.h \
+	  $(DISTNAME)/*.cc \
 	  $(DISTNAME)/testsuite/check.sh \
 	  $(DISTNAME)/testsuite/test.ouf \
 	  $(DISTNAME)/testsuite/test.pbm \
 	  $(DISTNAME)/testsuite/test.txt \
 	  $(DISTNAME)/testsuite/test_utf8.txt \
-	  $(DISTNAME)/ocrad.png \
-	  $(DISTNAME)/*.h \
-	  $(DISTNAME)/*.cc
+	  $(DISTNAME)/ocrad.png
 	rm -f $(DISTNAME)
 	lzip -v -9 $(DISTNAME).tar
 

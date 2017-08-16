@@ -21,7 +21,7 @@ tiff-4.0.6
 libxml2-2.9.3
 GraphicsMagick-1.3.23
 gocr-0.50pre
-ocrad-0.25
+ocrad-0.26
 potrace-1.15
 openbabel-2.4.1
 INCHI-1.0.4

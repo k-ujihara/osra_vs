@@ -1,5 +1,5 @@
 /*  GNU Ocrad - Optical Character Recognition program
-    Copyright (C) 2003-2015 Antonio Diaz Diaz.
+    Copyright (C) 2003-2017 Antonio Diaz Diaz.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ namespace {
 
 const char * const Program_name = "GNU Ocrad";
 const char * const program_name = "ocrad";
-const char * const program_year = "2015";
+const char * const program_year = "2017";
 const char * invocation_name = 0;
 
 struct Input_control
@@ -69,19 +69,16 @@ struct Input_control
 void show_error( const char * const msg, const int errcode = 0,
                  const bool help = false )
   {
-  if( verbosity >= 0 )
+  if( verbosity < 0 ) return;
+  if( msg && msg[0] )
     {
-    if( msg && msg[0] )
-      {
-      std::fprintf( stderr, "%s: %s", program_name, msg );
-      if( errcode > 0 )
-        std::fprintf( stderr, ": %s.", std::strerror( errcode ) );
-      std::fputs( "\n", stderr );
-      }
-    if( help )
-      std::fprintf( stderr, "Try '%s --help' for more information.\n",
-                    invocation_name );
+    std::fprintf( stderr, "%s: %s", program_name, msg );
+    if( errcode > 0 ) std::fprintf( stderr, ": %s", std::strerror( errcode ) );
+    std::fputc( '\n', stderr );
     }
+  if( help )
+    std::fprintf( stderr, "Try '%s --help' for more information.\n",
+                  invocation_name );
   }
 
 
@@ -190,8 +187,6 @@ int process_file( FILE * const infile, const char * const infile_name,
                   const Input_control & input_control,
                   const Control & control )
   {
-  if( verbosity >= 1 )
-    std::fprintf( stderr, "processing file '%s'\n", infile_name );
   try
     {
     Page_image page_image( infile, input_control.invert );
@@ -207,7 +202,7 @@ int process_file( FILE * const infile, const char * const infile_name,
       else
         {
         if( verbosity >= 1 )
-          std::fprintf( stderr, "file '%s' totally cut away\n", infile_name );
+          std::fprintf( stderr, "file '%s' totally cut away.\n", infile_name );
         return 1;
         }
       }
@@ -238,8 +233,34 @@ int process_file( FILE * const infile, const char * const infile_name,
       }
     }
   catch( Page_image::Error e ) { show_error( e.msg ); return 2; }
-  if( verbosity >= 1 ) std::fputs( "\n", stderr );
+  if( verbosity >= 1 ) std::fputc( '\n', stderr );
   return 0;
+  }
+
+int process_full_file( FILE * const infile, const char * const infile_name,
+                       const Input_control & input_control,
+                       const Control & control )
+  {
+  if( verbosity >= 1 )
+    std::fprintf( stderr, "processing file '%s'\n", infile_name );
+  int retval = 0;
+  while( true )
+    {
+    const int tmp = process_file( infile, infile_name, input_control, control );
+    if( tmp > retval ) retval = tmp;
+    if( control.outfile ) std::fflush( control.outfile );
+    if( control.exportfile ) std::fflush( control.exportfile );
+    if( infile != stdin ) break;
+    if( tmp <= 1 )		// detect EOF
+      {
+      int ch;
+      do ch = std::fgetc( infile ); while( ch == 0 || std::isspace( ch ) );
+      std::ungetc( ch, infile );
+      }
+    if( tmp > 1 || std::feof( infile ) || std::ferror( infile ) ) break;
+    }
+  std::fclose( infile );
+  return retval;
   }
 
 } // end namespace
@@ -385,38 +406,30 @@ int main( const int argc, const char * const argv[] )
     }
 
   // process any remaining command line arguments (input files)
-  FILE * infile = (argind < parser.arguments()) ? 0 : stdin;
-  const char *infile_name = "-";
-  while( true )
+  bool stdin_used = false;
+  for( bool first = true; first || argind < parser.arguments(); first = false )
     {
-    while( infile != stdin )
+    const char * infile_name = ( argind < parser.arguments() ) ?
+                               parser.argument( argind++ ).c_str() : "-";
+    FILE * infile;
+    if( std::strcmp( infile_name, "-" ) == 0 )
       {
-      if( infile ) std::fclose( infile );
-      if( argind >= parser.arguments() ) { infile = 0; break; }
-      infile_name = parser.argument( argind++ ).c_str();
-      if( std::strcmp( infile_name, "-" ) == 0 ) infile = stdin;
-      else infile = std::fopen( infile_name, "rb" );
-      if( infile ) break;
-      if( verbosity >= 0 )
-        std::fprintf( stderr, "Can't open '%s'\n", infile_name );
-      if( retval == 0 ) retval = 1;
+      if( stdin_used ) continue; else stdin_used = true;
+      infile = stdin;
       }
-    if( !infile ) break;
-
-    const int tmp = process_file( infile, infile_name, input_control, control );
-    if( infile == stdin )
+    else
       {
-      if( tmp <= 1 )		// detect EOF
+      infile = std::fopen( infile_name, "rb" );
+      if( !infile )
         {
-        int ch;
-        do ch = std::fgetc( infile ); while( ch == 0 || std::isspace( ch ) );
-        std::ungetc( ch, infile );
+        if( verbosity >= 0 )
+          std::fprintf( stderr, "Can't open '%s'\n", infile_name );
+        if( retval < 1 ) retval = 1;
+        continue;
         }
-      if( tmp > 1 || std::feof( infile ) || std::ferror( infile ) ) infile = 0;
       }
+    const int tmp = process_full_file( infile, infile_name, input_control, control );
     if( tmp > retval ) retval = tmp;
-    if( control.outfile ) std::fflush( control.outfile );
-    if( control.exportfile ) std::fflush( control.exportfile );
     }
   if( control.outfile ) std::fclose( control.outfile );
   if( control.exportfile ) std::fclose( control.exportfile );

@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <OCRAD_VERSION>0.25</OCRAD_VERSION>
+    <OCRAD_VERSION>0.26</OCRAD_VERSION>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />

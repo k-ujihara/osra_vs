@@ -6,8 +6,8 @@
 @finalout
 @c %**end of header
 
-@set UPDATED 31 March 2015
-@set VERSION 0.25
+@set UPDATED 24 March 2017
+@set VERSION 0.26
 
 @dircategory GNU Packages
 @direntry
@@ -50,7 +50,7 @@ This manual is for GNU Ocrad (version @value{VERSION}, @value{UPDATED}).
 @end menu
 
 @sp 1
-Copyright @copyright{} 2003-2015 Antonio Diaz Diaz.
+Copyright @copyright{} 2003-2017 Antonio Diaz Diaz.
 
 This manual is free documentation: you have unlimited permission
 to copy, distribute and modify it.
@@ -115,9 +115,15 @@ The format for running ocrad is:
 ocrad [@var{options}] [@var{files}]
 @end example
 
+@noindent
+@samp{-} used as a @var{file} argument means standard input. It can be
+mixed with other @var{files} and is read just once, the first time it
+appears in the command line. Ocrad can read concatenated files from
+standard input.
+
 Ocrad supports the following options:
 
-@table @samp
+@table @code
 @item -h
 @itemx --help
 Print an informative help message describing the options and exit.
@@ -322,7 +328,7 @@ leave                      # remove this line to get @samp{numbers_only}
 
 Ocrad provides the following built-in filters (@pxref{--filter}):
 
-@table @samp
+@table @code
 @item --filter=letters
 Forces every character that resembles a letter to be recognized as a
 letter. Other characters will be output without change.
@@ -379,7 +385,7 @@ used by the application.
 
 @example
 if( OCRAD_version()[0] != OCRAD_version_string[0] )
-  error( "bad library version" );
+  error( "bad library version." );
 @end example
 
 
@@ -513,7 +519,7 @@ have failed. But this return value only tells you that an error has
 occurred. To find out what kind of error it was, you need to verify the
 error code by calling @samp{OCRAD_get_errno}.
 
-Library functions do not change the value returned by
+Library functions don't change the value returned by
 @samp{OCRAD_get_errno} when they succeed; thus, the value returned by
 @samp{OCRAD_get_errno} after a successful call is not necessarily
 OCRAD_ok, and you should not use @samp{OCRAD_get_errno} to determine
@@ -638,10 +644,10 @@ Any line beginning with @samp{#} is a comment line.
 @item
 The first non-comment line has the form
 @w{@samp{source file @var{filename}}}, where @var{filename} is the name
-of the file being processed (@samp{-} for stdin). This is the only line
-guaranteed to exist for every input file read without errors. If the
-file, or any block or line, has no text, the corresponding part in the
-ORF file will be missing.
+of the file being processed (@samp{-} for standard input). This is the
+only line guaranteed to exist for every input file read without errors.
+If the file, or any block or line, has no text, the corresponding part
+in the ORF file will be missing.
 @item
 The second non-comment line has the form
 @w{@samp{total text blocks @var{n}}}, where @var{n} is the total number

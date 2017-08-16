@@ -46,9 +46,6 @@
     <ClCompile Include="..\..\ucs.cc" />
     <ClCompile Include="..\..\user_filter.cc" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\ocrad.def" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EF91390E-81AF-48FC-B47F-D8D6C0C8FDEA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

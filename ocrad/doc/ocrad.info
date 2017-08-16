@@ -11,7 +11,7 @@ File: ocrad.info,  Node: Top,  Next: Introduction,  Up: (dir)
 GNU Ocrad Manual
 ****************
 
-This manual is for GNU Ocrad (version 0.25, 31 March 2015).
+This manual is for GNU Ocrad (version 0.26, 24 March 2017).
 
 * Menu:
 
@@ -29,7 +29,7 @@ This manual is for GNU Ocrad (version 0.25, 31 March 2015).
 * Concept index::               Index of concepts
 
 
-   Copyright (C) 2003-2015 Antonio Diaz Diaz.
+   Copyright (C) 2003-2017 Antonio Diaz Diaz.
 
    This manual is free documentation: you have unlimited permission to
 copy, distribute and modify it.
@@ -90,6 +90,10 @@ File: ocrad.info,  Node: Invoking ocrad,  Next: Filters,  Prev: Character sets, 
 The format for running ocrad is:
 
      ocrad [OPTIONS] [FILES]
+
+'-' used as a FILE argument means standard input. It can be mixed with
+other FILES and is read just once, the first time it appears in the
+command line. Ocrad can read concatenated files from standard input.
 
    Ocrad supports the following options:
 
@@ -351,7 +355,7 @@ actually used may be incompatible with the 'ocradlib.h' header file
 used by the application.
 
      if( OCRAD_version()[0] != OCRAD_version_string[0] )
-       error( "bad library version" );
+       error( "bad library version." );
 
 
 File: ocrad.info,  Node: Library functions,  Next: Library error codes,  Prev: Library version,  Up: Top
@@ -473,7 +477,7 @@ have failed. But this return value only tells you that an error has
 occurred. To find out what kind of error it was, you need to verify the
 error code by calling 'OCRAD_get_errno'.
 
-   Library functions do not change the value returned by
+   Library functions don't change the value returned by
 'OCRAD_get_errno' when they succeed; thus, the value returned by
 'OCRAD_get_errno' after a successful call is not necessarily OCRAD_ok,
 and you should not use 'OCRAD_get_errno' to determine whether a call
@@ -594,9 +598,10 @@ follows:
 
    - The first non-comment line has the form 'source file FILENAME',
      where FILENAME is the name of the file being processed ('-' for
-     stdin). This is the only line guaranteed to exist for every input
-     file read without errors. If the file, or any block or line, has
-     no text, the corresponding part in the ORF file will be missing.
+     standard input). This is the only line guaranteed to exist for
+     every input file read without errors.  If the file, or any block
+     or line, has no text, the corresponding part in the ORF file will
+     be missing.
 
    - The second non-comment line has the form 'total text blocks N',
      where N is the total number of text blocks in the source image.
@@ -683,17 +688,17 @@ Node: Top196
 Node: Introduction1256
 Node: Character sets1990
 Node: Invoking ocrad3144
-Ref: --filter4090
-Ref: --user-filter4467
-Node: Filters7505
-Node: Library version12290
-Node: Library functions12962
-Node: Library error codes18080
-Node: Image format conversion19631
-Node: Algorithm21155
-Node: OCR results file22488
-Node: Problems24759
-Node: Concept index25297
+Ref: --filter4299
+Ref: --user-filter4676
+Node: Filters7714
+Node: Library version12499
+Node: Library functions13172
+Node: Library error codes18290
+Node: Image format conversion19840
+Node: Algorithm21364
+Node: OCR results file22697
+Node: Problems24983
+Node: Concept index25521
 
 End Tag Table
 

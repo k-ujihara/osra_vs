@@ -1,5 +1,5 @@
 /*  GNU Ocrad - Optical Character Recognition program
-    Copyright (C) 2003-2015 Antonio Diaz Diaz.
+    Copyright (C) 2003-2017 Antonio Diaz Diaz.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@
 #include "common.h"
 #include "user_filter.h"
 
+int verbosity = 0;
 
 namespace {
 
@@ -78,8 +79,6 @@ const T_entry T_table[] =
 } // end namespace
 
 
-int verbosity = 0;
-
 void Ocrad::internal_error( const char * const msg )
   {
   std::fprintf( stderr, "ocrad: internal error: %s\n", msg );
@@ -130,7 +129,7 @@ void Charset::show_error( const char * const program_name,
     std::fputs( "Valid charset names:", stderr );
     for( int i = 0; i < charsets; ++i )
       std::fprintf( stderr, "  %s", charset_name[i] );
-    std::fputs( "\n", stderr );
+    std::fputc( '\n', stderr );
     }
   }
 
@@ -180,7 +179,7 @@ bool Control::add_filter( const char * const program_name,
     std::fputs( "Valid filter names:", stderr );
     for( int i = 0; F_table[i].name != 0; ++i )
       std::fprintf( stderr, "  %s", F_table[i].name );
-    std::fputs( "\n", stderr );
+    std::fputc( '\n', stderr );
     }
   return false;
   }
