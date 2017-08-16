@@ -33,7 +33,6 @@ extern "C" {
 #include <potracelib.h>
 }
 
-using namespace std;
 using namespace Magick;
 
 // struct: atom_s
@@ -47,7 +46,7 @@ atom_s(double xx=0, double yy=0, const potrace_path_t* p=NULL) :
   double x, y;
   // string: label
   //    atomic label
-  string label;
+  std::string label;
   // int: n
   //    counter of created OBAtom objects in <create_molecule()>
   int n;

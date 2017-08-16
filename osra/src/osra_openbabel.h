@@ -27,7 +27,6 @@
 #include "osra.h"
 #include "osra_segment.h"
 
-using namespace std;
 
 // Header: osra_openbabel.h
 //
@@ -96,8 +95,9 @@ int osra_openbabel_init();
 //
 // Returns:
 //      calculated molecule statistics
-molecule_statistics_t calculate_molecule_statistics(vector<atom_t> &atom, const vector<bond_t> &bond, int n_bond,
-    double avg_bond_length, const map<string, string> &superatom, bool verbose);
+molecule_statistics_t calculate_molecule_statistics(
+    std::vector<atom_t> &atom, const std::vector<bond_t> &bond, int n_bond,
+    double avg_bond_length, const std::map<std::string, std::string> &superatom, bool verbose);
 
 // Function: get_formatted_structure()
 //
@@ -124,8 +124,14 @@ molecule_statistics_t calculate_molecule_statistics(vector<atom_t> &atom, const 
 //
 //  Returns:
 //      string containing SMILES, SDF or other representation of the molecule
-const string get_formatted_structure(vector<atom_t> &atom, const vector<bond_t> &bond, int n_bond, const string &format, const string &second_format, molecule_statistics_t &molecule_statistics,
-                                     double &confidence, bool show_confidence, double avg_bond_length, double scaled_avg_bond_length, bool show_avg_bond_length, const int * const resolution,
-                                     const int * const page, const box_t * const surrounding_box, const map<string, string> &superatom, int n_letters, bool show_learning, int resolution_iteration, bool verbose);
+const std::string get_formatted_structure(
+    std::vector<atom_t> &atom, const std::vector<bond_t> &bond, int n_bond,
+    const std::string &format, const std::string &second_format,
+    molecule_statistics_t &molecule_statistics,
+    double &confidence, bool show_confidence,
+    double avg_bond_length, double scaled_avg_bond_length, bool show_avg_bond_length,
+    const int * const resolution, const int * const page, const box_t * const surrounding_box,
+    const std::map<std::string, std::string> &superatom, int n_letters, bool show_learning,
+    int resolution_iteration, bool verbose, const std::vector<bracket_t>&  brackets);
 
 #endif

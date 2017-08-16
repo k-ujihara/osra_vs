@@ -33,7 +33,8 @@
 #include "osra_ocr.h"
 #include "osra_openbabel.h"
 
-void remove_disconnected_atoms(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n_bond)
+void remove_disconnected_atoms(std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+                               int n_atom, int n_bond)
 {
   for (int i = 0; i < n_atom; i++)
     {
@@ -51,7 +52,7 @@ void remove_disconnected_atoms(vector<atom_t> &atom, vector<bond_t> &bond, int n
     }
 }
 
-void remove_zero_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom)
+void remove_zero_bonds(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom)
 {
   for (int i = 0; i < n_bond; i++)
     if (bond[i].exists)
@@ -66,7 +67,7 @@ void remove_zero_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom)
       }
 }
 
-void collapse_doubleup_bonds(vector<bond_t> &bond, int n_bond)
+void collapse_doubleup_bonds(std::vector<bond_t> &bond, int n_bond)
 {
   for (int i = 0; i < n_bond; i++)
     if (bond[i].exists)
@@ -78,14 +79,15 @@ void collapse_doubleup_bonds(vector<bond_t> &bond, int n_bond)
           }
 }
 
-void bond_end_swap(vector<bond_t> &bond, int i)
+void bond_end_swap(std::vector<bond_t> &bond, int i)
 {
   int t = bond[i].a;
   bond[i].a = bond[i].b;
   bond[i].b = t;
 }
 
-bool bonds_within_each_other(const vector<bond_t> &bond, int ii, int jj, const vector<atom_t> &atom)
+bool bonds_within_each_other(const std::vector<bond_t> &bond, int ii, int jj,
+                             const std::vector<atom_t> &atom)
 {
   int i, j;
   bool res = false;
@@ -115,10 +117,10 @@ bool bonds_within_each_other(const vector<bond_t> &bond, int ii, int jj, const v
   return (res);
 }
 
-bool no_white_space(int ai, int bi, int aj, int bj, const vector<atom_t> &atom, const Image &image, double threshold,
-                    const ColorGray &bgColor)
+bool no_white_space(int ai, int bi, int aj, int bj, const std::vector<atom_t> &atom,
+                    const Image &image, double threshold, const ColorGray &bgColor)
 {
-  vector<double> xx(4);
+  std::vector<double> xx(4);
   double dx1 = atom[bi].x - atom[ai].x;
   double dy1 = atom[bi].y - atom[ai].y;
   double dx2 = atom[bj].x - atom[aj].x;
@@ -206,7 +208,7 @@ bool no_white_space(int ai, int bi, int aj, int bj, const vector<atom_t> &atom, 
 
 }
 
-int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,double avg)
+int find_wavy_bonds(std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom, double avg)
 {
   int n_bond_orig = n_bond;
   const double t = 4;
@@ -221,7 +223,7 @@ int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,d
       for (int j = 0; j < n_bond_orig; j++)
 	{
 	  bool found = false;
-	  set<int> bag;
+          std::set<int> bag;
 	  int begin = 0;
 	  int end = 0;
 	  if (bond[j].exists)// && !bond[j].Small)
@@ -249,7 +251,7 @@ int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,d
 		     (d4 = distance(atom[bond[end].b].x,atom[bond[end].b].y,atom[bond[i].b].x,atom[bond[i].b].y)) < mind ))
 		  //		    (bond[end].a == bond[i].a || bond[end].a == bond[i].b || bond[end].b == bond[i].a || bond[end].b == bond[i].b))
 		  {
-		    mind = min(min(d1,d2),min(d3,d4));
+                    mind = std::min(std::min(d1, d2), std::min(d3, d4));
 		    mini = i;
 		  }
 	      if (mini >= 0)
@@ -273,7 +275,7 @@ int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,d
 		     (d4 = distance(atom[bond[begin].b].x,atom[bond[begin].b].y,atom[bond[i].b].x,atom[bond[i].b].y)) < mind ))
 		  //		    (bond[begin].a == bond[i].a || bond[begin].a == bond[i].b || bond[begin].b == bond[i].a || bond[begin].b == bond[i].b))
 		  {
-		    mind = min(min(d1,d2),min(d3,d4));
+                    mind = std::min(std::min(d1, d2), std::min(d3, d4));
 		    mini = i;
 		  }
 	      if (mini >= 0)
@@ -295,7 +297,7 @@ int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,d
 	      double d2 = distance(atom[bond[begin].a].x,atom[bond[begin].a].y,atom[bond[end].b].x,atom[bond[end].b].y);
 	      double d3 = distance(atom[bond[begin].b].x,atom[bond[begin].b].y,atom[bond[end].a].x,atom[bond[end].a].y);
 	      double d4 = distance(atom[bond[begin].b].x,atom[bond[begin].b].y,atom[bond[end].b].x,atom[bond[end].b].y);
-	      double d = max(max(d1,d2),max(d3,d4));
+	      double d = std::max(std::max(d1, d2), std::max(d3, d4));
 
 	      if (d>0.75*avg && d<1.5*avg)
 		{
@@ -311,7 +313,7 @@ int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,d
 		      yb = atom[bond[end].b].y;
 		      b = bond[end].b;
 		    }
-		  if (d3 > max(d1,d2))
+		  if (d3 > std::max(d1,d2))
 		    {
 		      xa = atom[bond[begin].b].x;
 		      ya = atom[bond[begin].b].y;
@@ -320,7 +322,7 @@ int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,d
 		      a = bond[begin].b;
 		      b = bond[end].a;
 		    }
-		  if (d4 > max(d3,max(d1,d2)))
+		  if (d4 > std::max(d3, std::max(d1, d2)))
 		    {
 		      xa = atom[bond[begin].b].x;
 		      ya = atom[bond[begin].b].y;
@@ -330,7 +332,7 @@ int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,d
 		      b = bond[end].b;
 		    }
 		  bool too_far = false;
-		  for(set<int>::iterator i=bag.begin(); i!=bag.end(); i++)
+		  for(std::set<int>::iterator i = bag.begin(); i != bag.end(); i++)
 		    {
 		      double da =  fabs(distance_from_bond_y(xa,ya,xb,yb,atom[bond[*i].a].x, atom[bond[*i].a].y));
 		      double db =  fabs(distance_from_bond_y(xa,ya,xb,yb,atom[bond[*i].b].x, atom[bond[*i].b].y));
@@ -344,14 +346,14 @@ int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,d
 		  if (!too_far)  // This looks like a wavy bond
 		    {
 		      bond_t nb(a,b,bond[begin].curve);
-		      nb.hash = true;                        
+		      nb.hash = true;
 		      nb.wedge = true;
 		      if (n_bond < MAX_ATOMS)
 			{
 			  bond.push_back(nb);
 			  n_bond++;
 			}
-		      for(set<int>::iterator i=bag.begin(); i!=bag.end(); i++)
+		      for(std::set<int>::iterator i = bag.begin(); i != bag.end(); i++)
 			bond[*i].exists = false;
 		    }
 		}
@@ -360,11 +362,11 @@ int find_wavy_bonds(vector<bond_t> &bond,int n_bond,const vector<atom_t> &atom,d
   return n_bond;
 }
 
-double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const Image &image, double threshold,
-                 const ColorGray &bgColor, double dist, double avg)
+double skeletize(std::vector<atom_t> &atom, std::vector<bond_t> &bond, int n_bond, const Image &image,
+                 double threshold, const ColorGray &bgColor, double dist, double avg)
 {
   double thickness = 0;
-  vector<double> a;
+  std::vector<double> a;
   int n = 0;
 
   for (int i = 0; i < n_bond; i++)
@@ -404,14 +406,14 @@ double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const I
                               atom[bond[j].a].x = (atom[bond[i].a].x + atom[bond[j].a].x) / 2;
                               atom[bond[j].a].y = (atom[bond[i].a].y + atom[bond[j].a].y) / 2;
 
-			      atom[bond[i].a].min_x = min(atom[bond[i].a].min_x,atom[bond[j].a].min_x) ;
-			      atom[bond[i].a].min_y = min(atom[bond[i].a].min_y,atom[bond[j].a].min_y) ;
-			      atom[bond[i].a].max_x = min(atom[bond[i].a].max_x,atom[bond[j].a].max_x) ;
-			      atom[bond[i].a].max_y = min(atom[bond[i].a].max_y,atom[bond[j].a].max_y) ;
-			      atom[bond[j].a].min_x = min(atom[bond[i].a].min_x,atom[bond[j].a].min_x) ;
-			      atom[bond[j].a].min_y = min(atom[bond[i].a].min_y,atom[bond[j].a].min_y) ;
-			      atom[bond[j].a].max_x = min(atom[bond[i].a].max_x,atom[bond[j].a].max_x) ;
-			      atom[bond[j].a].max_y = min(atom[bond[i].a].max_y,atom[bond[j].a].max_y) ;
+			      atom[bond[i].a].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].a].min_x);
+			      atom[bond[i].a].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].a].min_y);
+			      atom[bond[i].a].max_x = std::min(atom[bond[i].a].max_x, atom[bond[j].a].max_x);
+			      atom[bond[i].a].max_y = std::min(atom[bond[i].a].max_y, atom[bond[j].a].max_y);
+			      atom[bond[j].a].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].a].min_x);
+			      atom[bond[j].a].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].a].min_y);
+			      atom[bond[j].a].max_x = std::min(atom[bond[i].a].max_x, atom[bond[j].a].max_x);
+			      atom[bond[j].a].max_y = std::min(atom[bond[i].a].max_y, atom[bond[j].a].max_y);
                             }
                           if (tang < 0 && ay > axb)
                             {
@@ -420,14 +422,14 @@ double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const I
                               atom[bond[j].b].x = (atom[bond[i].a].x + atom[bond[j].b].x) / 2;
                               atom[bond[j].b].y = (atom[bond[i].a].y + atom[bond[j].b].y) / 2;
 
-			      atom[bond[i].a].min_x = min(atom[bond[i].a].min_x,atom[bond[j].b].min_x) ;
-			      atom[bond[i].a].min_y = min(atom[bond[i].a].min_y,atom[bond[j].b].min_y) ;
-			      atom[bond[i].a].max_x = min(atom[bond[i].a].max_x,atom[bond[j].b].max_x) ;
-			      atom[bond[i].a].max_y = min(atom[bond[i].a].max_y,atom[bond[j].b].max_y) ;
-			      atom[bond[j].b].min_x = min(atom[bond[i].a].min_x,atom[bond[j].b].min_x) ;
-			      atom[bond[j].b].min_y = min(atom[bond[i].a].min_y,atom[bond[j].b].min_y) ;
-			      atom[bond[j].b].max_x = min(atom[bond[i].a].max_x,atom[bond[j].b].max_x) ;
-			      atom[bond[j].b].max_y = min(atom[bond[i].a].max_y,atom[bond[j].b].max_y) ;
+			      atom[bond[i].a].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].b].min_x);
+			      atom[bond[i].a].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].b].min_y);
+			      atom[bond[i].a].max_x = std::min(atom[bond[i].a].max_x, atom[bond[j].b].max_x);
+			      atom[bond[i].a].max_y = std::min(atom[bond[i].a].max_y, atom[bond[j].b].max_y);
+			      atom[bond[j].b].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].b].min_x);
+			      atom[bond[j].b].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].b].min_y);
+			      atom[bond[j].b].max_x = std::min(atom[bond[i].a].max_x, atom[bond[j].b].max_x);
+			      atom[bond[j].b].max_y = std::min(atom[bond[i].a].max_y, atom[bond[j].b].max_y);
                             }
                           double by = fabs(distance_from_bond_y(atom[bond[j].a].x, atom[bond[j].a].y,
                                                                 atom[bond[j].b].x, atom[bond[j].b].y, atom[bond[i].b].x, atom[bond[i].b].y));
@@ -443,14 +445,14 @@ double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const I
                               atom[bond[j].b].x = (atom[bond[i].b].x + atom[bond[j].b].x) / 2;
                               atom[bond[j].b].y = (atom[bond[i].b].y + atom[bond[j].b].y) / 2;
 
-			      atom[bond[i].b].min_x = min(atom[bond[i].b].min_x,atom[bond[j].b].min_x) ;
-			      atom[bond[i].b].min_y = min(atom[bond[i].b].min_y,atom[bond[j].b].min_y) ;
-			      atom[bond[i].b].max_x = min(atom[bond[i].b].max_x,atom[bond[j].b].max_x) ;
-			      atom[bond[i].b].max_y = min(atom[bond[i].b].max_y,atom[bond[j].b].max_y) ;
-			      atom[bond[j].b].min_x = min(atom[bond[i].b].min_x,atom[bond[j].b].min_x) ;
-			      atom[bond[j].b].min_y = min(atom[bond[i].b].min_y,atom[bond[j].b].min_y) ;
-			      atom[bond[j].b].max_x = min(atom[bond[i].b].max_x,atom[bond[j].b].max_x) ;
-			      atom[bond[j].b].max_y = min(atom[bond[i].b].max_y,atom[bond[j].b].max_y) ;
+			      atom[bond[i].b].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].b].min_x);
+			      atom[bond[i].b].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].b].min_y);
+			      atom[bond[i].b].max_x = std::min(atom[bond[i].b].max_x, atom[bond[j].b].max_x);
+			      atom[bond[i].b].max_y = std::min(atom[bond[i].b].max_y, atom[bond[j].b].max_y);
+			      atom[bond[j].b].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].b].min_x);
+			      atom[bond[j].b].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].b].min_y);
+			      atom[bond[j].b].max_x = std::min(atom[bond[i].b].max_x, atom[bond[j].b].max_x);
+			      atom[bond[j].b].max_y = std::min(atom[bond[i].b].max_y, atom[bond[j].b].max_y);
                             }
                           if (tang < 0 && by > bxa)
                             {
@@ -459,14 +461,14 @@ double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const I
                               atom[bond[j].a].x = (atom[bond[i].b].x + atom[bond[j].a].x) / 2;
                               atom[bond[j].a].y = (atom[bond[i].b].y + atom[bond[j].a].y) / 2;
 
-			      atom[bond[i].b].min_x = min(atom[bond[i].b].min_x,atom[bond[j].a].min_x) ;
-			      atom[bond[i].b].min_y = min(atom[bond[i].b].min_y,atom[bond[j].a].min_y) ;
-			      atom[bond[i].b].max_x = min(atom[bond[i].b].max_x,atom[bond[j].a].max_x) ;
-			      atom[bond[i].b].max_y = min(atom[bond[i].b].max_y,atom[bond[j].a].max_y) ;
-			      atom[bond[j].a].min_x = min(atom[bond[i].b].min_x,atom[bond[j].a].min_x) ;
-			      atom[bond[j].a].min_y = min(atom[bond[i].b].min_y,atom[bond[j].a].min_y) ;
-			      atom[bond[j].a].max_x = min(atom[bond[i].b].max_x,atom[bond[j].a].max_x) ;
-			      atom[bond[j].a].max_y = min(atom[bond[i].b].max_y,atom[bond[j].a].max_y) ;
+			      atom[bond[i].b].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].a].min_x);
+			      atom[bond[i].b].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].a].min_y);
+			      atom[bond[i].b].max_x = std::min(atom[bond[i].b].max_x, atom[bond[j].a].max_x);
+			      atom[bond[i].b].max_y = std::min(atom[bond[i].b].max_y, atom[bond[j].a].max_y);
+			      atom[bond[j].a].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].a].min_x);
+			      atom[bond[j].a].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].a].min_y);
+			      atom[bond[j].a].max_x = std::min(atom[bond[i].b].max_x, atom[bond[j].a].max_x);
+			      atom[bond[j].a].max_y = std::min(atom[bond[i].b].max_y, atom[bond[j].a].max_y);
                             }
                         }
                       break;
@@ -493,14 +495,14 @@ double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const I
                               atom[bond[j].a].x = (atom[bond[i].a].x + atom[bond[j].a].x) / 2;
                               atom[bond[j].a].y = (atom[bond[i].a].y + atom[bond[j].a].y) / 2;
 
-			      atom[bond[i].a].min_x = min(atom[bond[i].a].min_x,atom[bond[j].a].min_x) ;
-			      atom[bond[i].a].min_y = min(atom[bond[i].a].min_y,atom[bond[j].a].min_y) ;
-			      atom[bond[i].a].max_x = min(atom[bond[i].a].max_x,atom[bond[j].a].max_x) ;
-			      atom[bond[i].a].max_y = min(atom[bond[i].a].max_y,atom[bond[j].a].max_y) ;
-			      atom[bond[j].a].min_x = min(atom[bond[i].a].min_x,atom[bond[j].a].min_x) ;
-			      atom[bond[j].a].min_y = min(atom[bond[i].a].min_y,atom[bond[j].a].min_y) ;
-			      atom[bond[j].a].max_x = min(atom[bond[i].a].max_x,atom[bond[j].a].max_x) ;
-			      atom[bond[j].a].max_y = min(atom[bond[i].a].max_y,atom[bond[j].a].max_y) ;
+			      atom[bond[i].a].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].a].min_x);
+			      atom[bond[i].a].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].a].min_y);
+			      atom[bond[i].a].max_x = std::min(atom[bond[i].a].max_x, atom[bond[j].a].max_x);
+			      atom[bond[i].a].max_y = std::min(atom[bond[i].a].max_y, atom[bond[j].a].max_y);
+			      atom[bond[j].a].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].a].min_x);
+			      atom[bond[j].a].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].a].min_y);
+			      atom[bond[j].a].max_x = std::min(atom[bond[i].a].max_x, atom[bond[j].a].max_x);
+			      atom[bond[j].a].max_y = std::min(atom[bond[i].a].max_y, atom[bond[j].a].max_y);
                             }
                           if (tang < 0 && ay > axb)
                             {
@@ -509,14 +511,14 @@ double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const I
                               atom[bond[i].b].x = (atom[bond[j].a].x + atom[bond[i].b].x) / 2;
                               atom[bond[i].b].y = (atom[bond[j].a].y + atom[bond[i].b].y) / 2;
 
-			      atom[bond[i].a].min_x = min(atom[bond[i].a].min_x,atom[bond[j].b].min_x) ;
-			      atom[bond[i].a].min_y = min(atom[bond[i].a].min_y,atom[bond[j].b].min_y) ;
-			      atom[bond[i].a].max_x = min(atom[bond[i].a].max_x,atom[bond[j].b].max_x) ;
-			      atom[bond[i].a].max_y = min(atom[bond[i].a].max_y,atom[bond[j].b].max_y) ;
-			      atom[bond[j].b].min_x = min(atom[bond[i].a].min_x,atom[bond[j].b].min_x) ;
-			      atom[bond[j].b].min_y = min(atom[bond[i].a].min_y,atom[bond[j].b].min_y) ;
-			      atom[bond[j].b].max_x = min(atom[bond[i].a].max_x,atom[bond[j].b].max_x) ;
-			      atom[bond[j].b].max_y = min(atom[bond[i].a].max_y,atom[bond[j].b].max_y) ;
+			      atom[bond[i].a].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].b].min_x);
+			      atom[bond[i].a].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].b].min_y);
+			      atom[bond[i].a].max_x = std::min(atom[bond[i].a].max_x, atom[bond[j].b].max_x);
+			      atom[bond[i].a].max_y = std::min(atom[bond[i].a].max_y, atom[bond[j].b].max_y);
+			      atom[bond[j].b].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].b].min_x);
+			      atom[bond[j].b].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].b].min_y);
+			      atom[bond[j].b].max_x = std::min(atom[bond[i].a].max_x, atom[bond[j].b].max_x);
+			      atom[bond[j].b].max_y = std::min(atom[bond[i].a].max_y, atom[bond[j].b].max_y);
                             }
                           double by = fabs(distance_from_bond_y(atom[bond[i].a].x, atom[bond[i].a].y,
                                                                 atom[bond[i].b].x, atom[bond[i].b].y, atom[bond[j].b].x, atom[bond[j].b].y));
@@ -532,14 +534,14 @@ double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const I
                               atom[bond[j].b].x = (atom[bond[i].b].x + atom[bond[j].b].x) / 2;
                               atom[bond[j].b].y = (atom[bond[i].b].y + atom[bond[j].b].y) / 2;
 
-			      atom[bond[i].b].min_x = min(atom[bond[i].b].min_x,atom[bond[j].b].min_x) ;
-			      atom[bond[i].b].min_y = min(atom[bond[i].b].min_y,atom[bond[j].b].min_y) ;
-			      atom[bond[i].b].max_x = min(atom[bond[i].b].max_x,atom[bond[j].b].max_x) ;
-			      atom[bond[i].b].max_y = min(atom[bond[i].b].max_y,atom[bond[j].b].max_y) ;
-			      atom[bond[j].b].min_x = min(atom[bond[i].b].min_x,atom[bond[j].b].min_x) ;
-			      atom[bond[j].b].min_y = min(atom[bond[i].b].min_y,atom[bond[j].b].min_y) ;
-			      atom[bond[j].b].max_x = min(atom[bond[i].b].max_x,atom[bond[j].b].max_x) ;
-			      atom[bond[j].b].max_y = min(atom[bond[i].b].max_y,atom[bond[j].b].max_y) ;
+			      atom[bond[i].b].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].b].min_x);
+			      atom[bond[i].b].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].b].min_y);
+			      atom[bond[i].b].max_x = std::min(atom[bond[i].b].max_x, atom[bond[j].b].max_x);
+			      atom[bond[i].b].max_y = std::min(atom[bond[i].b].max_y, atom[bond[j].b].max_y);
+			      atom[bond[j].b].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].b].min_x);
+			      atom[bond[j].b].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].b].min_y);
+			      atom[bond[j].b].max_x = std::min(atom[bond[i].b].max_x, atom[bond[j].b].max_x);
+			      atom[bond[j].b].max_y = std::min(atom[bond[i].b].max_y, atom[bond[j].b].max_y);
                             }
                           if (tang < 0 && by > bxa)
                             {
@@ -548,14 +550,14 @@ double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const I
                               atom[bond[i].a].x = (atom[bond[j].b].x + atom[bond[i].a].x) / 2;
                               atom[bond[i].a].y = (atom[bond[j].b].y + atom[bond[i].a].y) / 2;
 
-			      atom[bond[i].b].min_x = min(atom[bond[i].b].min_x,atom[bond[j].a].min_x) ;
-			      atom[bond[i].b].min_y = min(atom[bond[i].b].min_y,atom[bond[j].a].min_y) ;
-			      atom[bond[i].b].max_x = min(atom[bond[i].b].max_x,atom[bond[j].a].max_x) ;
-			      atom[bond[i].b].max_y = min(atom[bond[i].b].max_y,atom[bond[j].a].max_y) ;
-			      atom[bond[j].a].min_x = min(atom[bond[i].b].min_x,atom[bond[j].a].min_x) ;
-			      atom[bond[j].a].min_y = min(atom[bond[i].b].min_y,atom[bond[j].a].min_y) ;
-			      atom[bond[j].a].max_x = min(atom[bond[i].b].max_x,atom[bond[j].a].max_x) ;
-			      atom[bond[j].a].max_y = min(atom[bond[i].b].max_y,atom[bond[j].a].max_y) ;
+			      atom[bond[i].b].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].a].min_x);
+			      atom[bond[i].b].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].a].min_y);
+			      atom[bond[i].b].max_x = std::min(atom[bond[i].b].max_x, atom[bond[j].a].max_x);
+			      atom[bond[i].b].max_y = std::min(atom[bond[i].b].max_y, atom[bond[j].a].max_y);
+			      atom[bond[j].a].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].a].min_x);
+			      atom[bond[j].a].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].a].min_y);
+			      atom[bond[j].a].max_x = std::min(atom[bond[i].b].max_x, atom[bond[j].a].max_x);
+			      atom[bond[j].a].max_y = std::min(atom[bond[i].b].max_y, atom[bond[j].a].max_y);
                             }
                         }
                     }
@@ -570,9 +572,10 @@ double skeletize(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, const I
   return (thickness);
 }
 
-double dist_double_bonds(const vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, double avg)
+double dist_double_bonds(const std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+                         int n_bond, double avg)
 {
-  vector<double> a;
+  std::vector<double> a;
   int n = 0;
   double max_dist_double_bond = 0;
 
@@ -613,8 +616,8 @@ double dist_double_bonds(const vector<atom_t> &atom, vector<bond_t> &bond, int n
   return (max_dist_double_bond);
 }
 
-int double_triple_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, double avg, int &n_atom,
-                        double max_dist_double_bond)
+int double_triple_bonds(std::vector<atom_t> &atom, std::vector<bond_t> &bond, int n_bond, double avg,
+                        int &n_atom, double max_dist_double_bond)
 {
   for (int i = 0; i < n_bond; i++)
     if (bond[i].exists)
@@ -691,8 +694,8 @@ int double_triple_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, 
                                                               atom[bond[ii].b].x, atom[bond[ii].b].y, atom[bond[jj].a].x, atom[bond[jj].a].y));
                       double bb = fabs(distance_from_bond_x_b(atom[bond[ii].a].x, atom[bond[ii].a].y,
                                                               atom[bond[ii].b].x, atom[bond[ii].b].y, atom[bond[jj].b].x, atom[bond[jj].b].y));
-                      double da = min(aa, ab);
-                      double db = min(ba, bb);
+                      double da = std::min(aa, ab);
+                      double db = std::min(ba, bb);
                       if (da > 0.5 * l22)
                         {
                           double x = atom[bond[ii].a].x + (atom[bond[ii].b].x - atom[bond[ii].a].x) * da / l11;
@@ -705,7 +708,7 @@ int double_triple_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, 
 			      bond[ii].a = n_atom;
 			      atom.push_back(at1);
 			      n_atom++;
-			    }     
+			    }
 			  bond_t b1(ba,bond[ii].a,bond[ii].curve);
 			  if (n_bond < MAX_ATOMS)
 			    {
@@ -717,7 +720,7 @@ int double_triple_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, 
                         {
                           double x = atom[bond[ii].b].x + (atom[bond[ii].a].x - atom[bond[ii].b].x) * db / l11;
                           double y = atom[bond[ii].b].y + (atom[bond[ii].a].y - atom[bond[ii].b].y) * db / l11;
-			 
+
                           int ba = bond[ii].b;
 			  atom_t at1(x,y,bond[ii].curve);
 			  at1.exists = true;
@@ -726,7 +729,7 @@ int double_triple_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, 
 			      bond[ii].b = n_atom;
 			      atom.push_back(at1);
 			      n_atom++;
-			    }     
+			    }
 			  bond_t b1(ba,bond[ii].b,bond[ii].curve);
 			  if (n_bond < MAX_ATOMS)
 			    {
@@ -777,9 +780,10 @@ int double_triple_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, 
   return (n_bond);
 }
 
-void extend_terminal_bond_to_label(vector<atom_t> &atom, const vector<letters_t> &letters, int n_letters, const vector<
-                                   bond_t> &bond, int n_bond, const vector<label_t> &label, int n_label, double avg, double maxh,
-                                   double max_dist_double_bond)
+void extend_terminal_bond_to_label(
+    std::vector<atom_t> &atom, const std::vector<letters_t> &letters, int n_letters,
+    const std::vector<bond_t> &bond, int n_bond, const std::vector<label_t> &label,
+    int n_label, double avg, double maxh, double max_dist_double_bond)
 {
   for (int j = 0; j < n_bond; j++)
     if (bond[j].exists)
@@ -944,8 +948,8 @@ void extend_terminal_bond_to_label(vector<atom_t> &atom, const vector<letters_t>
       }
 }
 
-void extend_terminal_bond_to_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int n_bond, double avg, double maxh,
-                                   double max_dist_double_bond)
+void extend_terminal_bond_to_bonds(std::vector<atom_t> &atom, std::vector<bond_t> &bond, int n_bond,
+                                   double avg, double maxh, double max_dist_double_bond)
 {
   bool found_intersection = true;
 
@@ -1011,10 +1015,10 @@ void extend_terminal_bond_to_bonds(vector<atom_t> &atom, vector<bond_t> &bond, i
 		  {
 		    atom[l].x = (atom[bond[j].a].x + atom[l].x) / 2;
 		    atom[l].y = (atom[bond[j].a].y + atom[l].y) / 2;
-		    atom[l].min_x = min(atom[bond[j].a].min_x ,atom[l].min_x);
-		    atom[l].min_y = min(atom[bond[j].a].min_y ,atom[l].min_y);
-		    atom[l].max_x = max(atom[bond[j].a].max_x ,atom[l].max_x);
-		    atom[l].max_y = max(atom[bond[j].a].max_y ,atom[l].max_y);
+		    atom[l].min_x = std::min(atom[bond[j].a].min_x ,atom[l].min_x);
+		    atom[l].min_y = std::min(atom[bond[j].a].min_y ,atom[l].min_y);
+		    atom[l].max_x = std::max(atom[bond[j].a].max_x ,atom[l].max_x);
+		    atom[l].max_y = std::max(atom[bond[j].a].max_y ,atom[l].max_y);
 		    bond[j].a = l;
 		    found_intersection = true;
 		  }
@@ -1065,15 +1069,15 @@ void extend_terminal_bond_to_bonds(vector<atom_t> &atom, vector<bond_t> &bond, i
 
             if (found)
               {
-	
+
 		if (atom[l].label.length() < 2 &&  atom[bond[j].b].label.length() < 2)
 		  {
 		    atom[l].x = (atom[bond[j].b].x + atom[l].x) / 2;
 		    atom[l].y = (atom[bond[j].b].y + atom[l].y) / 2;
-		    atom[l].min_x = min(atom[bond[j].b].min_x ,atom[l].min_x);
-		    atom[l].min_y = min(atom[bond[j].b].min_y ,atom[l].min_y);
-		    atom[l].max_x = max(atom[bond[j].b].max_x ,atom[l].max_x);
-		    atom[l].max_y = max(atom[bond[j].b].max_y ,atom[l].max_y);
+		    atom[l].min_x = std::min(atom[bond[j].b].min_x ,atom[l].min_x);
+		    atom[l].min_y = std::min(atom[bond[j].b].min_y ,atom[l].min_y);
+		    atom[l].max_x = std::max(atom[bond[j].b].max_x ,atom[l].max_x);
+		    atom[l].max_y = std::max(atom[bond[j].b].max_y ,atom[l].max_y);
 		    bond[j].b = l;
 		    found_intersection = true;
 		  }
@@ -1083,8 +1087,9 @@ void extend_terminal_bond_to_bonds(vector<atom_t> &atom, vector<bond_t> &bond, i
     }
 }
 
-void assign_charge(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n_bond, const map<string, string> &fix,
-                   const map<string, string> &superatom, bool debug)
+void assign_charge(std::vector<atom_t> &atom, std::vector<bond_t> &bond, int n_atom, int n_bond,
+                   const std::map<std::string, std::string> &fix,
+                   const std::map<std::string, std::string> &superatom, bool debug)
 {
   for (int j = 0; j < n_bond; j++)
     if (bond[j].exists && (!atom[bond[j].a].exists || !atom[bond[j].b].exists))
@@ -1106,8 +1111,8 @@ void assign_charge(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n
         bool cont = true;
         while (cont)
           {
-            string::size_type pos = atom[i].label.find_first_of('-');
-            if (pos != string::npos)
+            std::string::size_type pos = atom[i].label.find_first_of('-');
+            if (pos != std::string::npos)
               {
                 atom[i].label.erase(pos, 1);
                 if (atom[i].label.length() > 0 && isalpha(atom[i].label.at(0)))
@@ -1116,7 +1121,7 @@ void assign_charge(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n
             else
               {
                 pos = atom[i].label.find_first_of('+');
-                if (pos != string::npos)
+                if (pos != std::string::npos)
                   {
                     atom[i].label.erase(pos, 1);
                     if (atom[i].label.length() > 0 && isalpha(atom[i].label.at(0)))
@@ -1144,7 +1149,7 @@ int next_atom(int cur, int begin, int total)
   return (n);
 }
 
-bool dir_change(int n, int last, int begin, int total, const vector<atom_t> &atom)
+bool dir_change(int n, int last, int begin, int total, const std::vector<atom_t> &atom)
 {
   int m = next_atom(n, begin, total);
   while (distance(atom[m].x, atom[m].y, atom[n].x, atom[n].y) < V_DISPLACEMENT && m != n)
@@ -1157,7 +1162,7 @@ bool dir_change(int n, int last, int begin, int total, const vector<atom_t> &ato
   return (false);
 }
 
-bool smaller_distance(int n, int last, int begin, int total, const vector<atom_t> &atom)
+bool smaller_distance(int n, int last, int begin, int total, const std::vector<atom_t> &atom)
 {
   int m = next_atom(n, begin, total);
   double d1 = distance(atom[n].x, atom[n].y, atom[last].x, atom[last].y);
@@ -1169,7 +1174,7 @@ bool smaller_distance(int n, int last, int begin, int total, const vector<atom_t
   return (false);
 }
 
-void douglas_peucker(vector<atom_t> &atom,  int b_atom, int n_atom)
+void douglas_peucker(std::vector<atom_t> &atom,  int b_atom, int n_atom)
 {
   double max_s = 0;
   double max_i = b_atom;
@@ -1184,8 +1189,8 @@ void douglas_peucker(vector<atom_t> &atom,  int b_atom, int n_atom)
     }
   if (max_s>DIR_CHANGE)
     {
-      vector<atom_t> atom1(atom);
-      vector<atom_t> atom2(atom);
+      std::vector<atom_t> atom1(atom);
+      std::vector<atom_t> atom2(atom);
       douglas_peucker(atom1,  b_atom, max_i);
       douglas_peucker(atom2,  max_i, n_atom);
       for (int i=b_atom; i<max_i; i++)
@@ -1201,12 +1206,12 @@ void douglas_peucker(vector<atom_t> &atom,  int b_atom, int n_atom)
 }
 
 
-int find_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int b_atom, int n_atom, int n_bond,
+int find_bonds(std::vector<atom_t> &atom, std::vector<bond_t> &bond, int b_atom, int n_atom, int n_bond,
                const potrace_path_t * const p)
 {
 
   //douglas_peucker(atom,  b_atom, n_atom);
-  
+
   int i = b_atom + 1;
   int last = b_atom;
 
@@ -1235,7 +1240,7 @@ int find_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int b_atom, int n_ato
           i++;
         }
     }
-  
+
   for (int i = b_atom; i < n_atom; i++)
     if (atom[i].exists)
       {
@@ -1256,7 +1261,8 @@ int find_bonds(vector<atom_t> &atom, vector<bond_t> &bond, int b_atom, int n_ato
 
 
 
-int find_atoms(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_t> &bond, int *n_bond,int width, int height)
+int find_atoms(const potrace_path_t *p, std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+               int *n_bond,int width, int height)
 {
   int *tag, n_atom = 0;
   potrace_dpoint_t (*c)[3];
@@ -1280,7 +1286,7 @@ int find_atoms(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_t> &bo
 	{
 	  atom.push_back(at);
 	  n_atom++;
-	}     
+	}
 
       for (long i = 0; i < n; i++)
         {
@@ -1301,7 +1307,7 @@ int find_atoms(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_t> &bo
 		  {
 		    atom.push_back(at1);
 		    n_atom++;
-		  }     
+		  }
 	      }
               break;
             case POTRACE_CURVETO:
@@ -1318,8 +1324,8 @@ int find_atoms(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_t> &bo
 		  {
 		    atom.push_back(at2);
 		    n_atom++;
-		  }     
-		
+		  }
+
 		x = c[i][1].x;
 		y = c[i][1].y;
 		if (x<0) x=0;
@@ -1327,12 +1333,12 @@ int find_atoms(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_t> &bo
 		if (y<0) y=0;
 		if (y>height) y=height;
 		atom_t at3(x,y,p);
-		
+
 		if (n_atom < MAX_ATOMS)
 		  {
 		    atom.push_back(at3);
 		    n_atom++;
-		  }     
+		  }
 	      }
               break;
             }
@@ -1350,7 +1356,7 @@ int find_atoms(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_t> &bo
 		{
 		  atom.push_back(at4);
 		  n_atom++;
-		}     
+		}
             }
         }
       *n_bond = find_bonds(atom, bond, b_atom, n_atom, *n_bond, p);
@@ -1369,7 +1375,7 @@ bool comp_dashes_y(const dash_t &a, const dash_t &b)
   return (a.y < b.y);
 }
 
-void extend_dashed_bond(int a, int b, int n, vector<atom_t> &atom)
+void extend_dashed_bond(int a, int b, int n, std::vector<atom_t> &atom)
 {
   double x0 = atom[a].x;
   double y0 = atom[a].y;
@@ -1386,7 +1392,7 @@ void extend_dashed_bond(int a, int b, int n, vector<atom_t> &atom)
   atom[b].y = ky * l / (n - 1) + y1;
 }
 
-int count_area(vector<vector<int> > &box, double &x0, double &y0)
+int count_area(std::vector<std::vector<int> > &box, double &x0, double &y0)
 {
   int a = 0;
   int w = box.size();
@@ -1398,8 +1404,8 @@ int count_area(vector<vector<int> > &box, double &x0, double &y0)
   if (box[x][y] == 1)
     {
       box[x][y] = 2;
-      list<int> cx;
-      list<int> cy;
+      std::list<int> cx;
+      std::list<int> cy;
       cx.push_back(x);
       cy.push_back(y);
       while (!cx.empty())
@@ -1431,7 +1437,7 @@ int count_area(vector<vector<int> > &box, double &x0, double &y0)
   return (a);
 }
 
-bool curve_in_letter(const potrace_path_t *p,  vector<letters_t> &letters)
+bool curve_in_letter(const potrace_path_t *p, std::vector<letters_t> &letters)
 {
   bool r = false;
   for (int i=0; i<letters.size(); i++)
@@ -1440,12 +1446,14 @@ bool curve_in_letter(const potrace_path_t *p,  vector<letters_t> &letters)
   return r;
 }
 
-int find_dashed_bonds(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int *n_bond,
-                      int max, double avg, const Image &img, const ColorGray &bg, double THRESHOLD, bool thick, double dist, vector<letters_t> &letters)
+int find_dashed_bonds(const potrace_path_t *p, std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+                      int n_atom, int *n_bond, int max, double avg, const Image &img,
+                      const ColorGray &bg, double THRESHOLD, bool thick, double dist,
+                      std::vector<letters_t> &letters)
 {
   potrace_dpoint_t (*c)[3];
-  vector<dash_t> dot;
-  vector<vector<int> > box(img.columns());
+  std::vector<dash_t> dot;
+  std::vector<std::vector<int> > box(img.columns());
   int width = img.columns();
   int height = img.rows();
 
@@ -1571,7 +1579,7 @@ int find_dashed_bonds(const potrace_path_t *p, vector<atom_t> &atom, vector<bond
   for (int i = 0; i < dot.size(); i++)
     if (dot[i].free)
       {
-        vector<dash_t> dash;
+        std::vector<dash_t> dash;
         dash.push_back(dot[i]);
         dot[i].free = false;
         double l = dot[i].x;
@@ -1680,16 +1688,16 @@ int find_dashed_bonds(const potrace_path_t *p, vector<atom_t> &atom, vector<bond
 		  {
 		    atom.push_back(at1);
 		    n_atom++;
-		  }     
+		  }
 		atom_t at2(dash.back().x,dash.back().y,dash.back().curve);
 		at2.exists = true;
 		if (n_atom < MAX_ATOMS)
 		  {
 		    atom.push_back(at2);
 		    n_atom++;
-		  }     
+		  }
 		bond_t b1(n_atom-2,n_atom-1,dash[0].curve);
-		b1.hash = true;                        
+		b1.hash = true;
 		if (*n_bond < MAX_ATOMS)
 		  {
 		    bond.push_back(b1);
@@ -1706,14 +1714,14 @@ int find_dashed_bonds(const potrace_path_t *p, vector<atom_t> &atom, vector<bond
 }
 
 
-int find_small_bonds(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int *n_bond,
-                     double max_area, double Small, double thickness)
+int find_small_bonds(const potrace_path_t *p, std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+                     int n_atom, int *n_bond, double max_area, double Small, double thickness)
 {
   while (p != NULL)
     {
       if ((p->sign == int('+')) && (p->area <= max_area))
         {
-          vector<dash_t> dot;
+          std::vector<dash_t> dot;
           for (int i = 0; i < n_atom; i++)
             if ((atom[i].exists) && (atom[i].curve == p) && (dot.size() < 20))
               {
@@ -1752,7 +1760,7 @@ int find_small_bonds(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_
                 }
               double d = 0;
               for (int i = 1; i < dot.size() - 1; i++)
-                d = max(d, fabs(distance_from_bond_y(dot[0].x, dot[0].y, dot.back().x, dot.back().y,
+                d = std::max(d, fabs(distance_from_bond_y(dot[0].x, dot[0].y, dot.back().x, dot.back().y,
                                                      dot[i].x, dot[i].y)));
               if (d < thickness || p->area < Small)
                 {
@@ -1763,14 +1771,14 @@ int find_small_bonds(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_
 		    {
 		      atom.push_back(at1);
 		      n_atom++;
-		    }     
+		    }
 		  atom_t at2(dot.back().x,dot.back().y,p);
 		  at2.exists = true;
 		  if (n_atom < MAX_ATOMS)
 		    {
 		      atom.push_back(at2);
 		      n_atom++;
-		    }     
+		    }
 		  bond_t b1(n_atom-2,n_atom-1,p);
 		  b1.Small = true;
 		  if (*n_bond < MAX_ATOMS)
@@ -1786,15 +1794,16 @@ int find_small_bonds(const potrace_path_t *p, vector<atom_t> &atom, vector<bond_
   return (n_atom);
 }
 
-int resolve_bridge_bonds(vector<atom_t> &atom, int n_atom, vector<bond_t> &bond, int n_bond, double thickness,
-                         double avg_bond_length, const map<string, string> &superatom, bool verbose)
+int resolve_bridge_bonds(std::vector<atom_t> &atom, int n_atom, std::vector<bond_t> &bond,
+                         int n_bond, double thickness, double avg_bond_length,
+                         const std::map<std::string, std::string> &superatom, bool verbose)
 {
   molecule_statistics_t molecule_statistics1 = calculate_molecule_statistics(atom, bond, n_bond, avg_bond_length, superatom, verbose);
 
   for (int i = 0; i < n_atom; i++)
     if ((atom[i].exists) && (atom[i].label == " "))
       {
-        list<int> con;
+        std::list<int> con;
         for (int j = 0; j < n_bond; j++)
           if ((bond[j].exists) && (bond[j].a == i || bond[j].b == i))
             con.push_back(j);
@@ -1821,7 +1830,7 @@ int resolve_bridge_bonds(vector<atom_t> &atom, int n_atom, vector<bond_t> &bond,
                 con.pop_front();
                 int d = con.front();
                 con.pop_front();
-                vector<int> term;
+                std::vector<int> term;
                 term.push_back(a);
                 term.push_back(b);
                 term.push_back(c);
@@ -1893,7 +1902,8 @@ int resolve_bridge_bonds(vector<atom_t> &atom, int n_atom, vector<bond_t> &bond,
   return (molecule_statistics1.fragments);
 }
 
-void collapse_atoms(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int n_bond, double dist)
+void collapse_atoms(std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+                    int n_atom, int n_bond, double dist)
 {
   bool found = true;
 
@@ -1909,10 +1919,10 @@ void collapse_atoms(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int 
                 atom[i].x = (atom[i].x + atom[j].x) / 2;
                 atom[i].y = (atom[i].y + atom[j].y) / 2;
 
-		atom[i].min_x = min(atom[i].min_x,atom[j].min_x);
-		atom[i].min_y = min(atom[i].min_y,atom[j].min_y);
-		atom[i].max_x = max(atom[i].max_x,atom[j].max_x);
-		atom[i].max_y = max(atom[i].max_y,atom[j].max_y);
+		atom[i].min_x = std::min(atom[i].min_x, atom[j].min_x);
+		atom[i].min_y = std::min(atom[i].min_y, atom[j].min_y);
+		atom[i].max_x = std::max(atom[i].max_x, atom[j].max_x);
+		atom[i].max_y = std::max(atom[i].max_y, atom[j].max_y);
 
                 if (atom[j].label != " " && atom[i].label == " ")
                   atom[i].label = atom[j].label;
@@ -1933,28 +1943,29 @@ void collapse_atoms(vector<atom_t> &atom, vector<bond_t> &bond, int n_atom, int 
     }
 }
 
-void collapse_bonds(vector<atom_t> &atom, const vector<bond_t> &bond, int n_bond, double dist)
+void collapse_bonds(std::vector<atom_t> &atom, const std::vector<bond_t> &bond, int n_bond, double dist)
 {
   for (int i = 0; i < n_bond; i++)
     if (bond[i].exists && bond_length(bond, i, atom) < dist)
       {
         atom[bond[i].a].x = (atom[bond[i].a].x + atom[bond[i].b].x) / 2;
         atom[bond[i].a].y = (atom[bond[i].a].y + atom[bond[i].b].y) / 2;
-	atom[bond[i].a].min_x = min(atom[bond[i].a].min_x ,atom[bond[i].b].min_x) ;
-        atom[bond[i].a].min_y = min(atom[bond[i].a].min_y,atom[bond[i].b].min_y);
-	atom[bond[i].a].max_x = max(atom[bond[i].a].max_x ,atom[bond[i].b].max_x) ;
-        atom[bond[i].a].max_y = max(atom[bond[i].a].max_y,atom[bond[i].b].max_y);
+	atom[bond[i].a].min_x = std::min(atom[bond[i].a].min_x, atom[bond[i].b].min_x);
+        atom[bond[i].a].min_y = std::min(atom[bond[i].a].min_y, atom[bond[i].b].min_y);
+	atom[bond[i].a].max_x = std::max(atom[bond[i].a].max_x, atom[bond[i].b].max_x);
+        atom[bond[i].a].max_y = std::max(atom[bond[i].a].max_y, atom[bond[i].b].max_y);
         atom[bond[i].b].x = (atom[bond[i].a].x + atom[bond[i].b].x) / 2;
         atom[bond[i].b].y = (atom[bond[i].a].y + atom[bond[i].b].y) / 2;
-	atom[bond[i].b].min_x = min(atom[bond[i].a].min_x ,atom[bond[i].b].min_x) ;
-        atom[bond[i].b].min_y = min(atom[bond[i].a].min_y,atom[bond[i].b].min_y);
-	atom[bond[i].b].max_x = max(atom[bond[i].a].max_x ,atom[bond[i].b].max_x) ;
-        atom[bond[i].b].max_y = max(atom[bond[i].a].max_y,atom[bond[i].b].max_y);
+	atom[bond[i].b].min_x = std::min(atom[bond[i].a].min_x, atom[bond[i].b].min_x);
+        atom[bond[i].b].min_y = std::min(atom[bond[i].a].min_y, atom[bond[i].b].min_y);
+	atom[bond[i].b].max_x = std::max(atom[bond[i].a].max_x, atom[bond[i].b].max_x);
+        atom[bond[i].b].max_y = std::max(atom[bond[i].a].max_y, atom[bond[i].b].max_y);
       }
 }
 
 
-int fix_one_sided_bonds(vector<bond_t> &bond, int n_bond, const vector<atom_t> &atom, double thickness, double avg)
+int fix_one_sided_bonds(std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom,
+                        double thickness, double avg)
 {
   double l;
   int n_bond_orig = n_bond;
@@ -1982,7 +1993,7 @@ int fix_one_sided_bonds(vector<bond_t> &bond, int n_bond, const vector<atom_t> &
                       {
 			bond_t b1(bond[j].a,bond[i].b,bond[i].curve);
                         b1.type = bond[i].type;
-			b1.hash = bond[i].hash;                        
+			b1.hash = bond[i].hash;
 			b1.wedge = bond[i].wedge;
 			b1.arom = bond[i].arom;
                         b1.conjoined = bond[i].conjoined;
@@ -2010,7 +2021,7 @@ int fix_one_sided_bonds(vector<bond_t> &bond, int n_bond, const vector<atom_t> &
                       {
 			bond_t b1(bond[j].b,bond[i].b,bond[i].curve);
                         b1.type = bond[i].type;
-			b1.hash = bond[i].hash;                        
+			b1.hash = bond[i].hash;
 			b1.wedge = bond[i].wedge;
 			b1.arom = bond[i].arom;
                         b1.conjoined = bond[i].conjoined;
@@ -2089,19 +2100,21 @@ int thickness_ver(const Image &image, int x1, int y1, const ColorGray &bgColor, 
   return (w);
 }
 
-bool comp_thickness(const pair<int,double> &a, const pair<int,double> &b)
+bool comp_thickness(const std::pair<int, double> &a, const std::pair<int, double> &b)
 {
   return a.second < b.second;
 }
 
-double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, vector<bond_t> &bond, int n_bond,
-                        const ColorGray &bgColor, double THRESHOLD_BOND, double max_dist_double_bond, double avg, int limit, int dist)
+double find_wedge_bonds(const Image &image, std::vector<atom_t> &atom, int n_atom,
+                        std::vector<bond_t> &bond, int n_bond, const ColorGray &bgColor,
+                        double THRESHOLD_BOND, double max_dist_double_bond, double avg, int limit,
+                        int dist)
 {
   double l;
-  vector<pair<int,double> > a;
+  std::vector<std::pair<int, double> > a;
   int n = 0;
-  a.push_back(make_pair(-1,1.5));
-  vector<int> x_reg, y_reg;
+  a.push_back(std::make_pair(-1, 1.5));
+  std::vector<int> x_reg, y_reg;
   bool triangle = false;
   for (int i = 0; i < n_bond; i++)
     if (bond[i].exists && !bond[i].hash && bond[i].type == 1 && (l = bond_length(bond, i, atom))
@@ -2122,8 +2135,8 @@ double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, ve
           {
             w = w3_ver;
             int old = w3_ver;
-            max_c = int(max(atom[bond[i].a].x, atom[bond[i].b].x)) - dist;
-            min_c = int(min(atom[bond[i].a].x, atom[bond[i].b].x)) + dist;
+            max_c = int(std::max(atom[bond[i].a].x, atom[bond[i].b].x)) - dist;
+            min_c = int(std::min(atom[bond[i].a].x, atom[bond[i].b].x)) + dist;
             if (atom[bond[i].b].x < atom[bond[i].a].x)
               sign = -1;
             for (int j = x1 + 1; j <= max_c; j++)
@@ -2139,7 +2152,7 @@ double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, ve
                     y_reg.push_back(t);
                     avg_x += j;
                     avg_y += t;
-                    w = max(w, t);
+                    w = std::max(w, t);
                   }
                 old = t;
               }
@@ -2157,7 +2170,7 @@ double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, ve
                     y_reg.push_back(t);
                     avg_x += j;
                     avg_y += t;
-                    w = max(w, t);
+                    w = std::max(w, t);
                   }
                 old = t;
               }
@@ -2167,8 +2180,8 @@ double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, ve
           {
             w = w3_hor;
             int old = w3_hor;
-            max_c = int(max(atom[bond[i].a].y, atom[bond[i].b].y)) - dist;
-            min_c = int(min(atom[bond[i].a].y, atom[bond[i].b].y)) + dist;
+            max_c = int(std::max(atom[bond[i].a].y, atom[bond[i].b].y)) - dist;
+            min_c = int(std::min(atom[bond[i].a].y, atom[bond[i].b].y)) + dist;
             if (atom[bond[i].b].y < atom[bond[i].a].y)
               sign = -1;
             for (int j = y1 + 1; j <= max_c; j++)
@@ -2184,7 +2197,7 @@ double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, ve
                     y_reg.push_back(t);
                     avg_x += j;
                     avg_y += t;
-                    w = max(w, t);
+                    w = std::max(w, t);
                   }
                 old = t;
               }
@@ -2202,7 +2215,7 @@ double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, ve
                     y_reg.push_back(t);
                     avg_x += j;
                     avg_y += t;
-                    w = max(w, t);
+                    w = std::max(w, t);
                   }
                 old = t;
               }
@@ -2236,10 +2249,10 @@ double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, ve
                   atom[j].exists = false;
                   atom[bond[i].b].x = (atom[bond[i].b].x + atom[j].x) / 2;
                   atom[bond[i].b].y = (atom[bond[i].b].y + atom[j].y) / 2;
-		  atom[bond[i].b].min_x = min(atom[bond[i].b].min_x, atom[j].min_x);
-                  atom[bond[i].b].min_y = min(atom[bond[i].b].min_y,atom[j].min_y);
-		  atom[bond[i].b].max_x = max(atom[bond[i].b].max_x, atom[j].max_x);
-		  atom[bond[i].b].max_y = max(atom[bond[i].b].max_y,atom[j].max_y);
+		  atom[bond[i].b].min_x = std::min(atom[bond[i].b].min_x, atom[j].min_x);
+                  atom[bond[i].b].min_y = std::min(atom[bond[i].b].min_y,atom[j].min_y);
+		  atom[bond[i].b].max_x = std::max(atom[bond[i].b].max_x, atom[j].max_x);
+		  atom[bond[i].b].max_y = std::max(atom[bond[i].b].max_y,atom[j].max_y);
                   for (int k = 0; k < n_bond; k++)
                     if (bond[k].exists)
                       {
@@ -2256,7 +2269,7 @@ double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, ve
           }
         if (!bond[i].wedge)
           {
-            a.push_back(make_pair(i,int(avg_y)));
+            a.push_back(std::make_pair(i, int(avg_y)));
             n++;
           }
       }
@@ -2274,7 +2287,7 @@ double find_wedge_bonds(const Image &image, vector<atom_t> &atom, int n_atom, ve
   return (t);
 }
 
-void collapse_double_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, double dist)
+void collapse_double_bonds(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom, double dist)
 {
   for (int i = 0; i < n_bond; i++)
     if (bond[i].exists && bond[i].type == 2 && bond[i].conjoined) // uninitialized value here!!!
@@ -2287,10 +2300,10 @@ void collapse_double_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &ato
                 atom[bond[i].a].x = (atom[bond[i].a].x + atom[bond[j].b].x) / 2;
                 atom[bond[i].a].y = (atom[bond[i].a].y + atom[bond[j].b].y) / 2;
 
-		atom[bond[i].a].min_x = min(atom[bond[i].a].min_x,atom[bond[j].b].min_x);
-                atom[bond[i].a].min_y = min(atom[bond[i].a].min_y,atom[bond[j].b].min_y);
-		atom[bond[i].a].max_x = max(atom[bond[i].a].max_x,atom[bond[j].b].max_x);
-                atom[bond[i].a].max_y = max(atom[bond[i].a].max_y,atom[bond[j].b].max_y);
+		atom[bond[i].a].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].b].min_x);
+                atom[bond[i].a].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].b].min_y);
+		atom[bond[i].a].max_x = std::max(atom[bond[i].a].max_x, atom[bond[j].b].max_x);
+                atom[bond[i].a].max_y = std::max(atom[bond[i].a].max_y, atom[bond[j].b].max_y);
                 for (int k = 0; k < n_bond; k++)
                   if (bond[k].exists)
                     {
@@ -2310,10 +2323,10 @@ void collapse_double_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &ato
                 atom[bond[i].a].x = (atom[bond[i].a].x + atom[bond[j].a].x) / 2;
                 atom[bond[i].a].y = (atom[bond[i].a].y + atom[bond[j].a].y) / 2;
 
-		atom[bond[i].a].min_x = min(atom[bond[i].a].min_x,atom[bond[j].a].min_x);
-                atom[bond[i].a].min_y = min(atom[bond[i].a].min_y,atom[bond[j].a].min_y);
-		atom[bond[i].a].max_x = max(atom[bond[i].a].max_x,atom[bond[j].a].max_x);
-                atom[bond[i].a].max_y = max(atom[bond[i].a].max_y,atom[bond[j].a].max_y);
+		atom[bond[i].a].min_x = std::min(atom[bond[i].a].min_x, atom[bond[j].a].min_x);
+                atom[bond[i].a].min_y = std::min(atom[bond[i].a].min_y, atom[bond[j].a].min_y);
+		atom[bond[i].a].max_x = std::max(atom[bond[i].a].max_x, atom[bond[j].a].max_x);
+                atom[bond[i].a].max_y = std::max(atom[bond[i].a].max_y, atom[bond[j].a].max_y);
 
                 for (int k = 0; k < n_bond; k++)
                   if (bond[k].exists)
@@ -2333,10 +2346,10 @@ void collapse_double_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &ato
                 bond[j].exists = false;
                 atom[bond[i].b].x = (atom[bond[i].b].x + atom[bond[j].b].x) / 2;
                 atom[bond[i].b].y = (atom[bond[i].b].y + atom[bond[j].b].y) / 2;
-		atom[bond[i].b].min_x = min(atom[bond[i].b].min_x,atom[bond[j].b].min_x);
-                atom[bond[i].b].min_y = min(atom[bond[i].b].min_y,atom[bond[j].b].min_y);
-		atom[bond[i].b].max_x = max(atom[bond[i].b].max_x,atom[bond[j].b].max_x);
-                atom[bond[i].b].max_y = max(atom[bond[i].b].max_y,atom[bond[j].b].max_y);
+		atom[bond[i].b].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].b].min_x);
+                atom[bond[i].b].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].b].min_y);
+		atom[bond[i].b].max_x = std::max(atom[bond[i].b].max_x, atom[bond[j].b].max_x);
+                atom[bond[i].b].max_y = std::max(atom[bond[i].b].max_y, atom[bond[j].b].max_y);
                 for (int k = 0; k < n_bond; k++)
                   if (bond[k].exists)
                     {
@@ -2355,10 +2368,10 @@ void collapse_double_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &ato
                 bond[j].exists = false;
                 atom[bond[i].b].x = (atom[bond[i].b].x + atom[bond[j].a].x) / 2;
                 atom[bond[i].b].y = (atom[bond[i].b].y + atom[bond[j].a].y) / 2;
-		atom[bond[i].b].min_x = min(atom[bond[i].b].min_x,atom[bond[j].a].min_x);
-                atom[bond[i].b].min_y = min(atom[bond[i].b].min_y,atom[bond[j].a].min_y);
-		atom[bond[i].b].max_x = max(atom[bond[i].b].max_x,atom[bond[j].a].max_x);
-                atom[bond[i].b].max_y = max(atom[bond[i].b].max_y,atom[bond[j].a].max_y);
+		atom[bond[i].b].min_x = std::min(atom[bond[i].b].min_x, atom[bond[j].a].min_x);
+                atom[bond[i].b].min_y = std::min(atom[bond[i].b].min_y, atom[bond[j].a].min_y);
+		atom[bond[i].b].max_x = std::max(atom[bond[i].b].max_x, atom[bond[j].a].max_x);
+                atom[bond[i].b].max_y = std::max(atom[bond[i].b].max_y, atom[bond[j].a].max_y);
                 for (int k = 0; k < n_bond; k++)
                   if (bond[k].exists)
                     {
@@ -2375,7 +2388,8 @@ void collapse_double_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &ato
           }
 }
 
-void find_up_down_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, double thickness)
+void find_up_down_bonds(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom,
+                        double thickness)
 {
   for (int i = 0; i < n_bond; i++)
     if (bond[i].exists && bond[i].type == 2)
@@ -2433,8 +2447,8 @@ void find_up_down_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, 
 }
 
 
-void find_old_aromatic_bonds(const potrace_path_t *p, vector<bond_t> &bond, int n_bond, vector<atom_t> &atom,
-                             int n_atom, double avg)
+void find_old_aromatic_bonds(const potrace_path_t *p, std::vector<bond_t> &bond, int n_bond,
+                             std::vector<atom_t> &atom, int n_atom, double avg)
 {
   const potrace_path_t *p1 = p;
 
@@ -2468,7 +2482,7 @@ void find_old_aromatic_bonds(const potrace_path_t *p, vector<bond_t> &bond, int 
           potrace_path_t *child = p1->childlist;
           if (child != NULL && child->sign == int('-'))
             {
-              vector<int> vert;
+              std::vector<int> vert;
               double circum = 0;
               for (int i = 0; i < n_bond; i++)
                 if (bond[i].exists && bond[i].curve == p1)
@@ -2528,7 +2542,7 @@ void find_old_aromatic_bonds(const potrace_path_t *p, vector<bond_t> &bond, int 
 
 }
 
-void flatten_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, double maxh)
+void flatten_bonds(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom, double maxh)
 {
   bool found = true;
 
@@ -2677,7 +2691,8 @@ void flatten_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, doubl
 }
 
 
-void mark_terminal_atoms(const vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, int n_atom)
+void mark_terminal_atoms(const std::vector<bond_t> &bond, int n_bond,
+                         std::vector<atom_t> &atom, int n_atom)
 {
   for (int i = 0; i < n_atom; i++)
     atom[i].terminal = false;
@@ -2694,11 +2709,12 @@ void mark_terminal_atoms(const vector<bond_t> &bond, int n_bond, vector<atom_t> 
 
 
 
-void find_limits_on_avg_bond(double &best_bond, const vector<vector<double> > &pages_of_avg_bonds,
-                             const vector<vector<double> > &pages_of_ind_conf)
+void find_limits_on_avg_bond(double &best_bond,
+                             const std::vector<std::vector<double> > &pages_of_avg_bonds,
+                             const std::vector<std::vector<double> > &pages_of_ind_conf)
 {
   double max_ind_conf = -FLT_MAX;
-  
+
   for (unsigned int l = 0; l < pages_of_ind_conf.size(); l++)
     for (unsigned int i = 0; i < pages_of_ind_conf[l].size(); i++)
       if (max_ind_conf < pages_of_ind_conf[l][i])
@@ -2708,7 +2724,8 @@ void find_limits_on_avg_bond(double &best_bond, const vector<vector<double> > &p
         }
 }
 
-void remove_small_bonds_in_chars(vector<atom_t> &atom, vector<bond_t> &bond,vector<letters_t> &letters)
+void remove_small_bonds_in_chars(std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+                                 std::vector<letters_t> &letters)
 {
   for (int i = 0; i < bond.size(); i++)
     if (bond[i].exists)
@@ -2719,3 +2736,255 @@ void remove_small_bonds_in_chars(vector<atom_t> &atom, vector<bond_t> &bond,vect
 	    atom[bond[i].b].y >= letters[j].min_y && atom[bond[i].b].y <= letters[j].max_y)
 	  bond[i].exists = false;
 }
+
+bool overlap_boxes(const box_t &a, const box_t &b)
+{
+    if (a.x1 > b.x2 || b.x1 > a.x2)
+      {
+        return false;
+      }
+
+    if (a.y2 < b.y1 || b.y2 < a.y1)
+      {
+        return false;
+      }
+
+    return true;
+}
+
+void remove_bracket_atoms(std::vector<atom_t> &atom, int n_atom,
+                          const std::vector<bond_t> &bond, int n_bond,
+                          const std::set<std::pair<int, int> > &brackets,
+                          double thickness, int box_x, int box_y, double box_scale,
+			  int real_font_width, int real_font_height,
+                          std::vector<bracket_t> &reduced_bracket_boxes)
+{
+  thickness *= box_scale;
+  double scaled_font_width = box_scale * real_font_width;
+  double scaled_font_height = box_scale * real_font_height;
+  thickness = std::max(10., thickness);
+  std::vector<int> connected(atom.size(), 0);
+  for (size_t i = 0; i < n_bond; i++)
+    if (bond[i].exists)
+      {
+	connected[bond[i].a]++;
+	connected[bond[i].b]++;
+      }
+  std::vector<point_t> confirmed;
+  std::vector<bool> available(n_atom, true);
+  for (std::set<std::pair<int, int> >::const_iterator j = brackets.begin(); j != brackets.end(); ++j)
+    {
+      bool found(false);
+      for (int i = 0; i < n_atom; i++)
+	{
+	  if (atom[i].exists  && (atom[i].label == " " || atom[i].label.empty()) && connected[i] < 2 && available[i])
+	    {
+	      double x =   (double)  box_scale * atom[i].x + box_x -  FRAME;
+	      double y =   (double)  box_scale * atom[i].y + box_y -  FRAME;
+	      if (distance(x, y, j->first, j->second) < thickness)
+		{
+		  found = true;
+		  available[i] = false;
+		}
+	    }
+        }
+      if (found)
+	{
+	  confirmed.push_back(point_t(j->first, j->second));
+	}
+    }
+
+  std::vector<std::pair<point_t, point_t> > horizontals;
+  for (int i = 0; i < confirmed.size(); i++)
+    for (int j = i + 1; j < confirmed.size(); j++)
+      if ( fabs(confirmed[i].y - confirmed[j].y) < thickness && fabs(confirmed[i].x - confirmed[j].x) > 2 * scaled_font_width)
+	{
+	  if (confirmed[i].x < confirmed[j].x)
+            horizontals.push_back(std::make_pair(confirmed[i], confirmed[j]));
+	  else
+            horizontals.push_back(std::make_pair(confirmed[j], confirmed[i]));
+	}
+
+  std::vector<box_t> bracket_boxes;
+  for (int i = 0; i < horizontals.size(); i++)
+    for (int j = i + 1; j < horizontals.size(); j++)
+      {
+	if ( fabs(horizontals[i].first.x - horizontals[j].first.x) < thickness &&
+	     fabs(horizontals[i].second.x - horizontals[j].second.x) < thickness &&
+	     fabs(horizontals[i].first.y - horizontals[j].first.y) > 1.5 * scaled_font_height &&
+	     fabs(horizontals[i].second.y - horizontals[j].second.y) > 1.5 * scaled_font_height)
+	  {
+	    box_t b;
+	    if (horizontals[i].first.y < horizontals[j].first.y)
+	      {
+		b.x1 = horizontals[i].first.x;
+		b.y1 = horizontals[i].first.y;
+		b.x2 = horizontals[j].second.x;
+		b.y2 = horizontals[j].second.y;
+	      }
+	    else
+	      {
+		b.x1 = horizontals[j].first.x;
+		b.y1 = horizontals[j].first.y;
+		b.x2 = horizontals[i].second.x;
+		b.y2 = horizontals[i].second.y;
+	      }
+	    bracket_boxes.push_back(b);
+	  }
+      }
+
+  for (int i = 0; i < bracket_boxes.size(); i++)
+    {
+      if (bracket_boxes[i].x1 != -1)
+	{
+	  box_t b = bracket_boxes[i];
+	  for (int k = 0; k < n_atom; k++)
+	    {
+	      if (atom[k].exists  && (atom[k].label == " " || atom[k].label.empty()) && connected[k] < 2)
+		{
+		    double x =   (double)  box_scale * atom[k].x + box_x -  FRAME;
+		    double y =   (double)  box_scale * atom[k].y + box_y -  FRAME;
+		    if (distance(x, y, b.x1, b.y1) < thickness || distance(x, y, b.x1, b.y2) < thickness ||
+			distance(x, y, b.x2, b.y1) < thickness || distance(x, y, b.x2, b.y2) < thickness )
+		      {
+			atom[k].exists = false;
+		      }
+		}
+	    }
+	}
+    }
+
+  for (int i = 0; i < bracket_boxes.size(); i++)
+    {
+      if (bracket_boxes[i].x1 != -1)
+	{
+	  box_t b = bracket_boxes[i];
+	  for (int j = i + 1; j < bracket_boxes.size(); j++)
+	    {
+	      if (bracket_boxes[j].x1 != -1)
+		{
+		  if (overlap_boxes(b, bracket_boxes[j]))
+		    {
+                      b.x1 = std::min(b.x1, bracket_boxes[j].x1);
+		      b.y1 = std::min(b.y1, bracket_boxes[j].y1);
+		      b.x2 = std::max(b.x2, bracket_boxes[j].x2);
+		      b.y2 = std::max(b.y2, bracket_boxes[j].y2);
+		      bracket_boxes[j].x1 = -1;
+		    }
+		}
+	    }
+	  b.x1 = int(double(b.x1 + FRAME - box_x) / box_scale);
+	  b.y1 = int(double(b.y1 + FRAME - box_y) / box_scale);
+	  b.x2 = int(double(b.x2 + FRAME - box_x) / box_scale);
+	  b.y2 = int(double(b.y2 + FRAME - box_y) / box_scale);
+	  bracket_t bracket;
+	  bracket.box = b;
+	  reduced_bracket_boxes.push_back(bracket);
+	  //cout << b.x1 << " " << b.y1 << " " << b.x2 << " " << b.y2 << endl;
+	}
+    }
+}
+
+void remove_vertical_bonds_close_to_brackets(
+    const std::vector<bracket_t> &bracket_boxes, std::vector<atom_t> &atom,
+    const std::vector<bond_t> &bond, int n_bond, double thickness, double avg_bond_length)
+{
+  std::vector<int> connected(atom.size(), 0);
+  for (size_t i = 0; i < n_bond; i++)
+    if (bond[i].exists)
+      {
+	connected[bond[i].a]++;
+	connected[bond[i].b]++;
+      }
+
+  for (int i = 0; i < bracket_boxes.size(); i++)
+    {
+      int x1 = bracket_boxes[i].box.x1;
+      int y1 = bracket_boxes[i].box.y1;
+      int x2 = bracket_boxes[i].box.x2;
+      int y2 = bracket_boxes[i].box.y2;
+      for (size_t j = 0; j < n_bond; j++)
+	if (bond[j].exists)
+	  {
+	    int a = bond[j].a;
+	    int b = bond[j].b;
+	    if (fabs(atom[a].x - atom[b].x) < 2 * thickness)
+	      {
+		if (connected[a] == 1)
+		  {
+		    double x =   (double)  atom[a].x;
+		    double y =   (double)  atom[a].y;
+		    if ((fabs(y - y1) < 3 * thickness || fabs(y - y2) < 3 * thickness) &&
+			(fabs(x1 - x) < avg_bond_length / 2 || fabs(x - x2) < avg_bond_length / 2))
+		      {
+			atom[a].exists = false;
+			continue;
+		      }
+		  }
+		  if (connected[b] == 1)
+		    {
+		      double x =   (double)  atom[b].x;
+		      double y =   (double)  atom[b].y;
+		      if ( (fabs(y - y1) < 3 * thickness || fabs(y - y2) < 3 * thickness) &&
+			   (fabs(x1 - x) < avg_bond_length / 2 || fabs(x - x2) < avg_bond_length / 2))
+			{
+			  atom[b].exists = false;
+			  continue;
+			}
+		    }
+	      }
+	  }
+    }
+}
+
+void assign_labels_to_brackets(std::vector<bracket_t> &bracket_boxes,
+                               const std::vector<label_t> &label, int n_label,
+                               const std::vector<letters_t> &letters, int n_letters,
+			       int real_font_width, int real_font_height)
+{
+  for (int j = 0; j < bracket_boxes.size(); j++)
+    {
+      box_t b = bracket_boxes[j].box;
+      std::string a;
+      double d = DBL_MAX;
+      for (int i = 0; i < n_label; i++)
+	if ((label[i].a)[0] != '+' && (label[i].a)[0] != '-')
+	  {
+	    double x =   (double) label[i].x1;
+	    double y =   (double) label[i].y1;
+
+	    if (fabs(x - b.x2) < 2 * real_font_width && fabs(y - b.y2) < 2 * real_font_height)
+	      {
+		double dist = (x - b.x2) * (x - b.x2) + (y - b.y2) * (y - b.y2);
+		if (dist < d)
+		  {
+		    d = dist;
+		    a = label[i].a;
+		  }
+	      }
+	  }
+    
+   
+      for (int i = 0; i < n_letters; i++)
+	if (letters[i].free && letters[i].a != '+' && letters[i].a != '-')
+	  {
+	    double x =   (double) letters[i].x;
+	    double y =   (double) letters[i].y;
+	    
+	    if (fabs(x - b.x2) < 2 * real_font_width && fabs(y - b.y2) < 2 * real_font_height)
+	      {
+		double dist = (x - b.x2) * (x - b.x2) + (y - b.y2) * (y - b.y2);
+		if (dist < d)
+		  {
+		    d = dist;
+		    a = letters[i].a;
+		  }
+	      }
+	  }
+      bracket_boxes[j].a = a;
+    }
+
+}
+
+
+// US20050049267A1-20050303-C04374.png

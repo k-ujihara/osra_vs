@@ -3,6 +3,8 @@
 @if not "%VisualStudioVersion%" == "" Set HAS_VSDEV=TRUE
 @if not "%HAS_VSDEV%" == "TRUE" CALL "%VS140COMNTOOLS%VsDevCmd.bat" %1
 
+Call prep_sln.bat
+
 @Set DIR=build
 @if "%Platform%" == "X64" Set DIR=%DIR%_x64
 @if "%Platform%" == "" Set $PLATFORM=x86

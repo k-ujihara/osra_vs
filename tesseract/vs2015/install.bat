@@ -8,9 +8,6 @@ If "%Config%" == "" Set Config=Release
 @if "%Platform%" == "" Set $PLATFORM=x86
 @if "%Platform%" == "X64" Set $PLATFORM=x64
 
-@pushd
-MSBuild tesseract.sln /m /p:Configuration=DLL_%Config%,Platform=%$PLATFORM%
-
 if "%INSTALL_BASE%" == "" Set INSTALL_BASE=%PUBLIC%
 if "%INSTALL_PREFIX%" == "" (
 	if /I "%Platform%" == "X64" (
@@ -20,14 +17,23 @@ if "%INSTALL_PREFIX%" == "" (
 	)
 )
 
+Call prep_sln.bat
+
+@pushd
+MSBuild tesseract.sln /m /p:Configuration=DLL_%Config%,Platform=%$PLATFORM%
+
 Set OutDir=DLL_%Config%
 if /I "%Platform%" == "X64" Set OutDir=x64\%OutDir%
 Set DestIncl=%INSTALL_PREFIX%\include\tesseract
 if not exist "%DestIncl%" mkdir "%DestIncl%"
 Set DestLib=%INSTALL_PREFIX%\lib
 Set DestBin=%INSTALL_PREFIX%\bin
-XCOPY /D /Y /I libtesseract\%OutDir%\libtesseract304.dll "%DestBin%"
-XCOPY /D /Y /I libtesseract\%OutDir%\libtesseract304.lib "%DestLib%"
+
+pushd %OutDir%
+XCOPY /D /Y /I libtesseract304.dll "%DestBin%"
+XCOPY /D /Y /I libtesseract304.lib "%DestLib%"
+popd
+
 cd ..
 XCOPY /D /Y /I api\*.h "%DestIncl%"
 XCOPY /D /Y /I ccmain\*.h "%DestIncl%"

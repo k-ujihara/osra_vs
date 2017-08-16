@@ -65,10 +65,10 @@ int main(int argc,
   //
   // Output format options
   //
-  TCLAP::ValueArg<string> output_format_option("f", "format", "Output format", false, "can", "can/smi/sdf");
+  TCLAP::ValueArg<std::string> output_format_option("f", "format", "Output format", false, "can", "can/smi/sdf");
   cmd.add(output_format_option);
 
-  TCLAP::ValueArg<string> embedded_format_option("", "embedded-format", "Embedded format", false, "", "inchi/smi/can");
+  TCLAP::ValueArg<std::string> embedded_format_option("", "embedded-format", "Embedded format", false, "", "inchi/smi/can");
   cmd.add(embedded_format_option);
 
   TCLAP::SwitchArg show_confidence_option("p", "print", "Print out confidence estimate", false);
@@ -89,10 +89,10 @@ int main(int argc,
   //
   // Dictionaries options
   //
-  TCLAP::ValueArg<string> spelling_file_option("l", "spelling", "Spelling correction dictionary", false, "", "configfile");
+  TCLAP::ValueArg<std::string> spelling_file_option("l", "spelling", "Spelling correction dictionary", false, "", "configfile");
   cmd.add(spelling_file_option);
 
-  TCLAP::ValueArg<string> superatom_file_option("a", "superatom", "Superatom label map to SMILES", false, "", "configfile");
+  TCLAP::ValueArg<std::string> superatom_file_option("a", "superatom", "Superatom label map to SMILES", false, "", "configfile");
   cmd.add(superatom_file_option);
 
   //
@@ -104,19 +104,21 @@ int main(int argc,
   TCLAP::SwitchArg verbose_option("v", "verbose", "Be verbose and print the program flow", false);
   cmd.add(verbose_option);
 
-  TCLAP::ValueArg<string> output_image_file_prefix_option("o", "output", "Write recognized structures to image files with given prefix", false, "", "filename prefix");
+  TCLAP::ValueArg<std::string> output_image_file_prefix_option("o", "output", "Write recognized structures to image files with given prefix", false, "", "filename prefix");
   cmd.add(output_image_file_prefix_option);
 
-  TCLAP::ValueArg<string> resize_option("s", "size", "Resize image on output", false, "", "dimensions, 300x400");
+  TCLAP::ValueArg<std::string> resize_option("s", "size", "Resize image on output", false, "", "dimensions, 300x400");
   cmd.add(resize_option);
 
+  TCLAP::ValueArg<std::string> preview_option("", "preview", "Preview Image", false, "", "filename");
+  cmd.add(preview_option);
   //
   // Input-output options
   //
-  TCLAP::UnlabeledValueArg<string> input_file_option("in", "input file", true, "", "filename");
+  TCLAP::UnlabeledValueArg<std::string> input_file_option("in", "input file", true, "", "filename");
   cmd.add(input_file_option);
 
-  TCLAP::ValueArg<string> output_file_option("w", "write", "Write recognized structures to text file", false, "", "filename");
+  TCLAP::ValueArg<std::string> output_file_option("w", "write", "Write recognized structures to text file", false, "", "filename");
   cmd.add(output_file_option);
 
   TCLAP::SwitchArg show_learning_option("", "learn", "Print out all structure guesses with confidence parameters", false);
@@ -138,9 +140,9 @@ int main(int argc,
   string osra_dir(drive);
   osra_dir.append(dir);
 #else
-  string osra_dir = dirname(progname);
+  std::string osra_dir = dirname(progname);
 #endif
-
+	
   int result = osra_process_image(
                  input_file_option.getValue(),
                  output_file_option.getValue(),
@@ -165,9 +167,9 @@ int main(int argc,
                  debug_option.getValue(),
                  verbose_option.getValue(),
                  output_image_file_prefix_option.getValue(),
-                 resize_option.getValue()
+                 resize_option.getValue(),
+		 preview_option.getValue()
                );
 
   return result;
-
 }

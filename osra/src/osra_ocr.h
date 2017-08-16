@@ -27,8 +27,6 @@
 
 #include <Magick++.h> // Magick::Image, Magick::ColorGray
 
-using namespace std;
-
 //
 // Section: Functions
 //
@@ -77,7 +75,7 @@ char get_atom_label(const Magick::Image &image, const Magick::ColorGray &bg, int
 //
 // Returns:
 //      corrected atomic label
-const string fix_atom_name(const string &s, int n, const map<string, string> &fix,
-                           const map<string, string> &superatom, bool debug);
+const std::string fix_atom_name(const std::string &s, int n, const std::map<std::string, std::string> &fix,
+                                const std::map<std::string, std::string> &superatom, bool debug);
 
 bool detect_bracket(int x, int y, unsigned char *pic);

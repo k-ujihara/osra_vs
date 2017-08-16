@@ -1,0 +1,3 @@
+copy ..\include\version.h include
+patch -o ..\src\barcode.c _original\barcode.c barcode.c.diff
+

@@ -25,8 +25,6 @@
 #include <string> // std::string
 #include <ostream> // std:ostream
 
-using namespace std;
-
 //
 // Section: Functions
 //
@@ -42,10 +40,10 @@ int osra_process_image(
 #ifdef OSRA_LIB
   const char *image_data,
   int image_length,
-  ostream &structure_output_stream,
+  std::ostream &structure_output_stream,
 #else
-  const string &input_file,
-  const string &output_file,
+  const std::string &input_file,
+  const std::string &output_file,
 #endif
   int rotate = 0,
   bool invert = false,
@@ -54,19 +52,20 @@ int osra_process_image(
   int do_unpaper = 0,
   bool jaggy = false,
   bool adaptive = false,
-  string output_format = "smi",
-  string embedded_format = "",
+  std::string output_format = "smi",
+  std::string embedded_format = "",
   bool show_confidence = false,
   bool show_resolution_guess = false,
   bool show_page = false,
   bool show_coordinates = false,
   bool show_avg_bond_length = false,
   bool show_learning = false,
-  const string &osra_dir = "",
-  const string &spelling_file = "",
-  const string &superatom_file = "",
+  const std::string &osra_dir = "",
+  const std::string &spelling_file = "",
+  const std::string &superatom_file = "",
   bool debug = false,
   bool verbose = false,
-  const string &output_image_file_prefix = "",
-  const string &resize = ""
+  const std::string &output_image_file_prefix = "",
+  const std::string &resize = "",
+  const std::string &preview = ""
 );

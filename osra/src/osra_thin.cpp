@@ -173,9 +173,9 @@ double noise_factor(const Image &image, int width, int height, const ColorGray &
                     int resolution, int &max, double &nf45)
 {
   int max_thick = 40;
-  vector<double> n(max_thick, 0);
+  std::vector<double> n(max_thick, 0);
   double nf;
-  vector<int> lines;
+  std::vector<int> lines;
   for (int i = 0; i < width; i++)
     {
       int j = 0;

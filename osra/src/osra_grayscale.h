@@ -24,7 +24,6 @@
 
 #include <Magick++.h>
 
-using namespace std;
 using namespace Magick;
 
 //

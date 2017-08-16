@@ -24,7 +24,7 @@
 %define binarydep	potrace-lib >= 1.8, libopenbabel3 >= 2.3, libGraphicsMagick++3 >= 1.3.10, cuneiform => 1.1.0, tesseract => 3.01, %{name}-common = %{version}
 
 Name:			%{name}
-BuildRequires:	%{builddep}
+BuildRequires:		%{builddep}
 Url:			http://osra.sourceforge.net/
 Summary:		A command line chemical structure recognition tool
 Version:		%{version}
@@ -32,9 +32,10 @@ Release:		1.0
 Group:			Productivity/Graphics/Other
 Requires:		%{binarydep}
 License:		GPL v2 or later
-Source0:		%{name}-%{version}.tar.gz
+Source0:		%{name}-%{version}.tar.bz2
 #Patch0:		Makefile.in.patch
 BuildRoot:		%{_tmppath}/%{name}-%{version}-build
+BuildArch:		@build_cpu@
 
 %description
 OSRA is a utility designed to convert graphical representations of chemical structures into SMILES or SDF.
@@ -72,9 +73,9 @@ This package contains the dynamic library needed to consume OSRA functionality
 from Java programs.
 
 %package devel
-Summary:        OSRA static library and header files mandatory for development
-Group:          Development/Libraries/C and C++
-Requires:       %{name}-lib@LIB_MAJOR_VERSION@ = %{version}
+Summary:		OSRA static library and header files mandatory for development
+Group:			Development/Libraries/C and C++
+Requires:		%{name}-lib@LIB_MAJOR_VERSION@ = %{version}
 
 %description devel
 This package contains all necessary include files and libraries needed

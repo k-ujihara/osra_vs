@@ -35,8 +35,6 @@ extern "C" {
 
 #include "osra.h"
 
-using namespace std;
-
 // struct: letters_s
 // character found as part of atomic label
 struct letters_s
@@ -73,10 +71,10 @@ struct label_s
   int min_x, min_y,max_x,max_y;
   // string: a
   // atomic label string
-  string a;
+  std::string a;
   // array: n
   // vector of character indices comprising the atomic label
-  vector<int> n;
+  std::vector<int> n;
 };
 // typedef: label_t
 // defines label_t type based on label_s struct
@@ -115,7 +113,7 @@ typedef struct lbond_s lbond_t;
 //
 // Returns:
 // number of superatom labels
-int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &label);
+int assemble_labels(std::vector<letters_t> &letters, int n_letters, std::vector<label_t> &label);
 
 // Function: find_chars()
 //
@@ -141,9 +139,10 @@ int assemble_labels(vector<letters_t> &letters, int n_letters, vector<label_t> &
 //
 // Returns:
 // number of recognized characters
-int find_chars(const potrace_path_t * p, const Image &orig, vector<letters_t> &letters, vector<atom_t> &atom, vector<
-               bond_t> &bond, int n_atom, int n_bond, int height, int width, ColorGray &bgColor, double THRESHOLD,
-               int max_font_width, int max_font_height, int &real_font_width, int &real_font_height, bool verbose);
+int find_chars(const potrace_path_t * p, const Image &orig, std::vector<letters_t> &letters, std::vector<atom_t> &atom,
+               std::vector<bond_t> &bond, int n_atom, int n_bond, int height,
+               int width, ColorGray &bgColor, double THRESHOLD, int max_font_width,
+               int max_font_height, int &real_font_width, int &real_font_height, bool verbose);
 
 // Function: find_numbers()
 //
@@ -165,7 +164,7 @@ int find_chars(const potrace_path_t * p, const Image &orig, vector<letters_t> &l
 //
 // Returns:
 // number of recognized characters
-int find_numbers(const potrace_path_t * p, const Image &orig, vector<letters_t> &letters, vector<atom_t> &atom, vector<bond_t> &bond, 
+int find_numbers(const potrace_path_t * p, const Image &orig, std::vector<letters_t> &letters, std::vector<atom_t> &atom, std::vector<bond_t> &bond,
 		 int n_atom, int n_bond, int height, int width, ColorGray &bgColor, double THRESHOLD, int n_letters);
 
 // Function: find_plus_minus()
@@ -190,8 +189,10 @@ int find_numbers(const potrace_path_t * p, const Image &orig, vector<letters_t> 
 //
 // Returns:
 // new number of characters
-int find_plus_minus(const potrace_path_t *p, const Image &image, ColorGray &bgColor, double THRESHOLD, vector<letters_t> &letters, vector<atom_t> &atom, vector<bond_t> &bond,
-                    int n_atom, int n_bond, int height, int width, int max_font_height, int max_font_width, int n_letters, double avg_bond_length);
+int find_plus_minus(const potrace_path_t *p, const Image &image, ColorGray &bgColor, double THRESHOLD,
+                    std::vector<letters_t> &letters, std::vector<atom_t> &atom, std::vector<bond_t> &bond,
+                    int n_atom, int n_bond, int height, int width, int max_font_height, int max_font_width,
+                    int n_letters, double avg_bond_length);
 
 // Function: clean_unrecognized_characters()
 //
@@ -210,8 +211,9 @@ int find_plus_minus(const potrace_path_t *p, const Image &image, ColorGray &bgCo
 //
 // Returns:
 // new value for n_letters
-int clean_unrecognized_characters(vector<bond_t> &bond, int n_bond, const vector<atom_t> &atom, int real_font_height,
-                                  int real_font_width, unsigned int size, vector<letters_t> &letters, int n_letters);
+int clean_unrecognized_characters(std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom,
+                                  int real_font_height, int real_font_width, unsigned int size,
+                                  std::vector<letters_t> &letters, int n_letters);
 
 // Function: remove_small_terminal_bonds()
 //
@@ -223,7 +225,7 @@ int clean_unrecognized_characters(vector<bond_t> &bond, int n_bond, const vector
 // n_bond - number of bonds
 // atom - vector of atoms
 // avg - average bond length
-void remove_small_terminal_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, double avg);
+void remove_small_terminal_bonds(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom, double avg);
 
 // Function: remove_small_bonds()
 //
@@ -242,8 +244,9 @@ void remove_small_terminal_bonds(vector<bond_t> &bond, int n_bond, vector<atom_t
 //
 // Returns:
 // new value for n_letters
-int remove_small_bonds(vector<bond_t> &bond, int n_bond, const vector<atom_t> &atom, vector<letters_t> &letters,
-                       int n_letters, int max_font_height, int min_font_height, double avg);
+int remove_small_bonds(std::vector<bond_t> &bond, int n_bond, const std::vector<atom_t> &atom,
+                       std::vector<letters_t> &letters, int n_letters, int max_font_height,
+                       int min_font_height, double avg);
 
 // Function: find_fused_chars()
 //
@@ -266,7 +269,8 @@ int remove_small_bonds(vector<bond_t> &bond, int n_bond, const vector<atom_t> &a
 //
 // Returns:
 // new value for n_letters
-int find_fused_chars(vector<bond_t> &bond, int n_bond, vector<atom_t> &atom, vector<letters_t> &letters, int n_letters,
-                     int max_font_height, int max_font_width, char dummy, const Image &orig, const ColorGray &bgColor,
+int find_fused_chars(std::vector<bond_t> &bond, int n_bond, std::vector<atom_t> &atom,
+                     std::vector<letters_t> &letters, int n_letters, int max_font_height,
+                     int max_font_width, char dummy, const Image &orig, const ColorGray &bgColor,
                      double THRESHOLD, unsigned int size, bool verbose);
 #endif

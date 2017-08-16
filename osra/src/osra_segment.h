@@ -26,13 +26,13 @@
 
 #include <list> // sdt::list
 #include <vector> // std::vector
+#include <set>
 #include <math.h> // fabs(double)
 #include <float.h> // FLT_MAX
 #include <limits.h> // INT_MAX
 #include <algorithm> // std::min(double, double), std::max(double, double)
 #include <Magick++.h>
 
-using namespace std;
 using namespace Magick;
 
 // struct: point_s
@@ -58,7 +58,7 @@ struct box_s
   int x1, y1, x2, y2;
   // array: c
   //    vector of points in the box
-  vector<point_t> c;
+  std::vector<point_t> c;
 };
 // typedef: box_t
 //      defines box_t type based on box_s struct
@@ -75,7 +75,7 @@ arrow_s(point_t _head, point_t _tail,int _min_x,int _min_y,int _max_x,int _max_y
   // tail and head of an arrow as points
   point_t tail,head;
   int min_x,min_y,max_x,max_y;
-  string agent;
+  std::string agent;
   bool linebreak;
   bool reversible;
   bool remove;
@@ -111,7 +111,7 @@ typedef struct plus_s plus_t;
 //
 // Returns:
 // A list of clusters, each of which is a list of  connected segments each of which is a list of points
-list<list<list<point_t> > > find_segments(const Image &image, double threshold, const ColorGray &bgColor, bool adaptive, bool is_reaction, vector<arrow_t> &arrows, vector<plus_t> &pluses, bool verbose);
+std::list<std::list<std::list<point_t> > > find_segments(const Image &image, double threshold, const ColorGray &bgColor, bool adaptive, bool is_reaction, std::vector<arrow_t> &arrows, std::vector<plus_t> &pluses, bool verbose);
 
 // Function: prune_clusters()
 //
@@ -120,13 +120,15 @@ list<list<list<point_t> > > find_segments(const Image &image, double threshold, 
 // Parameters:
 // clusters - a list of clusters detected by <find_segments()>
 // boxes - a vector of <box_t> objects for molecular structure images
+// brackets - a vector of points which potentially belong to brackets
 //
 // Returns:
 // Number of molecular structure images
-int prune_clusters(list<list<list<point_t> > > &clusters, vector<box_t> &boxes);
+int prune_clusters(std::list<std::list<std::list<point_t> > > &clusters, std::vector<box_t> &boxes, std::set<std::pair<int,int> > &brackets);
+
 
 template<class T>
-void build_hist(const T &seg, vector<int> &hist, const int len, int &top_pos, int &top_value,point_t &head,point_t &tail, point_t &center, int &min_x, int &min_y, int &max_x, int &max_y)
+void build_hist(const T &seg, std::vector<int> &hist, const int len, int &top_pos, int &top_value,point_t &head,point_t &tail, point_t &center, int &min_x, int &min_y, int &max_x, int &max_y)
 {
   int l=seg.size();
   typename T::const_iterator j;
@@ -139,10 +141,10 @@ void build_hist(const T &seg, vector<int> &hist, const int len, int &top_pos, in
     {
       center.x += j->x;
       center.y += j->y;
-      min_x = min(min_x, j->x);
-      min_y = min(min_y, j->y);
-      max_x = max(max_x, j->x);
-      max_y = max(max_y, j->y);
+      min_x = std::min(min_x, j->x);
+      min_y = std::min(min_y, j->y);
+      max_x = std::max(max_x, j->x);
+      max_y = std::max(max_y, j->y);
     }
   center.x /=l;  // Find the center of mass for the segment margin
   center.y /=l;

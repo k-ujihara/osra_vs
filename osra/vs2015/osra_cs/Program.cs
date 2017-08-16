@@ -32,10 +32,10 @@ public static class OsraAPI
         bool debug,
         bool verbose,
         string ptr_output_image_file_prefix,
-        string ptr_resize
+        string ptr_resize,
+        string ptr_preview
     );
 }
-
 
 namespace osra_cs
 {
@@ -47,7 +47,7 @@ namespace osra_cs
                 @"test.png",
                 @"a.sdf",
                 0, false, 0, 0, 0, false, false,
-                "sdf", "", false, false, false, false, false, false, "", "", "", false, false, "", "");
+                "sdf", "", false, false, false, false, false, false, "", "", "", false, false, "", "", "");
         }
     }
 }
