@@ -2,8 +2,6 @@ pushd "%~dp0"
 
 Call init-env.bat
 
-Call "%VS140COMNTOOLS%VsDevCmd.bat"
-
 call gocr\vs2015\prep_sln
 call gocr\vs2015\install
 
@@ -44,8 +42,8 @@ call openbabel\vs2015\install
 call leptonica\vs2015\cmake_build
 call leptonica\vs2015\install
 
-call tesseract\vs2015\prep_sln
-call tesseract\vs2015\install
+REM call tesseract\vs2015\prep_sln
+REM call tesseract\vs2015\install
 
 Rem Includes all dependencies
 call GraphicsMagick\vs2015\install

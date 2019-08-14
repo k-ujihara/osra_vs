@@ -146,7 +146,7 @@
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
-      <AdditionalDependencies>libPgm2asc.lib;libtesseract304.lib;lept173.lib;shell32.lib;wsock32.lib;zlib.lib;CORE_RL_magick_.lib;CORE_RL_Magick++_.lib;ocrad-0.lib;libpotrace.lib;openbabel-2.lib</AdditionalDependencies>
+      <AdditionalDependencies>libPgm2asc.lib;lept173.lib;shell32.lib;wsock32.lib;zlib.lib;CORE_RL_magick_.lib;CORE_RL_Magick++_.lib;ocrad-0.lib;libpotrace.lib;openbabel-2.lib</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
@@ -180,7 +180,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>libosra.def</ModuleDefinitionFile>
-      <AdditionalDependencies>libPgm2asc.lib;libtesseract304.lib;lept173.lib;shell32.lib;wsock32.lib;zlib.lib;CORE_RL_magick_.lib;CORE_RL_Magick++_.lib;ocrad-0.lib;libpotrace.lib;openbabel-2.lib</AdditionalDependencies>
+      <AdditionalDependencies>libPgm2asc.lib;lept173.lib;shell32.lib;wsock32.lib;zlib.lib;CORE_RL_magick_.lib;CORE_RL_Magick++_.lib;ocrad-0.lib;libpotrace.lib;openbabel-2.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\Release\x64\bin;$(SolutionDir)..\..\Release\x64\bin\GraphicsMagick-Q8\lib;$(SolutionDir)..\..\Release\x64\bin\gocr\lib;$(SolutionDir)..\..\Release\x64\lib</AdditionalLibraryDirectories>
@@ -195,7 +195,6 @@
     <ClCompile Include="..\..\src\osra_labels.cpp" />
     <ClCompile Include="..\..\src\osra_lib.cpp" />
     <ClCompile Include="..\..\src\osra_ocr.cpp" />
-    <ClCompile Include="..\..\src\osra_ocr_tesseract.cpp" />
     <ClCompile Include="..\..\src\osra_openbabel.cpp" />
     <ClCompile Include="..\..\src\osra_reaction.cpp" />
     <ClCompile Include="..\..\src\osra_segment.cpp" />

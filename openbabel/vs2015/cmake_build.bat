@@ -26,13 +26,8 @@ Rem In:
 @Set PYTHON_BINDINGS=OFF
 @Set ENABLE_CAIRO=OFF
 
-: If "%WXWIN%" == "" Set WXWIN=C:\wxWidgets-3.1.0
-: If "%EIGEN3_INCLUDE_DIR%" == "" Set EIGEN3_INCLUDE_DIR=C:\eigen-eigen-07105f7124f9
-: If "%SWIG_EXECUTABLE%" == "" Set SWIG_EXECUTABLE=C:\swigwin-2.0.12
-: Set SWIG_EXECUTABLE=C:\swigwin-3.0.10
-
-Set WXWIN_LIB_DIR=%WXWIN%\lib\vc140_dll
-if "%Platform%" == "X64" Set WXWIN_LIB_DIR=%WXWIN%\lib\vc140_x64_dll
+REM Set WXWIN_LIB_DIR=%WXWIN%\lib\vc140_dll
+REM if "%Platform%" == "X64" Set WXWIN_LIB_DIR=%WXWIN%\lib\vc140_x64_dll
 
 @Set CFLAGS=
 @Rem babelconfig.h decides exsistence of several function by definition of WIN32 macro, but it is normally not defined to make 64bit binary.
@@ -77,8 +72,8 @@ if "%Platform%" == "X64" Set WXWIN_LIB_DIR=%WXWIN%\lib\vc140_x64_dll
 
 @if "%RUN_SWIG%" == "ON" If Not "%SWIG_EXECUTABLE%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DSWIG_EXECUTABLE=%SWIG_EXECUTABLE%\swig.exe -DSWIG_DIR=%SWIG_EXECUTABLE%
 
-@Set CMAKE_OPT=%CMAKE_OPT% -DBUILD_GUI=%BUILD_GUI%
-@If Not "%WXWIN%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DwxWidgets_ROOT_DIR="%WXWIN%" -DwxWidgets_LIB_DIR="%WXWIN_LIB_DIR%" -DwxWidgets_CONFIGURATION=msw 
+REM @Set CMAKE_OPT=%CMAKE_OPT% -DBUILD_GUI=%BUILD_GUI%
+REM @If Not "%WXWIN%" == "" Set CMAKE_OPT=%CMAKE_OPT% -DwxWidgets_ROOT_DIR="%WXWIN%" -DwxWidgets_LIB_DIR="%WXWIN_LIB_DIR%" -DwxWidgets_CONFIGURATION=msw 
 
 @if "%BUILD_GUI%" == "ON" (
 	@if "%BUILD_SHARED%" == "ON" (
@@ -101,7 +96,7 @@ cmake -Wno-dev %CMAKE_OPT%  ..\..
 for %%i in ( Debug Release ) do if not exist bin\%%i mkdir bin\%%i
 for %%i in ( Debug Release ) do XCOPY /D /Y "%BaseDir%\%pathtolib%\%ARCH_DIR%\*.dll" bin\%%i
 for %%j in ( libxml2.dll zlib1.dll iconv.dll libinchi.dll ) do for %%i in ( Debug Release ) do XCOPY /D /Y "%INSTALL_PREFIX%\bin\%%j" bin\%%i
-for %%i in ( Debug Release ) do XCOPY /D /Y "%WXWIN%\lib\vc140_dll" bin\%%i
+REM for %%i in ( Debug Release ) do XCOPY /D /Y "%WXWIN%\lib\vc140_dll" bin\%%i
 @if "%BUILD_PLATFORM%" == "x86" (
 	for %%j in ( jsoncpp.dll ) do for %%i in ( Debug Release ) do XCOPY /D /Y "%BaseDir%\msvc-dependencies\libs-vs12\%ARCH_DIR%\%%j" bin\%%i
 )

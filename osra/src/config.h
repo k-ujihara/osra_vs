@@ -33,7 +33,7 @@
 #define DATA_DIR "C:/Users/Public/share"
 
 /* Is tesseract library present? */
-#define HAVE_TESSERACT_LIB 1
+/* #define HAVE_TESSERACT_LIB 1 */
 
 /* Is cuneiform library present? */
 /* #undef HAVE_CUNEIFORM_LIB */

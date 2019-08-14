@@ -28,9 +28,12 @@ if /I "%Platform%" == "X64" Set OutDir=x64\%OutDir%
 Set BINS=ocrad-0.dll ocrad.exe
 Set LIBS=libocrad.lib ocrad-0.lib
 pushd %OutDir%
+if not exist "%INSTALL_PREFIX%\bin" md "%INSTALL_PREFIX%\bin"
 for %%i in ( %BINS% ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\bin"
+if not exist "%INSTALL_PREFIX%\lib" md "%INSTALL_PREFIX%\lib"
 for %%i in ( %LIBS% ) do XCOPY /D /Y /I %%i "%INSTALL_PREFIX%\lib"
 popd
+if not exist "%INSTALL_PREFIX%\include" md "%INSTALL_PREFIX%\include"
 XCOPY /D /Y ..\ocradlib.h "%INSTALL_PREFIX%\include"
 
 :EBye
