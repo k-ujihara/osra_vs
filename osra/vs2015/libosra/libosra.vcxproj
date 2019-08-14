@@ -56,44 +56,36 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\libosra.props" />
-    <Import Project="..\build\SolutionDir.props" />
-    <Import Project="..\build\InstallBase.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\libosra.props" />
-    <Import Project="..\build\SolutionDir.props" />
-    <Import Project="..\build\InstallBase.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\libosra.props" />
-    <Import Project="..\build\SolutionDir.props" />
-    <Import Project="..\build\InstallBase.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\libosra.props" />
-    <Import Project="..\build\SolutionDir.props" />
-    <Import Project="..\build\InstallBase.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IntDir>$(MSBuildProjectName)\$(Configuration)\</IntDir>
-    <OutDir>$(SOLUTION_BASE)$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SOLUTION_BASE)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>$(MSBuildProjectName)\$(Configuration)\</IntDir>
-    <OutDir>$(SOLUTION_BASE)$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SOLUTION_BASE)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -103,7 +95,7 @@
       <PreprocessorDefinitions>OSRA_LIB;USING_DYNAMIC_LIBS;_USE_MATH_DEFINES;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(INSTALL_BASE)\bin\GraphicsMagick-Q8\include;$(INSTALL_BASE)\bin\gocr\include;$(INSTALL_BASE)\include\openbabel-2.0;$(INSTALL_BASE)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Debug\bin\GraphicsMagick-Q8\include;$(SolutionDir)..\..\Debug\\bin\gocr\include;$(SolutionDir)..\..\Debug\\include\openbabel-2.0;$(SolutionDir)..\..\Debug\\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -113,7 +105,7 @@
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <ModuleDefinitionFile>libosra.def</ModuleDefinitionFile>
-      <AdditionalLibraryDirectories>$(INSTALL_BASE)\bin;$(INSTALL_BASE)\bin\GraphicsMagick-Q8\lib;$(INSTALL_BASE)\bin\gocr\lib;$(INSTALL_BASE)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Debug\bin;$(SolutionDir)..\..\Debug\bin\GraphicsMagick-Q8\lib;$(SolutionDir)..\..\Debug\bin\gocr\lib;$(SolutionDir)..\..\Debug\lib</AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <AdditionalDependencies>libPgm2asc.lib;openbabel-2.lib;CORE_RL_magick_.lib;CORE_RL_Magick++_.lib;libocrad.lib;libpotrace.lib;</AdditionalDependencies>
@@ -127,7 +119,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WIN64;OSRA_LIB;USING_DYNAMIC_LIBS;_USE_MATH_DEFINES;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(INSTALL_BASE)\x64\bin\GraphicsMagick-Q8\include;$(INSTALL_BASE)\x64\bin\gocr\include;$(INSTALL_BASE)\x64\include\openbabel-2.0;$(INSTALL_BASE)\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Debug\\x64\bin\GraphicsMagick-Q8\include;$(SolutionDir)..\..\Debug\\x64\bin\gocr\include;$(SolutionDir)..\..\Debug\\x64\include\openbabel-2.0;$(SolutionDir)..\..\Debug\\x64\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -136,7 +128,7 @@
       <ModuleDefinitionFile>libosra.def</ModuleDefinitionFile>
       <AdditionalDependencies>libPgm2ascd.lib;shell32.lib;wsock32.lib;zlib.lib;CORE_RL_magick_.lib;CORE_RL_Magick++_.lib;ocrad-0.lib;libpotrace.lib;openbabel-2.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(INSTALL_BASE)\x64\bin;$(INSTALL_BASE)\x64\bin\GraphicsMagick-Q8\lib;$(INSTALL_BASE)\x64\bin\gocr\lib;$(INSTALL_BASE)\x64\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Debug\x64\bin;$(SolutionDir)..\..\Debug\x64\bin\GraphicsMagick-Q8\lib;$(SolutionDir)..\..\Debug\x64\bin\gocr\lib;$(SolutionDir)..\..\Debug\x64\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -149,7 +141,7 @@
       <PreprocessorDefinitions>OSRA_LIB;USING_DYNAMIC_LIBS;_USE_MATH_DEFINES;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(INSTALL_BASE)\bin\GraphicsMagick-Q8\include;$(INSTALL_BASE)\bin\gocr\include;$(INSTALL_BASE)\include\openbabel-2.0;$(INSTALL_BASE)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Release\bin\GraphicsMagick-Q8\include;$(SolutionDir)..\..\Release\bin\gocr\include;$(SolutionDir)..\..\Release\include\openbabel-2.0;$(SolutionDir)..\..\Release\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -160,7 +152,7 @@
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ModuleDefinitionFile>libosra.def</ModuleDefinitionFile>
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
-      <AdditionalLibraryDirectories>$(INSTALL_BASE)\bin;$(INSTALL_BASE)\bin\GraphicsMagick-Q8\lib;$(INSTALL_BASE)\bin\gocr\lib;$(INSTALL_BASE)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Release\bin;$(SolutionDir)..\..\Release\bin\GraphicsMagick-Q8\lib;$(SolutionDir)..\..\Release\bin\gocr\lib;$(SolutionDir)..\..\Release\lib</AdditionalLibraryDirectories>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
@@ -181,7 +173,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WIN64;OSRA_LIB;USING_DYNAMIC_LIBS;_USE_MATH_DEFINES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(INSTALL_BASE)\x64\bin\GraphicsMagick-Q8\include;$(INSTALL_BASE)\x64\bin\gocr\include;$(INSTALL_BASE)\x64\include\openbabel-2.0;$(INSTALL_BASE)\x64\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Release\x64\bin\GraphicsMagick-Q8\include;$(SolutionDir)..\..\Release\x64\bin\gocr\include;$(SolutionDir)..\..\Release\x64\include\openbabel-2.0;$(SolutionDir)..\..\Release\x64\include</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -191,7 +183,7 @@
       <AdditionalDependencies>libPgm2asc.lib;libtesseract304.lib;lept173.lib;shell32.lib;wsock32.lib;zlib.lib;CORE_RL_magick_.lib;CORE_RL_Magick++_.lib;ocrad-0.lib;libpotrace.lib;openbabel-2.lib</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>$(INSTALL_BASE)\x64\bin;$(INSTALL_BASE)\x64\bin\GraphicsMagick-Q8\lib;$(INSTALL_BASE)\x64\bin\gocr\lib;$(INSTALL_BASE)\x64\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Release\x64\bin;$(SolutionDir)..\..\Release\x64\bin\GraphicsMagick-Q8\lib;$(SolutionDir)..\..\Release\x64\bin\gocr\lib;$(SolutionDir)..\..\Release\x64\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
